@@ -1,0 +1,13 @@
+# An error inside nested calls shows the whole traceback (most recent call last)
+func divide(a, b) {
+    return a / b;
+}
+func average(t) {
+    var s = 0;
+    for (x in t) { s += x; }
+    return divide(s, t.len());
+}
+prog main() {
+    print(average(tuple(1, 2, 3)));
+    print(average(tuple()));
+}

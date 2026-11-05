@@ -1,0 +1,35 @@
+Program
+  Func prog main
+    body:
+      Block
+        Try
+          body:
+            Block
+              ExprStmt
+                Call
+                  callee:
+                    Ident f
+          Except (e)
+            types:
+              Ident ValueError
+            body:
+              Block
+          Except
+            types:
+              Ident TypeError
+              Ident KeyError
+            body:
+              Block
+          Except (other)
+            body:
+              Block
+                Raise
+                  Ident other
+          finally:
+            Block
+              Assert
+                Bool true
+              Assert
+                Ident x
+                String "msg"
+exit=0

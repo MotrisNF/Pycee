@@ -1,0 +1,4 @@
+AttributeError: 'A' object has no attribute 'y' (tests/run/err_obj_no_field.pce, line 2)
+    prog main() { var a = A(); a.y = 2; }
+                               ^^^
+exit=1

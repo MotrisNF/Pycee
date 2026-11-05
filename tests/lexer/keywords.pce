@@ -1,0 +1,5 @@
+# Expect: keywords vs identifiers (case-sensitive, no prefixes)
+func prog obj var vemp if elif else while for in switch case default
+break continue return and or xor not is true false none self
+iff _x x_1 None Self isnot is not print range pow create
+import from as

@@ -1,0 +1,4 @@
+TypeError: the function of filter() needs a bool, not 'number' (tests/run/err_filter_not_bool.pce, line 1)
+    prog main() { print([1].filter((x) => x)); }
+                        ^^^^^^^^^^^^^^^^^^^^
+exit=1

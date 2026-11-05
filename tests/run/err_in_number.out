@@ -1,0 +1,4 @@
+TypeError: 'number' object is not iterable (tests/run/err_in_number.pce, line 1)
+    prog main() { print(1 in 5); }
+                        ^^^^^^
+exit=1

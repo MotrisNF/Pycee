@@ -1,0 +1,12 @@
+TypeError: exit() needs an integer code, not 'string' (<stdin:2>, line 1)
+    exit("now")
+    ^^^^^^^^^^^
+ValueError: exit code must be between 0 and 255, not -1 (<stdin:3>, line 1)
+    exit(-1)
+    ^^^^^^^^
+TypeError: exit() takes 0 to 1 arguments but 2 were given (<stdin:4>, line 1)
+    exit(1, 2)
+    ^^^^^^^^^^
+<built-in exit>
+still here
+exit=0

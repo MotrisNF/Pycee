@@ -1,0 +1,5 @@
+["a", "b", "c"] ["a", "", "b"] [] [""] ["n", "a", "ï"] [tuple(0, "ï"), tuple(1, "a")]
+0 h
+1 i
+one two three x-y
+exit=0

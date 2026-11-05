@@ -1,0 +1,2 @@
+# Expect: size and initial value cannot be combined
+var l[3] = [1, 2, 3];

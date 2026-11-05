@@ -1,0 +1,4 @@
+ValueError: range() step must not be zero (tests/run/err_range_step_zero.pce, line 2)
+        for (i in range(0, 10, 0)) { print(i); }
+                  ^^^^^^^^^^^^^^^
+exit=1

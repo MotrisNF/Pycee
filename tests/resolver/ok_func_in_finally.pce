@@ -1,0 +1,2 @@
+# A function inside a finally can return: it does not leave the finally
+prog main() { try { } finally { var f = () => { return 1; }; } }

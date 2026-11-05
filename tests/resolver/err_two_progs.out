@@ -1,0 +1,4 @@
+SyntaxError: only one 'prog' is allowed; the first one is at line 1 (tests/resolver/err_two_progs.pce, line 4)
+    prog other() {
+         ^^^^^
+exit=1

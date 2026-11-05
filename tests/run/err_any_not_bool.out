@@ -1,0 +1,4 @@
+TypeError: each value of all() needs a bool, not 'number' (tests/run/err_any_not_bool.pce, line 3)
+        print(all(x for (x in l)));
+                  ^
+exit=1

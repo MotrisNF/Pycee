@@ -1,0 +1,4 @@
+SyntaxError: 'break' outside loop (tests/resolver/err_break_in_switch_no_loop.pce, line 4)
+                break;
+                ^^^^^
+exit=1

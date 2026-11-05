@@ -1,0 +1,7 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            'a'
+2:7    TOK_ASSIGN           '='
+SyntaxError: invalid number literal (tests/lexer/err_number_trailing_underscore.pce, line 2)
+    var a = 1_;
+            ^^
+exit=1

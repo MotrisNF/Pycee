@@ -1,0 +1,4 @@
+SyntaxError: expected ';' but found identifier (tests/parser/err_missing_semicolon.pce, line 3)
+        var x = 1
+                 ^
+exit=1

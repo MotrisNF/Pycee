@@ -1,0 +1,44 @@
+# Functions: recursion, values, lambdas (both forms), defaults using earlier params, named arguments, ...rest and ...t, closures (a counter; a new loop variable each round), nested funcs, bound methods
+func fib(n) {
+    if (n < 2) { return n; }
+    return fib(n - 1) + fib(n - 2);
+}
+func double(x) { return x * 2; }
+func apply(f, x) { return f(x); }
+func greet(name, greeting = "hello", punct = greeting.type()) {
+    return greeting + " " + name + " " + punct;
+}
+func total(first, ...rest) {
+    var s = first;
+    for (x in rest) { s += x; }
+    return s;
+}
+func counter() {
+    var n = 0;
+    return () => { n++; return n; };
+}
+func nothing() { }
+func rect(w, h = w) { return w * h; }
+prog main() {
+    print(fib(20));
+    print(double, apply(double, 21), apply((x) => x + 1, 1), apply(func (x) { return -x; }, 5));
+    print(greet("ana"), greet("bob", "bye"), greet(greeting = "hey", name = "eva"));
+    print(total(1), total(1, 2, 3), total(...tuple(10, 20, 30)));
+    var c = counter();
+    var d = counter();
+    print(c(), c(), c(), d());
+    print(nothing(), rect(3), rect(3, 4), rect(h = 2, w = 5));
+    var f = print;
+    f("via value", 1);
+    var r = 7.5.round;
+    print(r, r(), double is double, c is d, c is c, print is f);
+    var fs = tuple();
+    for (i in range(3)) { fs = tuple(...fs, () => i * 10); }
+    print(fs[0](), fs[1](), fs[2]());
+    func fact(n) { return n <= 1 ? 1 : n * fact(n - 1); }
+    print(fact(10), fact);
+    var acc = 0;
+    var add = (v) => { acc += v; };
+    add(5); add(6);
+    print(acc);
+}

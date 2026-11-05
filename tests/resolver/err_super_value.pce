@@ -1,0 +1,2 @@
+obj A extends B { func m() { var s = super; } }
+obj B { }

@@ -1,0 +1,4 @@
+SyntaxError: unterminated f-string (or a '}' alone: write '}}' for a brace) (tests/parser/err_fstring_brace.pce, line 1)
+    prog main() { print(f"a } b"); }
+                        ^^
+exit=1

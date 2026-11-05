@@ -1,0 +1,4 @@
+TypeError: 'main' is the prog, not a value (tests/resolver/err_prog_as_value.pce, line 1)
+    prog main() { var p = main; }
+                          ^^^^
+exit=1

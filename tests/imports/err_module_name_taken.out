@@ -1,0 +1,4 @@
+NameError: 'score' was already declared at line 1 (tests/imports/err_module_name_taken.pce, line 3)
+    func score() {
+         ^^^^^
+exit=1

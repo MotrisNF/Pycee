@@ -1,0 +1,7 @@
+# Only values that cannot change can be keys or set elements
+prog main() {
+    try { var d = dict([1]: 2); } except TypeError (e) { print(e.message()); }
+    try { set(set()); } except TypeError (e) { print(e.message()); }
+    var ok = set(tuple(1, tuple(2)));
+    set(tuple(1, [2]));
+}

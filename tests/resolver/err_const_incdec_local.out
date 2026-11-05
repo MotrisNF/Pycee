@@ -1,0 +1,4 @@
+SyntaxError: cannot use '++' on 'n': it is a constant (tests/resolver/err_const_incdec_local.pce, line 1)
+    prog main() { const n = 1; n++; }
+                               ^
+exit=1

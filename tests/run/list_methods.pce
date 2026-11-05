@@ -1,0 +1,34 @@
+# Methods of lists and tuples, sort with key and reverse (stable), map/filter/reduce/any/all/each, sum/min/max, enumerate, for (i, x in ...)
+prog main() {
+    var l = [5, 3, 8];
+    l.append(1);
+    l.insert(0, 9);
+    l.insert(-1, 7);
+    l.insert(100, 0);
+    print(l, l.len(), l.pop(), l.pop(0), l.pop(-2), l);
+    l.remove(8);
+    print(l, l.index(3), l.count(5), [1, 1, 2].count(1));
+    var words = ["pear", "Kiwi", "grape", "banana"];
+    words.sort();
+    print(words);
+    words.sort(key = (w) => w.len());
+    print(words);
+    words.sort(key = (w) => w.lower(), reverse = true);
+    print(words);
+    var nums = [3, 1, 2];
+    nums.sort(reverse = true);
+    print(nums, nums.map((x) => x * 10), nums.filter((x) => x > 1), nums.reduce((a, b) => a + b, 100), nums.reduce((a, b) => a * b));
+    print(nums.any((x) => x > 2), nums.all((x) => x > 2), nums.sum(), nums.min(), nums.max(), [1.5, 2].sum());
+    nums.each(print);
+    print(nums.enumerate(), tuple("a", "b").enumerate(), nums.copy() is nums, nums.to_tuple(), tuple(1, 2).to_list());
+    print(tuple(4, 5).map((x) => x + 1), tuple(1, 2, 3).filter((x) => x is 2), ["a", "b"].join("-"), "+".join(["x", "y"]));
+    nums.reverse();
+    nums.clear();
+    print(nums, [].sum());
+    var stable = [tuple(1, "a"), tuple(0, "b"), tuple(1, "c"), tuple(0, "d")];
+    stable.sort(key = (t) => t[0]);
+    print(stable);
+    stable.sort(key = (t) => t[0], reverse = true);
+    print(stable);
+    for (i, x in [10, 20].enumerate()) { print(i, x); }
+}

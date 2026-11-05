@@ -1,0 +1,2 @@
+# No shadowing, also for the parameters of lambdas
+prog main() { var x = 1; var f = (x) => x; }

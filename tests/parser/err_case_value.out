@@ -1,0 +1,4 @@
+SyntaxError: case value must be a number or a string, found identifier (tests/parser/err_case_value.pce, line 3)
+        switch (x) { case y { } }
+                          ^
+exit=1

@@ -1,0 +1,6 @@
+a 'list' cannot be a dict key: it can change (only numbers, strings, bools, none, ranges and tuples of them can)
+a 'set' cannot be a set element: it can change (only numbers, strings, bools, none, ranges and tuples of them can)
+TypeError: a 'list' cannot be a set element: it can change (only numbers, strings, bools, none, ranges and tuples of them can) (tests/run/err_key_unhashable.pce, line 6)
+        set(tuple(1, [2]));
+        ^^^^^^^^^^^^^^^^^^
+exit=1

@@ -1,0 +1,2 @@
+# Only create declares fields: another method cannot add one
+obj A { func create() { self.x = 1; } func bad() { self.z = 2; } }

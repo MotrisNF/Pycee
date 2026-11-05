@@ -1,0 +1,4 @@
+TypeError: raise needs an error, not 'A': raise ValueError("...") (tests/run/err_raise_plain_obj.pce, line 2)
+    prog main() { raise A(); }
+                        ^^^
+exit=1

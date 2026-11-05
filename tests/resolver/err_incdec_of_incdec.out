@@ -1,0 +1,4 @@
+SyntaxError: cannot use '++' on the result of '++' or '--' (tests/resolver/err_incdec_of_incdec.pce, line 2)
+        ++i++;
+          ^^^
+exit=1

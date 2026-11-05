@@ -1,0 +1,18 @@
+Program
+  Var var a
+    init:
+      Binary '*'
+        Unary '-'
+          Ident x
+        Ident y
+  Var var b
+    init:
+      Unary '-'
+        Unary '-'
+          Ident x
+  Var var c
+    init:
+      Unary '-'
+        Unary '-'
+          Ident x
+exit=0

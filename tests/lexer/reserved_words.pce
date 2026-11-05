@@ -1,0 +1,3 @@
+# Reserved words are not identifiers, even before they do anything.
+try except finally raise const extends super enum private static
+assert do match async await export with

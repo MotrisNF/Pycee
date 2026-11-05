@@ -1,0 +1,2 @@
+# exit() only exists in the REPL
+prog main() { exit(); }

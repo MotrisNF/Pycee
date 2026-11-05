@@ -1,0 +1,4 @@
+SyntaxError: a comprehension only goes in [...], or alone inside tuple(...), set(...), dict(...), any(...), all(...), sum(...), min(...) or max(...) (tests/resolver/err_comprehension_place.pce, line 1)
+    prog main() { print(x for (x in l)); }
+                  ^^^^^^^^^^^^^^^^^^^^^
+exit=1

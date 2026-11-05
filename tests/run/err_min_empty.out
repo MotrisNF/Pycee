@@ -1,0 +1,4 @@
+ValueError: min() of an empty list (tests/run/err_min_empty.pce, line 1)
+    prog main() { print([].min()); }
+                        ^^^^^^^^
+exit=1

@@ -1,0 +1,4 @@
+SyntaxError: a dict comprehension makes key: value pairs (tests/resolver/err_dict_comprehension_pair.pce, line 1)
+    prog main() { var d = dict(x for (x in l)); }
+                               ^
+exit=1

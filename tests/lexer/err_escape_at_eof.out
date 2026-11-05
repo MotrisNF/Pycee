@@ -1,0 +1,7 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            's'
+2:7    TOK_ASSIGN           '='
+SyntaxError: unterminated string literal (tests/lexer/err_escape_at_eof.pce, line 2)
+    var s = "abc\
+            ^
+exit=1

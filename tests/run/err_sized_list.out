@@ -1,0 +1,4 @@
+ValueError: the size of a list must be an integer from 0 up, not negative (tests/run/err_sized_list.pce, line 1)
+    prog main() { var l[-1]; }
+                        ^^
+exit=1

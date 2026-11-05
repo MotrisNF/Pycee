@@ -1,0 +1,4 @@
+TypeError: raise needs an error, not 'string': raise ValueError("...") (tests/run/err_raise_not_error.pce, line 1)
+    prog main() { raise "text"; }
+                        ^^^^^^
+exit=1

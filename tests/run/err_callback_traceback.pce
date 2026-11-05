@@ -1,0 +1,3 @@
+# An error inside a function called by map shows its traceback
+func check(x) { return 10 / x; }
+prog main() { print([1, 0].map(check)); }

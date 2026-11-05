@@ -1,0 +1,4 @@
+import cycle_a;
+
+func b() {
+}

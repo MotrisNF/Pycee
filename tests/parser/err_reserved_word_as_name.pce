@@ -1,0 +1,2 @@
+# Using a reserved word as a name.
+var try = 1;

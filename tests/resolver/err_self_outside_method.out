@@ -1,0 +1,4 @@
+SyntaxError: 'self' can only be used inside the methods of an obj (tests/resolver/err_self_outside_method.pce, line 2)
+        return self;
+               ^^^^
+exit=1

@@ -1,0 +1,4 @@
+NameError: 'i' was already declared at line 2 (tests/resolver/err_for_var_vs_var.pce, line 3)
+        for (i in range(3)) {
+             ^
+exit=1

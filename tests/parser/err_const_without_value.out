@@ -1,0 +1,4 @@
+SyntaxError: a constant needs a value: const X = ...; (tests/parser/err_const_without_value.pce, line 1)
+    const X;
+           ^
+exit=1

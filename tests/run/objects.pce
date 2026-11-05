@@ -1,0 +1,43 @@
+# Objects: fields, methods, create, static (by the obj and by an object), extends + super, private, self in lambdas, bound methods, the obj as a value, x.f op= v, x.f++
+obj Point {
+    var x = 0;
+    var y = 0;
+    static var count = 0;
+    func create(x0, y0) { self.x = x0; self.y = y0; Point.count++; }
+    func move(dx, dy) { self.x += dx; self.y += dy; return self; }
+    func dist2() { return self.x * self.x + self.y * self.y; }
+    static func origin() { return Point(0, 0); }
+}
+obj Point3 extends Point {
+    var z = 0;
+    func create(x0, y0, z0) { super.create(x0, y0); self.z = z0; }
+    func dist2() { return super.dist2() + self.z * self.z; }
+}
+obj Counter {
+    private var n = 0;
+    func inc() { self.n++; return self.n; }
+    func adder() { return (k) => { self.n += k; return self.n; }; }
+}
+prog main() {
+    var p = Point(3, 4);
+    print(p, p.x, p.dist2(), p.type(), Point.count, p.count);
+    p.move(1, 1).move(1, 1);
+    print(p.x, p.y);
+    var q = Point.origin();
+    print(q.x, Point.count);
+    var r = Point3(1, 2, 3);
+    print(r.dist2(), r.x, r.z, r.is_type("Point"), r.is_type("Point3"), Point.count);
+    var m = p.move;
+    m(10, 0);
+    print(p.x, m);
+    var C = Point;
+    var c = C(7, 7);
+    print(c.x, C, c is c, c is p);
+    var k = Counter();
+    print(k.inc(), k.inc());
+    var add = k.adder();
+    print(add(10), k.inc());
+    p.x = 100;
+    p.y -= 1;
+    print(p.x, p.y);
+}

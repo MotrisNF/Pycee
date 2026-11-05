@@ -1,0 +1,4 @@
+SyntaxError: integer literal is too large (the largest is 9223372036854775807) (tests/parser/err_hex_too_large.pce, line 3)
+    var b = 0x8000000000000000;
+            ^^^^^^^^^^^^^^^^^^
+exit=1

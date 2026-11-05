@@ -1,0 +1,24 @@
+false
+true
+false
+true
+false
+false
+TypeError: 'not' needs a bool, not 'number' (<stdin:8>, line 1)
+    not 1
+    ^^^^^
+TypeError: 'and' needs a bool, not 'number' (<stdin:9>, line 1)
+    1 and true
+    ^
+TypeError: 'and' needs a bool, not 'number' (<stdin:10>, line 1)
+    true and 1
+             ^
+TypeError: 'xor' needs bools, not 'number' and 'bool' (<stdin:11>, line 1)
+    1 xor true
+    ^^^^^^^^^^
+"yes"
+2
+TypeError: the condition of '?:' needs a bool, not 'number' (<stdin:14>, line 1)
+    1 ? 2 : 3
+    ^
+exit=0

@@ -1,0 +1,4 @@
+NameError: 'print' is a built-in function and cannot be redeclared (tests/resolver/err_native_redeclared.pce, line 1)
+    func print(x) {
+         ^^^^^
+exit=1

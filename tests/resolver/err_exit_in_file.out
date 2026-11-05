@@ -1,0 +1,4 @@
+NameError: name 'exit' is not defined (tests/resolver/err_exit_in_file.pce, line 2)
+    prog main() { exit(); }
+                  ^^^^
+exit=1

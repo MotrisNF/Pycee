@@ -1,0 +1,4 @@
+TypeError: slice indices must be integers or none, not a float (tests/run/err_slice_float.pce, line 1)
+    prog main() { print(tuple(1, 2)[0.5:]); }
+                        ^^^^^^^^^^^^^^^^^
+exit=1

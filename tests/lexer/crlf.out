@@ -1,0 +1,12 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            'x'
+2:7    TOK_ASSIGN           '='
+2:9    TOK_INT              '1'
+2:10   TOK_SEMICOLON        ';'
+3:1    TOK_IDENT            'print'
+3:6    TOK_LPAREN           '('
+3:7    TOK_IDENT            'x'
+3:8    TOK_RPAREN           ')'
+3:9    TOK_SEMICOLON        ';'
+4:1    TOK_EOF             
+exit=0

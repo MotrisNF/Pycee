@@ -1,0 +1,5 @@
+ValueError: bad input ValueError bad input true true false
+Error true EOFError: 42
+true false string
+ValueError: bad input true string
+exit=0

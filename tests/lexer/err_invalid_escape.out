@@ -1,0 +1,7 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            's'
+2:7    TOK_ASSIGN           '='
+SyntaxError: invalid escape sequence '\q' (tests/lexer/err_invalid_escape.pce, line 2)
+    var s = "tab\tok, \q is not";
+                      ^^
+exit=1

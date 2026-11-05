@@ -1,0 +1,12 @@
+# strings: concatenation, repetition, comparison, and how they are shown
+"pyc" + "ee"
+"ab" * 3
+3 * "ab"
+"ab" * 0
+"ab" * -1
+"ab" * 1.5
+"a" + 1
+"tab\there" + "\n" + 'quote"s\\'
+print("tab\there", "x")
+str(7) + str(7.0) + str(true) + str(none)
+str("same")

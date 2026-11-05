@@ -1,0 +1,4 @@
+SyntaxError: cannot assign to 'g': it is a constant (tests/resolver/err_nested_func_const.pce, line 2)
+    prog main() { func g() { } g = 1; }
+                               ^
+exit=1

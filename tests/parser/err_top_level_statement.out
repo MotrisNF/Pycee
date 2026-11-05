@@ -1,0 +1,4 @@
+SyntaxError: expected a declaration (func, prog, obj, var or const) but found identifier (tests/parser/err_top_level_statement.pce, line 2)
+    print("hi");
+    ^^^^^
+exit=1

@@ -1,0 +1,23 @@
+true
+false
+true
+true
+true
+true
+true
+false
+false
+false
+true
+true
+true
+TypeError: '<' is not supported between 'number' and 'string' (<stdin:15>, line 1)
+    1 < "2"
+    ^^^^^^^
+TypeError: '<' is not supported between 'none' and 'number' (<stdin:16>, line 1)
+    none < 1
+    ^^^^^^^^
+SyntaxError: comparison operators cannot be chained (<stdin:17>, line 1)
+    1 < 2 < 3
+          ^
+exit=0

@@ -1,0 +1,4 @@
+import score;
+
+func score() {
+}

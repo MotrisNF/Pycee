@@ -1,0 +1,4 @@
+TypeError: 'f' is not an obj or an error type: an obj can only extend one of those (tests/resolver/err_obj_extends_func.pce, line 2)
+    obj A extends f { }
+                  ^
+exit=1

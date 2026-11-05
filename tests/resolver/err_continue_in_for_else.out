@@ -1,0 +1,4 @@
+SyntaxError: 'continue' outside loop (tests/resolver/err_continue_in_for_else.pce, line 4)
+            continue;
+            ^^^^^^^^
+exit=1

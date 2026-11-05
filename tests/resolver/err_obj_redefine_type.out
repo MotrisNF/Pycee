@@ -1,0 +1,4 @@
+SyntaxError: 'type' cannot be redefined: every value has it (tests/resolver/err_obj_redefine_type.pce, line 1)
+    obj A { func type() { return "x"; } }
+                 ^^^^
+exit=1

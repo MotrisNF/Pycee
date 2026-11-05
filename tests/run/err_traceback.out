@@ -1,0 +1,13 @@
+2.0
+Traceback (most recent call last):
+  File "tests/run/err_traceback.pce", line 12, in main
+        print(average(tuple()));
+              ^^^^^^^^^^^^^^^^
+  File "tests/run/err_traceback.pce", line 8, in average
+        return divide(s, t.len());
+               ^^^^^^^^^^^^^^^^^^
+  File "tests/run/err_traceback.pce", line 3, in divide
+        return a / b;
+               ^^^^^
+ZeroDivisionError: division by zero
+exit=1

@@ -1,0 +1,51 @@
+"number"
+"number"
+"string"
+"bool"
+"none"
+true
+false
+TypeError: is_type() needs the name of a type as a string, not 'number' (<stdin:9>, line 1)
+    7.is_type(7)
+    ^^^^^^^^^^^^
+1024
+OverflowError: integer overflow (<stdin:11>, line 1)
+    2.pow(63)
+    ^^^^^^^^^
+-9223372036854775808
+0.5
+1.4142135623730951
+ZeroDivisionError: 0 cannot be raised to a negative power (<stdin:15>, line 1)
+    0.pow(-1)
+    ^^^^^^^^^
+ValueError: a negative number cannot be raised to a fractional power (<stdin:16>, line 1)
+    (-8).pow(0.5)
+     ^^^^^^^^^^^^
+7
+2.5
+3
+-3
+3
+4
+OverflowError: the number is too large for an int (<stdin:23>, line 1)
+    1e300.round()
+    ^^^^^^^^^^^^^
+4.0
+ValueError: the square root of a negative number is not a real number (<stdin:25>, line 1)
+    (-1).sqrt()
+     ^^^^^^^^^^
+true
+false
+AttributeError: 'number' object has no attribute 'nothing' (<stdin:28>, line 1)
+    7.nothing()
+    ^^^^^^^^^^^
+TypeError: pow() takes 1 argument but 0 were given (<stdin:29>, line 1)
+    7.pow()
+    ^^^^^^^
+TypeError: type() takes 0 arguments but 1 was given (<stdin:30>, line 1)
+    7.type(1)
+    ^^^^^^^^^
+AttributeError: 'number' object has no attribute 'x' (<stdin:31>, line 1)
+    7.x
+    ^^^
+exit=0

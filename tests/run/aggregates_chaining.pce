@@ -1,0 +1,24 @@
+func noisy(x) { print("look", x); return (x > 2); }
+prog main() {
+    var l = [1, 2, 3, 4, 5];
+    print(any(x > 3 for (x in l)), all(x > 0 for (x in l)), any(x > 9 for (x in l)));
+    print(any(noisy(x) for (x in l)));
+    print(all(noisy(x) for (x in l)));
+    print(sum(x * x for (x in l)), min(x for (x in l) if (x > 2)), max(-x for (x in l)));
+    print(sum(range(101)), min("hello"), max(set(3, 9, 1)), sum([]), any([]), all([]));
+    print([x > 2 for (x in l)].any(), [true, false].all(), l.any((x) => x > 4));
+    print(sum(x * y for (x in l) for (y in l)));
+    var f = sum;
+    print(f(range(4)), f(tuple(1, 2.5)));
+    var m = [3, 1, 2];
+    var r = m.append(0).sort();
+    print(r, m, r.id() is m.id());
+    var c = m.copy().sort(reverse = true);
+    print(c, m);
+    m.extend(range(3)).extend("ab").extend(tuple(9));
+    print(m);
+    m.extend(m);
+    print(m.len());
+    print(set(1).add(2).add(3).remove(1), dict("a": 1).remove("a").len());
+    print([1, 2].insert(0, 0).reverse().remove(1).clear());
+}

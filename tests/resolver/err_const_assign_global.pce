@@ -1,0 +1,2 @@
+const MAX = 3;
+func f() { MAX = 4; }

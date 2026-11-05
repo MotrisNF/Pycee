@@ -1,0 +1,4 @@
+obj P {
+    var x = 1;
+    var y = self.x;
+}

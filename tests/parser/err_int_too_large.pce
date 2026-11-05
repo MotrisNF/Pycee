@@ -1,0 +1,3 @@
+# The largest int fits; one more does not.
+var ok = 9223372036854775807;
+var too_big = 9223372036854775808;

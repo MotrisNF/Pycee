@@ -1,0 +1,2 @@
+# Expect: SyntaxError unterminated string literal (backslash at end of file)
+var s = "abc\

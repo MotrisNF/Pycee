@@ -1,0 +1,8 @@
+# Expect: var with nothing, with size, with init; vemp inside a function
+var a;
+var l[3];
+var t = 0;
+func f() {
+    vemp x = 1;
+    vemp m[2];
+}

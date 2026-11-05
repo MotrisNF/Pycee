@@ -1,0 +1,2 @@
+# Expect: SyntaxError unterminated string literal (end of file), caret on the opening quote
+print('never closed

@@ -1,0 +1,15 @@
+1: ParseError: bad input: x ParseError bad input: x true true
+2: LineError: line 7: empty 7 check line 7 true
+3: LineError
+4: AppError true
+5: re-raised ParseError
+6: ParseError: bad input: z ParseError [ParseError("bad input: z")]
+Traceback (most recent call last):
+  File "tests/run/obj_errors.pce", line 23, in main
+        parse("final");
+        ^^^^^^^^^^^^^^
+  File "tests/run/obj_errors.pce", line 10, in parse
+        raise ParseError("bad input: " + s);
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ParseError: bad input: final
+exit=1

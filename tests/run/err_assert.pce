@@ -1,0 +1,1 @@
+prog main() { var n = 3; assert(n is 4, "n should be 4, it is " + str(n)); }

@@ -1,0 +1,5 @@
+# Expect: missing ";" reported at the end of line 3, not at line 4
+func f() {
+    var x = 1
+    print(x);
+}

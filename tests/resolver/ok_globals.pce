@@ -1,0 +1,22 @@
+# Top-level names are registered before any body: order does not matter.
+var counter = 0;
+
+prog main(argc, argv) {
+    return later(1);
+}
+
+func later(x) {
+    return x;
+}
+
+obj Point {
+    var x;
+    var y;
+    func create(x0, y0) {
+        self.x = x0;
+    }
+}
+
+obj Empty {
+    var a;
+}

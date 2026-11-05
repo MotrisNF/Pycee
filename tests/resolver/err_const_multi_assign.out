@@ -1,0 +1,4 @@
+SyntaxError: cannot assign to 'A': it is a constant (tests/resolver/err_const_multi_assign.pce, line 2)
+    prog main() { var b = 2; A, b = b, A; }
+                             ^
+exit=1

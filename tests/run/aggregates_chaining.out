@@ -1,0 +1,19 @@
+true true false
+look 1
+look 2
+look 3
+true
+look 1
+false
+55 3 -1
+5050 e 9 0 false true
+true false true
+225
+6 3.5
+[0, 1, 2, 3] [0, 1, 2, 3] true
+[3, 2, 1, 0] [0, 1, 2, 3]
+[0, 1, 2, 3, 0, 1, 2, "a", "b", 9]
+20
+set(2, 3) 0
+[]
+exit=0

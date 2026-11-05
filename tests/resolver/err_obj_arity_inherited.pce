@@ -1,0 +1,4 @@
+# A child without create takes its parent create arguments
+obj A { func create(x) { self.x = x; } }
+obj B extends A { }
+prog main() { B(); }

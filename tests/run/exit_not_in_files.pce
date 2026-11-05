@@ -1,0 +1,3 @@
+# exit() is only for the REPL: in a file the name is free (sys.exit comes with modules)
+func exit(code) { }
+prog main() { print("exit is a free name here"); }

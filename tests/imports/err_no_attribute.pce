@@ -1,0 +1,5 @@
+import score;
+
+func f() {
+    return score.nothing;
+}

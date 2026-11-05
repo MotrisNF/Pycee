@@ -1,0 +1,2 @@
+func f(a, b) { }
+prog main() { f(b = 1, b = 2); }

@@ -1,0 +1,4 @@
+# An except for another type does not catch it
+prog main() {
+    try { var x = 1 / 0; } except ValueError { print("never"); }
+}

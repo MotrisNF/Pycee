@@ -1,0 +1,22 @@
+# REPL: statements at the top level, blocks over several lines, exit()
+var total = 0
+for (i in range(1, 4)) {
+    total += i;
+}
+total
+i
+if (total > 5) { var big = "yes"; } else { print("small"); }
+big
+while (total < 50) { total *= 2; }
+total
+const K = 7
+K = 8
+for (j in range(3)) { var nope = j; }
+vemp t = 1
+switch (K) { case 7 { print("seven"); } }
+do { total--; } while (total > 40);
+total
+a, b = 1, 2
+var a = 1; var b = 2; a, b = b, a; a
+exit(4)
+print("not reached")

@@ -1,0 +1,4 @@
+SyntaxError: expected '{' but found 'return' (tests/parser/err_braces_required.pce, line 3)
+        if (a) return 1;
+               ^^^^^^
+exit=1

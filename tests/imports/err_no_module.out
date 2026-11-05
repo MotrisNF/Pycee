@@ -1,0 +1,4 @@
+ImportError: no module named 'missing': tests/imports/missing.pce does not exist (tests/imports/err_no_module.pce, line 1)
+    import missing;
+           ^^^^^^^
+exit=1

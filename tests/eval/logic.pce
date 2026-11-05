@@ -1,0 +1,14 @@
+# and, or, xor, not and conditions only take bools; and/or stop early
+true and false
+true or 1 / 0
+false and 1 / 0
+true xor false
+true xor true
+not true
+not 1
+1 and true
+true and 1
+1 xor true
+true ? "yes" : "no"
+false ? 1 : true ? 2 : 3
+1 ? 2 : 3

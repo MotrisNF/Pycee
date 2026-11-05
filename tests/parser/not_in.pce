@@ -1,0 +1,2 @@
+# "a not in b" is not (a in b); "not a in b" is not over the comparison
+prog main() { print(1 not in t, not 1 in t, (x in t) is true); }

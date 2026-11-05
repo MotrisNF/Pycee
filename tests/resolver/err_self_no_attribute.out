@@ -1,0 +1,4 @@
+AttributeError: 'P' object has no attribute 'z' (tests/resolver/err_self_no_attribute.pce, line 4)
+            return self.z;
+                        ^
+exit=1

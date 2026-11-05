@@ -1,0 +1,4 @@
+SyntaxError: '...r' cannot have a default: it is an empty tuple when nothing is left (tests/parser/err_rest_default.pce, line 1)
+    func f(...r = 1) { }
+                ^
+exit=1

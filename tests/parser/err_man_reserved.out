@@ -1,0 +1,4 @@
+SyntaxError: expected variable name but found reserved word 'man' (tests/parser/err_man_reserved.pce, line 2)
+    var man = 1;
+        ^^^
+exit=1

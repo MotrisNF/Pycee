@@ -1,0 +1,4 @@
+SyntaxError: expected variable name but found 'try' (tests/parser/err_reserved_word_as_name.pce, line 2)
+    var try = 1;
+        ^^^
+exit=1

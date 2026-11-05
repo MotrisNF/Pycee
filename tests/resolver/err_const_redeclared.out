@@ -1,0 +1,4 @@
+NameError: 'A' was already declared at line 1 (tests/resolver/err_const_redeclared.pce, line 2)
+    var A = 2;
+        ^
+exit=1

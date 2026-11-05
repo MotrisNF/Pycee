@@ -1,0 +1,4 @@
+TypeError: Point() takes 1 argument but 0 were given (tests/resolver/err_arity_create.pce, line 9)
+        var p = Point();
+                ^^^^^^^
+exit=1

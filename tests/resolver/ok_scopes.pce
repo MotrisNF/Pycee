@@ -1,0 +1,47 @@
+# Scopes that must be accepted.
+func scopes(flag, n) {
+    if (flag) {
+        var message = "inside the if";     # lives until the end of the function
+    }
+    if (flag) {
+        vemp tmp = 1;
+    } else {
+        vemp tmp = 2;                       # the first tmp died with its block
+    }
+    var i = 0;
+    while (i < n) {
+        vemp square = i * i;
+        i += 1;
+        if (i > 3) {
+            break;
+        }
+        continue;
+    }
+    for (x in range(3)) {
+        switch (x) {
+            case 0, 1 {
+                continue;                   # belongs to the for
+            }
+            case -1, "one" {
+                break;
+            }
+            default {
+            }
+        }
+    } else {
+        vemp x = 10;                        # the loop variable is gone here
+    }
+    for (x in range(2)) {
+    }
+    return i;
+}
+
+obj Point {
+    var x = 0;
+    func create() {
+        return;
+    }
+    func get() {
+        return self.x;
+    }
+}

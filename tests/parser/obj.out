@@ -1,0 +1,34 @@
+Program
+  Obj Point
+    Var var x
+    Var var y
+    Func func create
+      params:
+        Param x
+        Param y
+      body:
+        Block
+          Assign '='
+            Field .x
+              Self
+            Ident x
+          Assign '='
+            Field .y
+              Self
+            Ident y
+    Func func norm
+      body:
+        Block
+          Return
+            Binary '+'
+              Binary '*'
+                Field .x
+                  Self
+                Field .x
+                  Self
+              Binary '*'
+                Field .y
+                  Self
+                Field .y
+                  Self
+exit=0

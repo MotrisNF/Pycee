@@ -1,0 +1,4 @@
+SyntaxError: super is only for calling a method: super.name(...) (tests/resolver/err_super_value.pce, line 1)
+    obj A extends B { func m() { var s = super; } }
+                                         ^^^^^
+exit=1

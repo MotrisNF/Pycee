@@ -1,0 +1,4 @@
+ImportError: circular import: tests/imports/err_self_import.pce -> err_self_import (tests/imports/err_self_import.pce, line 1)
+    import err_self_import;
+           ^^^^^^^^^^^^^^^
+exit=1

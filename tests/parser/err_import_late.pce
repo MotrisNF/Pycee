@@ -1,0 +1,4 @@
+# Expect: imports must go first
+import a;
+func f() { }
+import b;

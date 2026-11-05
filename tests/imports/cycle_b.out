@@ -1,0 +1,4 @@
+ImportError: circular import: tests/imports/cycle_b.pce -> cycle_a -> cycle_b (tests/imports/cycle_a.pce, line 1)
+    import cycle_b;
+           ^^^^^^^
+exit=1

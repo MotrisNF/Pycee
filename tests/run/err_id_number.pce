@@ -1,0 +1,14 @@
+obj P { func create(id) { self.id = id; } }
+obj Q { func create() { } }
+prog main() {
+    var l = [1, 2];
+    var t = l;
+    print(l.id() is t.id(), l.copy().id() is l.id(), l is l.copy());
+    print("a".id() > 0, Q().id() is Q().id());
+    var q = Q();
+    var r = q;
+    print(q.id() is r.id());
+    print(P(7).id);
+    print(print.id() > 0);
+    print((5).id());
+}

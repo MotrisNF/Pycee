@@ -1,0 +1,4 @@
+SyntaxError: 'continue outer' needs a loop around this one (tests/resolver/err_continue_outer_in_else.pce, line 4)
+            for (i in range(3)) { } else { continue outer; }
+                                           ^^^^^^^^^^^^^^^
+exit=1

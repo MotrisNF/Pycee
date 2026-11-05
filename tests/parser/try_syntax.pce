@@ -1,0 +1,8 @@
+# try with every kind of except, finally, raise, assert
+prog main() {
+    try { f(); }
+    except ValueError (e) { }
+    except TypeError, KeyError { }
+    except (other) { raise other; }
+    finally { assert(true); assert(x, "msg"); }
+}

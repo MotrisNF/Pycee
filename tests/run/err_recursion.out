@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "tests/run/err_recursion.pce", line 3, in main
+    prog main() { down(0); }
+                  ^^^^^^^
+  File "tests/run/err_recursion.pce", line 2, in down
+    func down(n) { return down(n + 1); }
+                          ^^^^^^^^^^^
+  File "tests/run/err_recursion.pce", line 2, in down
+    func down(n) { return down(n + 1); }
+                          ^^^^^^^^^^^
+  File "tests/run/err_recursion.pce", line 2, in down
+    func down(n) { return down(n + 1); }
+                          ^^^^^^^^^^^
+  [Previous line repeated 996 more times]
+  File "tests/run/err_recursion.pce", line 2, in down
+    func down(n) { return down(n + 1); }
+                          ^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded (1000 calls)
+exit=1

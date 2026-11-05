@@ -1,0 +1,5 @@
+[1.9, 1.10, 2.0, 2.1] 1.9 2.1 true true
+[2.1, 2.0, 1.10, 1.9]
+caught: the list changed size during sort() (from 2 to 0 items)
+AttributeError 'number' object has no attribute 'major'
+exit=0

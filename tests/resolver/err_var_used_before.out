@@ -1,0 +1,4 @@
+NameError: name 'x' is not defined (tests/resolver/err_var_used_before.pce, line 2)
+        print(x);
+              ^
+exit=1

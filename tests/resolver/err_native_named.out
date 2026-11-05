@@ -1,0 +1,4 @@
+TypeError: print() takes no named arguments (tests/resolver/err_native_named.pce, line 1)
+    prog main() { print(x = 1); }
+                  ^^^^^^^^^^^^
+exit=1

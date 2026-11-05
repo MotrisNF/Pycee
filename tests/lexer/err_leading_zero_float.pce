@@ -1,0 +1,2 @@
+# Expect: SyntaxError leading zeros are not permitted (also with a decimal part)
+var bad = 00.5;

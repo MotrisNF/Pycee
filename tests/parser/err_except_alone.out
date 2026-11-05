@@ -1,0 +1,4 @@
+SyntaxError: 'except' without a matching 'try' (tests/parser/err_except_alone.pce, line 1)
+    prog main() { except { } }
+                  ^^^^^^
+exit=1

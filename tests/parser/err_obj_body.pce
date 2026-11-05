@@ -1,0 +1,5 @@
+# Expect: only var and func inside obj
+obj P {
+    var x;
+    prog main() { }
+}

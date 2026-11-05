@@ -1,0 +1,9 @@
+1:1    TOK_STRING           '"double"'
+1:10   TOK_STRING           ''single''
+1:19   TOK_STRING           'r"raw \n"'
+1:29   TOK_STRING           'r'raw''
+1:36   TOK_STRING           '"""multi
+line"""'
+2:9    TOK_STRING           ''''also''''
+3:1    TOK_EOF             
+exit=0

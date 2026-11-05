@@ -1,0 +1,4 @@
+SyntaxError: 'self' can only be used inside the methods of an obj (tests/resolver/err_self_in_field_init.pce, line 3)
+        var y = self.x;
+                ^^^^
+exit=1

@@ -1,0 +1,8 @@
+caught ZeroDivisionError
+ValueError("kept")
+"kept"
+ValueError: kept (<stdin:4>, line 1)
+    try { raise ValueError("kept"); } except (x) { kept = x; }
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+the session goes on
+exit=0

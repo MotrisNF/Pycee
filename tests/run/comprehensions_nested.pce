@@ -1,0 +1,13 @@
+prog main() {
+    var a = [1, 2, 3];
+    var b = [1, 2];
+    print([tuple(x, y) for (x in a) for (y in b) if (x is not y)]);
+    var m = [[1, -2], [], [3, 4]];
+    print([x for (row in m) if (row.len() > 0) for (x in row) if (x > 0)]);
+    print([x for (x in range(20)) if (x % 2 is 0) if (x % 3 is 0)]);
+    print(set(x * y for (x in a) for (y in a)));
+    print(dict(k: v * z for (k, v in [tuple(1, 2), tuple(3, 4)]) for (z in [10])));
+    print([[y for (y in row) if (y > 0)] for (row in m)]);
+    var f = [() => x for (x in a)];
+    print([g() for (g in f)]);
+}

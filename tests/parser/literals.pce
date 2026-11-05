@@ -1,0 +1,2 @@
+# Expect: numbers, strings with decoded escapes, lists, true/false/none/self
+var l = [1, 2.5, "a\tb\n", 'it\'s', [], true, false, none];

@@ -1,0 +1,4 @@
+SyntaxError: 'from ... import *' is not supported: list the names to import (tests/parser/err_import_star.pce, line 2)
+    from utils import *;
+                      ^
+exit=1

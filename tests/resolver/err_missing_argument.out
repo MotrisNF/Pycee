@@ -1,0 +1,4 @@
+TypeError: f() is missing argument 'a' (tests/resolver/err_missing_argument.pce, line 2)
+    prog main() { f(b = 2); }
+                  ^^^^^^^^
+exit=1

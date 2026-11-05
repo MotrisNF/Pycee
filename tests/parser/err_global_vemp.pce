@@ -1,0 +1,2 @@
+# Expect: vemp is not allowed at top level
+vemp x = 1;

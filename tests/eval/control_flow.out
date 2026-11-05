@@ -1,0 +1,22 @@
+6
+NameError: name 'i' is not defined (<stdin:7>, line 1)
+    i
+    ^
+"yes"
+96
+SyntaxError: cannot assign to 'K': it is a constant (<stdin:13>, line 1)
+    K = 8
+    ^
+SyntaxError: a global 'var' is not allowed inside a loop: declare it before the loop (<stdin:14>, line 1)
+    for (j in range(3)) { var nope = j; }
+                          ^^^
+SyntaxError: 'vemp' is only allowed inside functions; use 'var' for globals (<stdin:15>, line 1)
+    vemp t = 1
+    ^^^^
+seven
+40
+NameError: name 'a' is not defined (<stdin:19>, line 1)
+    a, b = 1, 2
+    ^
+2
+exit=4

@@ -1,0 +1,6 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            'na'
+SyntaxError: invalid character '\xc3' (tests/lexer/err_invalid_char_utf8.pce, line 2)
+    var naïve = 2026;
+          ^
+exit=1

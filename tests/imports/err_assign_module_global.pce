@@ -1,0 +1,5 @@
+import score;
+
+func f() {
+    score.GLOBAL_SCORE = 1;
+}

@@ -1,0 +1,4 @@
+SyntaxError: 'create' cannot return a value: Point(...) always gives back the new object (tests/resolver/err_create_returns.pce, line 3)
+            return 1;
+                   ^
+exit=1

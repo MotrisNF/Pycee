@@ -1,0 +1,40 @@
+Program
+  Func prog main
+    body:
+      Block
+        Var var l
+          init:
+            Comprehension list
+              For k
+                more:
+                  Var vemp x
+                in:
+                  Ident d
+                body:
+                  Block
+                    If
+                      cond:
+                        Binary '>'
+                          Ident x
+                          Int 0
+                      then:
+                        Block
+                          CompAdd
+                            Binary '*'
+                              Ident x
+                              Int 2
+        Var var s
+          init:
+            Call
+              callee:
+                Ident set
+              args:
+                Comprehension general
+                  For y
+                    in:
+                      Ident t
+                    body:
+                      Block
+                        CompAdd
+                          Ident y
+exit=0

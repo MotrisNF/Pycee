@@ -1,0 +1,17 @@
+Program
+  Var var d
+    init:
+      Call
+        callee:
+          Field .len
+            Index
+              Call
+                callee:
+                  Field .distance_sq
+                    Ident p
+                args:
+                  Ident q
+              Binary '+'
+                Ident i
+                Int 1
+exit=0

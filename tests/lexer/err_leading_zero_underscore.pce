@@ -1,0 +1,2 @@
+# Leading zeros, also with a separator.
+var a = 0_1;

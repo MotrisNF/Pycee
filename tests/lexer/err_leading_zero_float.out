@@ -1,0 +1,7 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            'bad'
+2:9    TOK_ASSIGN           '='
+SyntaxError: leading zeros are not permitted (tests/lexer/err_leading_zero_float.pce, line 2)
+    var bad = 00.5;
+              ^^^^
+exit=1

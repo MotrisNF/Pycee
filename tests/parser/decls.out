@@ -1,0 +1,26 @@
+Program
+  Var var g
+    init:
+      Int 1
+  Func func none_args
+    body:
+      Block
+  Func func two
+    params:
+      Param a
+      Param b
+    body:
+      Block
+        Return
+          Binary '+'
+            Ident a
+            Ident b
+  Func prog main
+    params:
+      Param argc
+      Param argv
+    body:
+      Block
+        Return
+          Int 0
+exit=0

@@ -1,0 +1,4 @@
+NameError: 'ValueError' is a built-in function and cannot be redeclared (tests/resolver/err_error_name_reserved.pce, line 1)
+    var ValueError = 1;
+        ^^^^^^^^^^
+exit=1

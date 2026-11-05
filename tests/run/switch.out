@@ -1,0 +1,11 @@
+0 zero
+after switch 0
+1 one or two
+after switch 1
+2 one or two
+after switch 2
+3 other
+after switch 3
+yes
+a bool is not 1
+exit=0

@@ -1,0 +1,13 @@
+Program
+  Var var l
+    init:
+      List
+        Int 1
+        Float 2.5
+        String "a\tb\n"
+        String "it's"
+        List
+        Bool true
+        Bool false
+        None
+exit=0

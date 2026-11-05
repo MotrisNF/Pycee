@@ -1,0 +1,2 @@
+# Expect: SyntaxError invalid number literal, carets on 12_000
+var big = 12_000;

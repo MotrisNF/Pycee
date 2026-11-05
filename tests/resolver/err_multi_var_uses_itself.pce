@@ -1,0 +1,2 @@
+# The values of var a, b = ... cannot use a or b
+prog main() { var a, b = 1, a; }

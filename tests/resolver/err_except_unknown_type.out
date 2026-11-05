@@ -1,0 +1,4 @@
+SyntaxError: 'Banana' is not an error type (tests/resolver/err_except_unknown_type.pce, line 1)
+    prog main() { try { } except Banana (e) { } }
+                                 ^^^^^^
+exit=1

@@ -1,0 +1,4 @@
+SyntaxError: an except has no 'as': write except Type (name) { ... } (tests/parser/err_except_as.pce, line 1)
+    prog main() { try { } except ValueError as (e) { } }
+                                            ^^
+exit=1

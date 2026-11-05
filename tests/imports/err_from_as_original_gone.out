@@ -1,0 +1,4 @@
+NameError: name 'add_score' is not defined (tests/imports/err_from_as_original_gone.pce, line 3)
+    prog main() { print(add_score(1)); }
+                        ^^^^^^^^^
+exit=1

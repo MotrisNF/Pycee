@@ -1,0 +1,6 @@
+obj Empty {
+}
+
+func f() {
+    var e = Empty(1);
+}

@@ -1,0 +1,2 @@
+# break cannot leave a function, even a lambda inside a loop
+prog main() { while (true) { var f = () => { break; }; } }

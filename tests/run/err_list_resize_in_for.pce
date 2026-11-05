@@ -1,0 +1,5 @@
+# A list that changes size while a for walks it: RuntimeError
+prog main() {
+    var l = [1, 2, 3];
+    for (x in l) { l.append(x); }
+}

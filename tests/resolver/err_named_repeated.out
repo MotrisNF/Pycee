@@ -1,0 +1,4 @@
+SyntaxError: argument 'b' is given twice (tests/resolver/err_named_repeated.pce, line 2)
+    prog main() { f(b = 1, b = 2); }
+                           ^
+exit=1

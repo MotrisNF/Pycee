@@ -1,0 +1,5 @@
+# Expect: func with and without params, prog main(argc, argv), global var
+var g = 1;
+func none_args() { }
+func two(a, b) { return a + b; }
+prog main(argc, argv) { return 0; }

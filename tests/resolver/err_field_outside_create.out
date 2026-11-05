@@ -1,0 +1,4 @@
+AttributeError: 'A' object has no attribute 'z' (tests/resolver/err_field_outside_create.pce, line 2)
+    obj A { func create() { self.x = 1; } func bad() { self.z = 2; } }
+                                                            ^
+exit=1

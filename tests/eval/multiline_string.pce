@@ -1,0 +1,5 @@
+# A multi-line string left open asks for more lines
+var s = """one
+two"""
+s
+s.len()

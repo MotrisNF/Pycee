@@ -1,0 +1,4 @@
+SyntaxError: cannot use '++' on 'print': it is a built-in function (tests/resolver/err_incdec_native.pce, line 2)
+        print++;
+        ^^^^^
+exit=1

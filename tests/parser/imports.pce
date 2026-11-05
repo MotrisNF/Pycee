@@ -1,0 +1,5 @@
+# Expect: the three import forms, before the other declarations
+import utils;
+import math as m;
+from geo import Point, dist;
+prog main() { utils.f(m.pi); }

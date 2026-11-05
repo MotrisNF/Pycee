@@ -1,0 +1,4 @@
+SyntaxError: 'return' cannot leave a 'finally' block: it would hide the error being raised (tests/resolver/err_return_in_finally.pce, line 1)
+    func f() { try { } finally { return 1; } }
+                                 ^^^^^^
+exit=1

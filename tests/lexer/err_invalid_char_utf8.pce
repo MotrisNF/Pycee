@@ -1,0 +1,2 @@
+# Expect: SyntaxError invalid character (UTF-8 outside a string)
+var naïve = 2026;

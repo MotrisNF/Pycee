@@ -1,0 +1,4 @@
+# A const inside a function lives in its block, like vemp: a loop makes a new one each round
+prog main() {
+    for (i in range(3)) { const twice = i * 2; }
+}

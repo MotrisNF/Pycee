@@ -1,0 +1,4 @@
+SyntaxError: positional arguments go before the named ones (tests/parser/err_positional_after_named.pce, line 1)
+    prog main() { f(a = 1, 2); }
+                           ^
+exit=1

@@ -1,0 +1,2 @@
+# Expect: SyntaxError invalid escape sequence, carets on \q
+var s = "tab\tok, \q is not";

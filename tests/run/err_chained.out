@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "tests/run/err_chained.pce", line 4, in main
+        try { parse("abc"); }
+              ^^^^^^^^^^^^
+  File "tests/run/err_chained.pce", line 2, in parse
+    func parse(s) { return num(s); }
+                           ^^^^^^
+ValueError: invalid literal for num(): "abc"
+
+During handling of the above error, another error occurred:
+
+RuntimeError: could not parse (tests/run/err_chained.pce, line 5)
+        except ValueError (e) { raise RuntimeError("could not parse"); }
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+exit=1

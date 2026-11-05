@@ -1,0 +1,4 @@
+SyntaxError: comparison operators cannot be chained (tests/parser/err_chained_comparison.pce, line 3)
+    var bad = a < b < c;
+                    ^
+exit=1

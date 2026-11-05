@@ -1,0 +1,1 @@
+prog main() { for (a, b, c in dict(1: 2)) { } }

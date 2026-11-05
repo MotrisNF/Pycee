@@ -1,0 +1,4 @@
+SyntaxError: imports must go at the beginning of the file, before any other declaration (tests/parser/err_import_late.pce, line 4)
+    import b;
+    ^^^^^^
+exit=1

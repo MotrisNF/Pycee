@@ -1,0 +1,5 @@
+func f() {
+    var i = 0;
+    for (i in range(3)) {
+    }
+}

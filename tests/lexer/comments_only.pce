@@ -1,0 +1,5 @@
+# Expect: only TOK_EOF
+/* block */ /**/ /***/ # line
+/* multi
+   line */
+	  

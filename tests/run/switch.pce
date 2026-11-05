@@ -1,0 +1,20 @@
+# switch: several values per case, numbers by value (1 is 1.0), strings,
+# default, and break/continue inside a case acting on the loop
+prog main() {
+    for (n in range(6)) {
+        switch (n) {
+            case 0 { print(n, "zero"); }
+            case 1.0, 2 { print(n, "one or two"); }
+            case 4 { continue; }
+            case 5 { break; }
+            default { print(n, "other"); }
+        }
+        print("after switch", n);
+    }
+    var name = "ana";
+    switch (name + "!") {
+        case "ana" { print("no"); }
+        case "ana!" { print("yes"); }
+    }
+    switch (true) { case 1 { print("never"); } default { print("a bool is not 1"); } }
+}

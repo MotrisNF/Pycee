@@ -1,0 +1,53 @@
+/*
+ * switch
+ * - switch (expr){ case v{ } ... default{ } }
+ * - A case takes numbers and strings, and several values separated by ','.
+ * - No fallthrough: only the matching case runs (no break needed).
+ * - default is optional.
+ * - Strings can be written with "" or '' (they are the same).
+ */
+
+func return_day_of_week(n){
+    if (n <= 0){
+        return "Insert a valid day";
+    }
+    else{
+        switch (n){
+            case 1{
+                return "Monday";
+            }
+            case 2{
+                return "Tuesday";
+            }
+            case 3{
+                return "Wednesday";
+            }
+            case 4{
+                return "Thursday";
+            }
+            case 5{
+                return "Friday";
+            }
+            case 6{
+                return "Saturday";
+            }
+            case 7{
+                return "Sunday";
+            }
+            default{
+                return "Insert a valid day";
+            }
+        }
+    }
+}
+
+func is_weekend(day){
+    switch (day){
+        case "Saturday", 'Sunday'{
+            return true;
+        }
+        default{
+            return false;
+        }
+    }
+}

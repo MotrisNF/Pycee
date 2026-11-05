@@ -1,0 +1,4 @@
+TypeError: a dict cannot be sliced (tests/run/err_dict_slice.pce, line 1)
+    prog main() { print(dict(1: 2)[0:1]); }
+                        ^^^^^^^^^^^^^^^
+exit=1

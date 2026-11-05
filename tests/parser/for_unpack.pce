@@ -1,0 +1,1 @@
+prog main() { for (k, v in d) { } }

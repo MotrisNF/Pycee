@@ -1,0 +1,4 @@
+TypeError: str() takes 1 argument but 2 were given (tests/resolver/err_arity_str.pce, line 2)
+        str(1, 2);
+        ^^^^^^^^^
+exit=1

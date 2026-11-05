@@ -1,0 +1,17 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            'ok'
+2:8    TOK_ASSIGN           '='
+2:10   TOK_INT              '0'
+2:11   TOK_SEMICOLON        ';'
+3:1    TOK_VAR              'var'
+3:5    TOK_IDENT            'half'
+3:10   TOK_ASSIGN           '='
+3:12   TOK_FLOAT            '0.5'
+3:15   TOK_SEMICOLON        ';'
+4:1    TOK_VAR              'var'
+4:5    TOK_IDENT            'bad'
+4:9    TOK_ASSIGN           '='
+SyntaxError: leading zeros are not permitted (tests/lexer/err_leading_zero.pce, line 4)
+    var bad = 007;
+              ^^^
+exit=1

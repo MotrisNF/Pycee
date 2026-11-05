@@ -1,0 +1,4 @@
+TypeError: find() needs a string, not 'number' (tests/run/err_string_method_arg.pce, line 1)
+    prog main() { print("abc".find(1)); }
+                        ^^^^^^^^^^^^^
+exit=1

@@ -1,0 +1,4 @@
+NameError: 'print' is a built-in function and cannot be redeclared (tests/imports/err_from_as_reserved.pce, line 1)
+    from score import add_score as print;
+                                   ^^^^^
+exit=1

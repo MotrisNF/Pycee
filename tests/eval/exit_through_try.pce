@@ -1,0 +1,3 @@
+# exit() is not an error: no except catches it, but finally runs
+try { exit(7); } except { print("must not catch exit"); } finally { print("finally on exit"); }
+print("not reached")

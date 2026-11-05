@@ -1,0 +1,3 @@
+# Expect: SyntaxError unterminated string literal (newline inside), caret on the opening quote
+print("hello);
+print("bye");

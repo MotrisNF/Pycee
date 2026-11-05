@@ -1,0 +1,5 @@
+# Ternary (right-associative, lowest) and bit operators (between comparisons and +, as in Python).
+var a = c ? 1 : d ? 2 : 3;
+var b = x & 1 is 0 or y | z ^ w << 2 + 1;
+var e = ~-x;
+var f = (c ? x : y) + 1;

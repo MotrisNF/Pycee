@@ -1,0 +1,4 @@
+SyntaxError: expected expression but found ')' (tests/parser/err_trailing_comma.pce, line 3)
+        g(a, b,);
+               ^
+exit=1

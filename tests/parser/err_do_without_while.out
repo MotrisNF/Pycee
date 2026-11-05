@@ -1,0 +1,4 @@
+SyntaxError: expected 'while' but found ';' (tests/parser/err_do_without_while.pce, line 1)
+    prog main() { do { } ; }
+                         ^
+exit=1

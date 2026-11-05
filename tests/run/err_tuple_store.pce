@@ -1,0 +1,1 @@
+prog main() { var t = tuple(1, 2); t[0] = 5; }

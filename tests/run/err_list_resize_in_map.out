@@ -1,0 +1,4 @@
+RuntimeError: the list changed size during map() (from 2 to 1 items) (tests/run/err_list_resize_in_map.pce, line 1)
+    prog main() { var l = [1, 2]; print(l.map((x) => l.pop())); }
+                                        ^^^^^^^^^^^^^^^^^^^^^
+exit=1

@@ -1,0 +1,4 @@
+NameError: name 'd' is not defined (tests/resolver/err_for_unpack_names.pce, line 1)
+    prog main() { for (k, k in d) { } }
+                               ^
+exit=1

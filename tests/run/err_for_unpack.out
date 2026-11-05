@@ -1,0 +1,5 @@
+1 2
+AssignmentError: cannot assign 1 values to 2 loop variables (tests/run/err_for_unpack.pce, line 1)
+    prog main() { for (a, b in [tuple(1, 2), tuple(3)]) { print(a, b); } }
+                               ^^^^^^^^^^^^^^^^^^^^^^^
+exit=1

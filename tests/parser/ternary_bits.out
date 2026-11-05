@@ -1,0 +1,50 @@
+Program
+  Var var a
+    init:
+      Ternary
+        cond:
+          Ident c
+        then:
+          Int 1
+        else:
+          Ternary
+            cond:
+              Ident d
+            then:
+              Int 2
+            else:
+              Int 3
+  Var var b
+    init:
+      Binary 'or'
+        Binary 'is'
+          Binary '&'
+            Ident x
+            Int 1
+          Int 0
+        Binary '|'
+          Ident y
+          Binary '^'
+            Ident z
+            Binary '<<'
+              Ident w
+              Binary '+'
+                Int 2
+                Int 1
+  Var var e
+    init:
+      Unary '~'
+        Unary '-'
+          Ident x
+  Var var f
+    init:
+      Binary '+'
+        Ternary
+          cond:
+            Ident c
+          then:
+            Ident x
+          else:
+            Ident y
+        Int 1
+exit=0

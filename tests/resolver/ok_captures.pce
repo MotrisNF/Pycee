@@ -1,0 +1,5 @@
+# Captures through several levels
+func a() {
+    var v = 1;
+    return () => () => () => v;
+}

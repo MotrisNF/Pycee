@@ -1,0 +1,4 @@
+SyntaxError: expected '}' to end the f-string field but found integer (tests/parser/err_fstring_expr.pce, line 1)
+    prog main() { print(f"{1 2}"); }
+                             ^
+exit=1

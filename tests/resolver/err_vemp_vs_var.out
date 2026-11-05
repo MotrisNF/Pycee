@@ -1,0 +1,4 @@
+NameError: 'x' was already declared at line 2 (tests/resolver/err_vemp_vs_var.pce, line 4)
+            vemp x = 2;
+                 ^
+exit=1

@@ -1,0 +1,3 @@
+# Expect: comparisons cannot be chained
+var ok = a < b and b < c;
+var bad = a < b < c;

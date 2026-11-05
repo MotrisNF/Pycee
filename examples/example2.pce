@@ -1,0 +1,14 @@
+/*
+ * Conditions
+ * - Parentheses around the condition and braces around the body are required.
+ * - The condition must be true or false: if (0) or if ("") is an error.
+ * - Comparisons (< <= > >= is, is not) give true or false.
+ * - and, or, not, xor only accept true or false.
+ */
+
+func positive_integer_sum(n1, n2){
+    if (n1 < 0 or n2 < 0){
+        return -1;
+    }
+    return n1 + n2;
+}

@@ -1,0 +1,4 @@
+SyntaxError: duplicate case value (first at line 3) (tests/resolver/err_duplicate_case_int_float.pce, line 5)
+            case 1.0 {
+                 ^^^
+exit=1

@@ -1,0 +1,3 @@
+# What prog returns is the exit code
+func check() { return 3; }
+prog main() { return check(); }

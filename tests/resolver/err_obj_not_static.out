@@ -1,0 +1,4 @@
+TypeError: 'm' is not static: it belongs to each object, reach it through one (tests/resolver/err_obj_not_static.pce, line 2)
+    prog main() { A.m(); }
+                    ^
+exit=1

@@ -1,0 +1,8 @@
+# switch is not a loop: outer counts loops only
+prog main() {
+    while (true) {
+        for (i in range(3)) {
+            switch (i) { case 1 { break outer; } }
+        }
+    }
+}

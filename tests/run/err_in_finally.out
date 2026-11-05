@@ -1,0 +1,10 @@
+TypeError: first (tests/run/err_in_finally.pce, line 3)
+        try { raise TypeError("first"); }
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+During handling of the above error, another error occurred:
+
+IndexError: tuple index 0 out of range (length 0) (tests/run/err_in_finally.pce, line 4)
+        finally { var y = tuple()[0]; }
+                          ^^^^^^^^^^
+exit=1

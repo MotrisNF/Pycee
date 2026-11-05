@@ -1,0 +1,5 @@
+obj Point {
+    var x;
+    func x() {
+    }
+}

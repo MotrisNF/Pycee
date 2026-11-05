@@ -1,0 +1,4 @@
+TypeError: the exit code returned by prog must be an integer, not a float (tests/run/err_prog_return_type.pce, line 1)
+    prog main() { return 1.5; }
+                         ^^^
+exit=1

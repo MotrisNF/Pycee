@@ -1,0 +1,43 @@
+3
+-3
+42
+-1000
+ValueError: invalid literal for int(): "3.5" (<stdin:6>, line 1)
+    int("3.5")
+    ^^^^^^^^^^
+ValueError: invalid literal for int(): "" (<stdin:7>, line 1)
+    int("")
+    ^^^^^^^
+OverflowError: the number is too large for an int (<stdin:8>, line 1)
+    int("9223372036854775808")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+OverflowError: the number is too large for an int (<stdin:9>, line 1)
+    int(float("inf"))
+    ^^^^^^^^^^^^^^^^^
+ValueError: cannot convert nan to an int (<stdin:10>, line 1)
+    int(float("nan"))
+    ^^^^^^^^^^^^^^^^^
+TypeError: int() needs a number or a string, not 'bool' (<stdin:11>, line 1)
+    int(true)
+    ^^^^^^^^^
+3.0
+2500.0
+-inf
+1000.5
+ValueError: invalid literal for float(): "0x10" (<stdin:16>, line 1)
+    float("0x10")
+    ^^^^^^^^^^^^^
+ValueError: invalid literal for float(): "abc" (<stdin:17>, line 1)
+    float("abc")
+    ^^^^^^^^^^^^
+42
+4.2
+1000.0
+7
+ValueError: invalid literal for num(): "seven" (<stdin:22>, line 1)
+    num("seven")
+    ^^^^^^^^^^^^
+TypeError: num() needs a number or a string, not 'none' (<stdin:23>, line 1)
+    num(none)
+    ^^^^^^^^^
+exit=0

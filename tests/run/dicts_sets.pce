@@ -1,0 +1,31 @@
+# Dicts and sets: insertion order, 1 and 1.0 are one key, methods, the ways to walk a dict, a dict inside itself
+prog main() {
+    var d = dict("a": 1, "b": 2, 3: "three");
+    print(d, d["a"], d[3], d.len(), "a" in d, "z" in d, d.get("z"), d.get("z", 0), dict());
+    d["c"] = 30;
+    d["a"] += 10;
+    d[1.0] = "float one";
+    d[1] = "int one";
+    print(d, d.keys(), d.values(), d.items());
+    d.remove("b");
+    print(d, d is dict("a": 11, 3: "three", "c": 30, 1: "int one"), d.copy() is d);
+    for (x in dict("k": 1, "j": 2)) { print(x, x.type()); }
+    for (k, v in d) { print(k, v); }
+    for (k in d.keys()) { print(k); }
+    var s = set(3, 1, 3, 2);
+    print(s, s.len(), s.has(2), 5 in s, set(1, 2) is set(2, 1), set());
+    s.add(10);
+    s.remove(3);
+    print(s, s.union(set(99)), s.intersection(set(1, 10, 7)), s.difference(set(1)), s.sum(), s.min(), s.max(), s.to_list());
+    for (x in set("x", "y")) { print(x); }
+    print([1, 2, 2, 3].to_set(), tuple("a", "a").to_set(), set(tuple(1, 2), "s", none, true, range(3)));
+    var nested = dict("inner": dict("x": [1, 2]));
+    nested["inner"]["x"].append(3);
+    print(nested, nested["inner"]["x"][-1]);
+    var self_ref = dict();
+    self_ref["me"] = self_ref;
+    print(self_ref);
+    var counts = dict();
+    for (w in "a b a c a".split()) { counts[w] = counts.get(w, 0) + 1; }
+    print(counts);
+}

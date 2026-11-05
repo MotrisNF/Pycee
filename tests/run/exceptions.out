@@ -1,0 +1,27 @@
+5.0
+caught: ValueError: zero is not allowed ValueError 3
+arith: division by zero
+base: IndexError true
+any: Error: custom
+silent catch
+finally runs for 5
+2.0
+finally runs for 0
+after finally: zero is not allowed
+loop finally 0
+loop finally 1
+made, not raised 28
+re-raised: KeyError: inner
+AssertionError: math broke
+AssertionError: assertion failed
+recursion caught: maximum recursion depth exceeded (1000 calls)
+Traceback (most recent call last):
+  File "tests/run/exceptions.pce", line 39, in main
+        try { risky(0); } except (e) { tb = e.traceback(); }
+              ^^^^^^^^
+  File "tests/run/exceptions.pce", line 3, in risky
+        if (n is 0) { raise ValueError("zero is not allowed"); }
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: zero is not allowed
+
+exit=0

@@ -1,0 +1,4 @@
+NameError: name 'a' is not defined (tests/resolver/err_multi_var_uses_itself.pce, line 2)
+    prog main() { var a, b = 1, a; }
+                                ^
+exit=1

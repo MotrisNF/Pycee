@@ -1,0 +1,2 @@
+# ... visible in its block only, like vemp
+prog main() { if (true) { func g() { } } g(); }

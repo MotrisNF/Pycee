@@ -1,0 +1,4 @@
+ValueError: slice step cannot be zero (tests/run/err_slice_step_zero.pce, line 1)
+    prog main() { print("abc"[::0]); }
+                        ^^^^^^^^^^
+exit=1

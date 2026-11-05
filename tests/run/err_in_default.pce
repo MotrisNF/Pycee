@@ -1,0 +1,3 @@
+# A default is evaluated in the call: its error shows the function
+func f(a, b = a / 0) { return b; }
+prog main() { f(1); }

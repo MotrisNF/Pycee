@@ -1,0 +1,4 @@
+AssignmentError: cannot assign 3 values to 2 targets (tests/run/err_unpack_count.pce, line 4)
+        var a, b = t;
+                   ^
+exit=1

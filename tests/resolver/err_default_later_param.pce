@@ -1,0 +1,2 @@
+# A default may use earlier parameters, never later ones
+func f(a = b, b = 1) { }

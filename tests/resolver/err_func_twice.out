@@ -1,0 +1,4 @@
+NameError: 'f' was already declared at line 1 (tests/resolver/err_func_twice.pce, line 4)
+    func f() {
+         ^
+exit=1

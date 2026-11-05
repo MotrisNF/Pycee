@@ -1,0 +1,12 @@
+# Expect: tokens only, no error.
+# a---b is (a--) - b; --x is a prefix decrement; //= and // are operators.
+# a/*b*/c is a, comment, c.
+a---b;
+--x;
+i++;
+x//=2;
+x //2;
+x/=2;
+a/*b*/c;
+x+=1; x-=1; x*=2; x%=2;
+a<=b; a<b; a>=b; a>b;

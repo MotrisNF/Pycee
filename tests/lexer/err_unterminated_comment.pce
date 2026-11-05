@@ -1,0 +1,4 @@
+# Expect: SyntaxError unterminated block comment, carets on the opening /*
+var x = 1;
+/* starts here
+   and never ends

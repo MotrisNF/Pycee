@@ -1,0 +1,19 @@
+# to_str everywhere a value is shown (print, str, f-strings, containers, assert, the REPL); one that prints while shown; one that does not give a string
+obj P {
+    func create(x) { self.x = x; }
+    func to_str() { return f"P({self.x})"; }
+}
+obj Noisy {
+    func create() { self.n = 0; }
+    func to_str() { print("  (to_str runs)"); self.n++; return "noisy" + str(self.n); }
+}
+obj Bad { func to_str() { return 5; } }
+obj Plain { func create() { self.a = 1; } }
+prog main() {
+    var p = P(3);
+    print(p, [p, P(4)], tuple(p), dict("k": p), str(p), f"<{p}> [{p:>6}]");
+    print("x", Noisy(), "y");
+    print(Plain(), [Plain()]);
+    try { print(Bad()); } except TypeError (e) { print(e.message()); }
+    assert(true, p);
+}

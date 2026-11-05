@@ -1,0 +1,6 @@
+# Numbers in the AST: ints and floats.
+var a = 1_000;
+var b = 0xFF;
+var c = 2.5e-3;
+var d = 7.0;
+var e = 1e400;

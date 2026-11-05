@@ -1,0 +1,4 @@
+TypeError: 'main' is the prog and cannot be called (tests/resolver/err_call_prog.pce, line 2)
+        main();
+        ^^^^
+exit=1

@@ -1,0 +1,2 @@
+# man is reserved for the manual of the REPL
+var man = 1;

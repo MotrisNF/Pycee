@@ -1,0 +1,4 @@
+AttributeError: module 'score' has no attribute 'nothing' (tests/imports/err_no_attribute.pce, line 4)
+        return score.nothing;
+                     ^^^^^^^
+exit=1

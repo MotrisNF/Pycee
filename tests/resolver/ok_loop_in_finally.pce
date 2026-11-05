@@ -1,0 +1,2 @@
+# A loop inside a finally can break: it does not leave the finally
+prog main() { try { } finally { while (true) { break; } } }

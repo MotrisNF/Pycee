@@ -1,0 +1,4 @@
+SyntaxError: cannot assign to 'GLOBAL_SCORE': it belongs to module 'score', and only its own functions can change it (tests/imports/err_assign_module_global.pce, line 4)
+        score.GLOBAL_SCORE = 1;
+        ^^^^^^^^^^^^^^^^^^
+exit=1

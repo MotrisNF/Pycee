@@ -1,0 +1,4 @@
+TypeError: format code 'f' needs a number, not 'string' (tests/run/err_fstring_text_number.pce, line 1)
+    prog main() { print(f"{"x":.2f}"); }
+                          ^^^^^^^^^
+exit=1

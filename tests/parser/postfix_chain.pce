@@ -1,0 +1,2 @@
+# Expect: call, index and field chain left to right
+var d = p.distance_sq(q)[i + 1].len();

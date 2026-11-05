@@ -1,0 +1,4 @@
+SyntaxError: 'except' after 'finally' (tests/parser/err_except_after_finally.pce, line 1)
+    prog main() { try { } finally { } except { } }
+                                      ^^^^^^
+exit=1

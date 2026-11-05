@@ -1,0 +1,4 @@
+SyntaxError: 'print' is not an error type (tests/resolver/err_except_not_error_type.pce, line 1)
+    prog main() { try { } except print { } }
+                                 ^^^^^
+exit=1

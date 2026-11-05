@@ -1,0 +1,1 @@
+prog main() { var d = dict(x for (x in l)); }

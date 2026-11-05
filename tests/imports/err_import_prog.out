@@ -1,0 +1,4 @@
+ImportError: cannot import name 'main' from 'score' (tests/imports/err_import_prog.pce, line 1)
+    from score import main;
+                      ^^^^
+exit=1

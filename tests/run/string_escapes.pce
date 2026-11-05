@@ -1,0 +1,10 @@
+# Escapes: \n \t \r \0 \" \x41 \u{XXXX}; raw strings keep backslashes; multi-line strings keep their newlines
+prog main() {
+    print("A\x41\u{42}|\u{F1}|\u{1F600}|", "a\0b".len());
+    print(r"C:\new\table", r"\u{41}".len());
+    var m = """first
+second "with quotes"
+third""";
+    print(m, m.len());
+    print('"""' + """'''""", 'it\'s', "say \"hi\"");
+}

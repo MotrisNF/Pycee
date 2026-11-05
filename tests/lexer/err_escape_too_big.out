@@ -1,0 +1,4 @@
+SyntaxError: invalid '\u' escape: write \u{XXXX} with 1 to 6 hex digits, up to 10FFFF and not D800-DFFF (tests/lexer/err_escape_too_big.pce, line 1)
+    "\u{110000}"
+     ^^
+exit=1

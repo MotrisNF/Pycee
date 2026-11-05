@@ -1,0 +1,4 @@
+NameError: 'x' was already declared at line 2 (tests/resolver/err_param_shadow_lambda.pce, line 2)
+    prog main() { var x = 1; var f = (x) => x; }
+                                      ^
+exit=1

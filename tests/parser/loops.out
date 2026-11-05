@@ -1,0 +1,36 @@
+Program
+  Func func f
+    body:
+      Block
+        While
+          cond:
+            Bool true
+          body:
+            Block
+              Continue
+        For x
+          in:
+            Call
+              callee:
+                Ident range
+              args:
+                Int 3
+          body:
+            Block
+              Break
+          else:
+            Block
+              ExprStmt
+                Call
+                  callee:
+                    Ident print
+                  args:
+                    String "no break"
+        For y
+          in:
+            List
+              Int 1
+              Int 2
+          body:
+            Block
+exit=0

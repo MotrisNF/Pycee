@@ -1,0 +1,10 @@
+[1, "two", [3, 4], tuple(5)] 1 tuple(5) 4 ["two", [3, 4]] [tuple(5), [3, 4], "two", 1] [] list
+[100, "two", [33, 4], tuple(5)]
+[1, 2, 3, 4] [1, 2, 3, 4] true [1, 2, 3] [0, 0, 0] ["a", "a"] true true true
+1 20 [10, 2, 3, 4]
+[none, none, none] 6
+[[...]]
+1
+2
+3
+exit=0

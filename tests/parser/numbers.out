@@ -1,0 +1,17 @@
+Program
+  Var var a
+    init:
+      Int 1000
+  Var var b
+    init:
+      Int 255
+  Var var c
+    init:
+      Float 0.0025000000000000001
+  Var var d
+    init:
+      Float 7
+  Var var e
+    init:
+      Float inf
+exit=0

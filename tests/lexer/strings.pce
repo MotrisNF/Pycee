@@ -1,0 +1,3 @@
+# Expect: valid strings, quotes kept in the token
+"a" 'b' "it's" 'say "hi"' "" ''
+"\n\t\"\'\\" "naïve"

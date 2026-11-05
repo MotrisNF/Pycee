@@ -1,0 +1,22 @@
+dict("a": 1, "b": 2, 3: "three") 1 three 3 true false none 0 dict()
+dict("a": 11, "b": 2, 3: "three", "c": 30, 1.0: "int one") ["a", "b", 3, "c", 1.0] [11, 2, "three", 30, "int one"] [tuple("a", 11), tuple("b", 2), tuple(3, "three"), tuple("c", 30), tuple(1.0, "int one")]
+dict("a": 11, 3: "three", "c": 30, 1.0: "int one") true true
+dict("k": 1) dict
+dict("j": 2) dict
+a 11
+3 three
+c 30
+1.0 int one
+a
+3
+c
+1.0
+set(3, 1, 2) 3 true false true set()
+set(1, 2, 10) set(1, 2, 10, 99) set(1, 10) set(2, 10) 13 1 10 [1, 2, 10]
+x
+y
+set(1, 2, 3) set("a") set(tuple(1, 2), "s", none, true, range(0, 3))
+dict("inner": dict("x": [1, 2, 3])) 3
+dict("me": dict(...))
+dict("a": 3, "b": 1, "c": 1)
+exit=0

@@ -1,0 +1,10 @@
+finally after return
+value of return
+finally 0
+body 1
+finally 1
+finally 2
+finally before the except
+caught KeyError: k
+loop inside finally 0
+exit=0

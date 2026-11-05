@@ -1,0 +1,2 @@
+# in is a comparison: it does not chain
+prog main() { print(x in t is true); }

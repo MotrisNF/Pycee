@@ -1,0 +1,4 @@
+SyntaxError: cannot assign to 'g': it is a function (tests/resolver/err_assign_to_func.pce, line 5)
+        g = 1;
+        ^
+exit=1

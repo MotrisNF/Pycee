@@ -1,0 +1,8 @@
+# Errors caught at the top of the REPL
+try { 1 / 0; } except ZeroDivisionError (e) { print("caught", e.type()); }
+var kept = none
+try { raise ValueError("kept"); } except (x) { kept = x; }
+kept
+kept.message()
+raise kept
+print("the session goes on")

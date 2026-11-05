@@ -1,0 +1,2 @@
+# Expect: not cannot be the operand of a comparison or of unary minus
+var bad = a < not b;

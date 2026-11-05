@@ -1,0 +1,1 @@
+prog main() { var d = dict("a": 1, x ? y : z: 2); }

@@ -1,0 +1,4 @@
+NameError: name 'Nothing' is not defined (tests/resolver/err_obj_extends_unknown.pce, line 1)
+    obj A extends Nothing { }
+                  ^^^^^^^
+exit=1

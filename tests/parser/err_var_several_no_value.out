@@ -1,0 +1,4 @@
+SyntaxError: several names need a value: vemp a, b = ...; (tests/parser/err_var_several_no_value.pce, line 1)
+    prog main() { vemp a, b; }
+                           ^
+exit=1

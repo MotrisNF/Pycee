@@ -1,0 +1,4 @@
+SyntaxError: expected ';' or 'outer' after 'break' (tests/parser/err_break_label.pce, line 2)
+    prog main() { while (true) { break loop1; } }
+                                       ^^^^^
+exit=1

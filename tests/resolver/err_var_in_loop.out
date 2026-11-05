@@ -1,0 +1,4 @@
+SyntaxError: 'var' is not allowed inside a loop: declare it before the loop or use 'vemp' (tests/resolver/err_var_in_loop.pce, line 3)
+            var x = 1;
+            ^^^
+exit=1

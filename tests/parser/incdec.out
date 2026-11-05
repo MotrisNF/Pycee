@@ -1,0 +1,22 @@
+Program
+  Func func f
+    body:
+      Block
+        ExprStmt
+          IncDec '++' postfix
+            Ident i
+        ExprStmt
+          IncDec '--' prefix
+            Ident i
+        Assign '='
+          Index
+            Ident l
+            IncDec '++' postfix
+              Ident i
+          IncDec '--' prefix
+            Ident x
+        ExprStmt
+          IncDec '++' prefix
+            IncDec '++' postfix
+              Ident i
+exit=0

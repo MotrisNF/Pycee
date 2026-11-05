@@ -1,0 +1,9 @@
+# Bytes that are not UTF-8 become U+FFFD (one per bad byte): reading never fails
+prog main() {
+    while (true) {
+        try {
+            vemp line = input();
+            print(line, line.len());
+        } except EOFError { return; }
+    }
+}

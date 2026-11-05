@@ -1,0 +1,4 @@
+# Expect: SyntaxError invalid character, caret on the !
+var x = 1;
+if (!x) {
+}

@@ -1,0 +1,6 @@
+# Imports score itself: score is loaded once, whoever imports it.
+import score;
+
+func area(w, h) {
+    return w * h + score.BONUS;
+}

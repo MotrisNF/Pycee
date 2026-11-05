@@ -1,0 +1,11 @@
+# The milestone of phase 8: the loop makes ~1.5 million objects and only
+# the last ones stay alive (memory stays flat: measured apart)
+prog main() {
+    var keep = "";
+    for (i in range(300000)) {
+        vemp s = "item " + str(i) + " of the loop";
+        vemp t = tuple(s, i, () => s);
+        if (i % 1000000 is 0) { keep = s; }
+    }
+    print(keep);
+}

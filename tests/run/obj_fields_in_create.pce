@@ -1,0 +1,20 @@
+# Fields are declared by self.x = ... in create (also inside an if, or several at once); a child adds its own
+obj Patata {
+    func create(x, y) {
+        self.name = x;
+        if (y > 0) { self.age = y; } else { self.age = 0; }
+        self.tags, self.score = [], 0;
+    }
+    func birthday() { self.age++; }
+}
+obj Mini extends Patata {
+    func create(n) { super.create(n, 1); self.extra = true; self.name = n.upper(); }
+}
+prog main() {
+    var p = Patata("Paco", 25);
+    p.birthday();
+    print(p.name, p.age, p.tags, p.score);
+    var m = Mini("ana");
+    print(m.name, m.age, m.extra);
+    try { int("hello"); } except ValueError (e) { print(e.type()); }
+}

@@ -1,0 +1,10 @@
+obj Point {
+    var x;
+    func create(x0) {
+        self.x = x0;
+    }
+}
+
+func f() {
+    var p = Point();
+}

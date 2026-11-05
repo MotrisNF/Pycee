@@ -1,0 +1,6 @@
+# Expect: every assignment operator; targets can be ident, index or field
+func f() {
+    a = 1; a += 1; a -= 1; a *= 2; a /= 2; a //= 2; a %= 2;
+    l[0] = 1;
+    self.x = 2;
+}

@@ -1,0 +1,4 @@
+SyntaxError: expected '}' but found end of file (tests/parser/err_unclosed_block.pce, line 4)
+            x++;
+                ^
+exit=1

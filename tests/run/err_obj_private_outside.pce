@@ -1,0 +1,2 @@
+obj A { private var secret = 1; func create() { } }
+prog main() { var a = A(); print(a.secret); }

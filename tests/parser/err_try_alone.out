@@ -1,0 +1,4 @@
+SyntaxError: expected 'except' or 'finally' after the try block but found '}' (tests/parser/err_try_alone.pce, line 1)
+    prog main() { try { } }
+                          ^
+exit=1

@@ -1,0 +1,25 @@
+# Locals: var lives in the whole prog (none until set), vemp in its
+# block (new each round), globals read and written from prog
+var counter = 10;
+prog main() {
+    var late;
+    print(late);
+    var i = 0;
+    while (i < 3) {
+        vemp sq = i * i;
+        vemp unset;
+        print(i, sq, unset);
+        unset = "set";
+        i++;
+    }
+    if (i is 3) { var inside = "declared in a branch"; }
+    print(inside);
+    counter += i;
+    --counter;
+    print(counter, counter++, counter);
+    var x = 1;
+    var y = 2;
+    var z = 3;
+    x, y, z = z, x, y;
+    print(x, y, z);
+}

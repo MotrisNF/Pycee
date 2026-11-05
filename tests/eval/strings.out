@@ -1,0 +1,18 @@
+"pycee"
+"ababab"
+"ababab"
+""
+ValueError: cannot repeat a string a negative number of times (<stdin:6>, line 1)
+    "ab" * -1
+    ^^^^^^^^^
+TypeError: a string can only be repeated an integer number of times (<stdin:7>, line 1)
+    "ab" * 1.5
+    ^^^^^^^^^^
+TypeError: unsupported operand types for '+': 'string' and 'number' (<stdin:8>, line 1)
+    "a" + 1
+    ^^^^^^^
+"tab\there\nquote\"s\\"
+tab	here x
+"77.0truenone"
+"same"
+exit=0

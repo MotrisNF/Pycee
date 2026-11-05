@@ -1,0 +1,2 @@
+const A = 1;
+prog main() { var b = 2; A, b = b, A; }

@@ -1,0 +1,4 @@
+# Expect: blocks always need braces
+func f(a) {
+    if (a) return 1;
+}

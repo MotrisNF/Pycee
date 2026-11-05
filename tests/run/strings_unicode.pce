@@ -1,0 +1,15 @@
+# Strings count characters (UTF-8): len, indexes, slices, methods, in, for
+prog main() {
+    var s = "naïve café";
+    print(s.len(), s[1], s[-1], s[0:3], s[::-1], s[4:], s[::2], s[100:], s[-100:2]);
+    print(s.upper(), "ÉCOLE".lower(), "hello WORLD".capitalize(), "ß".upper());
+    print("|" + "  x y  ".strip() + "|", "|" + "  x".lstrip() + "|", "|" + "x  ".rstrip() + "|", "xxhixx".strip("x"));
+    print(s.find("ï"), s.find("zz"), s.index("fé"), s.count("ï"), "aaa".count("aa"), "ab".count(""));
+    print("a-b-c".replace("-", "+"), "ab".replace("", "."), s.starts_with("naï"), s.ends_with("fé"));
+    print("123".is_digit(), "ab".is_alpha(), "ï".is_alpha(), "a1".is_alnum(), " \t".is_space(), "".is_digit(), "".is_ascii(), s.is_ascii());
+    print(", ".join(tuple("a", "b", "c")), tuple("x", "y").join("-"), s.reverse(), "ell" in "hello", "z" not in "hello");
+    for (c in "aé😀") { print(c, c.len()); }
+    print("ab" * 3, "ï" < "z", "abc"[1:2].type());
+    var t = tuple(1, 2, 3, 4, 5);
+    print(t[1:3], t[::-1], t[::2], t[-2:], t[3:1], t[:]);
+}

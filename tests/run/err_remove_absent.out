@@ -1,0 +1,4 @@
+ValueError: remove(): the value is not in the list (tests/run/err_remove_absent.pce, line 1)
+    prog main() { [1, 2].remove(3); }
+                  ^^^^^^^^^^^^^^^^
+exit=1

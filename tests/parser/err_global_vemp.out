@@ -1,0 +1,4 @@
+SyntaxError: 'vemp' is only allowed inside functions; use 'var' for globals (tests/parser/err_global_vemp.pce, line 2)
+    vemp x = 1;
+    ^^^^
+exit=1

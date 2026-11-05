@@ -1,0 +1,4 @@
+NameError: name 'undefined' is not defined (tests/resolver/err_fstring_name.pce, line 1)
+    prog main() { print(f"{undefined}"); }
+                           ^^^^^^^^^
+exit=1

@@ -1,0 +1,4 @@
+TypeError: Empty() takes 0 arguments but 1 was given (tests/resolver/err_arity_no_create.pce, line 5)
+        var e = Empty(1);
+                ^^^^^^^^
+exit=1

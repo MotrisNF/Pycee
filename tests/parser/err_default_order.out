@@ -1,0 +1,4 @@
+SyntaxError: parameter 'b' needs a default: it comes after one that has a default (tests/parser/err_default_order.pce, line 1)
+    func f(a = 1, b) { }
+                  ^
+exit=1

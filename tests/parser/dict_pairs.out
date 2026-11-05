@@ -1,0 +1,23 @@
+Program
+  Func prog main
+    body:
+      Block
+        Var var d
+          init:
+            Call
+              callee:
+                Ident dict
+              args:
+                Pair
+                  String "a"
+                  Int 1
+                Pair
+                  Ternary
+                    cond:
+                      Ident x
+                    then:
+                      Ident y
+                    else:
+                      Ident z
+                  Int 2
+exit=0

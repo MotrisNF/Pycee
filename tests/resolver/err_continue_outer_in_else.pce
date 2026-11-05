@@ -1,0 +1,6 @@
+# The else of a for runs after the loop: it is not inside it
+prog main() {
+    while (true) {
+        for (i in range(3)) { } else { continue outer; }
+    }
+}

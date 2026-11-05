@@ -1,0 +1,4 @@
+TypeError: 'score' is a module, not a value (tests/imports/err_module_as_value.pce, line 4)
+        var x = score;
+                ^^^^^
+exit=1

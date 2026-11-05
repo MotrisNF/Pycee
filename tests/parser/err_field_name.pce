@@ -1,0 +1,2 @@
+# Expect: a field name must follow the dot
+var x = p.3;

@@ -1,0 +1,4 @@
+NameError: name 'k' is not defined (tests/resolver/err_const_after_block.pce, line 3)
+        print(k);
+              ^
+exit=1

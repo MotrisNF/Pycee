@@ -1,0 +1,2 @@
+# Only "outer" can follow break or continue: there are no other labels
+prog main() { while (true) { break loop1; } }

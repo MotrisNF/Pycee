@@ -1,0 +1,4 @@
+# Expect: unclosed block reported at end of file, right after the last token
+func f() {
+    while (true) {
+        x++;

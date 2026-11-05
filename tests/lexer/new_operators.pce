@@ -1,0 +1,5 @@
+# New operators, longest match first.
+a<<=b >>= c << d >> e <= f >= g
+a&=b |= c ^= d & e | f ^ g ~h
+x ? y : z  (a) => a  f(...rest)  @deco
+a=>b a...b

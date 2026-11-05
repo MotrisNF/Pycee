@@ -1,0 +1,14 @@
+# The milestone of phase 6
+prog main() {
+    for (i in range(1, 16)) {
+        if (i % 15 is 0) {
+            print("FizzBuzz");
+        } elif (i % 3 is 0) {
+            print("Fizz");
+        } elif (i % 5 is 0) {
+            print("Buzz");
+        } else {
+            print(i);
+        }
+    }
+}

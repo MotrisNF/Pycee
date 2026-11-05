@@ -1,0 +1,2 @@
+# The loop variable of a comprehension lives inside it only
+prog main() { var l = [x for (x in range(3))]; print(x); }

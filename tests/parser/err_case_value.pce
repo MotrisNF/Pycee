@@ -1,0 +1,4 @@
+# Expect: case values must be literal numbers or strings
+func f(x) {
+    switch (x) { case y { } }
+}

@@ -1,0 +1,7 @@
+number? number?   not a number, try again (invalid literal for num(): "abc")
+number? number?   not a number, try again (invalid literal for num(): "")
+number? number?   not a number, try again (invalid literal for num(): "1x")
+number? 
+read 3 numbers
+total 16.5 average 5.5
+exit=0

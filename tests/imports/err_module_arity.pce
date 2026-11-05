@@ -1,0 +1,5 @@
+import score;
+
+func f() {
+    score.add_score();
+}

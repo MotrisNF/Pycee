@@ -1,0 +1,44 @@
+# Loops, break/continue (also outer), for-else, do-while, swap, switch, const and range
+const LIMIT = 3;
+var total = 0;
+prog main() {
+    var n = 0;
+    while (n < 10) {
+        n++;
+        if (n % 2 is 0) { continue; }
+        if (n > 7) { break; }
+        total += n;
+    }
+    print("total", total, "n", n);
+    for (i in range(3)) {
+        for (j in range(3)) {
+            if (j is 1) { continue outer; }
+            if (i is 2) { break outer; }
+            print(i, j);
+        }
+    } else {
+        print("no else after break outer");
+    }
+    for (k in range(2)) { print("k", k); } else { print("else runs"); }
+    var c = 0;
+    do { c++; } while (c < LIMIT);
+    print("do", c);
+    do { c = 100; } while (false);
+    print(c);
+    var a = 1;
+    var b = 2;
+    a, b = b, a;
+    print(a, b);
+    switch (a) {
+        case 1, 2.0 { print("one or two"); }
+        default { print("other"); }
+    }
+    switch ("hi") { case "hi" { print("str case"); } }
+    for (x in range(10, 0, -3)) { const y = x * 2; print(x, y); }
+    print(range(5), range(1, 10, 2), str(range(0)), range(3) is range(0, 3, 1));
+    print(range(9223372036854775806, 9223372036854775807));
+    for (z in range(9223372036854775805, 9223372036854775807, 1)) { print(z); }
+    for (z in range(-9223372036854775807 - 1, 9223372036854775807, 9223372036854775807)) { print(z); }
+    return;
+    print("never");
+}

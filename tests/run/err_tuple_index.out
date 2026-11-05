@@ -1,0 +1,5 @@
+a
+IndexError: tuple index 2 out of range (length 2) (tests/run/err_tuple_index.pce, line 4)
+        print(t[2]);
+              ^^^^
+exit=1

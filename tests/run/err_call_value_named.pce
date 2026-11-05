@@ -1,0 +1,6 @@
+func f(a) { return a; }
+prog main() {
+    var g = f;
+    print(g(a = 1));
+    print(g(b = 1));
+}

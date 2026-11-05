@@ -1,0 +1,11 @@
+# return ends the prog, even from inside loops
+prog main() {
+    for (i in range(10)) {
+        while (true) {
+            if (i is 2) { return; }
+            break;
+        }
+        print(i);
+    }
+    print("never");
+}

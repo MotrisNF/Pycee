@@ -1,0 +1,4 @@
+NameError: 'x' was already declared at line 3 (tests/resolver/err_var_twice_branches.pce, line 5)
+            var x = 2;
+                ^
+exit=1

@@ -1,0 +1,4 @@
+SyntaxError: '...r' must be the last parameter (tests/parser/err_rest_not_last.pce, line 1)
+    func f(...r, b) { }
+                 ^
+exit=1

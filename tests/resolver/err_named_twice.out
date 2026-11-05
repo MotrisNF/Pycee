@@ -1,0 +1,4 @@
+TypeError: f() got two values for 'a' (tests/resolver/err_named_twice.pce, line 2)
+    prog main() { f(1, a = 2); }
+                       ^
+exit=1

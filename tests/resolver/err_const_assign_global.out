@@ -1,0 +1,4 @@
+SyntaxError: cannot assign to 'MAX': it is a constant (tests/resolver/err_const_assign_global.pce, line 2)
+    func f() { MAX = 4; }
+               ^^^
+exit=1

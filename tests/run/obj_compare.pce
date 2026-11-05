@@ -1,0 +1,25 @@
+# compare(other) for < <= > >=, sort, min, max; a compare that empties the list being sorted is a RuntimeError
+obj Ver {
+    func create(major, minor) { self.major = major; self.minor = minor; }
+    func compare(other) {
+        if (self.major is not other.major) { return self.major - other.major; }
+        return self.minor - other.minor;
+    }
+    func to_str() { return f"{self.major}.{self.minor}"; }
+}
+obj Evil {
+    func create(l) { self.l = l; }
+    func compare(other) { self.l.clear(); return 0; }
+}
+prog main() {
+    var vs = [Ver(2, 1), Ver(1, 9), Ver(2, 0), Ver(1, 10)];
+    vs.sort();
+    print(vs, vs.min(), vs.max(), Ver(1, 0) < Ver(1, 1), Ver(3, 0) >= Ver(2, 9));
+    vs.sort(reverse = true);
+    print(vs);
+    var l = [];
+    l.append(Evil(l));
+    l.append(Evil(l));
+    try { l.sort(); } except RuntimeError (e) { print("caught:", e.message()); }
+    try { print(Ver(1, 1) < 3); } except (e) { print(e.type(), e.message()); }
+}

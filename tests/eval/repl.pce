@@ -1,0 +1,18 @@
+# REPL: the final ';' is optional, several items per line, continuation lines
+1 + 1;
+var a = 1; var b = 2; a + b
+func f(x) {
+    return x * 2;
+}
+var c = (1 +
+    2)
+c
+print("errors do not end the session")
+undefined
+a + "x"
+c
+if (true) { print("if works"); }
+[1, 2]
+f(1)
+var l[3]
+range(3)

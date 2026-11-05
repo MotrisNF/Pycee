@@ -1,0 +1,9 @@
+true false true
+true false
+true
+7
+true
+TypeError: a number has no id(): numbers, bools and none are plain values (tests/run/err_id_number.pce, line 13)
+        print((5).id());
+               ^^^^^^^
+exit=1

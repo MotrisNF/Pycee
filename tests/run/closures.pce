@@ -1,0 +1,24 @@
+# Closures share the variable they capture, and it outlives its frame
+func make_pair() {
+    var n = 0;
+    var inc = () => { n++; };
+    var get = () => n;
+    return tuple(inc, get);
+}
+func compose(f, g) { return (x) => f(g(x)); }
+prog main() {
+    var inc, get = make_pair();
+    inc(); inc(); inc();
+    print(get());
+    var inc2, get2 = make_pair();
+    inc2();
+    print(get(), get2());
+    var twice_plus = compose((x) => x + 1, (x) => x * 2);
+    print(twice_plus(5));
+    var deep = (a) => (b) => (c) => a + b + c;
+    print(deep(1)(2)(3));
+    var k = 10;
+    func adder(x) { return x + k; }
+    k = 20;
+    print(adder(1));
+}

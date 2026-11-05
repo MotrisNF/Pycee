@@ -1,0 +1,3 @@
+# A private member is for the obj that declares it, not its children
+obj A { private var secret = 1; }
+obj B extends A { func peek() { return self.secret; } }

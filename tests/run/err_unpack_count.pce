@@ -1,0 +1,5 @@
+# Unpacking a tuple of another length: AssignmentError when it runs
+prog main() {
+    var t = tuple(1, 2, 3);
+    var a, b = t;
+}

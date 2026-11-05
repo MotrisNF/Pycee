@@ -1,0 +1,4 @@
+TypeError: sum() needs numbers, but item 0 is 'string' (tests/run/err_sum_strings.pce, line 1)
+    prog main() { print(["a", "b"].sum()); }
+                        ^^^^^^^^^^^^^^^^
+exit=1

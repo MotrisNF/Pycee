@@ -1,0 +1,15 @@
+/*
+ * Functions and print
+ * - func declares a function. Parameters have no type.
+ * - Every statement ends in ';'. An expression may span several lines:
+ *   the statement ends at the ';', not at the line break.
+ * - print is a native function with any number of arguments: it
+ *   separates them with ' ' and adds '\n' at the end.
+ * - A function without return gives back none.
+ */
+
+func write_sencence(string){
+    print(string, "can recived difrent args",
+          1, "similat to python", "print a ' ' between args",
+          "and a \n at the en of the print");
+}

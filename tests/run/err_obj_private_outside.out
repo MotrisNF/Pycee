@@ -1,0 +1,4 @@
+AttributeError: 'secret' is private: only self can reach it, inside 'A' (tests/run/err_obj_private_outside.pce, line 2)
+    prog main() { var a = A(); print(a.secret); }
+                                     ^^^^^^^^
+exit=1

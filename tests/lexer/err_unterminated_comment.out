@@ -1,0 +1,9 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            'x'
+2:7    TOK_ASSIGN           '='
+2:9    TOK_INT              '1'
+2:10   TOK_SEMICOLON        ';'
+SyntaxError: unterminated block comment (tests/lexer/err_unterminated_comment.pce, line 3)
+    /* starts here
+    ^^
+exit=1

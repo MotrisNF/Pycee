@@ -1,0 +1,5 @@
+from score import GLOBAL_SCORE;
+
+func f() {
+    GLOBAL_SCORE++;
+}

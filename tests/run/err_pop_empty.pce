@@ -1,0 +1,1 @@
+prog main() { var l = []; l.pop(); }

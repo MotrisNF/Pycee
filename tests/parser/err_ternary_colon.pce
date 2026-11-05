@@ -1,0 +1,2 @@
+# A ternary needs its ":".
+var a = c ? 1;

@@ -1,0 +1,4 @@
+# Expect: an assignment is a statement, so it cannot be chained
+func f() {
+    a = b = 1;
+}

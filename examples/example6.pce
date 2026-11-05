@@ -1,0 +1,42 @@
+/*
+ * Lists and strings
+ * - List literals: [1, 2, 3]. Also var l[n] (n elements set to none).
+ * - Operations are methods: l.append(x), l.len().
+ * - + joins strings with strings and lists with lists.
+ *   Mixing types ("a" + 1) is an error.
+ * - Indexing out of range is an error.
+ * - Strings are indexed like lists: s[0] is a string of length 1.
+ * - Strings are immutable: s[0] = "x" is an error.
+ * - is compares by value, also lists (element by element).
+ * - print of a list shows its contents: [1, 2].
+ */
+
+prog main(){
+    var numbers = [3, 1, 4];
+    numbers.append(1);
+    print(numbers.len()); # 4
+
+    var fixed[3];         # [none, none, none]
+    fixed[0] = "a";
+    fixed.append("d");    # grows even though it was declared with a size
+
+    var both = numbers + [5, 9]; # [3, 1, 4, 1, 5, 9]
+
+    var word = "hello";
+    var greeting = word + ' world';
+    print(word[0]);       # "h"
+    # word[0] = "j";     # error: strings are immutable
+    print(both);          # [3, 1, 4, 1, 5, 9]
+    for (c in word){
+        print(c);
+    }
+    if (word.len() is 5 and word[1] is "e"){
+        print("ok");
+    }
+    if ([1, 2] is [1, 2]){
+        print("same values");
+    }
+
+    print(numbers[10]);   # error: index out of range
+    return 0;
+}

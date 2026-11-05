@@ -1,0 +1,5 @@
+3
+TypeError: f() takes 1 to 2 arguments but 3 were given (tests/run/err_call_value_arity.pce, line 6)
+        print(g(1, 2, 3));
+              ^^^^^^^^^^
+exit=1

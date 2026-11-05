@@ -1,0 +1,54 @@
+Program
+  Func func f
+    params:
+      Param a
+      Param b
+        default:
+          Ident a
+      Param ...rest
+    body:
+      Block
+        Return
+          Func lambda =>
+            params:
+              Param x
+            body:
+              Ident x
+  Func prog main
+    body:
+      Block
+        Var var g
+          init:
+            Func lambda
+              params:
+                Param x
+              body:
+                Block
+                  Return
+                    Ident x
+        Var var h
+          init:
+            Func lambda
+              body:
+                Block
+                  Return
+                    Int 1
+        ExprStmt
+          Call
+            callee:
+              Ident f
+            args:
+              Int 1
+              NamedArg b
+                Int 2
+        ExprStmt
+          Call
+            callee:
+              Ident f
+            args:
+              Spread
+                Ident t
+        Func func inner
+          body:
+            Block
+exit=0

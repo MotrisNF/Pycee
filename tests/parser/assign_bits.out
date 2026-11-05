@@ -1,0 +1,18 @@
+Program
+  Func func f
+    params:
+      Param x
+    body:
+      Block
+        Assign '&='
+          Ident x
+          Int 1
+        Assign '<<='
+          Ident x
+          Int 2
+        Assign '^='
+          Ident x
+          Binary '>>'
+            Ident x
+            Int 1
+exit=0

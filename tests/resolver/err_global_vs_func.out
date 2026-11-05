@@ -1,0 +1,4 @@
+NameError: 'total' was already declared at line 1 (tests/resolver/err_global_vs_func.pce, line 3)
+    func total() {
+         ^^^^^
+exit=1

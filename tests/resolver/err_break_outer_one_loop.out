@@ -1,0 +1,4 @@
+SyntaxError: 'break outer' needs a loop around this one (tests/resolver/err_break_outer_one_loop.pce, line 3)
+            break outer;
+            ^^^^^^^^^^^^
+exit=1

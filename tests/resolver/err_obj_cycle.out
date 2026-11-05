@@ -1,0 +1,4 @@
+SyntaxError: 'A' extends itself (through what it extends) (tests/resolver/err_obj_cycle.pce, line 1)
+    obj A extends B { }
+        ^
+exit=1

@@ -1,0 +1,4 @@
+SyntaxError: format width (up to 1000000) or precision (up to 1000) is too large (tests/parser/err_fstring_width.pce, line 1)
+    prog main() { print(f"{5:99999999}"); }
+                             ^^^^^^^^
+exit=1

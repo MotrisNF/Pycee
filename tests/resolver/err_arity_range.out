@@ -1,0 +1,4 @@
+TypeError: range() takes 1 to 3 arguments but 0 were given (tests/resolver/err_arity_range.pce, line 2)
+        range();
+        ^^^^^^^
+exit=1

@@ -1,0 +1,4 @@
+SyntaxError: 'case' after 'default' (tests/parser/err_case_after_default.pce, line 3)
+        switch (x) { default { } case 1 { } }
+                                 ^^^^
+exit=1

@@ -1,0 +1,4 @@
+TypeError: add_score() takes 1 argument but 0 were given (tests/imports/err_module_arity.pce, line 4)
+        score.add_score();
+        ^^^^^^^^^^^^^^^^^
+exit=1

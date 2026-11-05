@@ -1,0 +1,109 @@
+/*
+ * Control flow, operators, comments and special values
+ * - Comments: # to the end of the line, and block comments.
+ * - Numbers are int (64 bits) or float; both are of type "number".
+ *   /  decimal division:  7 / 2  -> 3.5 (always float: 6 / 3 -> 2.0)
+ *   // truncated division: 7 // 2 -> 3  (as in C: -7 // 2 -> -3)
+ *   %  remainder:         7 % 2  -> 1   (as in C; 7.5 % 2 -> 1.5)
+ *   power: the pow method, 2.pow(3) -> 8 (there is no operator)
+ * - x += 1; x -= 1; ... are statements, not expressions.
+ * - is compares by value; "different" is written is not.
+ * - true, false and none exist (lowercase).
+ * - var ("lasting"): lives until the end of the function, even when it
+ *   is declared inside a block. If its block never ran, it is none.
+ *   Not allowed inside loops: declare it before the loop or use vemp.
+ * - vemp ("fleeting"): lives only inside its block {}. Only inside functions.
+ *   The variable of a for is always a vemp.
+ * - No name may repeat another visible one: two equal vars in a function,
+ *   a local or parameter named like a global, or a vemp named like a
+ *   living outer variable are errors (found when the code is analysed,
+ *   before it runs).
+ */
+
+var counter = 0; # variable global
+
+func fizzbuzz(limit){
+    var i = 1;
+    while (i <= limit){
+        if (i % 15 is 0){
+            print("FizzBuzz");
+        }
+        elif (i % 3 is 0){
+            print("Fizz");
+        }
+        elif (i % 5 is 0){
+            print("Buzz");
+        }
+        else{
+            print(i);
+        }
+        i += 1;
+    }
+}
+
+func first_odd_multiple(n, limit){
+    for (i in range(1, limit)){
+        if (i % 2 is 0){
+            continue;
+        }
+        if (i % n is 0){
+            return i;
+        }
+    }
+    # no return: gives back none
+}
+
+func block_scope(flag){
+    if (flag){
+        var message = "declared inside the if";
+    }
+    print(message); # valid: message is still alive (none if flag is false)
+}
+
+func var_and_vemp(limit){
+    var total = 0;               # declared before the loop
+    var i = 0;
+    while (i < limit){
+        vemp square = i * i;     # new every round, dies at the closing }
+        total += square;
+        # var wrong = 1;        # error: var inside a loop
+        i += 1;
+    }
+    # print(square);            # error: square no longer exists
+    for (i2 in range(3)){        # i2 is an implicit vemp
+        print(i2);
+    }
+    for (i2 in range(3)){        # valid: the previous i2 already died
+        print(i2);
+    }
+    return total;
+}
+
+prog main(){
+    fizzbuzz(20);
+
+    print(7 / 2);  # 3.5
+    print(7 // 2); # 3
+
+    var a = true;
+    var b = false;
+    if ((a or b) and not (a xor b)){
+        print("never");
+    }
+
+    var found = first_odd_multiple(7, 5);
+    if (found is none){
+        print("not found");
+    }
+    if (found is not none){
+        print(found);
+    }
+
+    while (true){
+        counter += 1;
+        if (counter >= 3){
+            break;
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,4 @@
+NameError: 'score' was already declared at line 1 (tests/imports/err_import_twice.pce, line 2)
+    import score;
+           ^^^^^
+exit=1

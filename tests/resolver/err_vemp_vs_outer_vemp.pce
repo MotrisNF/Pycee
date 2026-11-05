@@ -1,0 +1,6 @@
+func f() {
+    vemp x = 1;
+    if (true) {
+        vemp x = 2;
+    }
+}

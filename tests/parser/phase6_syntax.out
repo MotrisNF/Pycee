@@ -1,0 +1,58 @@
+Program
+  Var const LIMIT
+    init:
+      Int 10
+  Func prog main
+    body:
+      Block
+        Var const step
+          init:
+            Int 2
+        Var var a
+          init:
+            Int 0
+        Var var b
+          init:
+            Int 1
+        DoWhile
+          cond:
+            Binary '<'
+              Ident a
+              Ident LIMIT
+          body:
+            Block
+              MultiAssign
+                targets:
+                  Ident a
+                  Ident b
+                values:
+                  Ident b
+                  Binary '+'
+                    Ident a
+                    Ident b
+        For i
+          in:
+            Call
+              callee:
+                Ident range
+              args:
+                Int 3
+          body:
+            Block
+              While
+                cond:
+                  Bool true
+                body:
+                  Block
+                    Break outer
+              For j
+                in:
+                  Call
+                    callee:
+                      Ident range
+                    args:
+                      Int 2
+                body:
+                  Block
+                    Continue outer
+exit=0

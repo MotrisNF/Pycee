@@ -1,0 +1,6 @@
+# An error raised while handling another one shows both, oldest first
+func parse(s) { return num(s); }
+prog main() {
+    try { parse("abc"); }
+    except ValueError (e) { raise RuntimeError("could not parse"); }
+}

@@ -1,0 +1,2 @@
+# A separator must go between two digits.
+var a = 1_;

@@ -1,0 +1,4 @@
+# Expect: unary minus binds tighter than *; -(-x) needs a space or parentheses
+var a = -x * y;
+var b = - -x;
+var c = -(-x);

@@ -1,0 +1,8 @@
+from score import add_score as add, Player as Gamer, GLOBAL_SCORE as total;
+from geometry import area;
+
+prog main() {
+    var p = Gamer("ana");
+    print(add(5), total, area(2, 3));
+    return 0;
+}

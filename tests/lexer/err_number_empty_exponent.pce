@@ -1,0 +1,2 @@
+# An exponent needs digits.
+var a = 1e;

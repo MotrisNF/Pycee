@@ -1,0 +1,4 @@
+TypeError: 'number' object is not iterable (tests/run/err_for_number.pce, line 2)
+        for (i in 10) { print(i); }
+                  ^^
+exit=1

@@ -1,0 +1,29 @@
+# The milestone of phase 7b: read numbers with num(input()) and recover
+# from what is not one, until the input ends
+func read_number(prompt) {
+    while (true) {
+        try {
+            return num(input(prompt));
+        } except ValueError (e) {
+            print("  not a number, try again (" + e.message() + ")");
+        }
+    }
+}
+
+prog main() {
+    var total = 0;
+    var count = 0;
+    try {
+        while (true) {
+            total += read_number("number? ");
+            count++;
+        }
+    } except EOFError {
+        print("");
+    } finally {
+        print("read", count, "numbers");
+    }
+    if (count > 0) {
+        print("total", total, "average", total / count);
+    }
+}

@@ -1,0 +1,4 @@
+RuntimeError: the list changed size while the for walked it (from 3 to 4 items) (tests/run/err_list_resize_in_for.pce, line 4)
+        for (x in l) { l.append(x); }
+                  ^
+exit=1

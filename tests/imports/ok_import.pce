@@ -1,0 +1,13 @@
+import score;
+import geometry as geo;
+from score import add_score, Player, GLOBAL_SCORE;
+
+var start = score.BONUS + GLOBAL_SCORE;   # a global may use imported ones
+
+prog main() {
+    var p = score.Player("ana");
+    vemp q = Player("eva");
+    print(score.add_score(10), add_score(1), geo.area(2, 3));
+    print(GLOBAL_SCORE, score.GLOBAL_SCORE, start);
+    return 0;
+}

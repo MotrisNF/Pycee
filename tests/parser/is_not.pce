@@ -1,0 +1,3 @@
+# Expect: a is not b is stored as not (a is b)
+var a = x is not none;
+var b = x is y;

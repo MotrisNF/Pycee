@@ -1,0 +1,4 @@
+SyntaxError: 'break' cannot leave a 'finally' block: it would hide the error being raised (tests/resolver/err_break_in_finally.pce, line 1)
+    prog main() { while (true) { try { } finally { break; } } }
+                                                   ^^^^^^
+exit=1

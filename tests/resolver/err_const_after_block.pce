@@ -1,0 +1,4 @@
+prog main() {
+    if (true) { const k = 1; }
+    print(k);
+}

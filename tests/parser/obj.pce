@@ -1,0 +1,7 @@
+# Expect: obj with fields and methods
+obj Point {
+    var x;
+    var y;
+    func create(x, y) { self.x = x; self.y = y; }
+    func norm() { return self.x * self.x + self.y * self.y; }
+}

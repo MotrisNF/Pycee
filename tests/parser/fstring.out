@@ -1,0 +1,18 @@
+Program
+  Func prog main
+    body:
+      Block
+        ExprStmt
+          Call
+            callee:
+              Ident print
+            args:
+              FString
+                String "a "
+                Format
+                  Ident x
+                String " b "
+                Format align=> width=5 prec=2 type=f
+                  Ident y
+                String " {c}"
+exit=0

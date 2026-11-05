@@ -1,0 +1,4 @@
+# Expect: case after default
+func f(x) {
+    switch (x) { default { } case 1 { } }
+}

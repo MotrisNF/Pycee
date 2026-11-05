@@ -1,0 +1,4 @@
+SyntaxError: a function used as a value has no name: func (...) { ... } (tests/parser/err_named_func_expr.pce, line 1)
+    prog main() { var g = func name(x) { }; }
+                               ^^^^
+exit=1

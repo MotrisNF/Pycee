@@ -1,0 +1,6 @@
+P(3) [P(3), P(4)] tuple(P(3)) dict("k": P(3)) P(3) <P(3)> [  P(3)]
+  (to_str runs)
+x noisy1 y
+<Plain> [<Plain>]
+to_str() must give back a string, not 'number'
+exit=0

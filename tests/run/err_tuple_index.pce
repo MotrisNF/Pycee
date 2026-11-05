@@ -1,0 +1,5 @@
+prog main() {
+    var t = tuple("a", "b");
+    print(t[-2]);
+    print(t[2]);
+}

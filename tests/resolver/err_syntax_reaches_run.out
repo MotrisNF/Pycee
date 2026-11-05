@@ -1,0 +1,4 @@
+SyntaxError: expected ';' but found '}' (tests/resolver/err_syntax_reaches_run.pce, line 2)
+        return 1
+                ^
+exit=1

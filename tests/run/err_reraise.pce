@@ -1,0 +1,5 @@
+# raise e again: it keeps where it came from, and is not chained to itself
+func f() { raise ValueError("from f"); }
+prog main() {
+    try { f(); } except (e) { print("seen:", e); raise e; }
+}

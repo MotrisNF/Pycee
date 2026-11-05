@@ -1,0 +1,4 @@
+ImportError: cannot import name 'nothing' from 'score' (tests/imports/err_cannot_import.pce, line 1)
+    from score import nothing;
+                      ^^^^^^^
+exit=1

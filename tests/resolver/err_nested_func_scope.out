@@ -1,0 +1,4 @@
+NameError: name 'g' is not defined (tests/resolver/err_nested_func_scope.pce, line 2)
+    prog main() { if (true) { func g() { } } g(); }
+                                             ^
+exit=1

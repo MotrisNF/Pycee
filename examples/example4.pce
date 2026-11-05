@@ -1,0 +1,28 @@
+/*
+ * prog, for and lists of a given size
+ * - prog main(argc, argv) is the entry point. argc is a number and argv
+ *   a tuple of strings (argv[0] is the program). prog main() with no
+ *   parameters is also valid.
+ * - The value prog returns is the exit code of the process.
+ * - for (variable in iterable): the for declares its own variable as a
+ *   vemp, which dies when the loop ends.
+ * - range(n), range(start, end), range(start, end, step): end excluded.
+ * - var list[n] makes a list of n elements set to none. The size can be
+ *   any expression. The list can grow later with append.
+ */
+
+prog main(argc, argv){
+    var length = 5;
+    var new_list[length];
+    for (i in range(length)){
+        print(i);
+        new_list[i] = i * i;
+    }
+    for (value in new_list){
+        print(value);
+    }
+    for (arg in argv){
+        print(arg);
+    }
+    return 0;
+}

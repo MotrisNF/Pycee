@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "tests/run/err_in_default.pce", line 3, in main
+    prog main() { f(1); }
+                  ^^^^
+  File "tests/run/err_in_default.pce", line 2, in f
+    func f(a, b = a / 0) { return b; }
+                  ^^^^^
+ZeroDivisionError: division by zero
+exit=1

@@ -1,0 +1,4 @@
+SyntaxError: expected an index or a slice but found ']' (tests/parser/err_empty_index.pce, line 1)
+    prog main() { print(s[]); }
+                          ^
+exit=1

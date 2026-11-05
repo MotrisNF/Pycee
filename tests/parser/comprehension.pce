@@ -1,0 +1,1 @@
+prog main() { var l = [x * 2 for (k, x in d) if (x > 0)]; var s = set(y for (y in t)); }

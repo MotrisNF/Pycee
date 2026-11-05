@@ -1,0 +1,4 @@
+# Expect: no trailing comma in calls
+func f() {
+    g(a, b,);
+}

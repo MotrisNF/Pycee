@@ -1,0 +1,4 @@
+RuntimeError: the dict changed size while the for walked it (tests/run/err_dict_resize_in_for.pce, line 1)
+    prog main() { var d = dict(1: 1); for (k in d.keys()) { } for (k, v in d) { d[k + 1] = v; } }
+                                                                           ^
+exit=1

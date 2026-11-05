@@ -1,0 +1,4 @@
+SyntaxError: comparison operators cannot be chained (tests/parser/err_in_chained.pce, line 2)
+    prog main() { print(x in t is true); }
+                               ^^
+exit=1

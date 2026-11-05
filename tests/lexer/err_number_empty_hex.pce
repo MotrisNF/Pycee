@@ -1,0 +1,2 @@
+# A base prefix needs digits of its base.
+var a = 0x;

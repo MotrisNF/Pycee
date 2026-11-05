@@ -1,0 +1,4 @@
+# Expect: else without a matching if
+func f() {
+    else { }
+}

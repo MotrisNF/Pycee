@@ -1,0 +1,34 @@
+# global variables in the REPL: var, =, op=, ++ and --
+var x = 10
+x
+x = x * 2
+x
+x += 1; x -= 2; x *= 3
+x
+x //= 4
+x
+x %= 5
+x
+var y
+y
+var z = x++
+z
+x
+++x
+x--
+--x
+x &= 6
+x
+x <<= 2
+x
+var big = 9223372036854775807
+big++
+big
+var f = 1.5
+f++
+f
+var s = "a"
+s++
+s += "b"
+s
+y = undefined_name

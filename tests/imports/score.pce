@@ -1,0 +1,19 @@
+# A module: its globals are read-only outside, but its functions change them.
+var GLOBAL_SCORE = 0;
+var BONUS = 5;
+
+func add_score(points) {
+    GLOBAL_SCORE += points + BONUS;
+    return GLOBAL_SCORE;
+}
+
+obj Player {
+    var name;
+    func create(n) {
+        self.name = n;
+    }
+}
+
+prog main() {
+    # ignored when imported
+}

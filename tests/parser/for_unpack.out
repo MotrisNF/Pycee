@@ -1,0 +1,12 @@
+Program
+  Func prog main
+    body:
+      Block
+        For k
+          more:
+            Var vemp v
+          in:
+            Ident d
+          body:
+            Block
+exit=0

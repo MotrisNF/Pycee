@@ -1,0 +1,4 @@
+SyntaxError: 'not' needs parentheses here (tests/parser/err_not_position.pce, line 2)
+    var bad = a < not b;
+                  ^^^
+exit=1

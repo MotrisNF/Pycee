@@ -1,0 +1,4 @@
+TypeError: 'number' object is not callable (tests/run/err_map_not_function.pce, line 1)
+    prog main() { print([1].map(5)); }
+                        ^^^^^^^^^^
+exit=1

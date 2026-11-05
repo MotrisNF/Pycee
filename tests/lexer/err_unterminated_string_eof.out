@@ -1,0 +1,6 @@
+2:1    TOK_IDENT            'print'
+2:6    TOK_LPAREN           '('
+SyntaxError: unterminated string literal (tests/lexer/err_unterminated_string_eof.pce, line 2)
+    print('never closed
+          ^
+exit=1

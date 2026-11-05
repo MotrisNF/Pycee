@@ -1,0 +1,7 @@
+obj Circle extends Shape {
+    private var r = 1;
+    static var count = 0;
+    static func unit() { return Circle(1); }
+    private func area() { return super.area(); }
+}
+obj Square(Shape) { }

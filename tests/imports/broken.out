@@ -1,0 +1,4 @@
+SyntaxError: expected parameter name but found '{' (tests/imports/broken.pce, line 1)
+    func broken( {
+                 ^
+exit=1

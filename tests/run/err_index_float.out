@@ -1,0 +1,4 @@
+TypeError: an index must be an integer, not a float (tests/run/err_index_float.pce, line 1)
+    prog main() { print(tuple(1, 2)[0.0]); }
+                                    ^^^
+exit=1

@@ -1,0 +1,4 @@
+NameError: 'str' is a built-in function and cannot be redeclared (tests/resolver/err_native_as_obj.pce, line 1)
+    obj str {
+        ^^^
+exit=1

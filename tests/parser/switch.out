@@ -1,0 +1,36 @@
+Program
+  Func func f
+    params:
+      Param x
+    body:
+      Block
+        Switch
+          subject:
+            Ident x
+          Case
+            values:
+              Int 1
+              Int -2
+            body:
+              Block
+                Return
+          Case
+            values:
+              String "a"
+              String "b"
+            body:
+              Block
+                Return
+                  Ident x
+          default:
+            Block
+              ExprStmt
+                Call
+                  callee:
+                    Ident print
+                  args:
+                    Ident x
+        Switch
+          subject:
+            Ident x
+exit=0

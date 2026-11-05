@@ -1,0 +1,26 @@
+10
+20
+57
+14
+4
+4
+5
+6
+6
+4
+4
+16
+OverflowError: integer overflow (<stdin:25>, line 1)
+    big++
+    ^^^^^
+9223372036854775807
+1.5
+2.5
+TypeError: '++' needs a number, not 'string' (<stdin:31>, line 1)
+    s++
+    ^^^
+"ab"
+NameError: name 'undefined_name' is not defined (<stdin:34>, line 1)
+    y = undefined_name
+        ^^^^^^^^^^^^^^
+exit=0

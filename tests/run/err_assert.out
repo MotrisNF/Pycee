@@ -1,0 +1,4 @@
+AssertionError: n should be 4, it is 3 (tests/run/err_assert.pce, line 1)
+    prog main() { var n = 3; assert(n is 4, "n should be 4, it is " + str(n)); }
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+exit=1

@@ -1,0 +1,18 @@
+Program
+  Var var a
+  Var var l
+    size:
+      Int 3
+  Var var t
+    init:
+      Int 0
+  Func func f
+    body:
+      Block
+        Var vemp x
+          init:
+            Int 1
+        Var vemp m
+          size:
+            Int 2
+exit=0

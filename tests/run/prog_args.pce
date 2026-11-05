@@ -1,0 +1,4 @@
+# prog main(argc, argv): argv is a tuple of strings, the program path first
+prog main(argc, argv) {
+    print(argc, argv.len(), argv[0].type());
+}

@@ -1,0 +1,7 @@
+2:1    TOK_VAR              'var'
+2:5    TOK_IDENT            'big'
+2:9    TOK_ASSIGN           '='
+2:11   TOK_INT              '12_000'
+2:17   TOK_SEMICOLON        ';'
+3:1    TOK_EOF             
+exit=0

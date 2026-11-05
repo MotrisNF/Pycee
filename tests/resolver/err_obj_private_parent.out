@@ -1,0 +1,4 @@
+AttributeError: 'secret' is private to 'A' (tests/resolver/err_obj_private_parent.pce, line 3)
+    obj B extends A { func peek() { return self.secret; } }
+                                                ^^^^^^
+exit=1

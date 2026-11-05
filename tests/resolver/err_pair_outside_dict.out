@@ -1,0 +1,4 @@
+SyntaxError: 'key: value' pairs only go inside dict(...) (tests/resolver/err_pair_outside_dict.pce, line 1)
+    prog main() { print("a": 1); }
+                        ^^^^^^
+exit=1

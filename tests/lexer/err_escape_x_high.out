@@ -1,0 +1,4 @@
+SyntaxError: '\x80' is not a character: \x goes up to \x7F, use \u{...} for the rest (tests/lexer/err_escape_x_high.pce, line 1)
+    "\x80"
+     ^^^^
+exit=1

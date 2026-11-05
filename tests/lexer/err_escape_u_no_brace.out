@@ -1,0 +1,4 @@
+SyntaxError: invalid escape sequence '\u' (tests/lexer/err_escape_u_no_brace.pce, line 1)
+    "\u0041"
+     ^^
+exit=1

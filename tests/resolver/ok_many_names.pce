@@ -1,0 +1,66 @@
+# More names than the initial capacity of every table (16), so they grow.
+var g1 = 1;
+var g2 = 2;
+var g3 = 3;
+var g4 = 4;
+var g5 = 5;
+var g6 = 6;
+var g7 = 7;
+var g8 = 8;
+var g9 = 9;
+var g10 = 10;
+var g11 = 11;
+var g12 = 12;
+var g13 = 13;
+var g14 = 14;
+var g15 = 15;
+var g16 = 16;
+var g17 = 17;
+var g18 = 18;
+var g19 = 19;
+var g20 = 20;
+
+func many(p1, p2) {
+    var v1 = 1;
+    var v2 = 2;
+    var v3 = 3;
+    var v4 = 4;
+    var v5 = 5;
+    var v6 = 6;
+    var v7 = 7;
+    var v8 = 8;
+    var v9 = 9;
+    var v10 = 10;
+    var v11 = 11;
+    var v12 = 12;
+    var v13 = 13;
+    var v14 = 14;
+    var v15 = 15;
+    var v16 = 16;
+    var v17 = 17;
+    var v18 = 18;
+    var v19 = 19;
+    var v20 = 20;
+    if (true) {
+        vemp t1 = 1;
+        vemp t2 = 2;
+        vemp t3 = 3;
+        vemp t4 = 4;
+        vemp t5 = 5;
+        vemp t6 = 6;
+        vemp t7 = 7;
+        vemp t8 = 8;
+        vemp t9 = 9;
+        vemp t10 = 10;
+        vemp t11 = 11;
+        vemp t12 = 12;
+        vemp t13 = 13;
+        vemp t14 = 14;
+        vemp t15 = 15;
+        vemp t16 = 16;
+        vemp t17 = 17;
+        vemp t18 = 18;
+        vemp t19 = 19;
+        vemp t20 = 20;
+    }
+}

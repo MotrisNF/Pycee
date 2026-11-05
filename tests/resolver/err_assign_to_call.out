@@ -1,0 +1,4 @@
+SyntaxError: cannot assign to a function call (tests/resolver/err_assign_to_call.pce, line 5)
+        g() = 1;
+        ^^^
+exit=1

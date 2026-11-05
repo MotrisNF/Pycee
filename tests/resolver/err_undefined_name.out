@@ -1,0 +1,4 @@
+NameError: name 'y' is not defined (tests/resolver/err_undefined_name.pce, line 2)
+        return y;
+               ^
+exit=1

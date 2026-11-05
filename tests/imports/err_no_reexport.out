@@ -1,0 +1,4 @@
+ImportError: cannot import name 'score' from 'geometry' (tests/imports/err_no_reexport.pce, line 1)
+    from geometry import score;
+                         ^^^^^
+exit=1

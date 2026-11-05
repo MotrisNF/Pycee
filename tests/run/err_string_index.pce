@@ -1,0 +1,1 @@
+prog main() { var s = "naï"; print(s[2]); print(s[3]); }

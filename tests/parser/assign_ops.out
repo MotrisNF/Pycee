@@ -1,0 +1,35 @@
+Program
+  Func func f
+    body:
+      Block
+        Assign '='
+          Ident a
+          Int 1
+        Assign '+='
+          Ident a
+          Int 1
+        Assign '-='
+          Ident a
+          Int 1
+        Assign '*='
+          Ident a
+          Int 2
+        Assign '/='
+          Ident a
+          Int 2
+        Assign '//='
+          Ident a
+          Int 2
+        Assign '%='
+          Ident a
+          Int 2
+        Assign '='
+          Index
+            Ident l
+            Int 0
+          Int 1
+        Assign '='
+          Field .x
+            Self
+          Int 2
+exit=0

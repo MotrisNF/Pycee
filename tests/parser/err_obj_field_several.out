@@ -1,0 +1,4 @@
+SyntaxError: declare one field per 'var' in an object (tests/parser/err_obj_field_several.pce, line 1)
+    obj P { var x, y = 1, 2; }
+                           ^
+exit=1

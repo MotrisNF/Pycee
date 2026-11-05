@@ -1,0 +1,2 @@
+obj A { func create() { self.f = 1; } }
+obj B extends A { func f() { } }

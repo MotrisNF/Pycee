@@ -1,0 +1,19 @@
+# The error a new one was raised while handling must survive collections
+# while it travels: through a finally that allocates, into an except that
+# allocates, and until it is printed (run with PYCEE_GC_STRESS=1 too)
+func f() {
+    try { raise ValueError("first"); }
+    except (e) { raise TypeError("second"); }
+}
+func g() {
+    try { f(); }
+    finally { var s = "a" + "b"; var t = tuple(s, s, str(1)); }
+}
+prog main() {
+    try { g(); }
+    except (x) {
+        var junk = tuple(str(1) + str(2), "x" * 3);
+        print(x.traceback());
+    }
+    g();
+}

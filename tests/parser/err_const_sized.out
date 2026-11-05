@@ -1,0 +1,4 @@
+SyntaxError: a constant needs a value: const L = ...; (tests/parser/err_const_sized.pce, line 1)
+    const L[3];
+           ^
+exit=1

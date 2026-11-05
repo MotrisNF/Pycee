@@ -1,0 +1,4 @@
+NameError: 'f' is already a field of 'A', which this obj extends; only a method can be redefined, by another method (tests/resolver/err_obj_field_vs_method.pce, line 2)
+    obj B extends A { func f() { } }
+                           ^
+exit=1

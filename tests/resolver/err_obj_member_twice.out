@@ -1,0 +1,4 @@
+NameError: 'x' was already declared in object 'Point' at line 2 (tests/resolver/err_obj_member_twice.pce, line 3)
+        func x() {
+             ^
+exit=1

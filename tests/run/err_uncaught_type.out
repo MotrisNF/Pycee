@@ -1,0 +1,4 @@
+ZeroDivisionError: division by zero (tests/run/err_uncaught_type.pce, line 3)
+        try { var x = 1 / 0; } except ValueError { print("never"); }
+                      ^^^^^
+exit=1

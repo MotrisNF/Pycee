@@ -1,0 +1,41 @@
+# try / except (by type, several types, the base Error, any) / finally; raise, re-raise, assert, RecursionError caught, e.traceback()
+func risky(n) {
+    if (n is 0) { raise ValueError("zero is not allowed"); }
+    return 10 / n;
+}
+func with_finally(n) {
+    try {
+        return risky(n);
+    } finally {
+        print("finally runs for", n);
+    }
+}
+prog main() {
+    try { print(risky(2)); print(risky(0)); print("never"); }
+    except ValueError (e) { print("caught:", e, e.type(), e.line()); }
+    try { var x = 1 / 0; }
+    except TypeError { print("no"); }
+    except ZeroDivisionError, OverflowError (e) { print("arith:", e.message()); }
+    try { tuple(1)[5]; } except Error (e) { print("base:", e.type(), e.is_type("Error")); }
+    try { raise Error("custom"); } except (e) { print("any:", e); }
+    try { 5(); } except { print("silent catch"); }
+    print(with_finally(5));
+    try { with_finally(0); } except (e) { print("after finally:", e.message()); }
+    for (i in range(3)) {
+        try { if (i is 1) { break; } } finally { print("loop finally", i); }
+    }
+    var e2 = RuntimeError("made, not raised");
+    try { raise e2; } except RuntimeError (r) { print(r.message(), r.line()); }
+    try {
+        try { raise KeyError("inner"); }
+        except (k) { raise k; }
+    } except (k2) { print("re-raised:", k2); }
+    assert(1 < 2, "never fails");
+    try { assert(1 > 2, "math broke"); } except AssertionError (a) { print(a); }
+    try { assert(false); } except (a) { print(a); }
+    func deep(n) { return deep(n + 1); }
+    try { deep(0); } except RecursionError (r) { print("recursion caught:", r.message()); }
+    var tb = "";
+    try { risky(0); } except (e) { tb = e.traceback(); }
+    print(tb);
+}

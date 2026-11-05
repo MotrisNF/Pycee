@@ -1,0 +1,5 @@
+prog main() {
+    for (i in range(3)) {
+        break outer;
+    }
+}

@@ -1,0 +1,1 @@
+obj A { static func f() { return self; } }

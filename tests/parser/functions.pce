@@ -1,0 +1,9 @@
+# Lambdas, arrow functions, defaults, ...rest, named arguments and ...t
+func f(a, b = a, ...rest) { return (x) => x; }
+prog main() {
+    var g = func (x) { return x; };
+    var h = () => { return 1; };
+    f(1, b = 2);
+    f(...t);
+    func inner() { }
+}

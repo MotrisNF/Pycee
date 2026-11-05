@@ -1,0 +1,4 @@
+SyntaxError: duplicate case value (first at line 3) (tests/resolver/err_duplicate_case.pce, line 5)
+            case 3, 2 {
+                    ^
+exit=1

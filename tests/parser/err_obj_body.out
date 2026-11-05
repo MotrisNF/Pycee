@@ -1,0 +1,4 @@
+SyntaxError: expected 'var', 'func', 'private', 'static' or '}' in object body but found 'prog' (tests/parser/err_obj_body.pce, line 4)
+        prog main() { }
+        ^^^^
+exit=1

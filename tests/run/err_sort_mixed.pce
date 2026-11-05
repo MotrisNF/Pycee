@@ -1,0 +1,8 @@
+# sort needs comparable elements; the list is left as it was
+prog main() {
+    var l = [3, "a", 1];
+    try { l.sort(); } except TypeError (e) { print(e.message(), l); }
+    l.sort(key = (x) => x.type());
+    print(l);
+    [1, 2].sort(sideways = true);
+}

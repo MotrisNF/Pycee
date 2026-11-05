@@ -1,0 +1,4 @@
+AttributeError: what 'A' extends has no method 'm' (tests/resolver/err_super_no_parent.pce, line 1)
+    obj A { func m() { super.m(); } }
+                             ^
+exit=1

@@ -1,0 +1,23 @@
+Program
+  Func prog main
+    body:
+      Block
+        ExprStmt
+          Call
+            callee:
+              Ident print
+            args:
+              Unary 'not'
+                Binary 'in'
+                  Int 1
+                  Ident t
+              Unary 'not'
+                Binary 'in'
+                  Int 1
+                  Ident t
+              Binary 'is'
+                Binary 'in'
+                  Ident x
+                  Ident t
+                Bool true
+exit=0

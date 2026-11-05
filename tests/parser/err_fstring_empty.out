@@ -1,0 +1,4 @@
+SyntaxError: empty expression in an f-string field (tests/parser/err_fstring_empty.pce, line 1)
+    prog main() { print(f"{}"); }
+                          ^^
+exit=1

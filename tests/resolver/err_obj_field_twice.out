@@ -1,0 +1,4 @@
+NameError: 'x' was already declared in object 'Point' at line 2 (tests/resolver/err_obj_field_twice.pce, line 3)
+        var x;
+            ^
+exit=1

@@ -1,0 +1,5 @@
+obj Point {
+    func create() {
+        return 1;
+    }
+}

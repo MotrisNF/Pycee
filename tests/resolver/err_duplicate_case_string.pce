@@ -1,0 +1,6 @@
+func f(x) {
+    switch (x) {
+        case "a", "a" {
+        }
+    }
+}

@@ -1,0 +1,8 @@
+# Conditions must be bools: the error stops the prog where it happens
+prog main() {
+    print("before");
+    var n = 3;
+    while (n) {
+        print("never");
+    }
+}

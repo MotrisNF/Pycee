@@ -1,0 +1,36 @@
+ValueError: first (tests/run/gc_error_context.pce, line 5)
+        try { raise ValueError("first"); }
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+During handling of the above error, another error occurred:
+
+Traceback (most recent call last):
+  File "tests/run/gc_error_context.pce", line 13, in main
+        try { g(); }
+              ^^^
+  File "tests/run/gc_error_context.pce", line 9, in g
+        try { f(); }
+              ^^^
+  File "tests/run/gc_error_context.pce", line 6, in f
+        except (e) { raise TypeError("second"); }
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: second
+
+ValueError: first (tests/run/gc_error_context.pce, line 5)
+        try { raise ValueError("first"); }
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+During handling of the above error, another error occurred:
+
+Traceback (most recent call last):
+  File "tests/run/gc_error_context.pce", line 18, in main
+        g();
+        ^^^
+  File "tests/run/gc_error_context.pce", line 9, in g
+        try { f(); }
+              ^^^
+  File "tests/run/gc_error_context.pce", line 6, in f
+        except (e) { raise TypeError("second"); }
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: second
+exit=1

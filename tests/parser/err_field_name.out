@@ -1,0 +1,4 @@
+SyntaxError: expected field name after '.' but found integer (tests/parser/err_field_name.pce, line 2)
+    var x = p.3;
+              ^
+exit=1

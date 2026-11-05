@@ -1,0 +1,18 @@
+Program
+  Import utils
+  Import math as m
+  Import from geo
+    Ident Point
+    Ident dist
+  Func prog main
+    body:
+      Block
+        ExprStmt
+          Call
+            callee:
+              Field .f
+                Ident utils
+            args:
+              Field .pi
+                Ident m
+exit=0

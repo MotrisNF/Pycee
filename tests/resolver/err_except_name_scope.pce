@@ -1,0 +1,2 @@
+# The name of an except lives in its block only
+prog main() { try { } except (e) { } print(e); }

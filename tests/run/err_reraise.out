@@ -1,0 +1,10 @@
+seen: ValueError: from f
+Traceback (most recent call last):
+  File "tests/run/err_reraise.pce", line 4, in main
+        try { f(); } except (e) { print("seen:", e); raise e; }
+              ^^^
+  File "tests/run/err_reraise.pce", line 2, in f
+    func f() { raise ValueError("from f"); }
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: from f
+exit=1

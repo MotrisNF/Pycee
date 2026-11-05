@@ -1,0 +1,4 @@
+TypeError: cannot unpack 'number' into 2 targets: only a tuple or a list can be unpacked (tests/run/err_unpack_not_tuple.pce, line 4)
+        a, b = 5;
+               ^
+exit=1

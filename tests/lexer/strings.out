@@ -1,0 +1,10 @@
+2:1    TOK_STRING           '"a"'
+2:5    TOK_STRING           ''b''
+2:9    TOK_STRING           '"it's"'
+2:16   TOK_STRING           ''say "hi"''
+2:27   TOK_STRING           '""'
+2:30   TOK_STRING           ''''
+3:1    TOK_STRING           '"\n\t\"\'\\"'
+3:14   TOK_STRING           '"naïve"'
+4:1    TOK_EOF             
+exit=0

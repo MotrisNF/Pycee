@@ -1,0 +1,2 @@
+# Expect: SyntaxError invalid number literal, carets on 3x
+var 3x = 5;

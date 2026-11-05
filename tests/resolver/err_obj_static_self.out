@@ -1,0 +1,4 @@
+SyntaxError: 'self' is not available in a static method (tests/resolver/err_obj_static_self.pce, line 1)
+    obj A { static func f() { return self; } }
+                                     ^^^^
+exit=1

@@ -1,0 +1,16 @@
+# finally runs on a normal end, a return (whose value survives), a break, a continue and an error
+func f() { try { return "value of return"; } finally { print("finally after return"); } }
+prog main() {
+    print(f());
+    for (i in range(3)) {
+        try {
+            if (i is 0) { continue; }
+            if (i is 2) { break; }
+            print("body", i);
+        } finally { print("finally", i); }
+    }
+    try {
+        try { raise KeyError("k"); } finally { print("finally before the except"); }
+    } except KeyError (e) { print("caught", e); }
+    try { } finally { for (j in range(3)) { if (j is 1) { break; } print("loop inside finally", j); } }
+}

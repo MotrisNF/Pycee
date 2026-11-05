@@ -1,0 +1,17 @@
+# is compares by value; different types are never equal; < needs the same kind
+1 is 1.0
+1 is "1"
+none is none
+true is not false
+"ab" is "a" + "b"
+2 < 3.5
+9007199254740993 > 9007199254740992.0
+9007199254740993 is 9007199254740992.0
+float("nan") is float("nan")
+float("nan") < 1
+"abc" < "abd"
+"ab" < "abc"
+"b" > "abc"
+1 < "2"
+none < 1
+1 < 2 < 3

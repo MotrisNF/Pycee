@@ -1,0 +1,43 @@
+# Expressions that must be accepted.
+var base = 10;
+var twice = base * 2;          # a global may use the globals above it
+var answer = compute(1, 2);    # and call any function
+
+func compute(a, b) {
+    var items = [a, b, later_global];   # functions see every global
+    items.append(a);                    # methods are checked at runtime
+    items[0] = items[1] + 1;
+    a++;
+    --b;
+    print(a, b, items.len(), "done");
+    print();
+    var p = Point(1, 2);
+    p.x = 3;
+    vemp e = Empty();
+    return range(0, 10, 2);
+}
+
+var later_global = 0;
+
+obj Point {
+    var x;
+    var y;
+    func create(x0, y0) {
+        self.x = x0;
+        self.y = y0;
+        self.x++;
+    }
+    func moved(dx) {
+        return self.shift(dx, 0);
+    }
+    func shift(dx, dy) {
+        return Point(self.x + dx, self.y + dy);
+    }
+}
+
+obj Empty {
+}
+
+prog main(argc, argv) {
+    return compute(argc, 0).len();
+}

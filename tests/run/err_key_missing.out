@@ -1,0 +1,4 @@
+KeyError: key "b" is not in the dict (tests/run/err_key_missing.pce, line 1)
+    prog main() { var d = dict("a": 1); print(d["b"]); }
+                                              ^^^^^^
+exit=1

@@ -1,0 +1,6 @@
+obj P {
+    var x;
+    func m() {
+        self.z = 1;
+    }
+}

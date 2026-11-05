@@ -1,0 +1,27 @@
+Program
+  Obj Circle extends Shape
+    Var private var r
+      init:
+        Int 1
+    Var static var count
+      init:
+        Int 0
+    Func static func unit
+      body:
+        Block
+          Return
+            Call
+              callee:
+                Ident Circle
+              args:
+                Int 1
+    Func private func area
+      body:
+        Block
+          Return
+            Call
+              callee:
+                Field .area
+                  Super
+  Obj Square extends Shape
+exit=0

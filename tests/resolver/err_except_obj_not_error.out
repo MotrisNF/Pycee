@@ -1,0 +1,4 @@
+SyntaxError: 'A' is not an error type (tests/resolver/err_except_obj_not_error.pce, line 2)
+    prog main() { try { } except A { } }
+                                 ^
+exit=1

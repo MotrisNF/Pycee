@@ -1,0 +1,4 @@
+TypeError: 'in' a string needs a string on the left, not 'number' (tests/run/err_in_string_left.pce, line 1)
+    prog main() { print(1 in "123"); }
+                        ^^^^^^^^^^
+exit=1

@@ -1,0 +1,4 @@
+NameError: global 'a' is used before its declaration at line 1 (tests/resolver/err_global_self_init.pce, line 1)
+    var a = a;
+            ^
+exit=1

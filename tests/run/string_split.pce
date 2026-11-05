@@ -1,0 +1,6 @@
+# split, to_list and enumerate on strings
+prog main() {
+    print("  a  b c ".split(), "a,,b".split(","), "".split(), "".split(","), "naï".to_list(), "ïa".enumerate());
+    for (i, c in "hi".enumerate()) { print(i, c); }
+    print(" ".join("one two  three".split()), "-".join(tuple("x", "y")));
+}

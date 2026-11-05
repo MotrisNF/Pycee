@@ -1,0 +1,38 @@
+/*
+ * Objects
+ * - obj Name{ ... } declares a type of object.
+ * - Fields are declared with var, or by assigning self.x inside create.
+ *   Assigning a field that was not declared is an error.
+ * - create is the method that runs when an object is made: Point(0, 0).
+ * - self is implicit: it is not written in the parameters.
+ * - Inheritance: obj Circle extends Shape (or obj Circle(Shape)).
+ * - Calling a function, method or create with the wrong number of
+ *   arguments is an error.
+ * - print of an object shows the name of its type: <Point>.
+ */
+
+obj Point{
+    var x;
+    var y;
+
+    func create(x, y){
+        self.x = x;
+        self.y = y;
+    }
+
+    func distance_sq(other){
+        var dx = self.x - other.x;
+        var dy = self.y - other.y;
+        return dx * dx + dy * dy;
+    }
+}
+
+prog main(){
+    var a = Point(0, 0);
+    var b = Point(3, 4);
+    print(a.distance_sq(b)); # 25
+    print(a);                # <Point>
+    # a.z = 1;              # error: field z not declared
+    # var c = Point(1);     # error: create expects 2 arguments
+    return 0;
+}

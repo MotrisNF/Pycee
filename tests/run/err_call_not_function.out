@@ -1,0 +1,4 @@
+TypeError: 'tuple' object is not callable (tests/run/err_call_not_function.pce, line 1)
+    prog main() { var x = tuple(1); x(); }
+                                    ^^^
+exit=1

@@ -1,0 +1,9 @@
+# Expect: several values per case, negative numbers folded, strings, default
+func f(x) {
+    switch (x) {
+        case 1, -2 { return; }
+        case "a", 'b' { return x; }
+        default { print(x); }
+    }
+    switch (x) { }
+}

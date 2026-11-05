@@ -1,0 +1,4 @@
+SyntaxError: 'break' outside loop (tests/resolver/err_lambda_break.pce, line 2)
+    prog main() { while (true) { var f = () => { break; }; } }
+                                                 ^^^^^
+exit=1

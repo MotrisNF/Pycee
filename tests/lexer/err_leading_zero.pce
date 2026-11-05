@@ -1,0 +1,4 @@
+# Expect: SyntaxError leading zeros are not permitted, carets on 007
+var ok = 0;
+var half = 0.5;
+var bad = 007;

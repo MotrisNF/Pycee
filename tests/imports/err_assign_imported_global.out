@@ -1,0 +1,4 @@
+SyntaxError: cannot use '++' on 'GLOBAL_SCORE': it belongs to module 'score', and only its own functions can change it (tests/imports/err_assign_imported_global.pce, line 4)
+        GLOBAL_SCORE++;
+        ^^^^^^^^^^^^
+exit=1

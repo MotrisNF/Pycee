@@ -1,0 +1,31 @@
+# get / set for obj[i] (also obj[i] += v) and iter with has_next / next for for (also in a comprehension, and with (a, b))
+obj Grid {
+    func create(w) { self.w = w; self.cells = dict(); }
+    func get(i) { return self.cells.get(i, "."); }
+    func set(i, v) { self.cells[i] = v; }
+}
+obj Countdown {
+    func create(n) { self.n = n; }
+    func iter() { return CountIter(self.n); }
+}
+obj CountIter {
+    func create(n) { self.n = n; }
+    func has_next() { return self.n > 0; }
+    func next() { self.n--; return self.n + 1; }
+}
+prog main() {
+    var g = Grid(3);
+    g[1] = "x";
+    g[2] = "o";
+    g[2] += "!";
+    print(g[0], g[1], g[2]);
+    for (x in Countdown(3)) { print(x); }
+    print([x * 10 for (x in Countdown(4))]);
+    for (a, b in Pairs()) { print(a, b); }
+}
+obj Pairs {
+    func iter() { return self; }
+    func create() { self.i = 0; }
+    func has_next() { return self.i < 2; }
+    func next() { self.i++; return tuple(self.i, self.i * self.i); }
+}

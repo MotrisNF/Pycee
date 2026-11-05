@@ -1,0 +1,2 @@
+# A func declared inside another is a constant
+prog main() { func g() { } g = 1; }

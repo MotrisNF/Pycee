@@ -1,0 +1,4 @@
+SyntaxError: expected ':' but found ';' (tests/parser/err_ternary_colon.pce, line 2)
+    var a = c ? 1;
+                 ^
+exit=1

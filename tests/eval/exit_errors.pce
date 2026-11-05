@@ -1,0 +1,7 @@
+# A wrong exit() is an error like any other: the session goes on
+exit("now")
+exit(-1)
+exit(1, 2)
+exit
+print("still here")
+exit()

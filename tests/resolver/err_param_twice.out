@@ -1,0 +1,4 @@
+NameError: 'a' was already declared at line 1 (tests/resolver/err_param_twice.pce, line 1)
+    func f(a, a) {
+              ^
+exit=1

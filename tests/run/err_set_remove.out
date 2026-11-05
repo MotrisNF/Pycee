@@ -1,0 +1,4 @@
+ValueError: remove(): the value is not in the set (tests/run/err_set_remove.pce, line 1)
+    prog main() { set(1).remove(2); }
+                  ^^^^^^^^^^^^^^^^
+exit=1

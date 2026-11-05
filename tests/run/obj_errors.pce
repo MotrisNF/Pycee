@@ -1,0 +1,24 @@
+# Errors of your own: an obj extending an error type; caught by its type or an ancestor, re-raised, shown, kept, uncaught
+obj ParseError extends ValueError { }
+obj LineError extends ParseError {
+    func create(line, msg) { super.create(f"line {line}: {msg}"); self.line_no = line; }
+    func hint() { return "check line " + str(self.line_no); }
+}
+obj AppError(Error) { }
+func parse(s) {
+    if (s is "") { raise LineError(7, "empty"); }
+    raise ParseError("bad input: " + s);
+}
+prog main() {
+    try { parse("x"); } except ParseError (e) { print("1:", e, e.type(), e.message(), e.is_type("ValueError"), e.is_type("Error")); }
+    try { parse(""); } except ValueError (e) { print("2:", e, e.line_no, e.hint(), e.line() > 0); }
+    try { parse(""); } except LineError, TypeError (e) { print("3:", e.type()); }
+    try { raise AppError(); } except Error (e) { print("4:", e, e.message() is ""); }
+    try {
+        try { parse("y"); } except ParseError (e) { raise e; }
+    } except (e2) { print("5: re-raised", e2.type()); }
+    var kept = none;
+    try { parse("z"); } except (e) { kept = e; }
+    print("6:", kept, kept.type(), [kept]);
+    parse("final");
+}

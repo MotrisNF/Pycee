@@ -1,0 +1,4 @@
+TypeError: m() takes 1 argument but 0 were given (tests/resolver/err_arity_self_method.pce, line 4)
+            return self.m();
+                   ^^^^^^^^
+exit=1

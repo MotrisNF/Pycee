@@ -1,0 +1,2 @@
+# Bytes of the source that are not UTF-8 become U+FFFD inside a string
+prog main() { var s = "aÿb"; print(s, s.len()); }

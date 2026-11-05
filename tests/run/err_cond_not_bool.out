@@ -1,0 +1,5 @@
+before
+TypeError: the condition of 'while' needs a bool, not 'number' (tests/run/err_cond_not_bool.pce, line 5)
+        while (n) {
+               ^
+exit=1

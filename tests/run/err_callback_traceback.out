@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "tests/run/err_callback_traceback.pce", line 3, in main
+    prog main() { print([1, 0].map(check)); }
+                        ^^^^^^^^^^^^^^^^^
+  File "tests/run/err_callback_traceback.pce", line 2, in check
+    func check(x) { return 10 / x; }
+                           ^^^^^^
+ZeroDivisionError: division by zero
+exit=1

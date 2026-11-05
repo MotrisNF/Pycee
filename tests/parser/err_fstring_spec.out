@@ -1,0 +1,4 @@
+SyntaxError: invalid format specifier (tests/parser/err_fstring_spec.pce, line 1)
+    prog main() { print(f"{1:zz}"); }
+                             ^^
+exit=1

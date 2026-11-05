@@ -1,0 +1,2 @@
+# Expect: from ... import * is not supported
+from utils import *;

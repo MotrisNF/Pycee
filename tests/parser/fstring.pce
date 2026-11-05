@@ -1,0 +1,1 @@
+prog main() { print(f"a {x} b {y:>5.2f} {{c}}"); }

@@ -1,0 +1,4 @@
+TypeError: B() takes 1 argument but 0 were given (tests/resolver/err_obj_arity_inherited.pce, line 4)
+    prog main() { B(); }
+                  ^^^
+exit=1

@@ -1,0 +1,13 @@
+Program
+  Var var a
+    init:
+      Unary 'not'
+        Binary 'is'
+          Ident x
+          None
+  Var var b
+    init:
+      Binary 'is'
+        Ident x
+        Ident y
+exit=0

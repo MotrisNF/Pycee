@@ -1,0 +1,5 @@
+# Expect: each elif is an If inside the else of the previous one
+func f(a) {
+    if (a < 1) { return 1; } elif (a is 2) { return 2; } elif (not a) { } else { return 3; }
+    if (a) { }
+}

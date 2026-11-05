@@ -1,0 +1,3 @@
+# Expect: binary operators are left-associative: (a - b) - c, (a / b) / c
+var a = x - y - z;
+var b = x / y / z;

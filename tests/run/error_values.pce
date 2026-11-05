@@ -1,0 +1,10 @@
+# Errors are values: made without raising, shown, compared, kept
+prog main() {
+    var e = ValueError("bad input");
+    print(e, e.type(), e.message(), e.is_type("ValueError"), e.is_type("Error"), e.is_type("TypeError"));
+    print(Error(), Error().message() is "", str(EOFError(42)));
+    print(e is e, e is ValueError("bad input"), e.type().type());
+    var kept = none;
+    try { raise e; } except (x) { kept = x; }
+    print(kept, kept.line() > 0, kept.file().type());
+}

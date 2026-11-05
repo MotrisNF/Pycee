@@ -1,0 +1,4 @@
+ValueError: index(): substring not found (tests/run/err_index_method.pce, line 1)
+    prog main() { print("abc".index("z")); }
+                        ^^^^^^^^^^^^^^^^
+exit=1

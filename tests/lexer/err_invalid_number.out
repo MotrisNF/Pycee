@@ -1,0 +1,5 @@
+2:1    TOK_VAR              'var'
+SyntaxError: invalid number literal (tests/lexer/err_invalid_number.pce, line 2)
+    var 3x = 5;
+        ^^
+exit=1

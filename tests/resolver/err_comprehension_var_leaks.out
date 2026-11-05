@@ -1,0 +1,4 @@
+NameError: name 'x' is not defined (tests/resolver/err_comprehension_var_leaks.pce, line 2)
+    prog main() { var l = [x for (x in range(3))]; print(x); }
+                                                         ^
+exit=1

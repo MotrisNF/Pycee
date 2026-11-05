@@ -1,0 +1,4 @@
+SyntaxError: cannot assign 3 values to 2 targets (tests/parser/err_multi_assign_count.pce, line 1)
+    prog main() { var a; var b; a, b = 1, 2, 3; }
+                                       ^^^^^^^
+exit=1

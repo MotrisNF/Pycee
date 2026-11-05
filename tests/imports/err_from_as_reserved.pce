@@ -1,0 +1,3 @@
+from score import add_score as print;
+
+prog main() { }

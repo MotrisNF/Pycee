@@ -1,0 +1,4 @@
+IndexError: pop from an empty list (tests/run/err_pop_empty.pce, line 1)
+    prog main() { var l = []; l.pop(); }
+                              ^^^^^^^
+exit=1

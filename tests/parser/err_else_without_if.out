@@ -1,0 +1,4 @@
+SyntaxError: 'else' without a matching 'if' (tests/parser/err_else_without_if.pce, line 3)
+        else { }
+        ^^^^
+exit=1

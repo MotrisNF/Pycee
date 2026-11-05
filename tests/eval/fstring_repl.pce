@@ -1,0 +1,4 @@
+# A multi-line f-string left open asks for more lines
+var x = 5
+f"""value
+{x * 2:03}"""

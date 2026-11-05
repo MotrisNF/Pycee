@@ -1,0 +1,4 @@
+NameError: name 'e' is not defined (tests/resolver/err_except_name_scope.pce, line 2)
+    prog main() { try { } except (e) { } print(e); }
+                                               ^
+exit=1

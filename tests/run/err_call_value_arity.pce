@@ -1,0 +1,7 @@
+# Through a value the arity is checked when it runs, with the same message
+func f(a, b = 2) { return a + b; }
+prog main() {
+    var g = f;
+    print(g(1));
+    print(g(1, 2, 3));
+}

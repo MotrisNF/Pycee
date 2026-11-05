@@ -1,0 +1,5 @@
+# An error in a finally goes on, with the one in flight as its context
+prog main() {
+    try { raise TypeError("first"); }
+    finally { var y = tuple()[0]; }
+}

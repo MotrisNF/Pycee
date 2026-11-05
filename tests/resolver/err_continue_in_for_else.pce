@@ -1,0 +1,6 @@
+func f() {
+    for (i in range(2)) {
+    } else {
+        continue;
+    }
+}

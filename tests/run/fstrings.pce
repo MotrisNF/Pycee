@@ -1,0 +1,15 @@
+# f-strings: any expression (also with quotes, a ternary, another f-string), {{ }}, and Python format specifiers
+prog main() {
+    var name = "Ana";
+    var n = 42;
+    var price = 3.14159;
+    print(f"hello {name}, n={n}, {{braces}}, sum={n + 1}");
+    print(f"[{price:.2f}] [{n:>5}] [{n:<5}] [{n:^6}] [{n:05}] [{-n:+}] [{n:+}]");
+    print(f"[{1234567:,}] [{1234567:_}] [{255:x}] [{255:#X}] [{5:b}] [{8:#o}] [{0xdeadbeef:_x}]");
+    print(f"[{price:e}] [{price:.3}] [{0.25:%}] [{0.256:.1%}] [{1e20:,.1f}] [{-0.0:f}]");
+    print(f"[{name:*^9}] [{name:.2}] [{"café":>7}] [{"café":·<7}] [{true}] [{none}] [{tuple(1, "a")}]");
+    print(f"{n > 40 ? "big" : "small"} {f"inner {n}"} {'single'}");
+    print(f"""multi
+{name}""");
+    print(f"{price}", f"{n:d}", f"{10 // 3}");
+}

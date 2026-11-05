@@ -1,0 +1,3 @@
+# Expect: CRLF line endings are whitespace; lines still count right
+var x = 1;
+print(x);

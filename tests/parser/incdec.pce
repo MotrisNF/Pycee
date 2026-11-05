@@ -1,0 +1,7 @@
+# Expect: prefix and postfix ++/-- (++i++ parses; the resolver rejects it)
+func f() {
+    i++;
+    --i;
+    l[i++] = --x;
+    ++i++;
+}

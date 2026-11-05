@@ -1,0 +1,36 @@
+Program
+  Func prog main
+    body:
+      Block
+        ExprStmt
+          Call
+            callee:
+              Ident print
+            args:
+              Index slice
+                Ident s
+                start:
+                  Int 1
+                end:
+                  Int 2
+              Index slice
+                Ident s
+              Index slice
+                Ident s
+                step:
+                  Unary '-'
+                    Int 1
+              Index slice
+                Ident s
+                start:
+                  Int 1
+              Index slice
+                Ident s
+                end:
+                  Int 2
+                step:
+                  Int 1
+              Index
+                Ident s
+                Ident i
+exit=0

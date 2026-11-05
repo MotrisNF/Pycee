@@ -1,0 +1,4 @@
+# Every number form: ints, floats, bases, separators, exponents.
+0 7 1_000_000 0xFF 0Xff 0b1010 0o17 0x_1
+3.14 0.5 1e9 2.5e-3 1E+10 1_000.000_1 7.0
+1.x 1.e5

@@ -1,0 +1,4 @@
+AssignmentError: a dict gives a key and a value: use one or two loop variables (tests/run/err_dict_for_three.pce, line 1)
+    prog main() { for (a, b, c in dict(1: 2)) { } }
+                                  ^^^^^^^^^^
+exit=1

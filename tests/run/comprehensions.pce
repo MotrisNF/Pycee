@@ -1,0 +1,12 @@
+# Comprehensions: in [...] and alone inside tuple(...), set(...), dict(...);
+# with if, (k, v), nested, in a global, capturing the loop variable
+var squares = [n * n for (n in range(5))];
+func evens(l) { return [x for (x in l) if (x % 2 is 0)]; }
+prog main() {
+    print(squares, evens(squares), tuple(c.upper() for (c in "abc")));
+    print(set(x % 3 for (x in range(10))), dict(w: w.len() for (w in "one two three".split())));
+    print(dict(v: k for (k, v in dict("a": 1, "b": 2))), [[y for (y in range(x))] for (x in range(3))]);
+    print([(() => i) for (i in range(3))].map((f) => f()), [x for (x in [])], tuple(x for (x in [1])));
+    var words = ["pear", "grape"];
+    print([f"{i}:{w}" for (i, w in words.enumerate())]);
+}

@@ -1,0 +1,42 @@
+Program
+  Func func f
+    params:
+      Param a
+    body:
+      Block
+        If
+          cond:
+            Binary '<'
+              Ident a
+              Int 1
+          then:
+            Block
+              Return
+                Int 1
+          else:
+            If
+              cond:
+                Binary 'is'
+                  Ident a
+                  Int 2
+              then:
+                Block
+                  Return
+                    Int 2
+              else:
+                If
+                  cond:
+                    Unary 'not'
+                      Ident a
+                  then:
+                    Block
+                  else:
+                    Block
+                      Return
+                        Int 3
+        If
+          cond:
+            Ident a
+          then:
+            Block
+exit=0

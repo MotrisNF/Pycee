@@ -1,0 +1,4 @@
+SyntaxError: expected '(' but found 'true' (tests/parser/err_assert_parens.pce, line 1)
+    prog main() { assert true; }
+                         ^^^^
+exit=1

@@ -1,0 +1,4 @@
+NameError: 'n' was already declared at line 1 (tests/resolver/err_var_vs_param.pce, line 2)
+        var n = 1;
+            ^
+exit=1

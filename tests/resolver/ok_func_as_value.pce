@@ -1,0 +1,6 @@
+func g() {
+}
+
+func f() {
+    var x = g;
+}

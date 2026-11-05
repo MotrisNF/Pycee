@@ -1,0 +1,4 @@
+NameError: global 'b' is used before its declaration at line 2 (tests/resolver/err_global_used_before.pce, line 1)
+    var a = b;
+            ^
+exit=1

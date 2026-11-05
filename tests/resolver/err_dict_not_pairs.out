@@ -1,0 +1,4 @@
+SyntaxError: dict() takes key: value pairs: dict("a": 1) (tests/resolver/err_dict_not_pairs.pce, line 1)
+    prog main() { var d = dict(1, 2); }
+                               ^
+exit=1
