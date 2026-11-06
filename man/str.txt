@@ -1,0 +1,47 @@
+# str
+NAME
+    str - any value as text: a new string
+
+SYNOPSIS
+    str(x)
+
+DESCRIPTION
+    Gives the text that print shows for x. pycee never turns a value into
+    text on its own ("a" + 1 is a TypeError), so str is how numbers and
+    other values join a string: "total: " + str(n). (An f-string does it
+    for you: f"total: {n}".)
+
+    What it gives for each type:
+        number    7, 3.5, 1e+300 (a float always shows a "." or an
+                  exponent: 7.0)
+        bool      true, false
+        none      none
+        string    the same string, as it is
+        list      [1, "a", [2]] (strings inside, quoted)
+        tuple     tuple(1, 2)
+        set       set(1, 2)
+        dict      dict("a": 1)
+        function  <func name>, <built-in print>
+        object    what its to_str() method returns, or <Name> without one
+        error     ValueError: message
+
+RETURN VALUE
+    A string.
+
+ERRORS
+    TypeError     an object whose to_str() does not give a string.
+
+EXAMPLES
+    >>> str(42)
+    "42"
+    >>> str(7.0)
+    "7.0"
+    >>> str([1, "a"])
+    "[1, \"a\"]"
+    >>> "n = " + str(3)
+    "n = 3"
+    >>> str(none)
+    "none"
+
+SEE ALSO
+    man(string), man(num), man(int), man(float), man(print), man(fstrings)

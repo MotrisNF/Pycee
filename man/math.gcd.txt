@@ -1,0 +1,26 @@
+# math.gcd math.lcm
+NAME
+    math.gcd - greatest common divisor and least common multiple
+
+SYNOPSIS
+    math.gcd(a, b, ...)
+    math.lcm(a, b, ...)
+
+DESCRIPTION
+    Two or more ints (a float is a TypeError). gcd is the largest int
+    that divides all of them; lcm the smallest positive one all of them
+    divide. Both are >= 0; gcd(0, 0) is 0, and lcm with a 0 is 0.
+
+ERRORS
+    TypeError       an argument that is not an int.
+    OverflowError   an lcm that does not fit in 64 bits.
+
+EXAMPLES
+    >>> import math
+    >>> math.gcd(12, 18, 27)
+    3
+    >>> math.lcm(4, 6)
+    12
+
+SEE ALSO
+    man(math)

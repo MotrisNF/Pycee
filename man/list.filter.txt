@@ -1,0 +1,26 @@
+# list.filter tuple.filter
+NAME
+    list.filter - keep the items that pass a test
+
+SYNOPSIS
+    l.filter(f)
+    t.filter(f)
+
+DESCRIPTION
+    A new collection (a tuple for a tuple) with the items for which
+    f(item) is true. f must give a bool. The same as
+    [x for (x in l) if (f(x))].
+
+ERRORS
+    TypeError     f gives something that is not a bool.
+
+EXAMPLES
+    >>> [1, 2, 3, 4].filter((x) => x % 2 is 0)
+    [2, 4]
+    >>> ["a", "", "b"].filter((s) => s.len() > 0)
+    ["a", "b"]
+    >>> [1, 2].filter((x) => x)
+    TypeError: the function of filter() needs a bool, not 'number'
+
+SEE ALSO
+    man(list.map), man(any), man(comprehensions)

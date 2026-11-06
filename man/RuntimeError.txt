@@ -1,0 +1,17 @@
+# RuntimeError
+NAME
+    RuntimeError - a collection changed size while it was walked
+
+DESCRIPTION
+    Raised when a list, dict or set changes size while a for (or a
+    method like map, filter or sort) walks it: items would be skipped or
+    seen twice. Walk a copy (for (x in l.copy())) to change the original,
+    or build a new collection.
+
+EXAMPLES
+    >>> var l = [1, 2, 3]
+    >>> for (x in l) { l.append(x); }
+    RuntimeError: the list changed size while the for walked it (from...
+
+SEE ALSO
+    man(errors), man(for)

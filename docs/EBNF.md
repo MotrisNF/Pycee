@@ -146,6 +146,8 @@ newline = ? line break ? ;
 (* Comments: # to end of line, and /* */ block comments. The lexer discards them. *)
 ```
 
+**The manual** (REPL only): typed alone at the prompt, `man_stmt = "man" "(" { token } ")" [ ";" ] ;`. What is between the parentheses is taken as written and never evaluated (`man(string.split)`, `man(+)`); its page is looked up by the manual (see `man()`). Anywhere else (a file, inside a block) it is a `SyntaxError`.
+
 ## Rules the grammar does not express (checked by the resolver)
 
 - The left side of an assignment, and the operand of `++`/`--` (prefix or postfix), must be `IDENT`, `x[i]` or `x.field`.
@@ -189,8 +191,6 @@ Decided in the design review; see SESSION.md for the reasons and TYPES.md for th
 
 ```ebnf
 
-(* Manual in the REPL (planned, not written yet): the argument is not evaluated. *)
-man_stmt = "man" "(" ( keyword | IDENT [ "." IDENT ] ) ")" ;
 
 
 (* Arguments: "k: v" pairs only inside dict(...) (phase 9). *)

@@ -1,0 +1,24 @@
+# list.enumerate tuple.enumerate string.enumerate
+NAME
+    enumerate - each item with its index: a list of tuple(index, item)
+
+SYNOPSIS
+    l.enumerate()
+    t.enumerate()
+    s.enumerate()
+
+DESCRIPTION
+    A new list with tuple(i, item) for every item, i counting from 0. Its
+    use is walking a collection with the index of each item:
+        for (i, x in l.enumerate()) { ... }
+    For a string, each item is a character.
+
+EXAMPLES
+    >>> ["a", "b"].enumerate()
+    [tuple(0, "a"), tuple(1, "b")]
+    >>> for (i, c in "hi".enumerate()) { print(i, c); }
+    0 h
+    1 i
+
+SEE ALSO
+    man(for), man(list)

@@ -1,0 +1,25 @@
+# error.message error.line error.file error.traceback
+NAME
+    error.message - what an error knows: message, line, file, traceback
+
+SYNOPSIS
+    e.message()   e.line()   e.file()   e.traceback()
+
+DESCRIPTION
+    The methods of an error value (the e of except T (e)):
+        message()    its message, without the type
+        line()       the line where it happened
+        file()       the file where it happened (<stdin:N> in the REPL)
+        traceback()  the text pycee would show for it if nobody caught
+                     it: the calls it went through and the error
+    and type() for its type. print(e) or str(e) give "Type: message".
+
+EXAMPLES
+    >>> try { 1 / 0; } except (e) { print(e.message(), "/", e.line()); }
+    division by zero / 1
+    >>> var err = ValueError("bad")
+    >>> err.message()
+    "bad"
+
+SEE ALSO
+    man(errors), man(try)

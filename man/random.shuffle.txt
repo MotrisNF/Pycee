@@ -1,0 +1,21 @@
+# random.shuffle
+NAME
+    random.shuffle - put the items of a list in a random order
+
+SYNOPSIS
+    random.shuffle(l)
+
+DESCRIPTION
+    Changes l in place (every order is equally likely) and gives it back.
+    Only lists: for a tuple, shuffle(t.to_list()).
+
+ERRORS
+    TypeError     l is not a list.
+
+EXAMPLES
+    >>> import random
+    >>> random.shuffle([1, 2, 3, 4]).sort()
+    [1, 2, 3, 4]
+
+SEE ALSO
+    man(random.choice), man(random)

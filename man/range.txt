@@ -1,0 +1,38 @@
+# range
+NAME
+    range - a sequence of integers, made as it is walked
+
+SYNOPSIS
+    range(stop)
+    range(start, stop)
+    range(start, stop, step)
+
+DESCRIPTION
+    The integers from start (0 when not given) up to stop, NOT included,
+    adding step each time (1 when not given). A negative step counts
+    down. The numbers are never stored: range(1_000_000_000) takes no
+    memory, they are made as a for walks them. Its type is "range"; it
+    is shown as range(0, 10) (with its step when it is not 1).
+
+    Use it with for, in comprehensions, with in (5 in range(10) is
+    instant), with sum/min/max/any/all, and to make a list:
+    [x for (x in range(5))]. It has no methods of its own (only type(),
+    is_type() and id()).
+
+    All three must be ints; a step of 0 is a ValueError (it would never
+    end). A range whose start is past its stop gives no numbers.
+
+EXAMPLES
+    >>> [x for (x in range(5))]
+    [0, 1, 2, 3, 4]
+    >>> [x for (x in range(10, 0, -3))]
+    [10, 7, 4, 1]
+    >>> sum(range(101))
+    5050
+    >>> 99 in range(0, 100, 3)
+    true
+    >>> range(0, 10, 0)
+    ValueError: range() step must not be zero
+
+SEE ALSO
+    man(for), man(list), man(comprehensions)

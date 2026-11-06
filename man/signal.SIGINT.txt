@@ -1,0 +1,21 @@
+# signal.SIGINT signal.SIGTERM signal.SIGHUP signal.SIGQUIT signal.SIGUSR1 signal.SIGUSR2 signal.SIGALRM signal.SIGPIPE signal.SIGCHLD
+NAME
+    signal.SIGINT - the signals the module handles, by name
+
+DESCRIPTION
+    Ints with Linux's numbers:
+        SIGINT    2   Ctrl+C (without a handler: KeyboardInterrupt)
+        SIGQUIT   3   Ctrl+\
+        SIGHUP    1   the terminal was closed
+        SIGTERM  15   "please end" (kill's default)
+        SIGUSR1  10   free for the program's own use
+        SIGUSR2  12   free for the program's own use
+        SIGALRM  14   a timer
+        SIGPIPE  13   writing to a pipe nobody reads
+        SIGCHLD  17   a child process ended
+    No other signal can be handled: SIGKILL and SIGSTOP cannot be by
+    anyone, and SIGSEGV, SIGFPE, SIGBUS and SIGILL are not allowed,
+    since going on after one would not be memory safe.
+
+SEE ALSO
+    man(signal)

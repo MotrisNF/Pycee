@@ -1,0 +1,20 @@
+# signal.send
+NAME
+    signal.send - send a signal to the program itself
+
+SYNOPSIS
+    signal.send(sig)
+
+DESCRIPTION
+    Sends sig as if it came from outside, and attends it before send
+    returns: its handler runs, or for SIGINT without one a
+    KeyboardInterrupt is raised. A signal with the system's default
+    (SIGTERM without a handler) ends the program.
+
+EXAMPLES
+    >>> import signal
+    >>> signal.send(signal.SIGINT)
+    KeyboardInterrupt
+
+SEE ALSO
+    man(signal), man(signal.handle)

@@ -1,0 +1,21 @@
+# string.find
+NAME
+    string.find - where a substring starts, or -1
+
+SYNOPSIS
+    s.find(sub)
+
+DESCRIPTION
+    The index (in characters) where the first appearance of sub starts,
+    or -1 when sub is not in s. "" is found at 0. To only know whether
+    it is there, sub in s is clearer; to get an error instead of -1, use
+    index.
+
+EXAMPLES
+    >>> "banana".find("an")
+    1
+    >>> "banana".find("x")
+    -1
+
+SEE ALSO
+    man(string.index), man(string.count), man(in)

@@ -1,0 +1,20 @@
+# io.eprint
+NAME
+    io.eprint - print to the error stream (stderr)
+
+SYNOPSIS
+    io.eprint(a, b, ..., sep = " ", end = "\n")
+
+DESCRIPTION
+    print(..., file = io.stderr) in short: for error messages and
+    warnings, which go apart from the normal output (a shell can send
+    them to another place: ./pycee x.pce 2> errors.txt). It always comes
+    out after what was printed before it.
+
+EXAMPLES
+    >>> import io
+    >>> io.eprint("warning:", 42)
+    warning: 42
+
+SEE ALSO
+    man(print), man(io.stdout)

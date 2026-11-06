@@ -1,0 +1,21 @@
+# os.cwd os.env
+NAME
+    os.cwd - the current directory (cwd), and environment variables (env)
+
+SYNOPSIS
+    os.cwd()
+    os.env(name)
+
+DESCRIPTION
+    cwd() is the absolute path of the current directory, the one
+    relative paths start from. env(name) is the value of the environment
+    variable name ("HOME", "PATH"...), or none if it is not set.
+
+EXAMPLES
+    >>> import os
+    >>> os.cwd().starts_with("/")
+    true
+    >>> os.env("PYCEE_SURELY_NOT_SET")
+
+SEE ALSO
+    man(os)

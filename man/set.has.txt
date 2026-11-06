@@ -1,0 +1,16 @@
+# set.has
+NAME
+    set.has - whether a value is in the set
+
+SYNOPSIS
+    s.has(x)
+
+DESCRIPTION
+    The same as x in s: true if x is an item. Fast whatever the size.
+
+EXAMPLES
+    >>> set("a", "b").has("a")
+    true
+
+SEE ALSO
+    man(set), man(in)

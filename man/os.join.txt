@@ -1,0 +1,29 @@
+# os.join os.base_name os.dir_name
+NAME
+    os.join - paths as text: join, base_name, dir_name
+
+SYNOPSIS
+    os.join(a, b, ...)
+    os.base_name(p)
+    os.dir_name(p)
+
+DESCRIPTION
+    They only work on the text (the paths need not exist), as Python's
+    os.path.
+    join puts one "/" between the parts; a part that starts with "/"
+    starts again from there.
+    base_name is what follows the last "/" (the name of the file).
+    dir_name is what comes before it (the directory), without its last
+    "/" ("" when there is none, "/" for the root).
+
+EXAMPLES
+    >>> import os
+    >>> os.join("data", "2026", "a.txt")
+    "data/2026/a.txt"
+    >>> os.base_name("/home/ada/notes.txt")
+    "notes.txt"
+    >>> os.dir_name("/home/ada/notes.txt")
+    "/home/ada"
+
+SEE ALSO
+    man(os)

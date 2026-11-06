@@ -1,0 +1,21 @@
+# string.starts_with string.ends_with
+NAME
+    string.starts_with - whether a string starts (or ends) with another:
+    starts_with, ends_with
+
+SYNOPSIS
+    s.starts_with(prefix)
+    s.ends_with(suffix)
+
+DESCRIPTION
+    true when s starts with prefix (ends with suffix). Every string
+    starts and ends with "".
+
+EXAMPLES
+    >>> "report.pdf".ends_with(".pdf")
+    true
+    >>> "#comment".starts_with("#")
+    true
+
+SEE ALSO
+    man(string.find), man(os.base_name)

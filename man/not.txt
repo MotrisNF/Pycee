@@ -1,0 +1,25 @@
+# not
+NAME
+    not - logical negation; also part of "is not" and "not in"
+
+SYNOPSIS
+    not a
+    a is not b
+    x not in c
+
+DESCRIPTION
+    not a is true when a is false and false when a is true; a must be a
+    bool. pycee has no "!": not is the only negation. is not and not in
+    are operators of their own (see man(is), man(in)).
+
+ERRORS
+    TypeError     not of a value that is not a bool.
+
+EXAMPLES
+    >>> not (1 > 2)
+    true
+    >>> not 0
+    TypeError: 'not' needs a bool, not 'number'
+
+SEE ALSO
+    man(and), man(or), man(is), man(operators)

@@ -1,0 +1,33 @@
+# sum list.sum tuple.sum set.sum
+NAME
+    sum - add up numbers: sum(x), or x.sum() on a list, tuple or set
+
+SYNOPSIS
+    sum(iterable)
+    sum(expression for (x in iterable) ...)
+    l.sum()
+
+DESCRIPTION
+    The sum of the items, which must all be numbers (an int if they are
+    all ints). Nothing to add up gives 0. sum() takes anything a for
+    walks (a range, a list, a set...) or a comprehension alone inside,
+    which builds no list: sum(x * x for (x in l)).
+
+ERRORS
+    TypeError     an item that is not a number.
+    OverflowError ints whose sum does not fit in 64 bits.
+
+EXAMPLES
+    >>> sum([1, 2, 3])
+    6
+    >>> sum(range(101))
+    5050
+    >>> [1, 2.5].sum()
+    3.5
+    >>> sum(x * x for (x in range(4)))
+    14
+    >>> sum(["a"])
+    TypeError: sum() needs numbers, but item 0 is 'string'
+
+SEE ALSO
+    man(min), man(max), man(comprehensions), man(list.reduce)

@@ -1,0 +1,29 @@
+# list.reduce tuple.reduce
+NAME
+    list.reduce - combine every item into one value
+
+SYNOPSIS
+    l.reduce(f)
+    l.reduce(f, start)
+
+DESCRIPTION
+    Goes through the items keeping an accumulated value: acc = f(acc,
+    item) for each item, and gives the last acc. It starts from start;
+    without it, from the first item (and goes on from the second).
+    f and start can also be given by name.
+
+ERRORS
+    ValueError    an empty collection without start.
+
+EXAMPLES
+    >>> [1, 2, 3, 4].reduce((acc, x) => acc * x)
+    24
+    >>> ["a", "b"].reduce((acc, s) => acc + s.upper(), ">")
+    ">AB"
+    >>> [].reduce((a, b) => a + b, 0)
+    0
+    >>> [].reduce((a, b) => a + b)
+    ValueError: reduce() of an empty list with no start value
+
+SEE ALSO
+    man(list.map), man(sum)

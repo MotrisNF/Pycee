@@ -1,0 +1,25 @@
+# list.len
+NAME
+    list.len - how many items the list has
+
+SYNOPSIS
+    l.len()
+
+DESCRIPTION
+    The number of items in the list right now: it changes when items are
+    added or removed. An item that is itself a list counts as one.
+
+RETURN VALUE
+    An int >= 0.
+
+EXAMPLES
+    >>> [1, 2, 3].len()
+    3
+    >>> [[1, 2], [3]].len()
+    2
+    >>> var l = []
+    >>> l.append("x").len()
+    1
+
+SEE ALSO
+    man(list), man(string.len)

@@ -1,0 +1,31 @@
+# sys.gc_collect sys.memory sys.gc_stats
+NAME
+    sys.gc_collect - run the collector, and see what it sees: gc_collect,
+    memory, gc_stats
+
+SYNOPSIS
+    sys.gc_collect()
+    sys.memory()
+    sys.gc_stats()
+
+DESCRIPTION
+    gc_collect() runs a collection now (even with the collector
+    disabled) and gives how many values it freed.
+
+    memory() is the bytes the live values take.
+
+    gc_stats() is a dict with "collections" (how many have run),
+    "objects" (live values), "bytes" (as memory()) and "next_gc" (the
+    bytes at which the next automatic collection runs).
+
+EXAMPLES
+    >>> import sys
+    >>> var big = [[i] for (i in range(1000))]
+    >>> big = none
+    >>> sys.gc_collect() >= 1000
+    true
+    >>> sys.gc_stats().keys()
+    ["collections", "objects", "bytes", "next_gc"]
+
+SEE ALSO
+    man(memory), man(sys.gc_disable)

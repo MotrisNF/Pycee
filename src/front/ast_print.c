@@ -214,6 +214,9 @@ static void print_node(const t_node *n, int depth)
             print_list("types", n->as.except.types, depth + 1);
             print_child("body", n->as.except.body, depth + 1);
             break ;
+        case NODE_MAN:
+            printf(" %.*s\n", (int)n->as.man.topic.len, n->as.man.topic.ptr);
+            break ;
         case NODE_RAISE:
         case NODE_ASSERT:
             putchar('\n');

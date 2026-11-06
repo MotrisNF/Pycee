@@ -6,7 +6,7 @@
 
 Cada fase termina con un **hito** ejecutable. No se pasa a la siguiente fase hasta que el hito funcione.
 
-**Estado (2026-11-06):** fases 0 a 10 terminadas; **siguiente: fase 11** (eficiencia). Para retomar: [SESSION.md](SESSION.md), sección "Cómo retomar".
+**Estado (2026-11-06):** fases 0 a 10 terminadas; manual `man` hecho; **siguiente: los ejercicios** (adelantados), luego la fase 11. Para retomar: [SESSION.md](SESSION.md), sección "Cómo retomar".
 
 ---
 
@@ -133,7 +133,7 @@ Estructura propuesta el 2026-11-06 (las preguntas abiertas están en SESSION.md,
 
 Las fases 0 a 7 son el núcleo del proyecto. Lo más difícil está en las fases 7 (funciones y traceback) y 8 (GC).
 
-**Manual en el REPL (`man`), cuando el lenguaje ya sea mínimamente funcional** (decidido 2026-11-05; `man` ya es palabra reservada): `man(palabra_reservada)`, `man(tipo)`, `man(método)` y `man(tipo.método)`. El argumento no se evalúa (es una palabra reservada, no una función). El contenido va en una tabla dentro del binario. Por decidir cuando toque: qué muestra `man(split)` si varios tipos tienen ese método, `man()` sin argumentos, el idioma y si funciona en ficheros.
+**Manual en el REPL (`man`): hecho el 2026-11-06.** 314 temas en inglés, al estilo del `man` de Unix, con todos sus ejemplos comprobados; `man()` es la portada con el índice, `man(len)` lista los tipos que lo tienen, solo en el REPL, paginador propio. Detalles en SESSION.md, "Manual `man`".
 
 **Al terminar el lenguaje: tutorial con ejercicios al estilo 42** (pedido por el autor, 2026-11-05). Las decisiones las ha tomado el autor, pero el código no lo ha escrito él, así que necesita aprender a usar su lenguaje *usándolo*: una serie de ejercicios progresivos (enunciado, qué se pide, ejemplos de entrada y salida, un corrector que lo comprueba), desde `print` y variables hasta closures, objetos, módulos y errores. Cada ejercicio introduce una pieza nueva y obliga a usarla.
 

@@ -1,0 +1,32 @@
+# all list.all tuple.all
+NAME
+    all - whether every item is true (or passes a test)
+
+SYNOPSIS
+    all(iterable)
+    all(condition for (x in iterable) ...)
+    l.all()
+    l.all(f)
+
+DESCRIPTION
+    all(x), and l.all() with no function, need every item to be a bool
+    and give true if all of them are. l.all(f) calls f on the items and
+    gives false as soon as one gives false. With a comprehension alone
+    inside, no list is made and it stops at the first false. Nothing at
+    all gives true.
+
+ERRORS
+    TypeError     an item (or a result of f) that is not a bool.
+
+EXAMPLES
+    >>> all(c.is_digit() for (c in "2026"))
+    true
+    >>> [2, 4, 5].all((x) => x % 2 is 0)
+    false
+    >>> all([])
+    true
+    >>> [true, 1].all()
+    TypeError: each item of all() needs a bool, not 'number'
+
+SEE ALSO
+    man(any), man(comprehensions)

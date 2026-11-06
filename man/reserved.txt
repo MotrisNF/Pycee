@@ -1,0 +1,25 @@
+# enum match async await export with reserved
+NAME
+    reserved - words kept for the future: enum, match, async, await,
+    export, with (and the symbol @)
+
+DESCRIPTION
+    These words are already reserved: they cannot be used as names
+    (var with = 1 is a SyntaxError), so that adding them later breaks no
+    program. What is planned:
+        enum     a type with a fixed set of named values
+        match    choosing by the shape of a value
+        with     with (io.open("f") as f) { ... }: a try / finally that
+                 closes f
+        async, await   code that waits without blocking
+        export   kept, with no planned use (a module already offers
+                 everything that is not private)
+        @        decorators (get / set of private fields)
+    man is a keyword too: the manual, only at the REPL's prompt.
+
+EXAMPLES
+    >>> var with = 1
+    SyntaxError: expected variable name but found reserved word 'with'
+
+SEE ALSO
+    man(pycee), man(man)

@@ -1,0 +1,40 @@
+# list.sort
+NAME
+    list.sort - order the list in place
+
+SYNOPSIS
+    l.sort()
+    l.sort(key = f, reverse = true)
+
+DESCRIPTION
+    Puts the items in increasing order (decreasing with reverse = true)
+    and gives back l, so a sorted copy is l.copy().sort(). The items
+    must be comparable with each other: numbers, strings (by bytes:
+    upper case before lower case), or objects with compare().
+
+    key = f sorts by f(item) instead of by the item: f is called once
+    per item, so sorting by a costly value is fine. key and reverse can
+    only be given by name.
+
+    The sort is stable: items with equal keys keep their order. To sort
+    by two things, sort by the second and then by the first.
+
+ERRORS
+    TypeError     items (or keys) that cannot be compared.
+    RuntimeError  the list changed size while sorting (in key).
+
+EXAMPLES
+    >>> [3, 1, 2].sort()
+    [1, 2, 3]
+    >>> ["b", "A", "a"].sort()
+    ["A", "a", "b"]
+    >>> ["bb", "a", "ccc"].sort(key = (s) => s.len(), reverse = true)
+    ["ccc", "bb", "a"]
+    >>> var words = ["pear", "Apple", "fig"]
+    >>> words.copy().sort(key = (w) => w.lower())
+    ["Apple", "fig", "pear"]
+    >>> [1, "a"].sort()
+    TypeError: cannot compare 'number' with 'string'
+
+SEE ALSO
+    man(list.reverse), man(obj), man(min)

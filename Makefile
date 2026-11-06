@@ -12,6 +12,7 @@ FRONT    = tokens lexer parser ast_print
 RESOLVER = native_defs symtab scope declarations objects expressions statements modules resolver
 RUNTIME  = value heap interp eval exec call ops format fmtspec methods signals
 TYPES    = number range tuple list string seq table dict object error file unicode_data
+MAN      = man pager man_data
 NATIVES  = natives sys math io random time os signal json
 LIBS     = -lm
 
@@ -21,6 +22,7 @@ SRCS = src/main.c \
        $(RESOLVER:%=src/resolver/%.c) \
        $(RUNTIME:%=src/runtime/%.c) \
        $(TYPES:%=src/types/%.c) \
+       $(MAN:%=src/man/%.c) \
        $(NATIVES:%=src/natives/%.c)
 
 DBG_DIR  = build/debug
@@ -61,6 +63,9 @@ test: $(NAME)
 	sh tests/run_tests.sh
 	sh tests/check_members.sh
 	sh tests/check_signals.sh
+	python3 tools/gen_man.py --check
+	python3 tools/check_man.py
+	python3 tools/check_man_coverage.py
 
 # Every test again, collecting on every allocation (with the sanitizers,
 # a value left out of the roots is a use-after-free at once).

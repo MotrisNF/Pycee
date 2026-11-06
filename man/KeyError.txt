@@ -1,0 +1,18 @@
+# KeyError
+NAME
+    KeyError - a key that is not in the dict
+
+DESCRIPTION
+    Raised by d[k] and d.remove(k) when k is not a key of d. To read a
+    key that may be missing, use d.get(k, default), or check k in d
+    first.
+
+EXAMPLES
+    >>> var d = dict("a": 1)
+    >>> d["b"]
+    KeyError: key "b" is not in the dict
+    >>> d.get("b", 0)
+    0
+
+SEE ALSO
+    man(errors), man(dict), man(dict.get)

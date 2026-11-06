@@ -1,0 +1,53 @@
+# dict
+NAME
+    dict - keys and their values, in the order they were added
+
+SYNOPSIS
+    dict("a": 1, "b": 2)     dict()     dict(k: v for (k in keys))
+
+DESCRIPTION
+    A dict maps keys to values. It is made with dict(...) and pairs
+    key: value (the pairs only exist inside dict(...)), and shown the
+    same way. It keeps its keys in the order they were added. Its type
+    is "dict". Dicts are shared, never copied on their own.
+
+    Keys must be values that cannot change: numbers, strings, bools,
+    none, ranges and tuples of those (a list as key is a TypeError). 1
+    and 1.0 are the same key.
+
+OPERATORS
+    d[k]           the value of k; a missing key is a KeyError (use
+                   d.get(k, default) to avoid it).
+    d[k] = v       adds the pair, or replaces the value of k.
+    k in d         true if k is a key.
+    a is b         same pairs, in any order.
+    for (x in d)        each pair, as a dict of length 1
+    for (k, v in d)     each key and its value
+    It must not change size while a for walks it (RuntimeError).
+
+METHODS
+    Each one has its page: man(dict.<method>).
+    len()                         number of pairs
+    get(k), get(k, default)       the value, or default / none
+    keys(), values(), items()     lists (items: tuple(key, value))
+    remove(k)                     takes the pair out (KeyError if absent)
+    clear(), copy()               empty it / a shallow copy
+    And type(), is_type(name), id().
+
+EXAMPLES
+    >>> var ages = dict("ana": 31, "leo": 25)
+    >>> ages["eva"] = 40
+    >>> ages
+    dict("ana": 31, "leo": 25, "eva": 40)
+    >>> ages.get("max", 0)
+    0
+    >>> for (name, age in ages) { if (age > 30) { print(name); } }
+    ana
+    eva
+    >>> ages["max"]
+    KeyError: key "max" is not in the dict
+    >>> dict([1]: 2)
+    TypeError: a 'list' cannot be a dict key: it can change (only...
+
+SEE ALSO
+    man(set), man(list), man(json), man(types)

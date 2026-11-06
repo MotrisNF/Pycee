@@ -1,0 +1,22 @@
+# list.index tuple.index
+NAME
+    list.index - where the first item equal to a value is
+
+SYNOPSIS
+    l.index(x)
+    t.index(x)
+
+DESCRIPTION
+    The index of the first item that "is" x.
+
+ERRORS
+    ValueError    no item is x (check with x in l first).
+
+EXAMPLES
+    >>> ["a", "b", "c"].index("b")
+    1
+    >>> [1, 2].index(5)
+    ValueError: index(): the value is not in the list
+
+SEE ALSO
+    man(list.count), man(in), man(string.index)

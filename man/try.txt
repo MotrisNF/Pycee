@@ -1,0 +1,63 @@
+# try except finally
+NAME
+    try - catch errors: try, except and finally
+
+SYNOPSIS
+    try { ... } except TypeName (e) { ... }
+    try { ... } except Type1, Type2 { ... } except { ... }
+    try { ... } finally { ... }
+
+DESCRIPTION
+    An error raised inside the try block (in it, or in any function it
+    calls) stops it and looks for an except that catches it:
+      - except ValueError catches a ValueError and any error that extends
+        it; several types go separated by commas.
+      - (e) after the types puts the error in e, a variable of the except
+        block (see man(errors) for what e has).
+      - except with no type catches any Error.
+    The first except that matches runs; if none does, the error goes on
+    up as if there were no try. An except that catches it ends it: the
+    program goes on after the try.
+
+    finally runs always, last: when the try ends well, after an except,
+    and when an error, a return, a break or a continue leaves the try. It
+    is for what must happen anyway (closing a file). return, break and
+    continue cannot leave a finally block.
+
+    An error raised inside an except or a finally keeps the one that was
+    being handled as its context: both are shown ("During handling of
+    the above error, another error occurred").
+
+    Two things are not errors and only pass through: exit / sys.exit (the
+    program ends, running the finally blocks on the way), and Ctrl+C,
+    a KeyboardInterrupt that only "except KeyboardInterrupt" catches.
+
+    There is no else block and no "as": the name goes in parentheses.
+
+ERRORS
+    SyntaxError   except of something that is not an error type; "as";
+                  return / break / continue inside finally.
+
+EXAMPLES
+    >>> func parse(s) {
+    ...     try {
+    ...         return num(s);
+    ...     } except ValueError (e) {
+    ...         print("not a number:", e.message());
+    ...         return 0;
+    ...     } finally {
+    ...         print("parsed", s);
+    ...     }
+    ... }
+    >>> parse("42")
+    parsed 42
+    42
+    >>> parse("x")
+    not a number: invalid literal for num(): "x"
+    parsed x
+    0
+    >>> try { [1][5]; } except IndexError, KeyError { print("caught"); }
+    caught
+
+SEE ALSO
+    man(raise), man(errors), man(assert), man(Error), man(sys.exit)

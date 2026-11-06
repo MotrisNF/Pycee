@@ -1,0 +1,16 @@
+# sys.platform sys.version
+NAME
+    sys.platform - the system pycee runs on, and pycee's version
+
+DESCRIPTION
+    platform is the name of the system in lower case, as the system
+    gives it ("linux"). version is pycee's version as a string, "0.10.0":
+    the phase of its roadmap as the minor number, until 1.0.
+
+EXAMPLES
+    >>> import sys
+    >>> sys.version
+    "0.10.0"
+
+SEE ALSO
+    man(sys), man(pycee)

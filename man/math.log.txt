@@ -1,0 +1,30 @@
+# math.exp math.log math.log2 math.log10
+NAME
+    math.log - logarithms and the exponential: exp, log, log2, log10
+
+SYNOPSIS
+    math.exp(x)   math.log(x)   math.log(x, base)   math.log2(x)
+    math.log10(x)
+
+DESCRIPTION
+    exp(x) is e to the power x. log(x) is the natural logarithm (base
+    e); log(x, base) in any base; log2 and log10 in base 2 and 10. All
+    give floats. x must be > 0, and base > 0 and not 1.
+
+ERRORS
+    ValueError      x <= 0, or a wrong base.
+    OverflowError   exp of a number too large (exp(1000)).
+
+EXAMPLES
+    >>> import math
+    >>> math.log(math.e)
+    1.0
+    >>> math.log(8, 2)
+    3.0
+    >>> math.log10(1000)
+    3.0
+    >>> math.log(0)
+    ValueError: log() needs a number > 0
+
+SEE ALSO
+    man(math), man(number.pow)

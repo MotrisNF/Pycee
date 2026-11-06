@@ -1,0 +1,17 @@
+# IndexError
+NAME
+    IndexError - an index out of range
+
+DESCRIPTION
+    Raised by l[i], s[i] and t[i] when i is not between -len and len - 1,
+    by pop() of an empty list, and by random.choice of an empty
+    sequence. Slices never raise it: their bounds are clipped.
+
+EXAMPLES
+    >>> [1, 2, 3][3]
+    IndexError: list index 3 out of range (length 3)
+    >>> [].pop()
+    IndexError: pop from an empty list
+
+SEE ALSO
+    man(errors), man(list), man(KeyError)

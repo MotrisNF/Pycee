@@ -1,0 +1,24 @@
+# none
+NAME
+    none - the value that means "nothing"
+
+DESCRIPTION
+    none is the only value of type "none". It is what a function gives
+    when it returns nothing, what a declared variable holds before it has
+    a value (var x;), what d.get(k) gives for a missing key, and the
+    items of var l[n]. It is equal only to itself: none is none.
+
+    none is not false and not 0: it is not a condition (if (x) is an
+    error); test it with x is none or x is not none. JSON's null is none.
+
+EXAMPLES
+    >>> var x
+    >>> x is none
+    true
+    >>> print(dict("a": 1).get("b"))
+    none
+    >>> none.type()
+    "none"
+
+SEE ALSO
+    man(true), man(types), man(dict.get)

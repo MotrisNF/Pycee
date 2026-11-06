@@ -1,0 +1,21 @@
+# string.replace
+NAME
+    string.replace - every appearance of a substring replaced with
+    another
+
+SYNOPSIS
+    s.replace(old, new)
+
+DESCRIPTION
+    A new string with every appearance of old (left to right, without
+    overlapping) replaced with new. new may be "" (to delete) or longer
+    than old.
+
+EXAMPLES
+    >>> "a-b-c".replace("-", ", ")
+    "a, b, c"
+    >>> "hello".replace("l", "")
+    "heo"
+
+SEE ALSO
+    man(string.split), man(string.join)

@@ -1,0 +1,17 @@
+# AttributeError
+NAME
+    AttributeError - a field or method that does not exist
+
+DESCRIPTION
+    Raised by x.name when x has no field or method name: a method a type
+    does not have ([].upper()), a field an object does not have, a
+    private field reached from outside, m.x when module m has no x. When
+    the type is known before running (self.name, m.name) it is found
+    then.
+
+EXAMPLES
+    >>> [1, 2].upper()
+    AttributeError: 'list' object has no attribute 'upper'
+
+SEE ALSO
+    man(errors), man(obj)

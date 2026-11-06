@@ -1,0 +1,102 @@
+# obj create
+NAME
+    obj - objects: your own types, with fields and methods
+
+SYNOPSIS
+    obj Name {
+        func create(a, b) { self.a = a; self.b = b; }
+        func method(x) { return self.a + x; }
+    }
+    obj Child extends Parent { ... }        (or: obj Child(Parent) { ... })
+
+DESCRIPTION
+    obj declares a new type. Calling it like a function, Name(...), makes
+    an object of that type: a value with its own fields and the methods
+    of the obj. Its type is the obj's name: Point(1, 2).type() is
+    "Point".
+
+  CREATE
+    create is the constructor: it runs when an object is made, with the
+    arguments of the call, and gives no value back (only "return;").
+    Without create, the obj is made with no arguments: Name().
+
+  FIELDS
+    Fields are declared by assigning them inside create: self.x = x;
+    anywhere in its body. The other methods read and change them but
+    cannot add new ones (that is an AttributeError, found before
+    running). A field can also be declared with var in the obj, needed
+    for a field with an initial value and no create, or with private or
+    static (see man(private), man(static)).
+
+    Fields that are not private can be read and written from outside:
+    p.x = 3. Assigning a field that does not exist is an AttributeError.
+
+  METHODS AND SELF
+    Methods are the func of the obj. Inside them, self is the object
+    they were called on (see man(self)); it is not written among the
+    parameters. obj.method gives a bound method, a function that
+    remembers its object: var m = p.move; m(1, 0) moves p.
+
+  INHERITANCE
+    obj Child extends Parent (or obj Child(Parent)) takes every field and
+    method of Parent; Child may add its own and redefine Parent's.
+    Methods are looked up in the child first, then in its parent. A
+    child without create uses its parent's; with its own, the parent's
+    only runs if it calls super.create(...) (see man(super)). An obj can
+    also extend an error type: see man(errors). Only one parent.
+
+  SPECIAL METHODS
+    The language calls these when an obj has them:
+        to_str()          the text of print, str() and f-strings
+        compare(other)    a number: < 0, 0, > 0; enables < <= > >= and
+                          sort()
+        len()             its length
+        get(i), set(i, v) obj[i] and obj[i] = v
+        iter()            for (x in obj): it returns a value with
+                          has_next() (a bool) and next()
+    to_str must give a string and compare a number (TypeError otherwise).
+    There is no overloading of + - * and the rest.
+
+  IDENTITY
+    Objects are shared, never copied: var q = p makes q the same object.
+    "is" compares objects by identity: two different objects are never
+    "is", even with the same fields.
+
+  SHOWN AS
+    <Name>, or what to_str() returns. The obj itself is a value too:
+    <obj Name>.
+
+ERRORS
+    AttributeError  a field or method that does not exist; a private
+                    field from outside.
+    TypeError       wrong number of arguments for create or a method;
+                    to_str or compare giving the wrong type.
+
+EXAMPLES
+    >>> obj Point {
+    ...     func create(x, y) { self.x = x; self.y = y; }
+    ...     func move(dx, dy) { self.x += dx; self.y += dy; return self; }
+    ...     func to_str() { return f"({self.x}, {self.y})"; }
+    ... }
+    >>> var p = Point(1, 2)
+    >>> p.move(3, 0)
+    (4, 2)
+    >>> p.x
+    4
+    >>> p.z = 1
+    AttributeError: 'Point' object has no attribute 'z'
+    >>> obj Point3 extends Point {
+    ...     func create(x, y, z) { super.create(x, y); self.z = z; }
+    ...     func to_str() { return f"({self.x}, {self.y}, {self.z})"; }
+    ... }
+    >>> var q = Point3(1, 2, 3)
+    >>> q.move(1, 1)
+    (2, 3, 3)
+    >>> q.is_type("Point")
+    true
+    >>> Point(0, 0) is Point(0, 0)
+    false
+
+SEE ALSO
+    man(self), man(super), man(private), man(static), man(errors),
+    man(func)

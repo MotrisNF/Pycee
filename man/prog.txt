@@ -1,0 +1,61 @@
+# prog
+NAME
+    prog - the entry point of a program: where it starts running
+
+SYNOPSIS
+    prog name() { ... }
+    prog name(argc, argv) { ... }
+
+DESCRIPTION
+    Running ./pycee file.pce first gives every global variable of the
+    file its value (in the order they are written), and then runs its
+    prog. A file has at most one prog; its name is free (main is the
+    usual one) but it cannot be called: nothing else can run it.
+
+    With two parameters, the first one (argc) is how many arguments the
+    program got and the second one (argv) a tuple of them as strings,
+    argv[0] being the path of the file:
+        ./pycee tool.pce a b    ->  argc is 3, argv is tuple("tool.pce",
+                                    "a", "b")
+    The names are yours (prog main(n, args) is the same); 0 or 2
+    parameters, never 1. The same tuple is sys.argv (see man(sys.argv)).
+
+    What prog returns is the exit code of the program: return 0 (or
+    nothing at all) is success; any integer from 0 to 255 is allowed. An
+    error that nobody catches ends the program with code 1, after
+    showing it with its traceback.
+
+    A file without prog is valid: it can be a module that others import
+    (see man(import)), or be checked with ./pycee --check. The prog of an
+    imported module never runs; only the one of the file given to pycee.
+
+    Inside prog, as in any function, var declares variables that live
+    until it ends (see man(var)).
+
+ERRORS
+    SyntaxError   two progs in one file; a prog with 1 or more than 2
+                  parameters; calling it.
+    TypeError     returning something that is not an integer (or none).
+    ValueError    returning an integer out of 0..255.
+
+EXAMPLES
+    $ cat args.pce
+    prog main(argc, argv) {
+        print(argc, argv);
+        if (argc < 2) {
+            print("usage: args.pce name");
+            return 2;
+        }
+        print(f"hello, {argv[1]}");
+    }
+    $ ./pycee args.pce ada
+    2 tuple("args.pce", "ada")
+    hello, ada
+    $ ./pycee args.pce
+    1 tuple("args.pce")
+    usage: args.pce name
+    $ echo $?
+    2
+
+SEE ALSO
+    man(pycee), man(func), man(sys.exit), man(sys.argv), man(import)

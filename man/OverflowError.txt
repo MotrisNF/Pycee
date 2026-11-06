@@ -1,0 +1,20 @@
+# OverflowError
+NAME
+    OverflowError - an int that does not fit in 64 bits, or a float too
+    large
+
+DESCRIPTION
+    Ints are exact and never wrap around: a result beyond
+    -9223372036854775808..9223372036854775807 raises this instead. Also
+    a float made into an int when it is too large (inf.round()), a float
+    function whose result is infinite from finite numbers (math.exp(1000))
+    and JSON numbers that do not fit. Use floats for numbers that big.
+
+EXAMPLES
+    >>> 9223372036854775807 + 1
+    OverflowError: integer overflow
+    >>> 2.pow(64)
+    OverflowError: integer overflow
+
+SEE ALSO
+    man(errors), man(number)

@@ -1,0 +1,16 @@
+# AssignmentError
+NAME
+    AssignmentError - unpacking into a different number of names
+
+DESCRIPTION
+    Raised when a tuple or list is unpacked into names and the number of
+    items is not the number of names: var a, b = t, a, b = t, and
+    for (k, v in items) with items that are not pairs. When the count is
+    visible before running (a, b = 1, 2, 3) it is a SyntaxError instead.
+
+EXAMPLES
+    >>> var a, b = tuple(1, 2, 3)
+    AssignmentError: cannot assign 3 values to 2 targets
+
+SEE ALSO
+    man(errors), man(var)

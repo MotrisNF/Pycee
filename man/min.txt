@@ -1,0 +1,32 @@
+# min list.min tuple.min set.min
+NAME
+    min - the smallest item: min(x), or x.min() on a list, tuple or set
+
+SYNOPSIS
+    min(iterable)
+    min(expression for (x in iterable) ...)
+    l.min()
+
+DESCRIPTION
+    The smallest item, compared with <: numbers, strings (by bytes) or
+    objects with compare(); all of the same type. The first of several
+    equal ones. Takes anything a for walks, or a comprehension alone
+    inside. To find the item with the smallest value of something, sort
+    a copy with a key: l.copy().sort(key = f)[0].
+
+ERRORS
+    ValueError    nothing to compare (an empty list).
+    TypeError     items that cannot be compared with each other.
+
+EXAMPLES
+    >>> min([3, 1, 2])
+    1
+    >>> min(["pear", "apple"])
+    "apple"
+    >>> min(w.len() for (w in ["hello", "hi"]))
+    2
+    >>> min([])
+    ValueError: min() of an empty list
+
+SEE ALSO
+    man(max), man(sum), man(list.sort)

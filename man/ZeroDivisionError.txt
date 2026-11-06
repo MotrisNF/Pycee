@@ -1,0 +1,16 @@
+# ZeroDivisionError
+NAME
+    ZeroDivisionError - dividing by zero
+
+DESCRIPTION
+    Raised by /, // and % when the right side is 0 (or 0.0), and by
+    raising 0 to a negative power.
+
+EXAMPLES
+    >>> 10 / 0
+    ZeroDivisionError: division by zero
+    >>> 0.pow(-1)
+    ZeroDivisionError: 0 cannot be raised to a negative power
+
+SEE ALSO
+    man(errors), man(operators)

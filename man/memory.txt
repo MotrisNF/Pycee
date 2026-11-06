@@ -1,0 +1,35 @@
+# memory
+NAME
+    memory - how pycee manages memory for you, and how to see it
+
+DESCRIPTION
+    Values are never freed by hand: there is no malloc or free in pycee.
+    A collector (mark and sweep) frees every value no variable can reach
+    any more. Every access is checked (indexes, keys, types), so no
+    program can read or write memory it should not, whatever it does.
+    Running out of memory ends the program cleanly.
+
+  WHEN THE COLLECTOR RUNS
+    When the memory in use passes twice what was alive after the last
+    collection (and at least 1 MiB). In between, values nobody uses wait
+    to be freed. Module sys controls it: sys.gc_collect() runs it now,
+    sys.memory() and sys.gc_stats() show the state, sys.gc_set_min() and
+    sys.gc_set_max() move the thresholds, sys.gc_disable() stops it (see
+    man(sys)).
+
+  WHAT IT MEANS FOR A PROGRAM
+    Lists, dicts, sets and objects are shared, not copied: passing a big
+    list to a function costs nothing. A value lives as long as something
+    reaches it: a list kept in a global lives until the program ends.
+    Values that contain each other (a list inside itself) are freed too.
+    A file left open is closed when it is freed (see man(file)).
+
+EXAMPLES
+    >>> import sys
+    >>> var junk = [[i] for (i in range(10000))]
+    >>> junk = none
+    >>> sys.gc_collect() >= 10000
+    true
+
+SEE ALSO
+    man(sys), man(sys.gc_collect), man(types)

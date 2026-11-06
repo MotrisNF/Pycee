@@ -1,0 +1,72 @@
+# errors
+NAME
+    errors - error values, their types, and how they travel
+
+DESCRIPTION
+    When something goes wrong, pycee raises an error: a value with a
+    type (ValueError...), a message, and where it happened. It travels
+    up through the calls until a try / except catches it (see man(try));
+    if nothing does, the program ends with exit code 1 and shows it with
+    its traceback: every call it went through, most recent last.
+
+    Errors found BEFORE running (SyntaxError, NameError, ImportError,
+    and some TypeError and AttributeError) stop the program before it
+    starts and show no traceback.
+
+  THE TYPES
+    Error is the base of every error: except Error, or except with no
+    type, catches them all. The rest extend it:
+        TypeError          a value of the wrong type
+        ValueError         a value of the right type that does not fit
+        ZeroDivisionError  dividing by zero
+        OverflowError      an int that does not fit in 64 bits
+        IndexError         an index out of range
+        KeyError           a key not in a dict
+        AttributeError     a field or method that does not exist
+        AssignmentError    unpacking into a different number of names
+        RuntimeError       a collection changed while it was walked
+        RecursionError     too many calls in progress, or too deep
+        NotImplementedError  something not written yet
+        EOFError           input() at the end of the input
+        AssertionError     an assert that failed
+        IOError            files and the system; its kinds:
+          FileNotFoundError    a path that does not exist
+          PermissionError      not allowed
+        SyntaxError, NameError, ImportError   found before running
+    Two are not errors and are never caught by "except" alone:
+        KeyboardInterrupt  Ctrl+C (only except KeyboardInterrupt)
+        SystemExit         exit() / sys.exit() (never caught)
+
+  AN ERROR AS A VALUE
+    ValueError("msg") makes one (each type is also a function); raise
+    sends it. In except T (e), e has:
+        e.type()        its type, "ValueError"
+        e.message()     its message
+        e.line()        the line where it happened
+        e.file()        the file ("<stdin:3>" in the REPL)
+        e.traceback()   the traceback, as text
+        print(e)        "ValueError: msg"
+    An error raised while handling another one keeps it as its context,
+    and both are shown.
+
+  ERRORS OF YOUR OWN
+    An obj can extend any error type; its objects are errors, caught by
+    their own type and by their parents', with the methods above plus
+    whatever the obj adds:
+        obj ParseError extends ValueError { }
+        raise ParseError("bad header");
+
+EXAMPLES
+    >>> obj ConfigError extends ValueError { }
+    >>> try {
+    ...     raise ConfigError("missing key");
+    ... } except ValueError (e) {
+    ...     print(e.type(), "-", e.message());
+    ... }
+    ConfigError - missing key
+    >>> func a() { return 1 / 0; }
+    >>> try { a(); } except (e) { print(e); }
+    ZeroDivisionError: division by zero
+
+SEE ALSO
+    man(try), man(raise), man(assert), man(Error)

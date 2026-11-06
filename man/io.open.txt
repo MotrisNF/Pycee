@@ -1,0 +1,27 @@
+# io.open
+NAME
+    io.open - open a file, giving a file value
+
+SYNOPSIS
+    io.open(path)
+    io.open(path, mode)
+
+DESCRIPTION
+    mode is "r" (read, the default), "w" (create or empty, then write) or
+    "a" (write at the end, creating it if needed). The file value has
+    read, read_line, read_lines, write, has_next, flush, close and
+    is_closed, and a for walks its lines (see man(file)). Close it when
+    done; otherwise it is closed when collected or when the program
+    ends.
+
+ERRORS
+    ValueError    a mode other than "r", "w", "a".
+    FileNotFoundError, PermissionError, IOError ("is a directory").
+
+EXAMPLES
+    >>> import io
+    >>> io.open("x.txt", "rw")
+    ValueError: open() mode must be "r", "w" or "a", not "rw"
+
+SEE ALSO
+    man(file), man(io)

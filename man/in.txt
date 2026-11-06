@@ -1,0 +1,33 @@
+# in
+NAME
+    in - "is it inside?" (operator), and the "in" of for
+
+SYNOPSIS
+    x in collection
+    x not in collection
+    for (x in collection) { ... }
+
+DESCRIPTION
+    As an operator, x in c is true when c contains x: an item of a list,
+    tuple, set or range (compared with "is"), a key of a dict, or a
+    substring of a string. not in is the opposite. It binds like the
+    comparisons and cannot be chained.
+
+    In a for, in separates the variable from what it walks (see
+    man(for)); in a comprehension, the same (see man(comprehensions)).
+
+ERRORS
+    TypeError     c is not a collection (a number, a bool...).
+
+EXAMPLES
+    >>> 2 in [1, 2, 3]
+    true
+    >>> "x" in dict("x": 1)
+    true
+    >>> "ell" in "hello"
+    true
+    >>> 10 not in range(10)
+    true
+
+SEE ALSO
+    man(operators), man(for)

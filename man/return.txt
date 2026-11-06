@@ -1,0 +1,37 @@
+# return
+NAME
+    return - end a function and give back a value
+
+SYNOPSIS
+    return;
+    return value;
+
+DESCRIPTION
+    return ends the function that is running and gives value to whoever
+    called it; return alone (or reaching the end of the function) gives
+    none. The parentheses some write, return (x), are just the
+    parentheses of an expression.
+
+    In prog, the value returned is the exit code of the program (see
+    man(prog)). In create, the constructor of an obj, only return; is
+    allowed (create gives back the object). A return inside a finally
+    block is a SyntaxError (it would hide an error).
+
+ERRORS
+    SyntaxError   return outside a function; return with a value in
+                  create; return inside finally.
+
+EXAMPLES
+    >>> func sign(x) {
+    ...     if (x < 0) { return -1; }
+    ...     if (x > 0) { return 1; }
+    ...     return 0;
+    ... }
+    >>> sign(-5)
+    -1
+    >>> func nothing() { return; }
+    >>> print(nothing())
+    none
+
+SEE ALSO
+    man(func), man(prog)

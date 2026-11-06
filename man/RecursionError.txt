@@ -1,0 +1,19 @@
+# RecursionError
+NAME
+    RecursionError - too many calls in progress, or nesting too deep
+
+DESCRIPTION
+    Raised when more calls are in progress than the recursion limit
+    (1000 at the start; see man(sys.recursion_limit)), when the real
+    stack of the machine runs out, and when data or code is nested too
+    deeply (JSON, a value printed). It never crashes the interpreter. It
+    can be caught; then the calls are unwound and the stack is free
+    again.
+
+EXAMPLES
+    >>> func forever(n) { return forever(n + 1); }
+    >>> forever(0)
+    RecursionError: maximum recursion depth exceeded (1000 calls)
+
+SEE ALSO
+    man(errors), man(sys.recursion_limit)

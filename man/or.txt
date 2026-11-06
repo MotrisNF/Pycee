@@ -1,0 +1,23 @@
+# or
+NAME
+    or - logical or: true when at least one side is true
+
+SYNOPSIS
+    a or b
+
+DESCRIPTION
+    Both sides must be bools. b is only evaluated when a is false: if a is
+    true the result is true and b never runs. or and xor bind the
+    loosest of the logical operators (only c ? a : b is looser).
+
+ERRORS
+    TypeError     a side that is not a bool.
+
+EXAMPLES
+    >>> 1 > 2 or 2 > 1
+    true
+    >>> true or 1 / 0 > 0
+    true
+
+SEE ALSO
+    man(and), man(xor), man(not), man(operators)

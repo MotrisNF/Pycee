@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "man/man.h"
 #include "runtime/interp_internal.h"
 
 /*
@@ -303,6 +304,41 @@ static int  run_expr_stmt(t_interp *in, const t_node *n, int echo,
 }
 
 /*
+ * man(topic) at the REPL's prompt: the page, through the pager. Every
+ * buffer is the session's (taken from the pool), so nothing leaks if
+ * memory runs out. A topic with no page is not an error: the message
+ * says what there is instead. Ctrl+C only leaves the pager.
+ */
+static int  run_man(t_interp *in, const t_node *n)
+{
+    t_buffer    *page;
+    t_buffer    *title;
+    t_buffer    *work;
+    t_buffer    *lines;
+
+    page = rt_buf_take(in);
+    title = rt_buf_take(in);
+    work = rt_buf_take(in);
+    lines = rt_buf_take(in);
+    if (man_lookup(n->as.man.topic.ptr, n->as.man.topic.len, page, title,
+            work))
+    {
+        if (man_show(title->data, page->data, page->len, lines))
+            interp_signals_clear();
+    }
+    else
+    {
+        fflush(stdout);
+        fwrite(page->data, 1, page->len, stderr);
+    }
+    rt_buf_give(in);
+    rt_buf_give(in);
+    rt_buf_give(in);
+    rt_buf_give(in);
+    return (0);
+}
+
+/*
  * One item of a module's top level: the static vars of an obj are
  * globals too, given their values in its place. Only a REPL line holds
  * statements there; break, continue and return cannot reach it.
@@ -321,6 +357,8 @@ static int  run_top(t_interp *in, t_node *n, int echo, t_error *err)
     }
     if (n->type == NODE_FUNC || n->type == NODE_IMPORT)
         return (0);
+    if (n->type == NODE_MAN)
+        return (run_man(in, n));
     if (n->type == NODE_EXPR_STMT)
         return (run_expr_stmt(in, n, echo, err));
     return (rt_exec(in, n, err) == EXEC_ERROR ? -1 : 0);

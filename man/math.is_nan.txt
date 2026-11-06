@@ -1,0 +1,21 @@
+# math.is_nan math.is_inf math.is_finite
+NAME
+    math.is_nan - whether a number is nan, infinite, or finite
+
+SYNOPSIS
+    math.is_nan(x)   math.is_inf(x)   math.is_finite(x)
+
+DESCRIPTION
+    Bools. is_inf is true for inf and -inf; is_finite for anything that
+    is neither inf nor nan. An int is always finite. is_nan is the only
+    way to test for nan (nan is never "is" anything).
+
+EXAMPLES
+    >>> import math
+    >>> math.is_nan(float("nan"))
+    true
+    >>> math.is_finite(1e308 * 10)
+    false
+
+SEE ALSO
+    man(math.pi), man(math)

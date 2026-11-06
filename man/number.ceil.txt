@@ -1,0 +1,23 @@
+# number.ceil math.ceil
+NAME
+    number.ceil - the smallest int not below x: x.ceil(), math.ceil(x)
+
+SYNOPSIS
+    x.ceil()
+    math.ceil(x)
+
+DESCRIPTION
+    Rounds up, toward plus infinity: 3.2 gives 4, -3.7 gives -3. An int
+    stays as it is.
+
+ERRORS
+    ValueError, OverflowError   nan; inf or a float too large.
+
+EXAMPLES
+    >>> 3.2.ceil()
+    4
+    >>> (-3.7).ceil()
+    -3
+
+SEE ALSO
+    man(number.floor), man(number.round)

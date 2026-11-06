@@ -1,0 +1,26 @@
+# list.copy dict.copy set.copy
+NAME
+    copy - a shallow copy of a list, dict or set
+
+SYNOPSIS
+    l.copy()   d.copy()   s.copy()
+
+DESCRIPTION
+    A new collection with the same items, which can then change without
+    touching the original. Shallow: the items themselves are not copied,
+    so a list inside the copy is the same list as inside the original.
+
+EXAMPLES
+    >>> var a = [1, [2]]
+    >>> var b = a.copy()
+    >>> b.append(3)
+    [1, [2], 3]
+    >>> a
+    [1, [2]]
+    >>> b[1].append(9)
+    [2, 9]
+    >>> a
+    [1, [2, 9]]
+
+SEE ALSO
+    man(types), man(id)

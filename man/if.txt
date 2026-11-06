@@ -1,0 +1,41 @@
+# if elif else
+NAME
+    if - run a block only when a condition is true (with elif and else)
+
+SYNOPSIS
+    if (condition) { ... }
+    if (condition) { ... } elif (condition) { ... } else { ... }
+
+DESCRIPTION
+    The condition goes in parentheses and must be a bool: true or false.
+    There is no "truthiness": if (l) with a list, or if (n) with a
+    number, is a TypeError; write if (l.len() > 0) or if (n is not 0).
+
+    The first condition that is true runs its block and the rest are
+    skipped; else runs when none was. elif can repeat; else, at most
+    once and at the end. The braces are always required, even for one
+    statement.
+
+    For a value chosen by a condition, the expression c ? a : b is
+    shorter (see man(operators)); for many cases of one value, see
+    man(switch).
+
+ERRORS
+    TypeError     a condition that is not a bool.
+    SyntaxError   elif or else without an if before.
+
+EXAMPLES
+    >>> var t = 31
+    >>> if (t > 30) {
+    ...     print("hot");
+    ... } elif (t > 15) {
+    ...     print("mild");
+    ... } else {
+    ...     print("cold");
+    ... }
+    hot
+    >>> if (1) { print("never"); }
+    TypeError: the condition of 'if' needs a bool, not 'number'
+
+SEE ALSO
+    man(switch), man(while), man(operators), man(bool)

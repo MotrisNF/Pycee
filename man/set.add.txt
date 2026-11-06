@@ -1,0 +1,25 @@
+# set.add set.remove set.clear
+NAME
+    set.add - add or take out items of a set: add, remove, clear
+
+SYNOPSIS
+    s.add(x)   s.remove(x)   s.clear()
+
+DESCRIPTION
+    add puts x in (nothing happens if it is already there); remove takes
+    x out; clear empties the set. All change s and give it back.
+
+ERRORS
+    ValueError    remove of a value that is not there.
+    TypeError     add of a value that can change (a list...).
+
+EXAMPLES
+    >>> set(1).add(2).add(2)
+    set(1, 2)
+    >>> set(1, 2).remove(1)
+    set(2)
+    >>> set(1).remove(5)
+    ValueError: remove(): the value is not in the set
+
+SEE ALSO
+    man(set), man(set.has)

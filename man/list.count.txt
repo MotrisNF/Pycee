@@ -1,0 +1,19 @@
+# list.count tuple.count
+NAME
+    list.count - how many items are equal to a value
+
+SYNOPSIS
+    l.count(x)
+    t.count(x)
+
+DESCRIPTION
+    The number of items that "is" x (1 and 1.0 count as equal).
+
+EXAMPLES
+    >>> [1, 2, 2, 3, 2].count(2)
+    3
+    >>> [1, 1.0].count(1)
+    2
+
+SEE ALSO
+    man(list.index), man(string.count)

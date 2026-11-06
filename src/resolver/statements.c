@@ -385,6 +385,8 @@ int rs_resolve_comprehension(t_ctx *c, t_node *n)
 
 static int  resolve_stmt(t_ctx *c, t_node *n)
 {
+    if (n->type == NODE_MAN)
+        return (0);
     if (stack_exhausted())
         return (error_set(c->err, ERR_SYNTAX, n->offset, 1,
                 "too deeply nested"));

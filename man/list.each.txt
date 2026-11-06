@@ -1,0 +1,18 @@
+# list.each tuple.each
+NAME
+    list.each - call a function with every item
+
+SYNOPSIS
+    l.each(f)
+
+DESCRIPTION
+    Calls f(item) for each item, in order, for what f does (printing,
+    adding to something); what f gives is ignored. Gives none.
+
+EXAMPLES
+    >>> ["a", "b"].each(print)
+    a
+    b
+
+SEE ALSO
+    man(list.map), man(for)

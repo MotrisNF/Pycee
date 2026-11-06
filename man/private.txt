@@ -1,0 +1,32 @@
+# private
+NAME
+    private - a field or method that only the obj itself can use
+
+SYNOPSIS
+    private var name = value;
+    private func name(...) { ... }
+
+DESCRIPTION
+    A private member can only be reached through self, inside the methods
+    of the obj that declares it: not from outside, not from a child obj.
+    Use it for the internal state an object must keep consistent itself.
+    A private field is declared with private var in the obj (with an
+    optional initial value), and can then be set in create.
+
+ERRORS
+    AttributeError  a private member reached from outside.
+
+EXAMPLES
+    >>> obj Account {
+    ...     private var balance = 0;
+    ...     func deposit(n) { self.balance += n; return self; }
+    ...     func total() { return self.balance; }
+    ... }
+    >>> var a = Account()
+    >>> a.deposit(50).total()
+    50
+    >>> a.balance
+    AttributeError: 'balance' is private: only self can reach it, ...
+
+SEE ALSO
+    man(obj), man(static)

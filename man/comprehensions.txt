@@ -1,0 +1,40 @@
+# comprehensions
+NAME
+    comprehensions - build a list, tuple, set or dict from a loop, in one
+    expression
+
+SYNOPSIS
+    [expression for (x in iterable)]
+    [expression for (x in a) for (y in b) if (condition)]
+    tuple(... for ...)   set(... for ...)   dict(k: v for ...)
+    sum(... for ...)   min(...)   max(...)   any(...)   all(...)
+
+DESCRIPTION
+    [x * x for (x in l)] makes a list with x * x for each x of l. After
+    the first for, any number of for and if clauses may follow, left to
+    right, each one inside the one before (as nested loops): an if keeps
+    only the items for which its condition (a bool) is true. The
+    variables of the fors exist only inside the comprehension, and
+    for (a, b in it) unpacks as in a for.
+
+    The same form alone inside tuple(), set() or dict() (with k: v) makes
+    that type; inside sum(), min(), max(), any() or all() it gives the
+    result directly, without making a list in between (any and all stop
+    as soon as they know the answer).
+
+EXAMPLES
+    >>> [x * x for (x in range(6)) if (x % 2 is 0)]
+    [0, 4, 16]
+    >>> [x * y for (x in range(3)) for (y in range(2)) if (x > 0)]
+    [0, 1, 0, 2]
+    >>> dict(w: w.len() for (w in ["hi", "pycee"]))
+    dict("hi": 2, "pycee": 5)
+    >>> set(c for (c in "hello"))
+    set("h", "e", "l", "o")
+    >>> sum(x * x for (x in range(4)))
+    14
+    >>> any(x > 3 for (x in [1, 5, 2]))
+    true
+
+SEE ALSO
+    man(list), man(for), man(sum), man(any)

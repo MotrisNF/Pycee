@@ -1,0 +1,31 @@
+# string.strip string.lstrip string.rstrip
+NAME
+    string.strip - the string without spaces (or other characters) at
+    its ends: strip, lstrip, rstrip
+
+SYNOPSIS
+    s.strip()     s.lstrip()     s.rstrip()
+    s.strip(chars)   s.lstrip(chars)   s.rstrip(chars)
+
+DESCRIPTION
+    strip takes away the white space (spaces, tabs, new lines) at both
+    ends; lstrip only at the left (the start), rstrip only at the right
+    (the end). Nothing in the middle is touched.
+
+    With chars (a string), they take away any of those characters
+    instead, however many and in any order: "xxhixx".strip("x") is "hi".
+
+    rstrip("\n") is how to take the "\n" off a line read from a file.
+
+EXAMPLES
+    >>> "  hello  ".strip()
+    "hello"
+    >>> "  hello  ".lstrip()
+    "hello  "
+    >>> "line\n".rstrip("\n")
+    "line"
+    >>> "--==title==--".strip("-=")
+    "title"
+
+SEE ALSO
+    man(string.split), man(string)

@@ -1,0 +1,32 @@
+# any list.any tuple.any
+NAME
+    any - whether at least one item is true (or passes a test)
+
+SYNOPSIS
+    any(iterable)
+    any(condition for (x in iterable) ...)
+    l.any()
+    l.any(f)
+
+DESCRIPTION
+    any(x), and l.any() with no function, need every item to be a bool
+    and give true if one of them is true. l.any(f) calls f on the items
+    and gives true as soon as one gives true (f must give bools). With a
+    comprehension alone inside, any(x > 3 for (x in l)), no list is made
+    and it stops at the first true. Nothing at all gives false.
+
+ERRORS
+    TypeError     an item (or a result of f) that is not a bool.
+
+EXAMPLES
+    >>> any(x > 3 for (x in [1, 5, 2]))
+    true
+    >>> [1, 2, 3].any((x) => x % 2 is 0)
+    true
+    >>> [false, false].any()
+    false
+    >>> any([])
+    false
+
+SEE ALSO
+    man(all), man(list.filter), man(comprehensions)

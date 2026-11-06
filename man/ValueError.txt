@@ -1,0 +1,18 @@
+# ValueError
+NAME
+    ValueError - a value of the right type that does not fit
+
+DESCRIPTION
+    Raised when a value has an accepted type but not an accepted value:
+    num("abc"), int("3.5"), math.sqrt(-1), a step of 0 in range, an exit
+    code of 300, removing from a list a value it does not have, JSON
+    that is not valid... It is the usual error for "invalid input".
+
+EXAMPLES
+    >>> num("12a")
+    ValueError: invalid literal for num(): "12a"
+    >>> [1, 2].remove(3)
+    ValueError: remove(): the value is not in the list
+
+SEE ALSO
+    man(errors), man(TypeError)

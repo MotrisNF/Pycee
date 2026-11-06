@@ -1,0 +1,32 @@
+# math.sin math.cos math.tan math.asin math.acos math.atan math.atan2 math.sinh math.cosh math.tanh math.degrees math.radians math.hypot
+NAME
+    math.sin - trigonometry: sin, cos, tan, their inverses, hyperbolic
+    ones, angle conversion and hypot
+
+SYNOPSIS
+    math.sin(x)   math.cos(x)   math.tan(x)
+    math.asin(x)  math.acos(x)  math.atan(x)  math.atan2(y, x)
+    math.sinh(x)  math.cosh(x)  math.tanh(x)
+    math.degrees(x)   math.radians(x)   math.hypot(x, y)
+
+DESCRIPTION
+    Angles are in radians (pi radians are 180 degrees); degrees(x) and
+    radians(x) convert. asin and acos take x from -1 to 1. atan2(y, x)
+    is the angle of the point (x, y), with the right quadrant (from -pi
+    to pi). hypot(x, y) is the length of (x, y): sqrt(x*x + y*y), without
+    overflowing on the way. All give floats.
+
+ERRORS
+    ValueError    x out of the domain (asin(2), sin(inf)).
+
+EXAMPLES
+    >>> import math
+    >>> math.cos(0)
+    1.0
+    >>> math.degrees(math.atan2(1, -1))
+    135.0
+    >>> math.hypot(3, 4)
+    5.0
+
+SEE ALSO
+    man(math), man(math.pi)

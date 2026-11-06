@@ -1,0 +1,19 @@
+# os.remove os.rename
+NAME
+    os.remove - delete a file (remove), or rename or move it (rename)
+
+SYNOPSIS
+    os.remove(p)
+    os.rename(old, new)
+
+DESCRIPTION
+    remove deletes the file p (a directory is an IOError: use
+    remove_dir). rename gives old the path new, moving it if new is in
+    another directory; a file already at new is replaced. Both give
+    none.
+
+ERRORS
+    FileNotFoundError, PermissionError, IOError.
+
+SEE ALSO
+    man(os.remove_dir), man(os)

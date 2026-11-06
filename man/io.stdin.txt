@@ -1,0 +1,19 @@
+# io.stdin io.stdout io.stderr
+NAME
+    io.stdin - the standard streams as file values: stdin, stdout, stderr
+
+DESCRIPTION
+    stdin is the input (what input() reads), stdout the normal output
+    (where print writes), stderr the error output. They are file values
+    (see man(file)): io.stdin.read() reads everything that was piped to
+    the program; for (line in io.stdin) walks the input line by line;
+    io.stdout.write(s) writes without a new line. They are never closed:
+    close() on them is an IOError.
+
+EXAMPLES
+    >>> import io
+    >>> io.stdout
+    <file "<stdout>">
+
+SEE ALSO
+    man(file), man(input), man(print)

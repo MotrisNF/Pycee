@@ -1,0 +1,14 @@
+# AssertionError
+NAME
+    AssertionError - an assert whose condition was false
+
+DESCRIPTION
+    Raised by assert(condition, message) when condition is false, with
+    message or "assertion failed" (see man(assert)).
+
+EXAMPLES
+    >>> assert(1 > 2, "math is broken")
+    AssertionError: math is broken
+
+SEE ALSO
+    man(assert), man(errors)

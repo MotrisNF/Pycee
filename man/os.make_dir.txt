@@ -1,0 +1,26 @@
+# os.make_dir os.remove_dir
+NAME
+    os.make_dir - make a directory (make_dir), or delete an empty one
+    (remove_dir)
+
+SYNOPSIS
+    os.make_dir(p)
+    os.make_dir(p, "r")
+    os.remove_dir(p)
+
+DESCRIPTION
+    make_dir(p) makes one directory: its parent must exist and p must
+    not ("file exists"). make_dir(p, "r") also makes every directory
+    missing on the way, and a p that already exists is fine.
+
+    remove_dir(p) deletes a directory only if it is empty; otherwise an
+    IOError "directory not empty" (to delete a tree, delete what is in
+    it first: see the example of man(os.list_dir) and man(for)).
+
+ERRORS
+    ValueError    a second argument other than "r".
+    IOError       "file exists", "directory not empty"...
+    FileNotFoundError   the parent does not exist (without "r").
+
+SEE ALSO
+    man(os), man(os.exists)

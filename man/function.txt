@@ -1,0 +1,38 @@
+# function
+NAME
+    function - the type of every function: func, lambdas, built-ins and
+    bound methods
+
+DESCRIPTION
+    Functions are values of type "function": they can be stored, passed
+    and returned. Every callable is one:
+        <func area>         a func declared with a name
+        <func lambda>       a lambda or an anonymous func
+        <built-in print>    a function of the language (also of a
+                            module: <built-in math.sqrt>)
+        <method Point.move> a method of an obj taken as a value
+        <method list.append>   a method of a value, bound to it
+    A bound method remembers its value: var add = l.append; add(3)
+    appends to l. An obj itself (Point) is callable too: it makes
+    objects.
+
+    "is" compares functions by identity. Calling a value that is not a
+    function is a TypeError. When a function is called through a value,
+    its arguments are checked when it runs.
+
+EXAMPLES
+    >>> var f = print
+    >>> f
+    <built-in print>
+    >>> var l = []
+    >>> var add = l.append
+    >>> add(1)
+    [1]
+    >>> [str, (x) => x * 2].map((g) => g(21))
+    ["21", 42]
+    >>> var n = 3
+    >>> n()
+    TypeError: 'number' object is not callable
+
+SEE ALSO
+    man(func), man(obj)

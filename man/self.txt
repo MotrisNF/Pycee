@@ -1,0 +1,31 @@
+# self
+NAME
+    self - inside a method, the object it was called on
+
+DESCRIPTION
+    self is the object a method belongs to in this call: in p.move(1, 0),
+    self is p. With it a method reads and changes the fields
+    (self.x += 1) and calls other methods (self.reset()). It is not a
+    parameter: it is never written in the list of parameters, and it
+    cannot be assigned.
+
+    A lambda written inside a method can use self too (it captures it).
+    A static method has no self (it belongs to the obj, not to one
+    object). self.name must be a field or a method of the obj: anything
+    else is an AttributeError before running.
+
+ERRORS
+    SyntaxError     self outside the methods of an obj, or in a static
+                    method.
+    AttributeError  self.name that the obj does not have.
+
+EXAMPLES
+    >>> obj Counter {
+    ...     func create() { self.n = 0; }
+    ...     func add(k) { self.n += k; return self; }
+    ... }
+    >>> Counter().add(2).add(3).n
+    5
+
+SEE ALSO
+    man(obj), man(super)

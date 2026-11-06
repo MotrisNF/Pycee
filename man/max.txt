@@ -1,0 +1,29 @@
+# max list.max tuple.max set.max
+NAME
+    max - the largest item: max(x), or x.max() on a list, tuple or set
+
+SYNOPSIS
+    max(iterable)
+    max(expression for (x in iterable) ...)
+    l.max()
+
+DESCRIPTION
+    The largest item, compared with >: numbers, strings (by bytes) or
+    objects with compare(); all of the same type. The first of several
+    equal ones. Takes anything a for walks, or a comprehension alone
+    inside.
+
+ERRORS
+    ValueError    nothing to compare.
+    TypeError     items that cannot be compared with each other.
+
+EXAMPLES
+    >>> max([3, 1, 2])
+    3
+    >>> max("pycee")
+    "y"
+    >>> max([1, "a"])
+    TypeError: cannot compare 'string' with 'number'
+
+SEE ALSO
+    man(min), man(sum)

@@ -1,0 +1,23 @@
+# dict.remove dict.clear
+NAME
+    dict.remove - take a pair out of a dict (remove), or all (clear)
+
+SYNOPSIS
+    d.remove(k)
+    d.clear()
+
+DESCRIPTION
+    remove takes out the pair of key k; clear takes out every pair. Both
+    change d and give it back.
+
+ERRORS
+    KeyError    remove of a key that is not there.
+
+EXAMPLES
+    >>> dict("a": 1, "b": 2).remove("a")
+    dict("b": 2)
+    >>> dict("a": 1).remove("z")
+    KeyError: key "z" is not in the dict
+
+SEE ALSO
+    man(dict), man(dict.get)

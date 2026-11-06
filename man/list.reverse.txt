@@ -1,0 +1,17 @@
+# list.reverse
+NAME
+    list.reverse - turn the order of the list around, in place
+
+SYNOPSIS
+    l.reverse()
+
+DESCRIPTION
+    The last item becomes the first, and so on. Changes l and gives it
+    back. For a reversed copy: l[::-1].
+
+EXAMPLES
+    >>> [1, 2, 3].reverse()
+    [3, 2, 1]
+
+SEE ALSO
+    man(list.sort), man(string.reverse)

@@ -1,0 +1,56 @@
+# import from as
+NAME
+    import - use what another file, or a module of the language, offers
+
+SYNOPSIS
+    import name;
+    import name as other;
+    from name import a, b as c;
+
+DESCRIPTION
+    Imports go at the beginning of the file, before anything else.
+
+    import utils; loads utils.pce, from the directory of the file that
+    imports it (in the REPL, from the current directory), and gives a
+    name for it: utils.parse(x), utils.LIMIT. import utils as u; names it
+    u instead. from utils import parse, dump as d; brings those names in
+    directly: parse(x), d(y).
+
+    The modules of the language (sys, math, io, random, time, os, signal,
+    json) are imported the same way and need no file; a file of yours
+    with one of their names is an error when imported. See man(modules).
+
+    What a module offers: its own func, obj and var (not its prog, nor
+    what it imports). Its globals can be read from outside, always with
+    their current value, but only its own functions can change them. A
+    module is loaded once however many files import it; two modules that
+    import each other are an error. The prog of an imported module never
+    runs.
+
+    A module is not a value: var m = math is an error, only math.name
+    exists.
+
+ERRORS
+    ImportError     no such file; a circular import; from m import x
+                    with no x in m; a user file named like a module of
+                    the language; from sys import exit in the REPL.
+    AttributeError  m.x with no x in m.
+    SyntaxError     assigning to a variable of another module.
+
+EXAMPLES
+    $ cat geometry.pce
+    const PI = 3.14159;
+    func circle_area(r) {
+        return PI * r * r;
+    }
+    $ cat main.pce
+    import geometry as g;
+    from math import sqrt;
+    prog main() {
+        print(g.circle_area(2), sqrt(16));
+    }
+    $ ./pycee main.pce
+    12.56636 4.0
+
+SEE ALSO
+    man(modules), man(sys), man(math), man(io)

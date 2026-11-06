@@ -147,6 +147,7 @@ run signal|tests/run/signal_module.pce|-
 run signal uncaught|tests/run/signal_uncaught.pce|-
 eval signal repl||tests/eval/signal_repl.pce
 run json|tests/run/json_module.pce|-
+eval man||tests/eval/man_repl.pce
 run milestone word count|tests/run/word_count.pce tests/run/word_count.txt build/word_count.json|-
 EOF
 [ "$fail" -eq 0 ]

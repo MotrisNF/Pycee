@@ -1,0 +1,24 @@
+# type
+NAME
+    type - the name of a value's type (a method of every value)
+
+SYNOPSIS
+    x.type()
+
+DESCRIPTION
+    Gives the type of x as a string: "number", "string", "bool", "none",
+    "list", "tuple", "dict", "set", "range", "function", "file", the
+    name of an error type ("ValueError"), or the name of an obj for an
+    object ("Point"). type cannot be redefined by an obj. To check a
+    type with inheritance in mind, use is_type.
+
+EXAMPLES
+    >>> 7.type()
+    "number"
+    >>> [].type()
+    "list"
+    >>> ValueError("x").type()
+    "ValueError"
+
+SEE ALSO
+    man(is_type), man(id), man(types)

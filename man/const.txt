@@ -1,0 +1,32 @@
+# const
+NAME
+    const - declare a name whose value never changes
+
+SYNOPSIS
+    const NAME = value;
+
+DESCRIPTION
+    const gives a name a value that can never be assigned again. The
+    value is required. At the top level of a file it is a global; inside
+    a function it lives in its block, like vemp (so it is allowed inside
+    loops).
+
+    const protects the name, not the value: a const list can still be
+    changed through its methods (append, sort...); what cannot happen is
+    the name pointing to another value.
+
+ERRORS
+    SyntaxError   assigning to it, or using ++ / -- on it; no value.
+
+EXAMPLES
+    >>> const LIMIT = 10
+    >>> LIMIT * 2
+    20
+    >>> LIMIT = 11
+    SyntaxError: cannot assign to 'LIMIT': it is a constant
+    >>> const ITEMS = [1]
+    >>> ITEMS.append(2)
+    [1, 2]
+
+SEE ALSO
+    man(var), man(vemp)

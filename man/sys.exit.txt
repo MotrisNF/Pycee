@@ -1,0 +1,39 @@
+# sys.exit
+NAME
+    sys.exit - end the program now, with an exit code
+
+SYNOPSIS
+    sys.exit()
+    sys.exit(code)
+
+DESCRIPTION
+    Ends the program with code (an int from 0 to 255; 0 when not given):
+    0 means success. It is not an error: no except catches it, but every
+    finally on the way runs, and everything is freed before leaving. In
+    the REPL it ends the session (there, exit() does the same, and
+    "from sys import exit" is an error because exit already exists).
+    Returning from prog is the other way to give the exit code.
+
+ERRORS
+    TypeError     a code that is not an int.
+    ValueError    a code out of 0..255.
+
+EXAMPLES
+    $ cat stop.pce
+    import sys;
+    prog main() {
+        try {
+            sys.exit(3);
+        } except {
+            print("never: nothing catches it");
+        } finally {
+            print("finally runs");
+        }
+    }
+    $ ./pycee stop.pce
+    finally runs
+    $ echo $?
+    3
+
+SEE ALSO
+    man(prog), man(exit), man(sys)

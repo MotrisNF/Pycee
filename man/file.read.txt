@@ -1,0 +1,16 @@
+# file.read
+NAME
+    file.read - everything left in the file, as one string
+
+SYNOPSIS
+    f.read()
+
+DESCRIPTION
+    Reads from where the file is to its end and gives it all ("" when
+    nothing is left). For a whole file, io.read_file(path) is shorter.
+
+ERRORS
+    IOError       the file is closed or open for writing.
+
+SEE ALSO
+    man(file), man(io.read_file), man(file.read_line)

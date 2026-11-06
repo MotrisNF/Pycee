@@ -1,0 +1,24 @@
+# number.sqrt math.sqrt
+NAME
+    number.sqrt - the square root, a float: x.sqrt(), math.sqrt(x)
+
+SYNOPSIS
+    x.sqrt()
+    math.sqrt(x)
+
+DESCRIPTION
+    The square root of x (>= 0), always a float: 9.sqrt() is 3.0.
+
+ERRORS
+    ValueError    a negative x.
+
+EXAMPLES
+    >>> 9.sqrt()
+    3.0
+    >>> 2.sqrt()
+    1.4142135623730951
+    >>> (-1).sqrt()
+    ValueError: the square root of a negative number is not a real number
+
+SEE ALSO
+    man(number.pow), man(math)

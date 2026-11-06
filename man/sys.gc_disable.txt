@@ -1,0 +1,29 @@
+# sys.gc_disable sys.gc_enable sys.gc_set_min sys.gc_set_max
+NAME
+    sys.gc_disable - decide when the collector runs: gc_disable,
+    gc_enable, gc_set_min, gc_set_max
+
+SYNOPSIS
+    sys.gc_disable()   sys.gc_enable()
+    sys.gc_set_min(bytes)   sys.gc_set_max(bytes)
+
+DESCRIPTION
+    By default the collector runs when the memory in use passes twice
+    what survived the last collection, and never below 1 MiB.
+
+    gc_disable() stops every automatic collection (memory then only
+    grows: it is up to the program; running out of memory still ends it
+    cleanly). gc_enable() turns it back on. gc_collect() works anyway.
+
+    gc_set_min(bytes): below that, no automatic collection.
+    gc_set_max(bytes): on reaching that, always a collection, whatever
+    the minimum says (0, the start, means no maximum). A maximum below
+    what the program keeps alive collects on every allocation: correct,
+    but slow. Both are ints >= 0 and can change at any time.
+
+ERRORS
+    ValueError    a negative number of bytes.
+    TypeError     a number of bytes that is not an int.
+
+SEE ALSO
+    man(memory), man(sys.gc_collect)

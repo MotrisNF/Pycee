@@ -1,0 +1,74 @@
+# number int float num
+NAME
+    number - ints (exact, 64 bits) and floats; and int(), float(), num()
+
+SYNOPSIS
+    7   -3   1_000_000   0xFF   0b1010   0o17        ints
+    2.5   7.0   1e9   2.5e-3                         floats
+    int(x)   float(x)   num(x)                       conversions
+
+DESCRIPTION
+    Both kinds are of type "number"; x.is_int() tells them apart.
+
+    An int is exact, from -9223372036854775808 to 9223372036854775807. A
+    result that does not fit is an OverflowError: an int never wraps
+    around silently. A float is an IEEE 754 double (about 15 exact
+    digits): 0.1 + 0.2 is 0.30000000000000004, as in every language that
+    uses them; it can be inf, -inf and nan (see man(math)).
+
+    Literals: _ may separate digits (1_000); 0x, 0b and 0o are hex,
+    binary and octal ints; a "." or an exponent makes a float (1.0, 1e3).
+    A leading zero (007) is a SyntaxError, and so is an int literal that
+    does not fit.
+
+    Mixed: an int with an int gives an int, anything with a float gives a
+    float. / always gives a float (6 / 3 is 2.0); // and % truncate
+    toward zero, as in C. 1 is 1.0 is true. See man(operators).
+
+  SHOWN AS
+    An int as 7; a float always with a "." or an exponent: 7.0, 3.5,
+    1e+20, 1.5e-07. f-strings format them in any other way (see
+    man(fstrings)).
+
+  CONVERSIONS
+    int(x)     a float truncated toward zero (int(-3.9) is -3), or a
+               string with an int ("42", " -7 ", "1_000"). Anything else
+               is a ValueError (int("3.5")) or a TypeError (int(true)).
+    float(x)   a number or a string as a float ("2.5", "1e3", "inf",
+               "nan").
+    num(s)     a string as the number it writes: an int if it has no "."
+               or exponent ("7" gives 7, "7.0" gives 7.0).
+    str(n)     the number as text.
+
+METHODS
+    n.pow(e), n.abs(), n.round(), n.round(digits), n.floor(), n.ceil(),
+    n.trunc(), n.sqrt(), n.is_int(); each one has its page
+    (man(number.pow)...), and math has the same as functions plus many
+    more (see man(math)).
+
+ERRORS
+    OverflowError       an int result that does not fit in 64 bits.
+    ZeroDivisionError   /, // or % by zero.
+    ValueError          int(), float() or num() of text that is not a
+                        number.
+
+EXAMPLES
+    >>> 7 / 2
+    3.5
+    >>> 2.pow(10)
+    1024
+    >>> 0xFF + 0b11
+    258
+    >>> 1_000_000 * 3
+    3000000
+    >>> 0.1 + 0.2
+    0.30000000000000004
+    >>> print(int("42"), int(-3.9), float("2.5"), num("7"), num("7.0"))
+    42 -3 2.5 7 7.0
+    >>> int("3.5")
+    ValueError: invalid literal for int(): "3.5"
+    >>> 9223372036854775807 * 2
+    OverflowError: integer overflow
+
+SEE ALSO
+    man(operators), man(math), man(fstrings), man(str)

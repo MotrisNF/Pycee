@@ -1,0 +1,36 @@
+# string.is_digit string.is_alpha string.is_alnum string.is_space string.is_ascii
+NAME
+    string.is_digit - whether every character is of a kind: is_digit,
+    is_alpha, is_alnum, is_space, is_ascii
+
+SYNOPSIS
+    s.is_digit()   s.is_alpha()   s.is_alnum()   s.is_space()
+    s.is_ascii()
+
+DESCRIPTION
+    true when EVERY character of s is:
+        is_digit   a decimal digit (any script: "٢" counts)
+        is_alpha   a letter (any script: "ñ", "ж")
+        is_alnum   a letter or a digit
+        is_space   white space (space, tab, new line...)
+        is_ascii   an ASCII character (code below 128)
+    The empty string gives false, except is_ascii, which gives true.
+    They follow Unicode, as Python's. To check a single character, use
+    it on a string of length 1: c.is_digit().
+
+EXAMPLES
+    >>> "2026".is_digit()
+    true
+    >>> "20.5".is_digit()
+    false
+    >>> "año".is_alpha()
+    true
+    >>> "a b".is_alpha()
+    false
+    >>> "".is_digit()
+    false
+    >>> "año".is_ascii()
+    false
+
+SEE ALSO
+    man(number), man(string)

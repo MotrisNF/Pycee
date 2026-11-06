@@ -1,0 +1,31 @@
+# while
+NAME
+    while - repeat a block while a condition is true
+
+SYNOPSIS
+    while (condition) { ... }
+
+DESCRIPTION
+    Checks the condition (a bool) before every round: if it is true the
+    block runs and the condition is checked again; if it is false the
+    loop ends. A condition false from the start runs the block zero
+    times; while (true) loops until a break or a return.
+
+    break leaves the loop; continue goes to the next check of the
+    condition (see man(break), man(continue)). var is not allowed in the
+    block: use vemp (see man(vemp)). Ctrl+C stops a loop that never ends
+    (KeyboardInterrupt).
+
+ERRORS
+    TypeError     a condition that is not a bool.
+
+EXAMPLES
+    >>> var n = 1
+    >>> while (n < 100) { n *= 3; }
+    >>> n
+    243
+    >>> while (1) { }
+    TypeError: the condition of 'while' needs a bool, not 'number'
+
+SEE ALSO
+    man(do), man(for), man(break), man(continue)

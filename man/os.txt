@@ -1,0 +1,38 @@
+# os
+NAME
+    os - files and directories, the environment, and paths
+
+SYNOPSIS
+    import os;
+
+MEMBERS
+    exists(p), is_file(p), is_dir(p)     what a path is
+    list_dir(p)                          the names in a directory
+    remove(p), rename(a, b)              files
+    make_dir(p), make_dir(p, "r"), remove_dir(p)     directories
+    cwd(), env(name)                     current directory, environment
+    join(a, b, ...), base_name(p), dir_name(p)       paths as text
+
+DESCRIPTION
+    Paths are strings relative to the current directory. Whatever the
+    system refuses is an IOError with its reason and the path
+    (FileNotFoundError, PermissionError, or IOError: "file exists",
+    "directory not empty"...). join, base_name and dir_name work on the
+    text only, as Python's os.path.
+
+EXAMPLES
+    $ cat tree.pce
+    import os;
+    import io;
+    prog main() {
+        os.make_dir("data/2026", "r");
+        io.write_file(os.join("data", "2026", "a.txt"), "x");
+        print(os.list_dir("data"), os.list_dir("data/2026"));
+        print(os.exists("data/2026/a.txt"), os.is_dir("data"));
+    }
+    $ ./pycee tree.pce
+    ["2026"] ["a.txt"]
+    true true
+
+SEE ALSO
+    man(io), man(modules)

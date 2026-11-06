@@ -1,0 +1,88 @@
+# func
+NAME
+    func - functions: declarations, lambdas, closures and their arguments
+
+SYNOPSIS
+    func name(a, b = default, ...rest) { ... }
+    func (a, b) { ... }                       an anonymous function
+    (a, b) => expression                      a lambda
+    (a, b) => { ... }                         a lambda with a block
+
+DESCRIPTION
+    A function takes arguments, runs its block and gives back a value
+    with return (or none when it ends without one). Functions are
+    values: they can be stored in variables, lists and dicts, passed to
+    other functions and returned from them. Their type is "function".
+
+  DECLARING
+    func name(...) { ... } at the top level declares a global function,
+    callable from anywhere in the file, even above its declaration. Its
+    name is a constant: it cannot be assigned. Inside another function,
+    the same form declares a function that lives in that block.
+
+  PARAMETERS
+    Plain parameters are required. A parameter with a default
+    (b = 10) may be left out; the default is evaluated on every call
+    that needs it and may use the parameters before it. Once one has a
+    default, all the next ones need one too. ...rest, the last one,
+    collects the remaining positional arguments in a tuple.
+
+  CALLING
+    f(1, 2) passes positional arguments in order; f(b = 2, a = 1) passes
+    them by name (named ones go after the positional ones); f(...t)
+    spreads a tuple or a list into positional arguments. Passing the
+    wrong number of arguments is a TypeError, found before running when
+    the function is called by its name.
+
+  LAMBDAS AND ANONYMOUS FUNCTIONS
+    (x) => x * 2 is a function that returns x * 2; () => 42 takes none.
+    (x) => { ... } and func (x) { ... } have a block, with return.
+
+  CLOSURES
+    A function made inside another one can use the variables around it,
+    and keeps them alive after the outer function returns. It captures
+    the variable itself, not a copy: changes are seen on both sides.
+
+  RECURSION
+    A function may call itself. More than 1000 calls in progress (see
+    man(sys.recursion_limit)) is a RecursionError, never a crash.
+
+  WHAT CAN BE PASSED
+    Numbers, strings, bools and none behave as copies (they cannot
+    change). Lists, dicts, sets and objects are shared: a function that
+    appends to a list it got changes the caller's list.
+
+ERRORS
+    TypeError       wrong number of arguments; a named argument that is
+                    not a parameter, or given twice; calling a value that
+                    is not a function.
+    RecursionError  too many calls in progress.
+
+EXAMPLES
+    >>> func area(w, h = w) { return w * h; }
+    >>> area(3)
+    9
+    >>> area(3, 4)
+    12
+    >>> area(h = 2, w = 5)
+    10
+    >>> func total(first, ...rest) { return first + sum(rest); }
+    >>> total(1, 2, 3)
+    6
+    >>> var double = (x) => x * 2
+    >>> [1, 2, 3].map(double)
+    [2, 4, 6]
+    >>> func counter() {
+    ...     var n = 0;
+    ...     return () => { n += 1; return n; };
+    ... }
+    >>> var next = counter()
+    >>> next()
+    1
+    >>> next()
+    2
+    >>> area()
+    TypeError: area() takes 1 to 2 arguments but 0 were given
+
+SEE ALSO
+    man(return), man(prog), man(obj), man(function), man(list.map)

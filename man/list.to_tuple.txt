@@ -1,0 +1,25 @@
+# list.to_tuple list.to_set tuple.to_list tuple.to_set set.to_list set.to_tuple
+NAME
+    to_list - convert between lists, tuples and sets: to_list, to_tuple,
+    to_set
+
+SYNOPSIS
+    l.to_tuple()   l.to_set()
+    t.to_list()    t.to_set()
+    s.to_list()    s.to_tuple()
+
+DESCRIPTION
+    A new collection of the other type with the same items, in the same
+    order (a set keeps each value once). to_set needs items that cannot
+    change (see man(set)). A string has to_list too (its characters).
+
+EXAMPLES
+    >>> [1, 2, 1].to_set()
+    set(1, 2)
+    >>> tuple(1, 2).to_list()
+    [1, 2]
+    >>> set(3, 4).to_tuple()
+    tuple(3, 4)
+
+SEE ALSO
+    man(list), man(tuple), man(set), man(string.to_list)

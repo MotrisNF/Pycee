@@ -1,0 +1,21 @@
+# io.write_file io.append_file
+NAME
+    io.write_file - write a string to a file: write_file (replacing it),
+    append_file (at its end)
+
+SYNOPSIS
+    io.write_file(path, text)
+    io.append_file(path, text)
+
+DESCRIPTION
+    write_file creates the file, or empties it if it exists, and writes
+    text; append_file adds text at the end (creating the file if
+    needed). text must be a string. Neither adds a "\n". Both give none.
+
+ERRORS
+    TypeError     text is not a string.
+    FileNotFoundError   the directory does not exist.
+    PermissionError, IOError.
+
+SEE ALSO
+    man(io), man(io.open)

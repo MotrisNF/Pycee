@@ -1,0 +1,40 @@
+# number.round math.round
+NAME
+    number.round - round to an int, or to some decimals: x.round(),
+    x.round(digits), math.round(x, digits)
+
+SYNOPSIS
+    x.round()
+    x.round(digits)
+    math.round(x)
+    math.round(x, digits)
+
+DESCRIPTION
+    Without digits: the nearest int, and a half goes AWAY FROM ZERO:
+    2.5 gives 3 and -2.5 gives -3 (Python would give 2 and -2).
+
+    With digits (an int): a float rounded to that many decimals, a half
+    also away from zero. A float can only hold most decimals
+    approximately: 2.675 is really 2.67499999..., so it rounds to 2.67,
+    while 0.125, held exactly, rounds to 0.13. A negative digits rounds
+    to tens, hundreds...: 1234.5.round(-2) is 1200.0.
+
+ERRORS
+    ValueError      nan.round().
+    OverflowError   a float too large for an int, without digits.
+    TypeError       digits that is not an int.
+
+EXAMPLES
+    >>> 2.5.round()
+    3
+    >>> (-2.5).round()
+    -3
+    >>> 3.14159.round(2)
+    3.14
+    >>> 1234.5.round(-2)
+    1200.0
+    >>> 1e300.round()
+    OverflowError: the number is too large for an int
+
+SEE ALSO
+    man(number.floor), man(number.ceil), man(number.trunc), man(fstrings)

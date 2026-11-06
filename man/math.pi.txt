@@ -1,0 +1,25 @@
+# math.pi math.e math.tau math.inf math.nan
+NAME
+    math.pi - the constants pi, e, tau, inf and nan
+
+DESCRIPTION
+    Floats, read-only:
+        pi    3.141592653589793 (half a turn, in radians)
+        e     2.718281828459045
+        tau   6.283185307179586 (2 * pi, a whole turn)
+        inf   infinity (larger than any number; -math.inf the smallest)
+        nan   "not a number": the result of undefined float operations.
+              nan is never equal to anything, not even itself: test it
+              with math.is_nan(x).
+
+EXAMPLES
+    >>> import math
+    >>> math.tau / math.pi
+    2.0
+    >>> math.inf > 1e308
+    true
+    >>> math.nan is math.nan
+    false
+
+SEE ALSO
+    man(math), man(math.is_nan)

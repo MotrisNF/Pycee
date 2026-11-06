@@ -1,0 +1,20 @@
+# string.to_list
+NAME
+    string.to_list - a list of the characters of a string
+
+SYNOPSIS
+    s.to_list()
+
+DESCRIPTION
+    A new list with each character of s as a string of length 1. The
+    list can be changed (sorted, reversed...) and joined back with
+    "".join(l).
+
+EXAMPLES
+    >>> "año".to_list()
+    ["a", "ñ", "o"]
+    >>> "".join("hello".to_list().sort())
+    "ehllo"
+
+SEE ALSO
+    man(join), man(string)

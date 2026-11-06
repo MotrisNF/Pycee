@@ -1,0 +1,22 @@
+# do
+NAME
+    do - repeat a block at least once, while a condition is true
+
+SYNOPSIS
+    do { ... } while (condition);
+
+DESCRIPTION
+    Like while, but the condition is checked after each round, so the
+    block always runs at least once. Note the ";" after the condition.
+    break and continue work as in while (continue goes to the check).
+
+EXAMPLES
+    >>> var tries = 0
+    >>> do { tries++; } while (tries < 3);
+    >>> tries
+    3
+    >>> do { print("once"); } while (false);
+    once
+
+SEE ALSO
+    man(while), man(for)

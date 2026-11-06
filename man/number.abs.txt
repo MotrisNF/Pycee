@@ -1,0 +1,22 @@
+# number.abs math.abs
+NAME
+    number.abs - the absolute value: x.abs(), math.abs(x)
+
+SYNOPSIS
+    x.abs()
+    math.abs(x)
+
+DESCRIPTION
+    x without its sign; an int stays an int, a float a float.
+
+ERRORS
+    OverflowError   the abs of -9223372036854775808 (it does not fit).
+
+EXAMPLES
+    >>> (-3).abs()
+    3
+    >>> (-2.5).abs()
+    2.5
+
+SEE ALSO
+    man(number), man(math)

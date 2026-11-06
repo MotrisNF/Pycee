@@ -1,0 +1,19 @@
+# list.append
+NAME
+    list.append - add an item at the end of the list
+
+SYNOPSIS
+    l.append(x)
+
+DESCRIPTION
+    Adds x as the last item, changing l. Gives back l itself, so calls
+    chain: l.append(1).append(2). x is added as one item even if it is a
+    list (to add the items of another list, use extend).
+
+EXAMPLES
+    >>> var l = [1]
+    >>> l.append(2).append([3])
+    [1, 2, [3]]
+
+SEE ALSO
+    man(list.extend), man(list.insert), man(list)

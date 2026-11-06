@@ -1,0 +1,23 @@
+# list.map tuple.map
+NAME
+    list.map - apply a function to every item: a new list (or tuple)
+
+SYNOPSIS
+    l.map(f)
+    t.map(f)
+
+DESCRIPTION
+    A new collection with f(item) for each item, in order; on a tuple it
+    gives a tuple. f takes one argument: a lambda, a func, a built-in
+    (str, num...) or a method. The same as [f(x) for (x in l)].
+
+EXAMPLES
+    >>> [1, 2, 3].map((x) => x * x)
+    [1, 4, 9]
+    >>> ["1", "2"].map(num)
+    [1, 2]
+    >>> tuple(1, 2).map(str)
+    tuple("1", "2")
+
+SEE ALSO
+    man(list.filter), man(list.reduce), man(comprehensions)

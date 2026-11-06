@@ -1,0 +1,32 @@
+# continue
+NAME
+    continue - skip to the next round of a loop
+
+SYNOPSIS
+    continue;
+    continue outer;
+
+DESCRIPTION
+    Ends the current round of the innermost loop and goes on with the
+    next one: the next item in a for, the check of the condition in a
+    while or a do. continue outer does the same for the loop that
+    encloses the current one, leaving the current one.
+
+ERRORS
+    SyntaxError   continue outside a loop; continue inside finally.
+
+EXAMPLES
+    >>> for (i in range(5)) { if (i % 2 is 0) { continue; } print(i); }
+    1
+    3
+    >>> for (i in range(2)) {
+    ...     for (j in range(3)) {
+    ...         if (j is 1) { continue outer; }
+    ...         print(i, j);
+    ...     }
+    ... }
+    0 0
+    1 0
+
+SEE ALSO
+    man(break), man(for), man(while)

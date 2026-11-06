@@ -1,0 +1,21 @@
+# string.capitalize
+NAME
+    string.capitalize - the first character in upper case, the rest in
+    lower case
+
+SYNOPSIS
+    s.capitalize()
+
+DESCRIPTION
+    A new string, as Python's capitalize: only the first character of
+    the whole string goes up; every other letter goes down (it is not a
+    "title case" of each word).
+
+EXAMPLES
+    >>> "hello WORLD".capitalize()
+    "Hello world"
+    >>> "ÁRBOL".capitalize()
+    "Árbol"
+
+SEE ALSO
+    man(string.upper), man(string.lower)

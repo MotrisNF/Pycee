@@ -1,0 +1,83 @@
+# pycee
+NAME
+    pycee - an interpreted language with the comfort of Python and the
+    shape of C
+
+VERSION
+    0.10.0 (phases 0 to 10 of the roadmap: the whole language and its
+    standard library).
+
+DESCRIPTION
+    pycee reads like Python, is written with the structure of C, and
+    manages memory for you: there is no malloc or free in sight, every
+    access is checked, and no pycee program can corrupt memory.
+
+    From Python it takes values that all have methods (s.split(","),
+    l.sort()), comprehensions, f-strings, named and default arguments,
+    errors with their type, line and traceback, and a standard library
+    that you import. From C it takes braces, a ";" after every
+    statement, parentheses around every condition, and ++ / --.
+
+    It also checks as much as it can before running anything: names that
+    do not exist, names declared twice, calls with the wrong number of
+    arguments, break outside a loop... The program does not start until
+    all of that is right.
+
+RUNNING IT
+    ./pycee file.pce [arguments]
+        Runs the program: its prog (see man(prog)). The exit code is what
+        prog returns (0 when it returns nothing), 1 for an error nobody
+        caught, 130 for Ctrl+C (see man(KeyboardInterrupt)).
+
+    ./pycee
+        The REPL: type a line, see its value. Declarations, statements and
+        expressions are allowed; the ";" at the end of a line is optional
+        there. A line that is not finished (an open "{", "2 +") goes on in
+        the next one, with the prompt "... ". Leave with exit() or Ctrl+D.
+
+    ./pycee --check file.pce
+        Only checks the file (syntax, names, arities) without running it.
+
+    ./pycee --tokens file.pce, ./pycee --ast file.pce
+        What the lexer and the parser see: for the curious.
+
+THE MANUAL
+    man(topic) shows the page of a topic: a keyword (man(while)), a type
+    (man(list)), a method (man(split), or man(string.split) when several
+    types have it), a function (man(print)), a module or one of its
+    members (man(math), man(math.sqrt)), an error (man(ValueError)) or a
+    subject (man(operators), man(memory)...). man() is this page; the
+    index below lists every entry.
+
+    man only exists in the REPL, typed alone at the prompt. In the pager:
+    space for the next page, b for the previous, Enter or the arrows for
+    one line, g and G for the start and the end, q to go back.
+
+A FIRST PROGRAM
+    A program is a file with a prog: the function where it starts.
+
+EXAMPLES
+    $ cat hello.pce
+    func greet(name) {
+        return f"Hello, {name}!";
+    }
+
+    prog main() {
+        print(greet("world"));
+        var squares = [n * n for (n in range(1, 6))];
+        print(squares, sum(squares));
+        return 0;
+    }
+    $ ./pycee hello.pce
+    Hello, world!
+    [1, 4, 9, 16, 25] 55
+
+WHERE TO GO NEXT
+    man(types)       the values and their types
+    man(var)         variables: var, vemp, const
+    man(if), man(for), man(while), man(switch)
+    man(func)        functions, lambdas and closures
+    man(obj)         objects
+    man(try)         errors: try, except, raise
+    man(import)      modules, and the ones of the language (man(modules))
+    man(operators)   every operator, its precedence and its rules

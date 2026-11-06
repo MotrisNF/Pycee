@@ -1,0 +1,15 @@
+# FileNotFoundError
+NAME
+    FileNotFoundError - a path that does not exist (a kind of IOError)
+
+DESCRIPTION
+    Raised by io and os when the file, or a directory on the way to it,
+    does not exist. except IOError catches it too.
+
+EXAMPLES
+    >>> import io
+    >>> io.read_file("no/such/file.txt")
+    FileNotFoundError: no such file or directory: "no/such/file.txt"
+
+SEE ALSO
+    man(IOError), man(io), man(os.exists)

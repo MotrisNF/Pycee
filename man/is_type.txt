@@ -1,0 +1,22 @@
+# is_type
+NAME
+    is_type - whether a value is of a type, or extends it
+
+SYNOPSIS
+    x.is_type(name)
+
+DESCRIPTION
+    true if x.type() is name, or, for an object or an error, if name is
+    one of its ancestors: an object of obj Dog extends Animal is_type
+    "Animal", and every error is_type "Error". name is a string.
+
+EXAMPLES
+    >>> 1.is_type("number")
+    true
+    >>> [1].is_type("tuple")
+    false
+    >>> ValueError("x").is_type("Error")
+    true
+
+SEE ALSO
+    man(type), man(obj), man(errors)

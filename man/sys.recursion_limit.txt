@@ -1,0 +1,29 @@
+# sys.recursion_limit
+NAME
+    sys.recursion_limit - how many calls may be in progress at once
+
+SYNOPSIS
+    sys.recursion_limit()
+    sys.recursion_limit(n)
+
+DESCRIPTION
+    Without n, gives the limit (1000 at the start). With n (an int >= 1)
+    changes it. One call more than the limit is a RecursionError. It
+    also limits how deep JSON can be nested. Whatever the limit, the
+    real stack of the machine is guarded too: a limit too high gives a
+    RecursionError ("stack exhausted"), never a crash.
+
+ERRORS
+    ValueError    n < 1.
+
+EXAMPLES
+    >>> import sys
+    >>> sys.recursion_limit()
+    1000
+    >>> func depth(n) { return n is 0 ? 0 : 1 + depth(n - 1); }
+    >>> sys.recursion_limit(5000)
+    >>> depth(3000)
+    3000
+
+SEE ALSO
+    man(RecursionError), man(sys)

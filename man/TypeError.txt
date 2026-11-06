@@ -1,0 +1,20 @@
+# TypeError
+NAME
+    TypeError - a value of the wrong type for the operation
+
+DESCRIPTION
+    Raised when an operation gets a value of a type it does not accept:
+    "a" + 1, a condition that is not a bool, calling a number, a method
+    that gets an argument of the wrong type, the wrong number of
+    arguments in a call, a list as a dict key... pycee never converts
+    types on its own, so this is the most common error: convert on
+    purpose (str(), num()...). Some are found before running.
+
+EXAMPLES
+    >>> "total: " + 5
+    TypeError: unsupported operand types for '+': 'string' and 'number'
+    >>> if (1) { }
+    TypeError: the condition of 'if' needs a bool, not 'number'
+
+SEE ALSO
+    man(errors), man(ValueError), man(types)

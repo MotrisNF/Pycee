@@ -1,0 +1,44 @@
+# switch case default
+NAME
+    switch - choose a block by the value of an expression
+
+SYNOPSIS
+    switch (value) {
+        case 1 { ... }
+        case 2, 3 { ... }
+        case "text" { ... }
+        default { ... }
+    }
+
+DESCRIPTION
+    Evaluates value once and runs the block of the first case whose value
+    is equal to it (with is), or default when none is; without default,
+    nothing runs. Exactly one block runs: there is no fallthrough, so no
+    break is needed (a break inside a case leaves the loop around the
+    switch, if any).
+
+    Case values are literals: numbers (a "-" allowed) and strings; a case
+    can list several, separated by commas. A value cannot repeat in one
+    switch. default, if present, goes last.
+
+ERRORS
+    SyntaxError   a repeated case value; a case value that is not a
+                  literal number or string.
+
+EXAMPLES
+    >>> func kind(c) {
+    ...     switch (c) {
+    ...         case "a", "e", "i", "o", "u" { return "vowel"; }
+    ...         case " " { return "space"; }
+    ...         default { return "other"; }
+    ...     }
+    ... }
+    >>> kind("e")
+    "vowel"
+    >>> kind("x")
+    "other"
+    >>> switch (1) { case 1 { } case 1 { } }
+    SyntaxError: duplicate case value (first at line 1)
+
+SEE ALSO
+    man(if), man(operators)

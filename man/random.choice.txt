@@ -1,0 +1,32 @@
+# random.choice random.sample
+NAME
+    random.choice - pick items at random: one (choice) or several,
+    without repeating (sample)
+
+SYNOPSIS
+    random.choice(seq)
+    random.sample(seq, k)
+
+DESCRIPTION
+    seq is a list, a tuple, a string (its characters) or a range; not a
+    set (it has no positions: use s.to_list()).
+
+    choice gives one item. sample gives a new list of k different
+    positions of seq (k from 0 to its length), in a random order; it
+    works on huge ranges without walking them: sample(range(10**9), 3).
+
+ERRORS
+    IndexError    choice of an empty sequence.
+    ValueError    a k out of range.
+    TypeError     seq is a set or something without positions.
+
+EXAMPLES
+    >>> import random
+    >>> random.seed(3)
+    >>> random.sample(range(100), 3).len()
+    3
+    >>> random.choice([])
+    IndexError: choice() from an empty list
+
+SEE ALSO
+    man(random.shuffle), man(random)

@@ -1,0 +1,25 @@
+# math.factorial
+NAME
+    math.factorial - n! = 1 * 2 * ... * n
+
+SYNOPSIS
+    math.factorial(n)
+
+DESCRIPTION
+    n is an int >= 0; 0! is 1. 20! is the largest that fits in an int:
+    21! and above are an OverflowError.
+
+ERRORS
+    ValueError      n < 0.
+    TypeError       n is a float.
+    OverflowError   n > 20.
+
+EXAMPLES
+    >>> import math
+    >>> math.factorial(5)
+    120
+    >>> math.factorial(21)
+    OverflowError: integer overflow
+
+SEE ALSO
+    man(math)

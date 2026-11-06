@@ -1,0 +1,20 @@
+# NotImplementedError
+NAME
+    NotImplementedError - something that is not written yet
+
+DESCRIPTION
+    The language raises it for parts that do not exist yet. Your own
+    code can raise it too, for example in the method of a parent obj
+    that every child must redefine.
+
+EXAMPLES
+    >>> obj Shape {
+    ...     func area() {
+    ...         raise NotImplementedError("each shape has its own");
+    ...     }
+    ... }
+    >>> Shape().area()
+    NotImplementedError: each shape has its own
+
+SEE ALSO
+    man(errors), man(obj)

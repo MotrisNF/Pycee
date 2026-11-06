@@ -1,0 +1,41 @@
+# man
+NAME
+    man - the manual of pycee, in the REPL
+
+SYNOPSIS
+    man(topic)
+    man()
+
+DESCRIPTION
+    Shows the page of topic. It is not a function: what goes in the
+    parentheses is never evaluated, it is just the name of a page:
+        man(while)          a keyword
+        man(list)           a type, with every method listed
+        man(split)          a method (several types: a list of them)
+        man(string.split)   the method of one type
+        man(print)          a function of the language
+        man(math)           a module; man(math.sqrt) one of its members
+        man(ValueError)     an error type
+        man(operators)      a subject: also types, errors, modules,
+                            comprehensions, fstrings, memory, repl...
+    man() is man(pycee): what pycee is, and the index of every page. A
+    name with no page suggests the closest ones. Operators have no page
+    of their own: man(operators) explains all of them.
+
+    It only exists at the REPL's prompt, typed alone: not in a file,
+    not inside a block.
+
+  THE PAGER
+    space, f, Page Down    next page        b, Page Up    previous page
+    Enter, j, Down         one line down    k, Up         one line up
+    g, Home                the start        G, End        the end
+    q                      back to the REPL (Ctrl+C too)
+    When the output is not a terminal, the page is written whole.
+
+EXAMPLES
+    >>> man(xyzzy)
+    No manual entry for 'xyzzy'.
+    man() lists every entry.
+
+SEE ALSO
+    man(pycee), man(repl)

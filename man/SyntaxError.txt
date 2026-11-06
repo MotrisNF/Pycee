@@ -1,0 +1,27 @@
+# SyntaxError NameError ImportError SystemExit
+NAME
+    SyntaxError - errors found before running: SyntaxError, NameError,
+    ImportError (and SystemExit, which is not an error)
+
+DESCRIPTION
+    pycee checks the whole program before running it; these stop it
+    before it starts, with the line and a mark under the problem, and no
+    traceback. They cannot be caught (the program never ran).
+
+    SyntaxError   the text is not valid pycee: a missing ";", an unclosed
+                  brace, var inside a loop, break outside a loop...
+    NameError     a name that does not exist, or one declared twice.
+    ImportError   a module that cannot be imported.
+
+    SystemExit is what exit() and sys.exit() raise: not an error, it
+    only travels up so that every finally runs before the program ends.
+
+EXAMPLES
+    >>> print(undefined_name)
+    NameError: name 'undefined_name' is not defined
+    >>> var x = (1 + 2
+    ... ;
+    SyntaxError: expected ')' but found ';'
+
+SEE ALSO
+    man(errors), man(import)

@@ -1,0 +1,11 @@
+# EOFError
+NAME
+    EOFError - input() found the end of the input
+
+DESCRIPTION
+    Raised by input() when there is nothing more to read: Ctrl+D on a
+    terminal, or the end of a file or pipe given as input. Catch it to
+    stop a loop that reads lines (see man(input)).
+
+SEE ALSO
+    man(input), man(errors)

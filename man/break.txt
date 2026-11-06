@@ -1,0 +1,37 @@
+# break outer
+NAME
+    break - leave a loop now
+
+SYNOPSIS
+    break;
+    break outer;
+
+DESCRIPTION
+    Ends the innermost loop (while, do, for) at once and goes on after
+    it; the else of a for does not run. break outer ends the loop that
+    encloses the current one (one level up), together with the current
+    one. outer is not a keyword: it only means that after break or
+    continue.
+
+    Inside a switch, break belongs to the loop around the switch (a
+    switch has no fallthrough, so it needs none of its own).
+
+ERRORS
+    SyntaxError   break outside a loop; break outer without a loop around
+                  the current one; break inside finally.
+
+EXAMPLES
+    >>> for (i in range(10)) { if (i is 3) { break; } print(i); }
+    0
+    1
+    2
+    >>> for (i in range(3)) {
+    ...     for (j in range(3)) {
+    ...         if (j is 1) { break outer; }
+    ...         print(i, j);
+    ...     }
+    ... }
+    0 0
+
+SEE ALSO
+    man(continue), man(for), man(while)

@@ -1,0 +1,32 @@
+# modules
+NAME
+    modules - the modules of the language: sys, math, io, random, time,
+    os, signal, json
+
+DESCRIPTION
+    The standard library is in modules you import (see man(import)):
+        sys      the program and the interpreter: argv, exit, the
+                 collector                                 man(sys)
+        math     constants and functions of mathematics    man(math)
+        io       files, standard streams, eprint           man(io)
+        random   random numbers, choices, shuffles         man(random)
+        time     clocks and waiting                        man(time)
+        os       files and directories, environment, paths man(os)
+        signal   signals and their handlers                man(signal)
+        json     JSON text to values and back              man(json)
+    Their functions are values (var f = math.sqrt) and their constants
+    are read-only. No member is called like a keyword or a built-in
+    function, so any can be imported alone: from math import sqrt, pi.
+    A file of yours named like one of them (math.pce) cannot be imported.
+
+    Your own files are modules too: import utils; uses utils.pce.
+
+EXAMPLES
+    >>> import math
+    >>> from random import seed, rand_int
+    >>> seed(1)
+    >>> math.floor(math.pi * 100)
+    314
+
+SEE ALSO
+    man(import), and the page of each module

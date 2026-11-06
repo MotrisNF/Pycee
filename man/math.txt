@@ -1,0 +1,35 @@
+# math
+NAME
+    math - constants and functions of mathematics
+
+SYNOPSIS
+    import math;     from math import sqrt, pi;
+
+MEMBERS
+    pi, e, tau, inf, nan                        man(math.pi)
+    sqrt, abs, round, floor, ceil, trunc, pow   as the methods of number:
+                                                math.sqrt(x) is x.sqrt()
+    exp, log, log2, log10                       man(math.log)
+    sin, cos, tan, asin, acos, atan, atan2, sinh, cosh, tanh,
+    degrees, radians, hypot                     man(math.sin)
+    gcd, lcm                                    man(math.gcd)
+    factorial                                   man(math.factorial)
+    is_nan, is_inf, is_finite                   man(math.is_nan)
+
+DESCRIPTION
+    Every function takes numbers (int or float; a bool is not one: a
+    TypeError). As in Python: a result outside the domain (sqrt(-1),
+    asin(2), sin(inf)) is a ValueError; one too large (exp(1000)) an
+    OverflowError; a nan given stays nan.
+
+EXAMPLES
+    >>> import math
+    >>> math.sqrt(16)
+    4.0
+    >>> math.floor(math.pi * 100) / 100
+    3.14
+    >>> math.asin(2)
+    ValueError: asin(): math domain error
+
+SEE ALSO
+    man(number), man(modules)

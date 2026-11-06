@@ -1,0 +1,23 @@
+# Error
+NAME
+    Error - the base of every error type
+
+SYNOPSIS
+    Error(message)
+    except Error (e) { ... }
+
+DESCRIPTION
+    Every error type extends Error, so except Error catches any error
+    (as does an except with no type). Error("msg") makes an error of
+    this general type, for when no specific type fits. An obj can extend
+    it to make a family of errors of its own. KeyboardInterrupt and
+    SystemExit do not extend it.
+
+EXAMPLES
+    >>> try { [].pop(); } except Error (e) { print("caught a", e.type()); }
+    caught a IndexError
+    >>> raise Error("something went wrong")
+    Error: something went wrong
+
+SEE ALSO
+    man(errors), man(try)

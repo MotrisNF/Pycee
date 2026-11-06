@@ -1,0 +1,26 @@
+# and
+NAME
+    and - logical and: true when both sides are true
+
+SYNOPSIS
+    a and b
+
+DESCRIPTION
+    Both sides must be bools. b is only evaluated when a is true: if a is
+    false the result is false and b never runs. Binds tighter than or and
+    xor, looser than not and the comparisons.
+
+ERRORS
+    TypeError     a side that is not a bool.
+
+EXAMPLES
+    >>> 3 > 1 and 2 > 1
+    true
+    >>> false and missing_function()
+    NameError: name 'missing_function' is not defined
+    >>> var l = []
+    >>> l.len() > 0 and l[0] is 1
+    false
+
+SEE ALSO
+    man(or), man(xor), man(not), man(operators), man(bool)

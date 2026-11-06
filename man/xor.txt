@@ -1,0 +1,19 @@
+# xor
+NAME
+    xor - logical exclusive or: true when exactly one side is true
+
+SYNOPSIS
+    a xor b
+
+DESCRIPTION
+    Both sides must be bools; both are always evaluated. true xor true is
+    false. Same precedence as or.
+
+EXAMPLES
+    >>> true xor false
+    true
+    >>> true xor true
+    false
+
+SEE ALSO
+    man(and), man(or), man(not), man(operators)

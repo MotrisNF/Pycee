@@ -1,0 +1,30 @@
+# json.parse
+NAME
+    json.parse - the value a JSON text holds
+
+SYNOPSIS
+    json.parse(text)
+
+DESCRIPTION
+    Reads JSON (RFC 8259, strictly: no comments, no trailing commas, no
+    NaN): objects become dicts (a repeated key keeps its last value),
+    arrays lists, numbers without "." or exponent ints (others floats),
+    null none. \uXXXX escapes are understood (pairs for emojis too).
+    Spaces and new lines around values are fine; anything after the
+    value is an error. Nesting deeper than the recursion limit is a
+    RecursionError.
+
+ERRORS
+    ValueError      text that is not JSON, with the line and the column.
+    OverflowError   an int beyond 64 bits, or a float out of range.
+    TypeError       text is not a string.
+
+EXAMPLES
+    >>> import json
+    >>> json.parse("{\"a\": [1, 2.5, null], \"b\": true}")
+    dict("a": [1, 2.5, none], "b": true)
+    >>> json.parse("[1, 2,]")
+    ValueError: json.parse(): expected a value but found ']' at line 1, ...
+
+SEE ALSO
+    man(json), man(json.dump)

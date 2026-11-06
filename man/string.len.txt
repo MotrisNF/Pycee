@@ -1,0 +1,24 @@
+# string.len
+NAME
+    string.len - how many characters the string has
+
+SYNOPSIS
+    s.len()
+
+DESCRIPTION
+    Counts characters, not bytes: a letter like "ñ" or an emoji is one,
+    however many bytes UTF-8 needs for it. "" has length 0.
+
+RETURN VALUE
+    An int >= 0.
+
+EXAMPLES
+    >>> "hello".len()
+    5
+    >>> "año".len()
+    3
+    >>> "".len()
+    0
+
+SEE ALSO
+    man(string), man(list.len)

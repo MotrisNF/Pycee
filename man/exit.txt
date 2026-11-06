@@ -1,0 +1,25 @@
+# exit
+NAME
+    exit - leave the REPL (in a program, sys.exit)
+
+SYNOPSIS
+    exit()
+    exit(code)
+
+DESCRIPTION
+    Only exists in the REPL: ends the session with code (an integer from
+    0 to 255; 0 when not given). Like sys.exit, it goes through every
+    except (nothing catches it) and runs the finally blocks on the way.
+    In a program file, use sys.exit (see man(sys.exit)) or return from
+    prog.
+
+ERRORS
+    TypeError     a code that is not an integer.
+    ValueError    a code out of 0..255.
+
+EXAMPLES
+    >>> exit("a")
+    TypeError: exit() needs an integer code, not 'string'
+
+SEE ALSO
+    man(sys.exit), man(prog), man(repl)

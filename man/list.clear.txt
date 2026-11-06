@@ -1,0 +1,21 @@
+# list.clear
+NAME
+    list.clear - remove every item
+
+SYNOPSIS
+    l.clear()
+
+DESCRIPTION
+    Leaves the list empty (the same list: every name that holds it sees
+    it empty). Gives back l.
+
+EXAMPLES
+    >>> var a = [1, 2]
+    >>> var b = a
+    >>> a.clear()
+    []
+    >>> b
+    []
+
+SEE ALSO
+    man(list.pop), man(list)

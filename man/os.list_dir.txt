@@ -1,0 +1,20 @@
+# os.list_dir
+NAME
+    os.list_dir - the names in a directory, sorted
+
+SYNOPSIS
+    os.list_dir()
+    os.list_dir(p)
+    os.list_dir(p = "dir")
+
+DESCRIPTION
+    A list of the names (not paths: join them with p) of everything in
+    directory p ("." when not given), sorted by their bytes, without "."
+    and "..".
+
+ERRORS
+    FileNotFoundError   p does not exist.
+    IOError             p is not a directory ("not a directory").
+
+SEE ALSO
+    man(os.join), man(os)

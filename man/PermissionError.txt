@@ -1,0 +1,11 @@
+# PermissionError
+NAME
+    PermissionError - not allowed by the system (a kind of IOError)
+
+DESCRIPTION
+    Raised by io and os when the system does not allow the operation:
+    reading a file without read permission, writing in a directory that
+    is read-only... except IOError catches it too.
+
+SEE ALSO
+    man(IOError), man(io), man(os)

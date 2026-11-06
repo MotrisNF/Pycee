@@ -1,0 +1,108 @@
+# string
+NAME
+    string - text: an immutable sequence of Unicode characters
+
+SYNOPSIS
+    "text"   'text'   """several
+    lines"""   r"raw \n"   f"value: {x}"
+
+DESCRIPTION
+    A string holds text, stored as UTF-8. Its length, its indexes and its
+    slices count characters, not bytes: "año".len() is 3 and "año"[1] is
+    "ñ". A string never changes: every method that "modifies" it gives a
+    new one, and += makes a new string too (see PERFORMANCE).
+
+    Its type is "string": "a".type() is "string". str(x) turns any value
+    into one (see man(str)); num(s), int(s) and float(s) read a number
+    from one.
+
+LITERALS
+    "..." and '...' are the same. Inside them, these escapes:
+        \n  new line     \t  tab          \r  carriage return
+        \0  the byte 0   \"  "            \'  '
+        \\  \            \xHH  the byte HH (00 to 7F)
+        \u{HHHH}  the character with that code (1 to 6 hex digits)
+    Any other \ is a SyntaxError. A string cannot cross a line, except
+    the triple-quoted ones: """...""" keeps the new lines in it.
+
+    r"..." (raw) has no escapes: r"\n" is the two characters \ and n.
+    Useful for paths and for JSON text.
+
+    f"..." (f-string) puts the value of each {expression} in the text:
+        f"{name} is {age} years old"
+    with Python's format after a ":" (f"{price:.2f}", f"{n:>5}",
+    f"{n:,}", f"{n:x}"); {{ and }} are a literal brace. See man(fstrings).
+
+OPERATORS
+    a + b          a new string, a followed by b (both strings).
+    s * n, n * s   s repeated n times (n an int >= 0).
+    s[i]           the character at i (a string of length 1); a negative
+                   i counts from the end: s[-1] is the last one. Out of
+                   range is an IndexError.
+    s[a:b:c]       a slice: the characters from a up to b (not included),
+                   every c. Each part is optional (s[:3], s[2:],
+                   s[::-1]); out-of-range bounds are clipped, never an
+                   error.
+    x in s         true if x is a substring of s.
+    is, < <= > >=  equal text; order by bytes ("B" < "a").
+    for (c in s)   walks its characters, one string each.
+
+METHODS
+    Each one has its page: man(string.<method>), or man(<method>) when
+    only strings have it.
+    len()                          number of characters
+    upper(), lower()               every letter in upper / lower case
+    capitalize()                   the first upper, the rest lower
+    strip(), lstrip(), rstrip()    without spaces (or the given chars)
+                                   at both ends / the left / the right
+    split(), split(sep)            a list of the pieces
+    join(collection)               the items, with s between them
+    replace(old, new)              every old replaced with new
+    find(sub), index(sub)          where sub starts (-1 / ValueError)
+    starts_with(s), ends_with(s)   bools
+    count(sub)                     how many times sub appears
+    reverse()                      the characters in reverse order
+    is_digit(), is_alpha(), is_alnum(), is_space(), is_ascii()
+                                   whether every character is one
+    to_list()                      a list of its characters
+    And the methods of every value: type(), is_type(name), id().
+
+TEXT FROM OUTSIDE
+    Text read from a file or from input() that is not valid UTF-8 has
+    each wrong byte replaced with U+FFFD (the character "�"): reading
+    never fails because of it.
+
+PERFORMANCE
+    s += x makes a new string with a copy of both: in a loop that grows a
+    string piece by piece, the total cost grows with the square of its
+    length. To build a long text, put the pieces in a list and join them
+    once: "".join(pieces).
+
+EXAMPLES
+    >>> var s = "naïve"
+    >>> s.len()
+    5
+    >>> s[2]
+    "ï"
+    >>> s[::-1]
+    "evïan"
+    >>> s.upper()
+    "NAÏVE"
+    >>> "a,b,,c".split(",")
+    ["a", "b", "", "c"]
+    >>> ", ".join(["x", "y"])
+    "x, y"
+    >>> "ell" in "hello"
+    true
+    >>> r"C:\new"
+    "C:\\new"
+    >>> var n = 3
+    >>> f"{n} items, {n / 7:.2f} each"
+    "3 items, 0.43 each"
+    >>> s[9]
+    IndexError: string index 9 out of range (length 5)
+    >>> "a" + 1
+    TypeError: unsupported operand types for '+': 'string' and 'number'
+
+SEE ALSO
+    man(str), man(fstrings), man(list), man(operators), man(types)

@@ -1,0 +1,7 @@
+man(len)
+man(lenght)
+man(+)
+man()
+man( string.len )
+if (true) { man(x) }
+print("the REPL goes on")

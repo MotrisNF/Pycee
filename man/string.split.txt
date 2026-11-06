@@ -1,0 +1,37 @@
+# string.split
+NAME
+    string.split - cut a string into a list of pieces
+
+SYNOPSIS
+    s.split()
+    s.split(sep)
+
+DESCRIPTION
+    With sep (a non-empty string): the pieces between each sep, in
+    order. Two seps together, or one at an end, give an empty piece "":
+    "a,,b".split(",") is ["a", "", "b"].
+
+    With no sep: splits on any run of white space (spaces, tabs, new
+    lines) and drops the empty pieces, so leading and trailing spaces do
+    not matter: "  a  b ".split() is ["a", "b"]. The usual way to get
+    the words of a line.
+
+    The pieces are new strings; joining them back with sep.join(pieces)
+    gives s again (for split(sep)).
+
+ERRORS
+    ValueError    an empty sep.
+    TypeError     a sep that is not a string.
+
+EXAMPLES
+    >>> "a,b,,c".split(",")
+    ["a", "b", "", "c"]
+    >>> "  one two\tthree\n".split()
+    ["one", "two", "three"]
+    >>> "key=value=x".split("=")
+    ["key", "value", "x"]
+    >>> "abc".split("")
+    ValueError: split(): empty separator
+
+SEE ALSO
+    man(string.join), man(string.strip), man(string)

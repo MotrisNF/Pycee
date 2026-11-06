@@ -1,0 +1,26 @@
+# file.write
+NAME
+    file.write - write a string to the file
+
+SYNOPSIS
+    f.write(s)
+
+DESCRIPTION
+    Writes s (a string: use str() for anything else) where the file is,
+    without adding a "\n". Gives back the file, so writes chain:
+    f.write("a").write("\n"). What is written may wait in a buffer until
+    flush(), close() or the end of the program.
+
+ERRORS
+    TypeError     s is not a string.
+    IOError       the file is closed or open for reading; the system
+                  refused (a full disk).
+
+EXAMPLES
+    >>> import io
+    >>> io.stdout.write("no new line").write("\n")
+    no new line
+    <file "<stdout>">
+
+SEE ALSO
+    man(file), man(print), man(file.flush)

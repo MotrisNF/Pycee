@@ -1,0 +1,22 @@
+# number.is_int
+NAME
+    number.is_int - whether a number is an int (not a float)
+
+SYNOPSIS
+    x.is_int()
+
+DESCRIPTION
+    true for an int, false for a float, even a float with no decimals:
+    7.0.is_int() is false. Both are of type "number"; this tells them
+    apart. To know whether a float has no decimals: x.floor() is x.
+
+EXAMPLES
+    >>> 7.is_int()
+    true
+    >>> 7.0.is_int()
+    false
+    >>> (6 / 3).is_int()
+    false
+
+SEE ALSO
+    man(number)

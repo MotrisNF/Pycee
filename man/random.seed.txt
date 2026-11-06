@@ -1,0 +1,25 @@
+# random.seed
+NAME
+    random.seed - start the sequence of random numbers from a seed
+
+SYNOPSIS
+    random.seed(n)
+
+DESCRIPTION
+    n is an int (negative ones too). After it, every function of random
+    gives the same results, in the same order, on any machine: seed
+    again with the same n to repeat them.
+
+ERRORS
+    TypeError     n is not an int.
+
+EXAMPLES
+    >>> import random
+    >>> random.seed(7)
+    >>> var a = random.rand_int(1, 100)
+    >>> random.seed(7)
+    >>> random.rand_int(1, 100) is a
+    true
+
+SEE ALSO
+    man(random)

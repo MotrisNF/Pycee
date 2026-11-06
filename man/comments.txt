@@ -1,0 +1,23 @@
+# comments
+NAME
+    comments - text pycee ignores: # and /* */
+
+SYNOPSIS
+    # until the end of the line
+    /* any number of lines */
+
+DESCRIPTION
+    # starts a comment that goes to the end of its line; /* starts one
+    that goes to the next */, across lines (they do not nest). Inside a
+    string they are just text. Note that // is not a comment in pycee:
+    it is the truncated division (see man(operators)).
+
+EXAMPLES
+    >>> 10 // 3   # integer division, not a comment
+    3
+    >>> /* a block
+    ... comment */ 1 + 1
+    2
+
+SEE ALSO
+    man(pycee)

@@ -1,0 +1,37 @@
+# repl
+NAME
+    repl - pycee's interactive prompt
+
+SYNOPSIS
+    ./pycee
+
+DESCRIPTION
+    Without a file, pycee opens the REPL: type something, press Enter,
+    see what it gives. The prompt is ">>> ".
+      - Any declaration (func, obj, var, const, import) and any
+        statement can be typed; what is declared stays for the next
+        lines.
+      - The value of an expression is shown (strings with quotes), unless
+        it is none.
+      - The ";" at the end of a line is optional.
+      - A line that is not finished (an open "{", "(", "2 +") goes on in
+        the next one, with the prompt "... ".
+      - An error is shown and the REPL goes on, with everything as it
+        was before that line.
+      - man(topic) shows the manual (see man(man)); man() starts it.
+      - exit() or exit(code), or Ctrl+D, leave. Ctrl+C drops the line
+        being typed, or stops what is running.
+    The REPL has no prog: what is typed runs at once.
+
+EXAMPLES
+    >>> var l = [1, 2]
+    >>> l.append(3)
+    [1, 2, 3]
+    >>> func f(x) {
+    ...     return x + 1;
+    ... }
+    >>> f(41)
+    42
+
+SEE ALSO
+    man(pycee), man(man), man(exit)

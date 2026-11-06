@@ -1,0 +1,39 @@
+# print
+NAME
+    print - write values as text, to the standard output or a file
+
+SYNOPSIS
+    print(a, b, ...)
+    print(a, b, ..., sep = " ", end = "\n", file = io.stdout)
+
+DESCRIPTION
+    Writes each value as str() shows it (a string as its plain text,
+    without quotes), separated by sep and followed by end. With no
+    values it writes just end: print() is an empty line.
+
+    sep, end and file can only be given by name, after the values. sep
+    and end are strings (none means the default). file is an open file
+    for writing (see man(file)): print(..., file = io.stderr) writes to
+    the error stream, which always comes out after what was printed
+    before it.
+
+RETURN VALUE
+    none.
+
+ERRORS
+    TypeError     sep or end that is not a string; file that is not a
+                  file; an object whose to_str() does not give a string.
+    IOError       file is closed or open for reading.
+
+EXAMPLES
+    >>> print("total:", 3, [1, "a"])
+    total: 3 [1, "a"]
+    >>> print(1, 2, 3, sep = ", ", end = ".\n")
+    1, 2, 3.
+    >>> print("no", "space", sep = "")
+    nospace
+    >>> print(1, file = 3)
+    TypeError: print(file = ...) needs a file, not 'number'
+
+SEE ALSO
+    man(str), man(fstrings), man(input), man(io.eprint), man(file)

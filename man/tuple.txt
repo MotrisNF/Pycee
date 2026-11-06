@@ -1,0 +1,42 @@
+# tuple
+NAME
+    tuple - an ordered sequence that never changes
+
+SYNOPSIS
+    tuple(1, 2, 3)     tuple()     tuple(x for (x in l))     l.to_tuple()
+
+DESCRIPTION
+    A tuple is like a list that cannot change: no item can be added,
+    removed or replaced. It is made with tuple(...) (there is no literal
+    with parentheses) and shown as tuple(1, 2). Its type is "tuple".
+
+    Because it never changes, a tuple of immutable values can be a set
+    item or a dict key, and it is what functions give to return several
+    values: return tuple(q, r); then var q, r = f(...). The arguments of
+    a program (argv) and ...rest are tuples.
+
+    It has the operators of a list that read (t[i], t[a:b], +, *, in, is,
+    for) and these methods, which work as the list's (each with its page,
+    man(tuple.<method>) or man(list.<method>)): len, index, count, map,
+    filter (both give a tuple), reduce, each, any, all, sum, min, max,
+    enumerate, join, to_list, to_set.
+
+ERRORS
+    TypeError       t[i] = x (a tuple cannot change).
+    AttributeError  a method that changes things (append, sort...).
+
+EXAMPLES
+    >>> var t = tuple(1, 2, 3)
+    >>> t[0] + t[-1]
+    4
+    >>> t.map((x) => x * 2)
+    tuple(2, 4, 6)
+    >>> func div(a, b) { return tuple(a // b, a % b); }
+    >>> var q, r = div(17, 5)
+    >>> print(q, r)
+    3 2
+    >>> t.append(4)
+    AttributeError: 'tuple' object has no attribute 'append'
+
+SEE ALSO
+    man(list), man(set), man(dict), man(types)

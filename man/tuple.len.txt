@@ -1,0 +1,17 @@
+# tuple.len dict.len set.len
+NAME
+    len - the number of items of a tuple, dict (pairs) or set
+
+SYNOPSIS
+    t.len()   d.len()   s.len()
+
+EXAMPLES
+    >>> tuple(1, 2).len()
+    2
+    >>> dict("a": 1).len()
+    1
+    >>> set(1, 1, 2).len()
+    2
+
+SEE ALSO
+    man(list.len), man(string.len)

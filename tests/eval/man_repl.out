@@ -1,0 +1,11 @@
+#contains
+'len' is in several types or modules:
+    list.len                 how many items the list has
+No manual entry for 'lenght'. Did you mean: dict.len, list.len, set.len, string.len, tuple.len?
+No manual entry for '+': every operator and symbol is explained in man(operators).
+    pycee - an interpreted language with the comfort of Python and the
+INDEX
+    string.len - how many characters the string has
+SyntaxError: man() goes alone at the REPL's prompt, not inside a statement (<stdin:6>, line 1)
+the REPL goes on
+exit=0

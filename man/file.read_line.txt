@@ -1,0 +1,18 @@
+# file.read_line
+NAME
+    file.read_line - the next line of the file, with its "\n"
+
+SYNOPSIS
+    f.read_line()
+
+DESCRIPTION
+    Reads one line and gives it WITH its "\n" (the last line of a file
+    may have none). At the end of the file it gives "", which is how to
+    tell the end from an empty line ("\n"). Take the "\n" off with
+    line.rstrip("\n"). for (line in f) is the usual way to walk lines.
+
+ERRORS
+    IOError       the file is closed or open for writing.
+
+SEE ALSO
+    man(file), man(file.read_lines), man(for)

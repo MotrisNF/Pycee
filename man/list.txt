@@ -1,0 +1,68 @@
+# list
+NAME
+    list - an ordered, changeable sequence of values
+
+SYNOPSIS
+    [1, "two", [3]]     []     var l[5]     [x * 2 for (x in l)]
+
+DESCRIPTION
+    A list holds any values, of any types, in order. It can grow, shrink
+    and change in place. Its type is "list". Lists are shared, never
+    copied on their own (see man(types)): l.copy() makes a new one.
+
+    Every method that changes the list (append, insert, extend, remove,
+    clear, sort, reverse) gives back the list itself, so they chain:
+    l.append(3).sort(). A sorted copy, leaving l as it is:
+    l.copy().sort(). pop gives the item it takes out.
+
+OPERATORS
+    l[i]          the item at i (0 is the first; -1 the last, -2 the one
+                  before...). Out of range is an IndexError.
+    l[i] = x      replaces it.
+    l[a:b:c]      a new list with a slice (as in strings: each part
+                  optional, out-of-range bounds clipped). A slice cannot
+                  be assigned.
+    a + b         a new list: a's items, then b's.
+    l * n         a new list with l's items n times ([0] * 5); with
+                  lists inside, the inner lists are shared.
+    l += x        adds the items of x in place (as l.extend(x)).
+    x in l        true if an item "is" x.
+    a is b        same length and every item "is" the other.
+    for (x in l)  its items; it must not change size meanwhile
+                  (RuntimeError).
+
+METHODS
+    Each one has its page: man(list.<method>).
+    len()                       number of items
+    append(x), insert(i, x)     add an item at the end / at i
+    extend(c)                   add every item of c (anything a for walks)
+    pop(), pop(i)               take out the last / the one at i
+    remove(x), clear()          take out the first x / everything
+    index(x), count(x)          where x is / how many times
+    sort(key, reverse), reverse()     order it in place
+    copy()                      a shallow copy
+    map(f), filter(f), reduce(f, start), each(f)     apply a function
+    any(f), all(f), any(), all()     whether some / every item passes
+    sum(), min(), max()         of numbers (min and max of strings too)
+    enumerate()                 a list of tuple(index, item)
+    join(sep)                   its strings joined with sep
+    to_tuple(), to_set()        conversions
+    And type(), is_type(name), id().
+
+EXAMPLES
+    >>> var l = [3, 1, 2]
+    >>> l.append(5).sort()
+    [1, 2, 3, 5]
+    >>> l[-1]
+    5
+    >>> l[1:3]
+    [2, 3]
+    >>> l.map((x) => x * 10).filter((x) => x > 15)
+    [20, 30, 50]
+    >>> [[0] * 2] * 2
+    [[0, 0], [0, 0]]
+    >>> l[10]
+    IndexError: list index 10 out of range (length 4)
+
+SEE ALSO
+    man(tuple), man(comprehensions), man(for), man(types)

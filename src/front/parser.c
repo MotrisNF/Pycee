@@ -1789,6 +1789,10 @@ static t_node   *parse_statement(t_parser *p)
     if (type == TOK_LBRACE)
         return (error_at(p, &p->cur, "unexpected '{': blocks only go after"
                 " if, while, for, switch, func..."));
+    if (type == TOK_MAN)
+        return (error_at(p, &p->cur, p->repl ? "man() goes alone at the"
+                " REPL's prompt, not inside a statement" : "man() is only"
+                " available in the REPL (run ./pycee and type man(topic))"));
     if (type == TOK_FUNC && peek_is(p, 1, TOK_IDENT))
     {
         if (advance(p) == -1 || !(n = parse_func(p, 0)))
@@ -2101,6 +2105,9 @@ static t_node   *parse_top_decl(t_parser *p)
     if (type == TOK_VEMP)
         return (error_at(p, &p->cur, "'vemp' is only allowed inside"
                 " functions; use 'var' for globals"));
+    if (type == TOK_MAN)
+        return (error_at(p, &p->cur, "man() is only available in the REPL"
+                " (run ./pycee and type man(topic))"));
     if (type != TOK_FUNC && type != TOK_PROG && type != TOK_OBJ
         && type != TOK_VAR && type != TOK_CONST)
         return (error_at(p, &p->cur, "expected a declaration (func, prog,"
@@ -2164,6 +2171,44 @@ t_node  *parse_program(t_arena *arena, const t_source *src, t_error *err)
 }
 
 /*
+ * man(topic), alone at the REPL's prompt: the manual. The topic is the
+ * text between the parentheses (spaces around it dropped), whatever it
+ * is: a name, type.method, a keyword, an operator... It is never
+ * evaluated: looking it up is the manual's job.
+ */
+static t_node   *parse_man(t_parser *p)
+{
+    t_node      *n;
+    const char  *start;
+    const char  *end;
+    int         depth;
+
+    n = node_new(p, NODE_MAN, p->cur.offset);
+    if (advance(p) == -1 || expect(p, TOK_LPAREN) == -1)
+        return (NULL);
+    start = tok_text(p, &p->cur);
+    end = start;
+    depth = 0;
+    while (!(depth == 0 && check(p, TOK_RPAREN)))
+    {
+        if (check(p, TOK_EOF))
+            return (error_at(p, &p->cur, "expected ')' to end man(...)"
+                    " but found end of file"));
+        depth += check(p, TOK_LPAREN) - check(p, TOK_RPAREN);
+        end = tok_text(p, &p->cur) + p->cur.len;
+        if (advance(p) == -1)
+            return (NULL);
+    }
+    n->as.man.topic.ptr = start;
+    n->as.man.topic.len = (size_t)(end - start);
+    if (advance(p) == -1)
+        return (NULL);
+    if (check(p, TOK_SEMICOLON) && advance(p) == -1)
+        return (NULL);
+    return (node_end(p, n));
+}
+
+/*
  * One thing typed in the REPL: an import, a declaration or any
  * statement (control statements too, unlike the top level of a file).
  */
@@ -2172,6 +2217,8 @@ static t_node   *parse_repl_item(t_parser *p)
     t_token_type    type;
 
     type = p->cur.type;
+    if (type == TOK_MAN)
+        return (parse_man(p));
     if (type == TOK_IMPORT || type == TOK_FROM)
     {
         if (advance(p) == -1)

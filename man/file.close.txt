@@ -1,0 +1,26 @@
+# file.close file.is_closed file.flush
+NAME
+    file.close - close a file (close), ask whether it is closed
+    (is_closed), push out what was written (flush)
+
+SYNOPSIS
+    f.close()   f.is_closed()   f.flush()
+
+DESCRIPTION
+    close() closes the file: what was written reaches it, and the file
+    can no longer be used. Closing it again does nothing. An error
+    writing what was waiting (a full disk) shows up here. The standard
+    streams cannot be closed.
+
+    is_closed() is true after close().
+
+    flush() sends now what was written and waits in a buffer (useful
+    before something that takes long, or for io.stdout); it gives back
+    the file.
+
+ERRORS
+    IOError       close of io.stdin, io.stdout or io.stderr; a failure
+                  writing.
+
+SEE ALSO
+    man(file), man(io.open)

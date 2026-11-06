@@ -1,0 +1,30 @@
+# random.rand_int random.rand_float
+NAME
+    random.rand_int - a random int in a range (rand_int), or a float in
+    [0, 1) (rand_float)
+
+SYNOPSIS
+    random.rand_int(a, b)
+    random.rand_float()
+
+DESCRIPTION
+    rand_int gives an int from a to b, BOTH INCLUDED, each one equally
+    likely: rand_int(1, 6) is a die. a and b are ints, a <= b.
+    rand_float gives a float from 0 (included) to 1 (not included): for
+    a float in another range, a + rand_float() * (b - a).
+
+ERRORS
+    ValueError    a > b.
+    TypeError     a or b is not an int.
+
+EXAMPLES
+    >>> import random
+    >>> random.seed(1)
+    >>> var dice = [random.rand_int(1, 6) for (i in range(100))]
+    >>> dice.all((n) => n >= 1 and n <= 6)
+    true
+    >>> random.rand_int(3, 1)
+    ValueError: rand_int() needs a <= b, not 3 > 1
+
+SEE ALSO
+    man(random)

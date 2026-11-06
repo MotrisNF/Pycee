@@ -1,0 +1,27 @@
+# time time.now time.clock
+NAME
+    time - clocks and waiting: now, clock, sleep
+
+SYNOPSIS
+    import time;
+    time.now()   time.clock()   time.sleep(seconds)
+
+DESCRIPTION
+    now() is the seconds since 1970-01-01 00:00 UTC, as a float: the wall
+    clock, which can jump when the system's clock is set.
+
+    clock() is the seconds from some fixed moment, as a float: it never
+    goes back, so clock() - start is a duration. Use it to measure how
+    long something takes.
+
+    sleep(s) waits s seconds (see man(time.sleep)).
+
+EXAMPLES
+    >>> import time
+    >>> var start = time.clock()
+    >>> time.sleep(0.1)
+    >>> time.clock() - start >= 0.1
+    true
+
+SEE ALSO
+    man(time.sleep), man(modules)

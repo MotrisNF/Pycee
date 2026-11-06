@@ -1,0 +1,33 @@
+# raise
+NAME
+    raise - raise an error
+
+SYNOPSIS
+    raise ErrorType("message");
+    raise e;
+
+DESCRIPTION
+    Stops what is running and sends the error up until an except catches
+    it (see man(try)); if nothing does, the program ends showing it, with
+    its traceback, and exit code 1.
+
+    The value must be an error: made with the constructor of a type
+    (ValueError("bad input"), Error("...")), an error caught in an except
+    (raise e; sends it on, as it was), or an object of an obj that
+    extends an error type (see man(errors)).
+
+ERRORS
+    TypeError     raising a value that is not an error.
+
+EXAMPLES
+    >>> func check_age(n) {
+    ...     if (n < 0) { raise ValueError(f"age cannot be negative: {n}"); }
+    ...     return n;
+    ... }
+    >>> check_age(-1)
+    ValueError: age cannot be negative: -1
+    >>> raise 5
+    TypeError: raise needs an error, not 'number': raise ValueError("...")
+
+SEE ALSO
+    man(try), man(errors), man(assert)

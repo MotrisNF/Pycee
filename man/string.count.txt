@@ -1,0 +1,20 @@
+# string.count
+NAME
+    string.count - how many times a substring appears
+
+SYNOPSIS
+    s.count(sub)
+
+DESCRIPTION
+    The number of times sub appears in s, without overlapping: "aaa"
+    contains "aa" once. An empty sub counts the places between
+    characters (len + 1).
+
+EXAMPLES
+    >>> "banana".count("a")
+    3
+    >>> "aaa".count("aa")
+    1
+
+SEE ALSO
+    man(string.find), man(list.count)

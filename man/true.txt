@@ -1,0 +1,26 @@
+# true false bool
+NAME
+    bool - the values true and false
+
+DESCRIPTION
+    true and false are the two values of type "bool". Conditions (if,
+    while, for's else excluded, c ? a : b) and the logical operators
+    (and, or, xor, not) only accept bools: there is no "truthiness", so
+    a number, a string or a list is never a condition. Comparisons give
+    bools, and so do methods like is_digit() or has().
+
+    A bool is not a number: true + 1 is a TypeError. str(true) is
+    "true"; bools can be set items and dict keys.
+
+EXAMPLES
+    >>> 2 > 1
+    true
+    >>> true and not false
+    true
+    >>> true + 1
+    TypeError: unsupported operand types for '+': 'bool' and 'number'
+    >>> true.type()
+    "bool"
+
+SEE ALSO
+    man(if), man(and), man(none), man(types)

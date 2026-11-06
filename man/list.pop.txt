@@ -1,0 +1,29 @@
+# list.pop
+NAME
+    list.pop - take an item out of the list and give it back
+
+SYNOPSIS
+    l.pop()
+    l.pop(i)
+
+DESCRIPTION
+    Removes the last item (or the one at i; negative counts from the
+    end) and gives it back. With append, a list is a stack: append to
+    push, pop() to pop.
+
+ERRORS
+    IndexError    the list is empty, or i is out of range.
+
+EXAMPLES
+    >>> var stack = [1, 2, 3]
+    >>> stack.pop()
+    3
+    >>> stack.pop(0)
+    1
+    >>> stack
+    [2]
+    >>> [].pop()
+    IndexError: pop from an empty list
+
+SEE ALSO
+    man(list.remove), man(list.append)

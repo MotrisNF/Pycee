@@ -1,0 +1,36 @@
+# io
+NAME
+    io - files and the standard streams
+
+SYNOPSIS
+    import io;
+
+MEMBERS
+    read_file(path)                  the whole file as a string
+    read_lines(path)                 a list of its lines
+    write_file(path, text)           create or empty, then write
+    append_file(path, text)          write at the end
+    open(path, mode)                 a file value ("r", "w", "a")
+    eprint(...)                      print to the error stream
+    stdin, stdout, stderr            the standard streams, as files
+    Each one has its page; man(file) explains file values.
+
+DESCRIPTION
+    Paths are strings, relative to the current directory. Text is
+    UTF-8. Whatever the system refuses is an IOError with the system's
+    reason and the path: FileNotFoundError when it does not exist,
+    PermissionError when it is not allowed (see man(IOError)).
+
+EXAMPLES
+    $ cat copy.pce
+    import io;
+    prog main() {
+        io.write_file("a.txt", "one\ntwo\n");
+        io.append_file("a.txt", "three\n");
+        print(io.read_lines("a.txt"));
+    }
+    $ ./pycee copy.pce
+    ["one\n", "two\n", "three\n"]
+
+SEE ALSO
+    man(file), man(os), man(json), man(modules)

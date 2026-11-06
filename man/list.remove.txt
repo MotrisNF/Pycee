@@ -1,0 +1,22 @@
+# list.remove
+NAME
+    list.remove - take out the first item equal to a value
+
+SYNOPSIS
+    l.remove(x)
+
+DESCRIPTION
+    Removes the first item that "is" x (only the first). Gives back l.
+    To remove every one, filter: l = l.filter((y) => y is not x).
+
+ERRORS
+    ValueError    no item is x.
+
+EXAMPLES
+    >>> [1, 2, 1].remove(1)
+    [2, 1]
+    >>> [1].remove(5)
+    ValueError: remove(): the value is not in the list
+
+SEE ALSO
+    man(list.pop), man(list.filter), man(set.remove)

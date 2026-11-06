@@ -1,0 +1,38 @@
+# string.lower
+NAME
+    string.lower - the string with every letter in lower case
+
+SYNOPSIS
+    s.lower()
+
+DESCRIPTION
+    Gives a new string: s with each upper-case letter changed to its
+    lower-case form, following Unicode ("ÁÉÍ" becomes "áéí"). Anything
+    that is not an upper-case letter (digits, spaces, punctuation, letters
+    already in lower case) stays as it is. s itself does not change:
+    strings never do.
+
+    Useful to compare text without caring about case:
+        a.lower() is b.lower()
+
+RETURN VALUE
+    A new string, with as many characters as s.
+
+ERRORS
+    TypeError     an argument: lower takes none.
+
+EXAMPLES
+    >>> "Hello, World!".lower()
+    "hello, world!"
+    >>> "ÁRBOL Ñandú 42".lower()
+    "árbol ñandú 42"
+    >>> var s = "ABC"
+    >>> s.lower()
+    "abc"
+    >>> s
+    "ABC"
+    >>> "a".lower(1)
+    TypeError: lower() takes 0 arguments but 1 was given
+
+SEE ALSO
+    man(string.upper), man(string.capitalize), man(string)

@@ -37,6 +37,7 @@
     X(NODE_ASSIGN,      "Assign") \
     X(NODE_MULTI_ASSIGN, "MultiAssign") \
     X(NODE_EXPR_STMT,   "ExprStmt") \
+    X(NODE_MAN,         "Man") \
     /* Expressions */ \
     X(NODE_INT,         "Int") \
     X(NODE_FLOAT,       "Float") \
@@ -255,6 +256,12 @@ typedef struct s_node
                  struct s_node *body; } except;
         /* RAISE: value is an error. ASSERT: message may be NULL. */
         struct { struct s_node *value; struct s_node *message; } raise;
+        /*
+         * MAN (only typed alone at the REPL's prompt): what is between the
+         * parentheses, as written and never evaluated ("list.len", "+");
+         * empty for man().
+         */
+        struct { t_name topic; } man;
         /* CASE: values is a list of INT / FLOAT / STRING */
         struct { struct s_node *values; struct s_node *body; } case_;
         /*

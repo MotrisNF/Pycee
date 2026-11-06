@@ -1,0 +1,2 @@
+man(print)
+prog main() { }

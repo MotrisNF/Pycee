@@ -1,0 +1,21 @@
+# list.extend
+NAME
+    list.extend - add every item of another collection at the end
+
+SYNOPSIS
+    l.extend(collection)
+
+DESCRIPTION
+    Adds, in order, every item that a for over collection gives: a list,
+    a tuple, a range, a set, a string (its characters), a file (its
+    lines)... Extending a list with itself doubles it. l += c does the
+    same. Gives back l.
+
+EXAMPLES
+    >>> [1, 2].extend(range(3, 5))
+    [1, 2, 3, 4]
+    >>> [].extend("ab")
+    ["a", "b"]
+
+SEE ALSO
+    man(list.append), man(operators)

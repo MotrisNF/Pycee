@@ -1,0 +1,18 @@
+# string.reverse
+NAME
+    string.reverse - the characters in reverse order
+
+SYNOPSIS
+    s.reverse()
+
+DESCRIPTION
+    A new string with the characters of s from the last to the first
+    (characters, not bytes: accents and emojis stay whole). The same as
+    s[::-1].
+
+EXAMPLES
+    >>> "año".reverse()
+    "oña"
+
+SEE ALSO
+    man(list.reverse), man(string)

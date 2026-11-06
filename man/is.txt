@@ -1,0 +1,37 @@
+# is
+NAME
+    is - equality: "is" and "is not" (pycee has no == or !=)
+
+SYNOPSIS
+    a is b
+    a is not b
+
+DESCRIPTION
+    a is b is true when a and b are equal:
+      - numbers by value: 1 is 1.0 is true;
+      - strings by their text, bools and none by value;
+      - lists and tuples item by item, dicts and sets by their content
+        (in any order), ranges by the numbers they give;
+      - functions when they are the same function;
+      - objects (obj) by identity: only the same object is "is".
+    Values of different types are never equal ("1" is 1 is false), and
+    that is never an error. Same precedence as the other comparisons;
+    comparisons cannot be chained.
+
+    To know whether two names hold the very same list (not an equal
+    copy), compare their id(): a.id() is b.id() (see man(id)).
+
+EXAMPLES
+    >>> 1 is 1.0
+    true
+    >>> [1, [2]] is [1, [2]]
+    true
+    >>> set(1, 2) is set(2, 1)
+    true
+    >>> "1" is 1
+    false
+    >>> none is not false
+    true
+
+SEE ALSO
+    man(operators), man(id), man(obj)

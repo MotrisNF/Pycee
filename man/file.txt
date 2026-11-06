@@ -1,0 +1,51 @@
+# file
+NAME
+    file - an open file: io.open(), and io.stdin, io.stdout, io.stderr
+
+SYNOPSIS
+    var f = io.open(path);          read
+    var f = io.open(path, "w");     write (create or empty)
+    var f = io.open(path, "a");     write at the end
+
+DESCRIPTION
+    A value of type "file", shown as <file "a.txt">. Text is UTF-8; what
+    is read is cleaned like input() (an invalid byte becomes U+FFFD).
+
+    Reading: f.read() the rest, f.read_line() the next line WITH its
+    "\n" ("" at the end), f.read_lines() a list of lines, for (line in f)
+    each line (with its "\n"), f.has_next() whether anything is left.
+    Writing: f.write(s) (s a string; it gives back the file, so writes
+    chain), print(..., file = f), f.flush(). Closing: f.close(); then
+    f.is_closed() is true and using it is an IOError.
+
+    Each method has its page: man(file.<method>).
+
+  CLOSING
+    A file nobody can reach any more is closed by the collector, and
+    every file still open is closed when the program ends: what was
+    written reaches the disk even without close(). Still, close a file
+    when you are done (or use io.read_file / io.write_file, which do
+    everything in one call). The standard streams are never closed.
+
+ERRORS
+    IOError     reading a file open for writing, writing one open for
+                reading, using a closed file; failures of the system
+                (full disk...).
+
+EXAMPLES
+    $ cat files.pce
+    import io;
+    prog main() {
+        var f = io.open("notes.txt", "w");
+        f.write("one\n").write("two\n");
+        f.close();
+        for (line in io.open("notes.txt")) {
+            print(line.strip().upper());
+        }
+    }
+    $ ./pycee files.pce
+    ONE
+    TWO
+
+SEE ALSO
+    man(io), man(io.open), man(os)

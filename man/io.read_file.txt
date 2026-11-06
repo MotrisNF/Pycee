@@ -1,0 +1,21 @@
+# io.read_file io.read_lines
+NAME
+    io.read_file - read a whole file: read_file (one string), read_lines
+    (a list of lines)
+
+SYNOPSIS
+    io.read_file(path)
+    io.read_lines(path)
+
+DESCRIPTION
+    Open the file, read it all, close it. read_file gives the text as one
+    string; read_lines a list of the lines, EACH WITH ITS "\n" (the last
+    one may have none). For lines without it: io.read_file(p).split("\n")
+    (with an empty last piece if the file ends in "\n"), or rstrip("\n")
+    on each.
+
+ERRORS
+    FileNotFoundError, PermissionError, IOError (a directory...).
+
+SEE ALSO
+    man(io), man(file.read_line)

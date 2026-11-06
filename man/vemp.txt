@@ -1,0 +1,46 @@
+# vemp
+NAME
+    vemp - declare a variable that only lives in its block
+
+SYNOPSIS
+    vemp name;
+    vemp name = value;
+    vemp name[size];
+    vemp a, b = 1, 2;
+
+DESCRIPTION
+    vemp ("var temporary") declares a variable like var, but it only
+    exists from its line to the "}" that closes its block. When the block
+    ends the name is free again, so another block can declare it anew.
+
+    It is the variable to use inside loops, where var is not allowed: a
+    vemp in the body of a loop is made again, fresh, on every round.
+
+    vemp is only allowed inside functions (prog included): at the top
+    level of a file use var.
+
+    The variable of a for is a vemp of the loop's body, and the name of
+    an except (except ValueError (e)) is a vemp of its block.
+
+ERRORS
+    SyntaxError   vemp outside a function.
+    NameError     the name repeats a visible one.
+
+EXAMPLES
+    $ cat vemp.pce
+    prog main() {
+        var total = 0;
+        for (i in range(3)) {
+            vemp square = i * i;
+            total += square;
+        }
+        if (total > 0) {
+            vemp square = "free again";
+            print(square, total);
+        }
+    }
+    $ ./pycee vemp.pce
+    free again 5
+
+SEE ALSO
+    man(var), man(const), man(for)

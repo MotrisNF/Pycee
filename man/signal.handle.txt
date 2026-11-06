@@ -1,0 +1,33 @@
+# signal.handle signal.ignore signal.reset
+NAME
+    signal.handle - what a signal does: handle (call a function), ignore
+    (nothing), reset (the default)
+
+SYNOPSIS
+    signal.handle(sig, f)
+    signal.ignore(sig)
+    signal.reset(sig)
+
+DESCRIPTION
+    handle: from now on f(sig) runs when sig comes. For SIGINT, Ctrl+C
+    then calls f instead of raising KeyboardInterrupt.
+    ignore: sig does nothing from now on (Ctrl+C neither, for SIGINT).
+    reset: back to the start: SIGINT is a KeyboardInterrupt again, any
+    other does what the system does.
+
+ERRORS
+    ValueError    a signal the module does not handle (SIGKILL...).
+    TypeError     f is not a function; sig is not an int.
+
+EXAMPLES
+    >>> import signal
+    >>> var count = 0
+    >>> signal.handle(signal.SIGUSR2, (s) => { count += 1; })
+    >>> signal.send(signal.SIGUSR2)
+    >>> count
+    1
+    >>> signal.handle(9, print)
+    ValueError: signal 9 (SIGKILL) cannot be handled
+
+SEE ALSO
+    man(signal), man(signal.send)

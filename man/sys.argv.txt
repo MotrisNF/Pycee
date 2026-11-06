@@ -1,0 +1,20 @@
+# sys.argv
+NAME
+    sys.argv - the arguments the program was run with
+
+DESCRIPTION
+    A tuple of strings: argv[0] is the path of the file, then each
+    argument given after it. The same tuple that prog main(argc, argv)
+    gets, reachable from any function. In the REPL it is tuple().
+
+EXAMPLES
+    $ cat show.pce
+    import sys;
+    prog main() {
+        print(sys.argv.len(), sys.argv[1:]);
+    }
+    $ ./pycee show.pce a "b"
+    3 tuple("a", "\"b\"")
+
+SEE ALSO
+    man(prog), man(sys)

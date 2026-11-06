@@ -1,0 +1,21 @@
+# os.exists os.is_file os.is_dir
+NAME
+    os.exists - what a path is: exists, is_file, is_dir
+
+SYNOPSIS
+    os.exists(p)   os.is_file(p)   os.is_dir(p)
+
+DESCRIPTION
+    Bools, never an error for a path that is not there: exists is true
+    for anything at p, is_file for a regular file, is_dir for a
+    directory. A link is followed.
+
+EXAMPLES
+    >>> import os
+    >>> os.exists("no/such/thing")
+    false
+    >>> os.is_dir(".")
+    true
+
+SEE ALSO
+    man(os)

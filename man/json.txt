@@ -1,0 +1,33 @@
+# json
+NAME
+    json - JSON text to values (parse) and values to JSON text (dump)
+
+SYNOPSIS
+    import json;
+    json.parse(text)
+    json.dump(value)
+    json.dump(value, indent = n)
+
+MEMBERS
+    parse(text), dump(value)          each with its page
+
+DESCRIPTION
+    JSON object  <->  dict (string keys)       array  <->  list (or tuple)
+    string       <->  string                   number <->  number
+    true / false <->  bools                    null   <->  none
+
+EXAMPLES
+    $ cat config.pce
+    import json;
+    import io;
+    prog main() {
+        var cfg = dict("name": "demo", "ports": [80, 443], "debug": false);
+        io.write_file("cfg.json", json.dump(cfg, indent = 2));
+        var back = json.parse(io.read_file("cfg.json"));
+        print(back["ports"][1], back is cfg);
+    }
+    $ ./pycee config.pce
+    443 true
+
+SEE ALSO
+    man(json.parse), man(json.dump), man(dict)

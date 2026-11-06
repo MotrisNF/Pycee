@@ -1,0 +1,24 @@
+# dict.keys dict.values dict.items
+NAME
+    dict.keys - lists of the keys, the values or the pairs of a dict
+
+SYNOPSIS
+    d.keys()   d.values()   d.items()
+
+DESCRIPTION
+    New lists, in the order of the dict: keys() the keys, values() the
+    values, items() a tuple(key, value) for each pair. They are copies:
+    changing them does not change d (and changing d while walking them
+    is fine).
+
+EXAMPLES
+    >>> var d = dict("a": 1, "b": 2)
+    >>> d.keys()
+    ["a", "b"]
+    >>> d.values()
+    [1, 2]
+    >>> d.items()
+    [tuple("a", 1), tuple("b", 2)]
+
+SEE ALSO
+    man(dict), man(for)

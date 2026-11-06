@@ -1,0 +1,34 @@
+# number.pow math.pow
+NAME
+    number.pow - a number raised to a power: x.pow(e), math.pow(x, e)
+
+SYNOPSIS
+    x.pow(e)
+    math.pow(x, e)
+
+DESCRIPTION
+    x to the power e. Both ints with e >= 0 give an exact int (an
+    OverflowError if it does not fit in 64 bits); anything else gives a
+    float. pycee has no ** operator: this is it. For a square root,
+    x.sqrt() is clearer.
+
+ERRORS
+    ZeroDivisionError   0 to a negative power.
+    ValueError          a negative number to a fractional power.
+    OverflowError       a result too large (int or float).
+    TypeError           e is not a number.
+
+EXAMPLES
+    >>> 2.pow(10)
+    1024
+    >>> 2.pow(-1)
+    0.5
+    >>> 2.pow(0.5)
+    1.4142135623730951
+    >>> 2.pow(64)
+    OverflowError: integer overflow
+    >>> (-8).pow(1 / 3)
+    ValueError: a negative number cannot be raised to a fractional power
+
+SEE ALSO
+    man(number.sqrt), man(math), man(number)

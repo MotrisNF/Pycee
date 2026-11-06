@@ -1,0 +1,29 @@
+# assert
+NAME
+    assert - stop with an AssertionError when something must be true and
+    is not
+
+SYNOPSIS
+    assert(condition);
+    assert(condition, message);
+
+DESCRIPTION
+    Checks condition (a bool): when it is true nothing happens; when it is
+    false it raises AssertionError with message (any value, shown as
+    text), or "assertion failed". Use it for what can only be false if
+    the program itself is wrong, not for checking what a user typed (use
+    an if and raise for that).
+
+ERRORS
+    AssertionError  the condition is false.
+    TypeError       the condition is not a bool.
+
+EXAMPLES
+    >>> assert(1 + 1 is 2)
+    >>> assert(2 > 3, "two is not greater than three")
+    AssertionError: two is not greater than three
+    >>> assert(false)
+    AssertionError: assertion failed
+
+SEE ALSO
+    man(raise), man(try), man(AssertionError)

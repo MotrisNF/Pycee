@@ -1,0 +1,35 @@
+# signal
+NAME
+    signal - signals: handle, ignore, reset and send them
+
+SYNOPSIS
+    import signal;
+    signal.handle(signal.SIGTERM, f);
+
+MEMBERS
+    SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGUSR1, SIGUSR2, SIGALRM,
+    SIGPIPE, SIGCHLD                    the signals, by name
+    handle(sig, f)                      call f when sig comes
+    ignore(sig), reset(sig)             do nothing / do the default
+    send(sig)                           send sig to the program itself
+
+DESCRIPTION
+    A signal is a message the system (or the user) sends to a running
+    program: Ctrl+C sends SIGINT, kill sends SIGTERM. A handler is a
+    function taking the signal's number. It never runs in the middle of
+    something: the signal is noted, and the handler runs at the next
+    safe point (before a statement or a call, or at once if the program
+    is waiting in input(), time.sleep() or a read); an error it raises
+    comes out where the program was.
+
+    Without the module, SIGINT is a KeyboardInterrupt and the others do
+    what the system does (most end the program).
+
+EXAMPLES
+    >>> import signal
+    >>> signal.handle(signal.SIGUSR1, (s) => print("got signal", s))
+    >>> signal.send(signal.SIGUSR1)
+    got signal 10
+
+SEE ALSO
+    man(signal.handle), man(KeyboardInterrupt), man(modules)

@@ -1,0 +1,69 @@
+# var
+NAME
+    var - declare a variable
+
+SYNOPSIS
+    var name;
+    var name = value;
+    var name[size];
+    var a, b = 1, 2;
+    var a, b = pair;
+
+DESCRIPTION
+    var declares a variable and, optionally, gives it a value; without
+    one it holds none. A variable has no type: its value does, so the
+    same variable can hold 1 and later "one" or a list.
+
+    Where it lives:
+      - At the top level of a file: a global, visible from every function
+        and, in an imported module, read-only from other files (see
+        man(import)). Its value may only use the globals declared above
+        it. Globals get their values, in order, before prog starts.
+      - Inside a function: from the line where it is declared to the end
+        of the function, even if it was declared inside a block (an if,
+        a try...). Use vemp for a variable that only lives in its block.
+
+    var is not allowed inside a loop (while, for, do), at any depth:
+    the loop would declare it again on every round. Declare it before the
+    loop, or use vemp, which belongs to the block (see man(vemp)).
+
+    No name may repeat another one that is visible at that point: a
+    variable cannot hide a global, a parameter, a function or a built-in
+    function (var print = 1 is an error). Every name means one thing.
+
+    var name[size] makes a list of size items, all none: var l[3] is the
+    same as var l = [none, none, none]. size is an int >= 0.
+
+    Several names at once: var a, b = 1, 2 gives one value to each name
+    (as many values as names), and var a, b = t takes the items of a
+    tuple or a list t (as many items as names).
+
+ERRORS
+    NameError       the name repeats a visible one; a global used before
+                    its declaration.
+    SyntaxError     var inside a loop.
+    AssignmentError unpacking a tuple or list with a different number of
+                    items than names.
+
+EXAMPLES
+    >>> var n = 10
+    >>> n = "ten"
+    >>> n
+    "ten"
+    >>> var l[3]
+    >>> l
+    [none, none, none]
+    >>> var a, b = 1, 2
+    >>> a, b = b, a
+    >>> a
+    2
+    >>> var q, r = tuple(7, 3)
+    >>> q + r
+    10
+    >>> var x, y = tuple(1, 2, 3)
+    AssignmentError: cannot assign 3 values to 2 targets
+    >>> var n = 1
+    NameError: 'n' was already declared at line 1 of <stdin:1>
+
+SEE ALSO
+    man(vemp), man(const), man(func), man(types)

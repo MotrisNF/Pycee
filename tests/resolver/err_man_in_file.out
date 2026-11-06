@@ -1,0 +1,4 @@
+SyntaxError: man() is only available in the REPL (run ./pycee and type man(topic)) (tests/resolver/err_man_in_file.pce, line 2)
+        man(print);
+        ^^^
+exit=1

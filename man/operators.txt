@@ -1,0 +1,161 @@
+# operators
+NAME
+    operators - every operator of pycee: what it does, on which values,
+    its precedence and its errors
+
+DESCRIPTION
+    Operators take values and give a new value; none of them changes its
+    operands, except the assignments and ++ / --. There are no implicit
+    conversions: "a" + 1 is a TypeError, not "a1" (use str(1)). Every
+    operand is evaluated left to right, exactly once.
+
+    pycee has no ==, != or !: equality is "is" / "is not" and negation is
+    "not". Writing one of them is a SyntaxError.
+
+PRECEDENCE
+    From the loosest to the tightest; operators on one line bind equally
+    and group left to right (a - b - c is (a - b) - c):
+
+        c ? a : b                  conditional            (right to left)
+        or   xor                   logical (bools)
+        and                        logical (bools)
+        not                        logical (bools)
+        is  is not  in  not in  <  <=  >  >=     comparison (never chained)
+        |                          bitwise or (ints)
+        ^                          bitwise xor (ints)
+        &                          bitwise and (ints)
+        <<  >>                     shifts (ints)
+        +  -                       addition, subtraction, concatenation
+        *  /  //  %                multiplication, division, remainder
+        -x  ~x  ++x  --x           unary (prefix)
+        f(...)  x[i]  x.name  x++  x--      postfix
+
+    Parentheses group as usual: (1 + 2) * 3 is 9. Assignments are
+    statements, not operators: they give no value and cannot be nested.
+
+ARITHMETIC: + - * / // %
+    Numbers are ints (64 bits, exact) or floats. An int with an int gives
+    an int; anything with a float gives a float. An int result that does
+    not fit in 64 bits is an OverflowError (never a silent wrap).
+
+    a + b    sum; also joins two strings, two lists or two tuples into a
+             new one (same type on both sides).
+    a - b    difference.
+    a * b    product; a string, list or tuple times an int n >= 0 repeats
+             it n times, in either order (3 * "ab" is "ababab").
+    a / b    division, ALWAYS a float: 6 / 3 is 2.0.
+    a // b   division truncated toward zero, as in C (not Python's
+             floor): 7 // 2 is 3, -7 // 2 is -3. Floats allowed:
+             7.5 // 2 is 3.0.
+    a % b    remainder of that division, with the sign of a, as in C:
+             -7 % 2 is -1. Floats allowed (5.5 % 2 is 1.5).
+    -a       negation.
+
+    Dividing by 0 (/, //, %) is a ZeroDivisionError. There is no power
+    operator: use x.pow(e) or math.pow(x, e).
+
+COMPARISON: is, is not, <, <=, >, >=, in, not in
+    a is b       equal value: numbers by value (1 is 1.0 is true),
+                 strings by their text, lists and tuples item by item,
+                 dicts and sets by their content in any order. Objects
+                 (obj) compare by identity: two objects are "is" only if
+                 they are the same one. Values of different types are
+                 never equal ("1" is 1 is false), never an error.
+    a is not b   the opposite.
+    < <= > >=    order: numbers by value, strings by their bytes
+                 ("B" < "a"), objects with a compare() method (see
+                 man(obj)). Two values of different types, or a type
+                 without order (lists, dicts...), are a TypeError.
+    x in c       true if c contains x: an item of a list, tuple, set or
+                 range; a key of a dict; a substring of a string
+                 ("ell" in "hello").
+    x not in c   the opposite.
+
+    Comparisons cannot be chained: 1 < x < 3 is a SyntaxError; write
+    1 < x and x < 3.
+
+LOGIC: and, or, xor, not
+    Only bools: true and 1 is a TypeError, and so is a condition
+    (if, while...) that is not a bool. "and" and "or" stop as soon as the
+    result is known (false and f() never calls f); "xor" is true when
+    exactly one side is.
+
+BITS: & | ^ ~ << >>
+    Ints only (a float is a TypeError). a << n and a >> n shift by n
+    bits, n >= 0 (a negative n is a ValueError); a << n that does not
+    fit in 64 bits is an OverflowError, and a >> n past the last bit is 0
+    (-1 for a negative a). ~a is -a - 1.
+
+CONDITIONAL: c ? a : b
+    a if c is true, b otherwise; only the one chosen is evaluated. c must
+    be a bool.
+
+INCREMENT AND DECREMENT: ++ --
+    As in C. ++x adds 1 and gives the new value; x++ adds 1 and gives the
+    old one; -- likewise. x must be a variable, a list item (l[i]) or a
+    field (p.x) holding a number. Unlike C, the order is defined: i = i++;
+    leaves i as it was.
+
+ASSIGNMENT: = += -= *= /= //= %= &= |= ^= <<= >>=
+    x = v stores v; x op= v is x = x op v, with x evaluated once. The
+    target is a variable, an item (l[i], d[k]) or a field (p.x); never a
+    slice. a, b = b, a swaps (every value is evaluated first). For a
+    list, l += x adds the items of x in place (the same list).
+
+OTHER SYMBOLS
+    f(a, b)        a call (see man(func)): positional arguments, then
+                   named ones (sep = ", "), and ...t spreads a tuple or
+                   a list into arguments.
+    x[i], x[a:b:c] an item and a slice (see man(list), man(string)).
+    x.name         a field or a method (see man(obj)); m.name, a member of
+                   a module (see man(import)).
+    (x) => x * 2   a lambda (see man(func)).
+    ...rest        in a parameter list, the remaining arguments.
+    "k": v         a pair, only inside dict(...) (see man(dict)).
+    @              reserved for the future.
+
+EXAMPLES
+    >>> 7 / 2
+    3.5
+    >>> 7 // 2
+    3
+    >>> -7 // 2
+    -3
+    >>> -7 % 2
+    -1
+    >>> 3 * "ab"
+    "ababab"
+    >>> [1] + [2]
+    [1, 2]
+    >>> 1 is 1.0
+    true
+    >>> "1" is 1
+    false
+    >>> "ell" in "hello"
+    true
+    >>> 5 & 3
+    1
+    >>> ~5
+    -6
+    >>> true ? "yes" : "no"
+    "yes"
+    >>> var i = 5
+    >>> i++
+    5
+    >>> ++i
+    7
+    >>> "a" + 1
+    TypeError: unsupported operand types for '+': 'string' and 'number'
+    >>> 1 < "a"
+    TypeError: '<' is not supported between 'number' and 'string'
+    >>> 1 < 2 < 3
+    SyntaxError: comparison operators cannot be chained
+    >>> true and 1
+    TypeError: 'and' needs a bool, not 'number'
+    >>> 9223372036854775807 + 1
+    OverflowError: integer overflow
+    >>> 5 / 0
+    ZeroDivisionError: division by zero
+
+SEE ALSO
+    man(types), man(number), man(string), man(list), man(obj), man(func)

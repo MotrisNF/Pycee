@@ -1,0 +1,47 @@
+# fstrings
+NAME
+    fstrings - f"...": strings with values inside, and how to format them
+
+SYNOPSIS
+    f"text {expression} text"
+    f"{expression:spec}"
+
+DESCRIPTION
+    An f-string puts the value of each {expression} into the text, as
+    str() would show it. Any expression is allowed: f"{a + b}",
+    f"{l.len()}", f"{x > 0 ? "yes" : "no"}". {{ and }} write a brace.
+    An f-string can also be triple-quoted: f"""...""".
+
+  FORMAT SPEC (after ":", as in Python)
+    [[fill]align][sign][#][0][width][,|_][.precision][type]
+
+    align   <  left   >  right   ^  center   = after the sign
+            (fill: any character before align, " " by default)
+    sign    +  always a sign   -  only negatives (default)   " " a
+            space for positives
+    width   the minimum width; 0 in front pads numbers with zeros
+    , _     thousands separators
+    .precision   digits after the "." (f, e, %), significant digits
+                 (g, or no type), or the maximum length of a string
+    type    d  int            f  fixed point     e  exponent
+            g  general        %  percent         x X  hex
+            o  octal          b  binary          s  string
+
+    f"{1.0:.2}" gives 1 (Python gives 1.0): with no type, a float is
+    formatted with g.
+
+  NOT SUPPORTED
+    {x=}, !r and !s, and fields nested inside a spec ({x:{w}}).
+
+EXAMPLES
+    >>> var price = 1234.5
+    >>> f"{price:.2f} | {price:,.2f} | {price:>10.1f}"
+    "1234.50 | 1,234.50 |     1234.5"
+    >>> f"{255:x} {255:08b} {"ab":*^6} {3:+} {0.25:.0%}"
+    "ff 11111111 **ab** +3 25%"
+    >>> var name = "Ada"
+    >>> f"Hello, {name.upper()}! {{braces}}"
+    "Hello, ADA! {braces}"
+
+SEE ALSO
+    man(string), man(str), man(print)

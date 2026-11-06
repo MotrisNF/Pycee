@@ -1,0 +1,20 @@
+# number.trunc math.trunc
+NAME
+    number.trunc - x without its decimals: x.trunc(), math.trunc(x)
+
+SYNOPSIS
+    x.trunc()
+    math.trunc(x)
+
+DESCRIPTION
+    Rounds toward zero: 2.7 gives 2, -2.7 gives -2. The same as int(x)
+    for a float.
+
+EXAMPLES
+    >>> 2.7.trunc()
+    2
+    >>> (-2.7).trunc()
+    -2
+
+SEE ALSO
+    man(number.floor), man(number.round), man(int)

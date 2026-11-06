@@ -1,0 +1,32 @@
+# random
+NAME
+    random - pseudo-random numbers, choices, shuffles and samples
+
+SYNOPSIS
+    import random;
+
+MEMBERS
+    seed(n)            the same sequence from n on, on any machine
+    rand_int(a, b)     an int from a to b, both included
+    rand_float()       a float in [0, 1)
+    choice(seq)        one item at random
+    shuffle(l)         the list in a random order, in place
+    sample(seq, k)     k items at random, none twice
+
+DESCRIPTION
+    pycee has its own generator (xoshiro256**): after seed(n), the
+    numbers are the same on every machine, for tests and reproducible
+    runs. Without a seed it starts from the system's randomness, so
+    every run is different. It is not for cryptography (passwords,
+    keys).
+
+EXAMPLES
+    >>> import random
+    >>> random.seed(42)
+    >>> random.rand_int(1, 6)
+    1
+    >>> random.choice("abc")
+    "a"
+
+SEE ALSO
+    man(random.rand_int), man(modules)

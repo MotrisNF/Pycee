@@ -1,0 +1,30 @@
+# static
+NAME
+    static - a field or method of the obj itself, not of each object
+
+SYNOPSIS
+    static var name = value;
+    static func name(...) { ... }
+
+DESCRIPTION
+    A static field exists once, shared by every object of the obj:
+    Name.field reads and writes it (an object reaches the same one:
+    p.field). A static method is called on the obj, Name.method(...), and
+    has no self. Useful for counters, constants of the type and
+    functions that make objects (Point.origin()).
+
+EXAMPLES
+    >>> obj Ticket {
+    ...     static var issued = 0;
+    ...     func create() { Ticket.issued += 1; self.number = Ticket.issued; }
+    ...     static func reset() { Ticket.issued = 0; }
+    ... }
+    >>> var t1 = Ticket()
+    >>> var t2 = Ticket()
+    >>> t2.number
+    2
+    >>> Ticket.issued
+    2
+
+SEE ALSO
+    man(obj), man(private)

@@ -1,0 +1,65 @@
+# types
+NAME
+    types - every kind of value, how it is written and what it means
+
+DESCRIPTION
+    Variables have no type; values do. x.type() gives the name of a
+    value's type and x.is_type(name) checks it (for objects, also any
+    obj they extend).
+
+        type       written as                       man page
+        number     7, -3, 1_000, 0xFF, 2.5, 1e9     man(number)
+        string     "text", 'text', f"{x}", r"\d"    man(string)
+        bool       true, false                      man(bool)
+        none       none                             man(none)
+        list       [1, 2, 3]                        man(list)
+        tuple      tuple(1, 2)                      man(tuple)
+        dict       dict("a": 1)                     man(dict)
+        set        set(1, 2)                        man(set)
+        range      range(10)                        man(range)
+        function   func, (x) => x, print            man(function)
+        file       io.open("a.txt")                 man(file)
+        errors     ValueError("bad")                man(errors)
+        objects    Point(1, 2): the obj's name      man(obj)
+
+  SHARED OR COPIED
+    Numbers, strings, bools, none, tuples and ranges never change, so it
+    does not matter whether they are shared. Lists, dicts, sets, files
+    and objects can change, and they are SHARED, never copied on their
+    own: after var b = a, or when passed to a function, both names see
+    the same value, and a change through one is seen through the other.
+    Use copy() for an independent (shallow) copy.
+
+  NO IMPLICIT CONVERSIONS
+    pycee never converts a value to another type by itself: "a" + 1,
+    true + 1 and if (1) are TypeErrors. Convert on purpose: str(x),
+    int(x), float(x), num(x), to_list(), to_tuple(), to_set(),
+    tuple(...), set(...).
+
+  EQUALITY AND ORDER
+    "is" compares values (objects by identity); values of different
+    types are never equal. "<" and the rest only compare values of the
+    same type that have an order (numbers, strings, objects with
+    compare()): anything else is a TypeError.
+
+  EVERY VALUE HAS METHODS
+    Every value, even a number, has methods: 2.pow(10), "a".upper(),
+    l.len(). Every one has type(), is_type(name) and id().
+
+EXAMPLES
+    >>> [7, "a", true, none, [1], tuple(1), dict(), set()].map((x) => x.type())
+    ["number", "string", "bool", "none", "list", "tuple", "dict", "set"]
+    >>> var a = [1]
+    >>> var b = a
+    >>> b.append(2)
+    [1, 2]
+    >>> a
+    [1, 2]
+    >>> var c = a.copy()
+    >>> c.append(3)
+    [1, 2, 3]
+    >>> a
+    [1, 2]
+
+SEE ALSO
+    man(type), man(is_type), man(id), man(is), man(operators)

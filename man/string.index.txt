@@ -1,0 +1,22 @@
+# string.index
+NAME
+    string.index - where a substring starts; an error if it is not there
+
+SYNOPSIS
+    s.index(sub)
+
+DESCRIPTION
+    Like find, but a missing sub is a ValueError instead of -1: for when
+    it must be there.
+
+ERRORS
+    ValueError    sub is not in s.
+
+EXAMPLES
+    >>> "key=value".index("=")
+    3
+    >>> "abc".index("z")
+    ValueError: index(): substring not found
+
+SEE ALSO
+    man(string.find), man(list.index)

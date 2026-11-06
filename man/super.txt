@@ -1,0 +1,36 @@
+# super extends
+NAME
+    super - in a child obj, reach the methods of its parent
+
+SYNOPSIS
+    obj Child extends Parent { ... super.create(...); super.method(...); }
+
+DESCRIPTION
+    extends (or the form obj Child(Parent)) makes Child inherit every
+    field and method of Parent. super.name(...) calls Parent's version of
+    a method from inside Child, even when Child redefines it.
+
+    super.create(...) runs the parent's constructor: a child with its own
+    create must call it to set the parent's fields (it is not called on
+    its own). A child without create uses its parent's.
+
+    The parent may be another obj of the file or of an imported module,
+    or an error type (obj ParseError extends ValueError { }).
+
+ERRORS
+    SyntaxError     super outside a method, or in an obj without parent.
+    AttributeError  super.name that the parent does not have.
+
+EXAMPLES
+    >>> obj Animal {
+    ...     func create(name) { self.name = name; }
+    ...     func speak() { return self.name + " makes a sound"; }
+    ... }
+    >>> obj Dog extends Animal {
+    ...     func speak() { return super.speak() + ": woof"; }
+    ... }
+    >>> Dog("Rex").speak()
+    "Rex makes a sound: woof"
+
+SEE ALSO
+    man(obj), man(self)

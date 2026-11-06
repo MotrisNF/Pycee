@@ -1,0 +1,38 @@
+# json.dump
+NAME
+    json.dump - the JSON text of a value
+
+SYNOPSIS
+    json.dump(value)
+    json.dump(value, indent = n)
+
+DESCRIPTION
+    Without indent, one line written as Python does: {"a": 1, "b": [1,
+    2]}. With indent = n (0 to 64, only by name), each item on its own
+    line, n spaces deeper per level. Tuples are written as arrays; text
+    stays UTF-8 ("año"), and control characters are escaped.
+
+    Only dicts with string keys, lists, tuples, strings, numbers, bools
+    and none can be written.
+
+ERRORS
+    TypeError       a set, an object, a function...; a dict key that is
+                    not a string; dump(v, 2) (indent goes by name).
+    ValueError      nan or inf; a value that contains itself.
+
+EXAMPLES
+    >>> import json
+    >>> json.dump(dict("a": tuple(1, 2), "b": "año"))
+    "{\"a\": [1, 2], \"b\": \"año\"}"
+    >>> print(json.dump([1, dict("x": none)], indent = 2))
+    [
+      1,
+      {
+        "x": null
+      }
+    ]
+    >>> json.dump(set(1))
+    TypeError: dump(): a 'set' cannot be written in JSON (only dicts, ...
+
+SEE ALSO
+    man(json), man(json.parse)

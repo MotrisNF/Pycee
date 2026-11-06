@@ -1,0 +1,27 @@
+# KeyboardInterrupt
+NAME
+    KeyboardInterrupt - Ctrl+C: stop the program
+
+DESCRIPTION
+    Ctrl+C (the signal SIGINT) raises KeyboardInterrupt at the next safe
+    point of the program (between statements, in a wait like input() or
+    time.sleep()). It is NOT an Error: an except with no type and except
+    Error do not catch it, so a program can always be stopped. Only
+    except KeyboardInterrupt catches it. The finally blocks run on its
+    way out.
+
+    Not caught, it ends a program with its traceback and exit code 130;
+    in the REPL it stops what is running and goes back to the prompt.
+    With signal.handle(signal.SIGINT, f), Ctrl+C calls f instead.
+
+EXAMPLES
+    >>> import signal
+    >>> try {
+    ...     signal.send(signal.SIGINT);
+    ... } except KeyboardInterrupt {
+    ...     print("stopped");
+    ... }
+    stopped
+
+SEE ALSO
+    man(signal), man(try), man(errors)

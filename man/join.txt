@@ -1,0 +1,38 @@
+# string.join list.join tuple.join
+NAME
+    join - strings joined into one, with a separator: sep.join(c),
+    l.join(sep)
+
+SYNOPSIS
+    sep.join(collection)
+    list.join(sep)
+    tuple.join(sep)
+
+DESCRIPTION
+    One string with every item of the collection, with sep between them
+    (not before the first, not after the last). Both forms are the same:
+    ", ".join(l) is l.join(", "). sep.join takes anything a for walks
+    (a list, a tuple, a set, a generator of strings...).
+
+    Every item must be a string: join never converts (use
+    l.map(str).join(", ") for numbers).
+
+    It is the fast way to build a long text: collect the pieces in a
+    list and join them once (s += piece in a loop copies the whole text
+    each time).
+
+ERRORS
+    TypeError     an item that is not a string.
+
+EXAMPLES
+    >>> ", ".join(["a", "b", "c"])
+    "a, b, c"
+    >>> ["x", "y"].join("")
+    "xy"
+    >>> [1, 2, 3].map(str).join("+")
+    "1+2+3"
+    >>> "-".join([1])
+    TypeError: join() needs strings, but item 0 is 'number'
+
+SEE ALSO
+    man(string.split), man(string)

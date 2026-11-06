@@ -1,0 +1,13 @@
+# file.has_next
+NAME
+    file.has_next - whether a read would give something
+
+SYNOPSIS
+    f.has_next()
+
+DESCRIPTION
+    true when the file has something left to read. On a terminal it
+    waits for the next line typed.
+
+SEE ALSO
+    man(file), man(file.read_line)

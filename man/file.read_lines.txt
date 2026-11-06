@@ -1,0 +1,13 @@
+# file.read_lines
+NAME
+    file.read_lines - a list of every line left, each with its "\n"
+
+SYNOPSIS
+    f.read_lines()
+
+DESCRIPTION
+    Reads to the end and gives the lines as a list, each with its "\n".
+    io.read_lines(path) does it for a whole file.
+
+SEE ALSO
+    man(file), man(io.read_lines)

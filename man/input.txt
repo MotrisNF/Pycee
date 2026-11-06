@@ -1,0 +1,53 @@
+# input
+NAME
+    input - read a line typed by the user (the standard input)
+
+SYNOPSIS
+    input()
+    input(prompt)
+
+DESCRIPTION
+    Shows prompt (any value, as print would, without a new line) and
+    waits for a line; gives it as a string WITHOUT its "\n" (nor its
+    "\r"). Everything printed before is shown before waiting.
+
+    At the end of the input (Ctrl+D on a terminal, or the end of a file
+    or a pipe) it raises EOFError: catch it to stop reading. On a
+    terminal, the next call waits again. Ctrl+C while it waits is a
+    KeyboardInterrupt.
+
+    The line is always text: to get a number, convert it with num(),
+    int() or float() and catch the ValueError of what is not one. Bytes
+    that are not valid UTF-8 become U+FFFD.
+
+ERRORS
+    EOFError            the input ended.
+    KeyboardInterrupt   Ctrl+C while waiting.
+
+EXAMPLES
+    $ cat ask.pce
+    prog main() {
+        var total = 0;
+        while (true) {
+            try {
+                total += num(input("number: "));
+            } except EOFError {
+                break;
+            } except ValueError {
+                print("that is not a number");
+            }
+        }
+        print();
+        print("total:", total);
+    }
+    $ cat numbers.txt
+    3
+    x
+    4
+    $ ./pycee ask.pce < numbers.txt
+    number: number: that is not a number
+    number: number:
+    total: 7
+
+SEE ALSO
+    man(print), man(io.stdin), man(EOFError), man(number)

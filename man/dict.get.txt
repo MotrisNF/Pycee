@@ -1,0 +1,24 @@
+# dict.get
+NAME
+    dict.get - the value of a key, or a default when it is missing
+
+SYNOPSIS
+    d.get(k)
+    d.get(k, default)
+
+DESCRIPTION
+    d[k] when k is a key; otherwise default (none when not given),
+    without an error. The usual way to count with a dict:
+        counts[w] = counts.get(w, 0) + 1;
+
+EXAMPLES
+    >>> var d = dict("a": 1)
+    >>> d.get("a")
+    1
+    >>> d.get("b", 0)
+    0
+    >>> print(d.get("b"))
+    none
+
+SEE ALSO
+    man(dict), man(KeyError)

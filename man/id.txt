@@ -1,0 +1,32 @@
+# id
+NAME
+    id - which value this is: the same for every name that holds it
+
+SYNOPSIS
+    x.id()
+
+DESCRIPTION
+    A number that identifies the value itself: two names holding the
+    same list give the same id, and a copy gives another one. It tells
+    "the same list" (a.id() is b.id()) from "an equal list" (a is b).
+    Ids count from 1 in the order values are made and are never reused.
+
+    Numbers, bools and none have no id: they are plain values (a
+    TypeError). An obj may declare its own field or method id, which
+    then hides this one.
+
+ERRORS
+    TypeError     the id of a number, a bool or none.
+
+EXAMPLES
+    >>> var a = [1]
+    >>> var b = a
+    >>> a.id() is b.id()
+    true
+    >>> a.id() is a.copy().id()
+    false
+    >>> 5.id()
+    TypeError: a number has no id(): numbers, bools and none are plain...
+
+SEE ALSO
+    man(is), man(types)

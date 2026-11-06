@@ -1,0 +1,17 @@
+# string.upper
+NAME
+    string.upper - the string with every letter in upper case
+
+SYNOPSIS
+    s.upper()
+
+DESCRIPTION
+    A new string: each lower-case letter changed to its upper-case form,
+    following Unicode ("ñ" becomes "Ñ"). The rest stays as it is.
+
+EXAMPLES
+    >>> "Hello, año 2026".upper()
+    "HELLO, AÑO 2026"
+
+SEE ALSO
+    man(string.lower), man(string.capitalize)

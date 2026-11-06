@@ -1,0 +1,23 @@
+# time.sleep
+NAME
+    time.sleep - wait some seconds
+
+SYNOPSIS
+    time.sleep(seconds)
+
+DESCRIPTION
+    Waits at least seconds (a number >= 0, fractions too: 0.25). A signal
+    that comes meanwhile is attended at once (its handler runs; Ctrl+C is
+    a KeyboardInterrupt), and then the rest of the wait goes on.
+
+ERRORS
+    ValueError    a negative number.
+    TypeError     not a number.
+
+EXAMPLES
+    >>> import time
+    >>> time.sleep(-1)
+    ValueError: sleep() needs a number of seconds >= 0
+
+SEE ALSO
+    man(time), man(signal)

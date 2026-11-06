@@ -1,0 +1,21 @@
+# sys
+NAME
+    sys - the program and the interpreter: arguments, exit, recursion,
+    platform, and the memory collector
+
+SYNOPSIS
+    import sys;
+
+MEMBERS
+    argv                     the program's arguments (a tuple)
+    platform, version        the system ("linux") and pycee's version
+    exit(code)               end the program now
+    recursion_limit(n)       how many calls may be in progress
+    gc_collect()             run the collector now
+    memory(), gc_stats()     what the collector sees
+    gc_enable(), gc_disable(), gc_set_min(b), gc_set_max(b)
+                             when the collector runs
+    Each one has its page: man(sys.argv), man(sys.exit)...
+
+SEE ALSO
+    man(modules), man(memory), man(prog)
