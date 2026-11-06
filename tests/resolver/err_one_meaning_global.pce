@@ -1,0 +1,7 @@
+# Inside one function a name means one thing: not the global on one line and a local on another
+var total = 0;
+
+func f() {
+    total += 1;
+    var total = 5;
+}

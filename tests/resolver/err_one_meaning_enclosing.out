@@ -1,0 +1,4 @@
+NameError: 'n' is declared in an enclosing function at line 6, so here it cannot mean the global 'n': use another name for one of them (tests/resolver/err_one_meaning_enclosing.pce, line 5)
+        func g() { return n; }
+                          ^
+exit=1

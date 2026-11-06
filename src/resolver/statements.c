@@ -517,6 +517,130 @@ static int  declare_self(t_ctx *c, t_node *f)
 }
 
 /*
+ * What a function declares (params and, anywhere in its body, var, vemp,
+ * const, for and except variables and nested funcs; not what its inner
+ * functions declare), so that a name means one thing in the whole
+ * function: a use that finds a global or a name of an enclosing function
+ * while this function declares that name somewhere else is an error
+ * (rs_scope_declares). With out NULL it only counts.
+ */
+static size_t   decl_names(const t_node *n, t_name *out, size_t count);
+
+static size_t   decl_list(const t_node *n, t_name *out, size_t count)
+{
+    for (; n; n = n->next)
+        count = decl_names(n, out, count);
+    return (count);
+}
+
+static size_t   add_name(t_name name, t_name *out, size_t count)
+{
+    if (out && name.ptr)
+        out[count] = name;
+    return (name.ptr ? count + 1 : count);
+}
+
+static size_t   decl_names(const t_node *n, t_name *out, size_t count)
+{
+    const t_node    *h;
+
+    if (!n || stack_exhausted())
+        return (count);
+    if (n->type == NODE_BLOCK)
+        return (decl_list(n->as.list.items, out, count));
+    if (n->type == NODE_VAR)
+        return (add_name(n->as.var.name, out, count));
+    if (n->type == NODE_PARAM)
+        return (add_name(n->as.param.name, out, count));
+    if (n->type == NODE_MULTI_VAR)
+        return (decl_list(n->as.multi.targets, out, count));
+    if (n->type == NODE_FUNC)
+        return (add_name(n->as.func.name, out, count));
+    if (n->type == NODE_IF)
+        return (decl_names(n->as.if_.else_, out,
+                decl_names(n->as.if_.then, out, count)));
+    if (n->type == NODE_WHILE || n->type == NODE_DO_WHILE)
+        return (decl_names(n->as.while_.body, out, count));
+    if (n->type == NODE_FOR)
+    {
+        count = decl_list(n->as.for_.more, out,
+                add_name(n->as.for_.name, out, count));
+        return (decl_names(n->as.for_.else_, out,
+                decl_names(n->as.for_.body, out, count)));
+    }
+    if (n->type == NODE_SWITCH)
+    {
+        for (h = n->as.switch_.cases; h; h = h->next)
+            count = decl_names(h->as.case_.body, out, count);
+        return (decl_names(n->as.switch_.default_, out, count));
+    }
+    if (n->type != NODE_TRY)
+        return (count);
+    count = decl_names(n->as.try_.body, out, count);
+    for (h = n->as.try_.handlers; h; h = h->next)
+        count = decl_names(h->as.except.body, out,
+                add_name(h->as.except.name, out, count));
+    return (decl_names(n->as.try_.finally_, out, count));
+}
+
+/*
+ * Fills s->names: an open-addressing set (a power of two, at most half
+ * full, empty slots with ptr NULL) of what f declares. It lives in the
+ * arena, so an allocation failure leaves nothing to free.
+ */
+static void scope_names(t_ctx *c, t_fscope *s, const t_node *f)
+{
+    t_name  *list;
+    t_name  *set;
+    size_t  n;
+    size_t  cap;
+    size_t  i;
+    size_t  j;
+
+    n = decl_list(f->as.func.params, NULL, 0);
+    if (!f->as.func.expr_body)
+        n = decl_names(f->as.func.body, NULL, n);
+    s->names = NULL;
+    s->names_cap = 0;
+    if (n == 0)
+        return ;
+    list = arena_alloc(c->r->arena, n * sizeof(t_name));
+    i = decl_list(f->as.func.params, list, 0);
+    if (!f->as.func.expr_body)
+        decl_names(f->as.func.body, list, i);
+    for (cap = 8; cap < 2 * n; cap *= 2)
+        ;
+    set = arena_alloc(c->r->arena, cap * sizeof(t_name));
+    for (i = 0; i < n; i++)
+    {
+        j = rs_name_hash(list[i]) & (cap - 1);
+        while (set[j].ptr && !rs_name_eq(set[j], list[i]))
+            j = (j + 1) & (cap - 1);
+        if (!set[j].ptr)
+            set[j] = list[i];
+    }
+    s->names = set;
+    s->names_cap = cap;
+}
+
+/* Where s's function declares name (its first declaration), or NULL. */
+const t_name    *rs_scope_declares(const t_fscope *s, t_name name)
+{
+    size_t  j;
+
+    if (s->names_cap == 0)
+        return (NULL);
+    j = rs_name_hash(name) & (s->names_cap - 1);
+    while (s->names[j].ptr)
+    {
+        if (rs_name_eq(s->names[j], name))
+            return (&s->names[j]);
+        j = (j + 1) & (s->names_cap - 1);
+    }
+    return (NULL);
+}
+
+/*
  * A function body, at any depth: top level, inside another function
  * (its names stay visible, so using them is a capture) or a lambda.
  * Params and var go to locals, on top of the enclosing function's, and
@@ -537,6 +661,7 @@ int rs_resolve_function(t_ctx *c, t_node *f, const t_node *obj)
     scope.func = f;
     scope.depth = c->depth + 1;
     scope.outer = c->scope;
+    scope_names(c, &scope, f);
     c->scope = &scope;
     c->depth = scope.depth;
     c->func = f;

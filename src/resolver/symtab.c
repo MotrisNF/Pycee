@@ -20,7 +20,7 @@ int  rs_name_eq(t_name a, t_name b)
 }
 
 /* FNV-1a. */
-static size_t   name_hash(t_name name)
+size_t  rs_name_hash(t_name name)
 {
     size_t  h;
     size_t  i;
@@ -39,7 +39,7 @@ static void index_insert(t_symtab *t, size_t pos)
 {
     size_t  i;
 
-    i = name_hash(t->items[pos].name) & (t->index_cap - 1);
+    i = rs_name_hash(t->items[pos].name) & (t->index_cap - 1);
     while (t->index[i])
         i = (i + 1) & (t->index_cap - 1);
     t->index[i] = pos + 1;
@@ -117,7 +117,7 @@ t_symbol *symtab_find(const t_symtab *t, t_name name)
 
     if (t->hashed && t->index_cap)
     {
-        i = name_hash(name) & (t->index_cap - 1);
+        i = rs_name_hash(name) & (t->index_cap - 1);
         while ((pos = t->index[i]))
         {
             if (rs_name_eq(t->items[pos - 1].name, name))
@@ -127,6 +127,17 @@ t_symbol *symtab_find(const t_symtab *t, t_name name)
         return (NULL);
     }
     for (i = 0; i < t->count; i++)
+        if (rs_name_eq(t->items[i].name, name))
+            return (&t->items[i]);
+    return (NULL);
+}
+
+/* The last symbol pushed with that name (unhashed tables only). */
+t_symbol *symtab_find_last(const t_symtab *t, t_name name)
+{
+    size_t  i;
+
+    for (i = t->count; i-- > 0;)
         if (rs_name_eq(t->items[i].name, name))
             return (&t->items[i]);
     return (NULL);

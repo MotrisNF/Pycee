@@ -153,7 +153,7 @@ newline = ? line break ? ;
 - The left side of an assignment, and the operand of `++`/`--` (prefix or postfix), must be `IDENT`, `x[i]` or `x.field`.
 - `var` is forbidden inside loops (at any nesting level).
 - `vemp` only inside functions; a `for` variable is an implicit `vemp`.
-- No name may repeat another visible one (var, vemp, parameter or global).
+- A name may not repeat another one of the same function (var, vemp, parameter, `for` or `except` variable, nested `func`) or of the top level, nor a native. It may hide a global (var, func, obj, module, imported name) or a name of an enclosing function: inside its function it means its own declaration. Inside one function a name means one thing: if the function declares it anywhere, it cannot refer to the global (or the enclosing function's name) anywhere else in that function (`NameError`). A `vemp` of an inner block cannot repeat a variable of the same function that is still alive.
 - `break` and `continue` only inside a loop (inside a `case` they belong to the enclosing loop); `return` only inside a function; `create` only `return;` without a value.
 - `self` only inside the methods of an `obj`.
 - At most one `prog`, with 0 or 2 parameters (`argc`, `argv`). A file without `prog` is valid and runs nothing. The `prog` cannot be called.
@@ -170,7 +170,7 @@ newline = ? line break ? ;
 - A module is loaded once, however many files import it.
 - Circular imports are an error.
 - Modules are not values (like functions): `utils.parse` is resolved before running; `var m = utils;` is an error.
-- Imported names follow the usual rule: no name may repeat another visible one.
+- Imported names are globals of the importing file: they cannot repeat another global or a native, and a local may hide them like any global.
 - A module offers only what it declares itself (its `func`, `obj` and `var`): not its `prog`, nor what it imports.
 - A module's global variables are read-only outside it (`m.x = 1;`, or `x = 1;` after `from m import x`, are errors); they are always read with their current value, and the module's own functions may change them.
 - In the REPL, `import m;` loads `m.pce` from the current directory.

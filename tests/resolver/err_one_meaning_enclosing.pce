@@ -1,0 +1,7 @@
+# Also through an inner function: main declares n, so g cannot mean the global n
+var n = 1;
+
+prog main() {
+    func g() { return n; }
+    var n = 2;
+}

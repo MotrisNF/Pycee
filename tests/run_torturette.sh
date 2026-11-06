@@ -119,6 +119,8 @@ run callback error|tests/run/err_callback_traceback.pce|-
 run dicts sets|tests/run/dicts_sets.pce|-
 run unhashable key|tests/run/err_key_unhashable.pce|-
 run comprehensions|tests/run/comprehensions.pce|-
+run shadowing|tests/run/shadowing.pce|-
+resolver one meaning|tests/resolver/err_one_meaning_enclosing.pce|-
 run nested comprehensions|tests/run/comprehensions_nested.pce|-
 run aggregates chaining|tests/run/aggregates_chaining.pce|-
 run id error|tests/run/err_id_number.pce|-

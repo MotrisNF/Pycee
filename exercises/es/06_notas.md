@@ -1,10 +1,11 @@
-# Ejercicio 00: notas
+# Ejercicio 06: notas
 
 | | |
 |---|---|
 | Fichero a entregar | `notas.pce` |
 | Se usa | `input()`, `try`/`except`, strings (`split`, `strip`), `num()`, listas, tuplas, funciones, f-strings con formato, `sort(key, reverse)`, comprensiones |
 | No se usa | `import` (ningún módulo) |
+| En el manual | `man(input)`, `man(EOFError)`, `man(string.split)`, `man(num)`, `man(tuple)`, `man(fstrings)`, `man(list.sort)`, `man(comprehensions)` |
 
 ## Enunciado
 

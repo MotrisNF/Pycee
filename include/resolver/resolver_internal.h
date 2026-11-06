@@ -29,6 +29,8 @@ typedef struct s_fscope
     t_node              *func;
     int                 depth;
     struct s_fscope     *outer;
+    const t_name        *names;     /* what func declares: see statements.c */
+    size_t              names_cap;
 }   t_fscope;
 
 typedef struct s_ctx
@@ -55,7 +57,9 @@ void            symtab_push(t_symtab *t, const t_symbol *sym);
 void            symtab_truncate(t_symtab *t, size_t count);
 void            symtab_free(t_symtab *t);
 t_symbol        *symtab_find(const t_symtab *t, t_name name);
+t_symbol        *symtab_find_last(const t_symtab *t, t_name name);
 int             rs_name_eq(t_name a, t_name b);
+size_t          rs_name_hash(t_name name);
 
 /* scope.c: names, declarations and references */
 t_symbol        *rs_lookup(const t_ctx *c, t_name name);
@@ -98,6 +102,7 @@ int             rs_resolve_target(t_ctx *c, t_node *n, const char *action);
 int             rs_resolve_bodies(t_ctx *c, t_node *root);
 int             rs_resolve_function(t_ctx *c, t_node *f, const t_node *obj);
 int             rs_resolve_comprehension(t_ctx *c, t_node *n);
+const t_name    *rs_scope_declares(const t_fscope *s, t_name name);
 
 /* modules.c */
 t_module        *rs_module_new(t_resolver *r, const char *name);

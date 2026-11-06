@@ -27,9 +27,16 @@ DESCRIPTION
     the loop would declare it again on every round. Declare it before the
     loop, or use vemp, which belongs to the block (see man(vemp)).
 
-    No name may repeat another one that is visible at that point: a
-    variable cannot hide a global, a parameter, a function or a built-in
-    function (var print = 1 is an error). Every name means one thing.
+    Names and functions. Each function is a unit of its own: a variable
+    or a parameter may have the name of a global (a var, a func or an
+    obj) or of a name of the function around it (for a lambda or a func
+    inside another); inside the function, the name is its own one, and
+    outside nothing changes. Inside one function a name means one thing:
+    it cannot be declared twice there (also not as a vemp of an inner
+    block while the outer one lives), and if the function declares it
+    anywhere, it cannot mean the global on another line of the function
+    (total += 1; var total = 0; is an error). A built-in function can
+    never be used as a name (var print = 1 is an error).
 
     var name[size] makes a list of size items, all none: var l[3] is the
     same as var l = [none, none, none]. size is an int >= 0.
@@ -39,8 +46,10 @@ DESCRIPTION
     tuple or a list t (as many items as names).
 
 ERRORS
-    NameError       the name repeats a visible one; a global used before
-                    its declaration.
+    NameError       the name is already declared in the same function (or
+                    at the top level), or is a built-in function; a name
+                    the function declares used as the global elsewhere in
+                    it; a global used before its declaration.
     SyntaxError     var inside a loop.
     AssignmentError unpacking a tuple or list with a different number of
                     items than names.
@@ -64,6 +73,11 @@ EXAMPLES
     AssignmentError: cannot assign 3 values to 2 targets
     >>> var n = 1
     NameError: 'n' was already declared at line 1 of <stdin:1>
+    >>> func twice(n) { return n * 2; }
+    >>> twice(4)
+    8
+    >>> n
+    "ten"
 
 SEE ALSO
     man(vemp), man(const), man(func), man(types)

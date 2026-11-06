@@ -1,0 +1,2 @@
+# A lambda (or a nested func) may reuse a name of the function around it
+prog main() { var x = 1; var f = (x) => x; }

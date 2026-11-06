@@ -1,0 +1,7 @@
+# A param or a local may hide a global var, func or obj inside its function
+var a = 1;
+func g() { }
+
+func f(a, g) {
+    var b = a + g;
+}

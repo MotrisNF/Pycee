@@ -5,6 +5,39 @@
 #include "resolver/resolver_internal.h"
 
 /*
+ * A name means one thing in a whole function: when sym (what it found)
+ * is a global or a name of an enclosing function, no function between
+ * here and there may declare that name anywhere else (it would be the
+ * global on one line and its own variable on another).
+ */
+static int  check_one_meaning(t_ctx *c, const t_node *ident,
+                const t_symbol *sym)
+{
+    char            where[ERR_MSG_SIZE];
+    const t_fscope  *s;
+    const t_name    *decl;
+    t_name          name;
+
+    if (sym->kind == SYM_NATIVE)
+        return (0);
+    name = ident->as.ident.name;
+    for (s = c->scope; s && s->depth > sym->depth; s = s->outer)
+    {
+        decl = rs_scope_declares(s, name);
+        if (!decl)
+            continue ;
+        rs_where_str(c, rs_name_offset(c, *decl), where, sizeof(where));
+        return (error_set(c->err, ERR_NAME, ident->offset, name.len,
+                "'%.*s' is declared in %s at %s, so here it cannot mean the"
+                " %s '%.*s': use another name for one of them",
+                (int)name.len, name.ptr, s == c->scope ? "this function"
+                : "an enclosing function", where, sym->depth == 0 ? "global"
+                : "enclosing function's", (int)name.len, name.ptr));
+    }
+    return (0);
+}
+
+/*
  * The symbol an IDENT names, or a NameError. Globals are initialised in
  * order before prog runs, so a global's value may only use the globals
  * declared above it (functions run later and may use any).
@@ -19,6 +52,8 @@ static int  find_name(t_ctx *c, const t_node *ident, t_symbol **out)
     if (!*out)
         return (error_set(c->err, ERR_NAME, ident->offset, name.len,
                 "name '%.*s' is not defined", (int)name.len, name.ptr));
+    if (check_one_meaning(c, ident, *out) == -1)
+        return (-1);
     if (c->global_init && (*out)->kind == SYM_GLOBAL
         && (*out)->offset >= c->global_offset)
     {

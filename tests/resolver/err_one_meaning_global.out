@@ -1,0 +1,4 @@
+NameError: 'total' is declared in this function at line 6, so here it cannot mean the global 'total': use another name for one of them (tests/resolver/err_one_meaning_global.pce, line 5)
+        total += 1;
+        ^^^^^
+exit=1

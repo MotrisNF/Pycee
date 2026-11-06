@@ -1,0 +1,4 @@
+10 100 42 global helper inner helper
+main lambda!
+[10, 10, 10]
+exit=0

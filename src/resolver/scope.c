@@ -4,19 +4,28 @@
 #include <string.h>
 #include "resolver/resolver_internal.h"
 
-/* Any visible symbol. There is no shadowing, so scope order does not matter. */
+/*
+ * The visible symbol a name means: the innermost one. locals and temps
+ * hold the functions being resolved one on top of the other, so the last
+ * one pushed in each is the innermost there, and of the two, the deeper
+ * function wins (inside one function a name is in at most one of them).
+ * Then the globals of the module, then the natives.
+ */
 t_symbol *rs_lookup(const t_ctx *c, t_name name)
 {
-    t_symbol    *sym;
+    t_symbol    *temp;
+    t_symbol    *local;
 
-    sym = symtab_find(&c->r->temps, name);
-    if (!sym)
-        sym = symtab_find(&c->r->locals, name);
-    if (!sym)
-        sym = symtab_find(&c->mod->globals, name);
-    if (!sym)
-        sym = symtab_find(&c->r->natives, name);
-    return (sym);
+    temp = symtab_find_last(&c->r->temps, name);
+    local = symtab_find_last(&c->r->locals, name);
+    if (temp && (!local || temp->depth >= local->depth))
+        return (temp);
+    if (local)
+        return (local);
+    temp = symtab_find(&c->mod->globals, name);
+    if (!temp)
+        temp = symtab_find(&c->r->natives, name);
+    return (temp);
 }
 
 size_t   rs_name_offset(const t_ctx *c, t_name name)
@@ -59,13 +68,18 @@ static int  error_redeclared(t_ctx *c, t_name name, const t_symbol *prev)
             where));
 }
 
-/* Adds a symbol to t, or fails if the name repeats any visible one. */
+/*
+ * Adds a symbol to t. A name may hide a global or a name of an enclosing
+ * function (decided by the author: each function is a unit of its own),
+ * but never a native, nor another name of the same function (or of the
+ * same top level).
+ */
 int  rs_declare(t_ctx *c, t_symtab *t, const t_symbol *sym)
 {
     t_symbol    *prev;
 
     prev = rs_lookup(c, sym->name);
-    if (prev)
+    if (prev && (prev->kind == SYM_NATIVE || prev->depth >= sym->depth))
         return (error_redeclared(c, sym->name, prev));
     symtab_push(t, sym);
     return (0);

@@ -14,10 +14,11 @@
  *   Not allowed inside loops: declare it before the loop or use vemp.
  * - vemp ("fleeting"): lives only inside its block {}. Only inside functions.
  *   The variable of a for is always a vemp.
- * - No name may repeat another visible one: two equal vars in a function,
- *   a local or parameter named like a global, or a vemp named like a
- *   living outer variable are errors (found when the code is analysed,
- *   before it runs).
+ * - Inside one function a name means one thing: two equal vars in a
+ *   function, or a vemp named like a living outer variable, are errors
+ *   (found when the code is analysed, before it runs). A local or a
+ *   parameter may have the name of a global: inside its function it
+ *   hides the global.
  */
 
 var counter = 0; # variable global

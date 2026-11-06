@@ -1,0 +1,31 @@
+# A param or local hides a global (or a name of the enclosing function) inside its function only
+var total = 100;
+var x = "global";
+
+func helper() { return "global helper"; }
+
+func sum_to(total) {
+    var s = 0;
+    for (i in range(total)) { s += i; }
+    return s;
+}
+
+func shadow_func(helper) { return helper * 2; }
+
+func inner_helper() {
+    func helper() { return "inner helper"; }
+    return helper();
+}
+
+prog main() {
+    print(sum_to(5), total, shadow_func(21), helper(), inner_helper());
+    var x = "main";
+    var keep = () => x;
+    var param = (x) => x + "!";
+    print(keep(), param("lambda"));
+    var counters = [];
+    for (i in range(3)) {
+        counters.append((i) => i * 10);
+    }
+    print(counters.map((f) => f(1)));
+}

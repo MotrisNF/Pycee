@@ -6,7 +6,7 @@
 
 Cada fase termina con un **hito** ejecutable. No se pasa a la siguiente fase hasta que el hito funcione.
 
-**Estado (2026-11-06):** fases 0 a 10 terminadas; manual `man` hecho; **siguiente: los ejercicios** (adelantados), luego la fase 11. Para retomar: [SESSION.md](SESSION.md), sección "Cómo retomar".
+**Estado (2026-11-06):** fases 0 a 10 terminadas; manual `man` y ejercicios (`exercises/`, 12 en castellano y en inglés) hechos; **siguiente: la fase 11**. Para retomar: [SESSION.md](SESSION.md), sección "Cómo retomar".
 
 ---
 
