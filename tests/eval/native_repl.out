@@ -1,0 +1,16 @@
+<built-in math.floor>
+ImportError: cannot import 'exit' from 'sys' in the REPL: exit() is already there (<stdin:3>, line 1)
+    from sys import exit
+                    ^^^^
+ImportError: cannot import 'exit' from 'sys' in the REPL: exit() is already there (<stdin:4>, line 1)
+    from sys import exit as leave
+                    ^^^^
+<built-in sys.exit>
+TypeError: 'math' is a module, not a value (<stdin:7>, line 1)
+    var m = math
+            ^^^^
+ImportError: cannot import name 'max' from 'math' (<stdin:8>, line 1)
+    from math import max
+                     ^^^
+1+2
+exit=0

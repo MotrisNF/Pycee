@@ -1,0 +1,4 @@
+TypeError: dump() takes 1 positional argument but 2 were given: indent goes by name: dump(v, indent = 2) (tests/resolver/err_native_kw_only.pce, line 2)
+    prog main() { json.dump(dict("a": 1), 2); }
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+exit=1

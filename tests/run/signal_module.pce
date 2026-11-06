@@ -1,0 +1,39 @@
+# Module signal (deterministic: send() attends the signal before it returns)
+# and KeyboardInterrupt: only an except naming it catches it, never a bare
+# except nor "except Error".
+import signal;
+from signal import SIGINT, SIGUSR1, SIGTERM, handle, send;
+
+var seen = [];
+
+func note(sig) {
+    seen.append(sig);
+}
+
+prog main() {
+    print(SIGINT, SIGUSR1, SIGTERM);
+    handle(SIGUSR1, note);
+    send(SIGUSR1);
+    send(SIGUSR1);
+    print(seen);
+    handle(SIGUSR1, (s) => print("lambda got", s));
+    send(SIGUSR1);
+    handle(SIGUSR1, (s) => { raise ValueError("from handler"); });
+    try { send(SIGUSR1); } except ValueError (e) { print("caught:", e); }
+    try { send(SIGINT); } except KeyboardInterrupt (e) { print("caught KI:", e.type()); }
+    try {
+        try { send(SIGINT); } except { print("never: bare except"); }
+    } except KeyboardInterrupt { print("bare except did not swallow it"); }
+    try { send(SIGINT); } except Error { print("never"); } except KeyboardInterrupt { print("not an Error"); }
+    handle(SIGINT, (s) => print("my ctrl-c", s));
+    send(SIGINT);
+    signal.reset(SIGINT);
+    signal.ignore(SIGUSR1);
+    send(SIGUSR1);
+    print("ignored ok");
+    for (bad in [9, 19, 11, 8, 99, 0]) {
+        try { handle(bad, note); } except ValueError (e) { print(e); }
+    }
+    try { handle(SIGUSR1, 5); } except TypeError (e) { print(e); }
+    try { handle("x", note); } except TypeError (e) { print(e); }
+}

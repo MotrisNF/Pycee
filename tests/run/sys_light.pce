@@ -1,0 +1,39 @@
+# Module sys with few allocations, for fault injection (tests/run_torturette.sh):
+# every member once, and its errors. sys_module.pce has the heavy version.
+import sys;
+from sys import argv, gc_stats;
+
+func depth(n) {
+    return (n is 0 ? 0 : 1 + depth(n - 1));
+}
+
+prog main() {
+    print(argv.len(), sys.platform, sys.version);
+    sys.recursion_limit(20);
+    try {
+        depth(30);
+    } except RecursionError (e) {
+        print(e);
+    }
+    sys.recursion_limit(1000);
+    var l = [[1], [2], [3]];
+    l = none;
+    print(sys.gc_collect() >= 0, sys.memory() > 0, gc_stats().len());
+    sys.gc_disable();
+    var t = [1, 2];
+    sys.gc_enable();
+    sys.gc_set_max(1);
+    t = [3];
+    sys.gc_set_max(0);
+    sys.gc_set_min(2048);
+    try {
+        sys.gc_set_min(-1);
+    } except ValueError (e) {
+        print(e);
+    }
+    try {
+        sys.exit(2);
+    } finally {
+        print("finally");
+    }
+}

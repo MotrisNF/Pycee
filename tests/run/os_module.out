@@ -1,0 +1,24 @@
+true true true false false
+IOError: file exists: "build/os_test"
+true
+["a.txt", "b.txt", "x"] ["y"] true
+IOError: directory not empty: "build/os_test"
+IOError: is a directory: "build/os_test/x"
+FileNotFoundError: no such file or directory: "build/os_test/nope.txt"
+FileNotFoundError: no such file or directory: "build/os_test/nope"
+IOError: not a directory: "build/os_test/a.txt"
+FileNotFoundError: no such file or directory: "build/os_test/q/w"
+ValueError: make_dir() takes "r" as its second argument (make every directory on the way), not "x"
+TypeError: make_dir() takes "r" as its second argument (make every directory on the way), not 'number'
+IOError: not a directory: "build/os_test/a.txt"
+FileNotFoundError: no such file or directory: "build/os_test/nope"
+TypeError: join() needs strings, not 'number'
+TypeError: exists() needs a path (a string), not 'number'
+TypeError: env() needs a name (a string), not 'number'
+["c.txt", "x"] a
+false
+true none
+a/b/c.txt a/b /abs/b a/ b
+["b.txt", "b.txt", "", ""]
+["a", "", "/", "a/b", "/", "a"]
+exit=0

@@ -78,6 +78,9 @@ typedef struct s_symtab
  * module is LOADING while its own imports are being loaded: meeting a
  * LOADING one again is a circular import. Modules finish in dependency
  * order (rank), the order their globals must be initialised in.
+ * A module of the language (sys, math...) has no file or tree: its
+ * globals are its natives (SYM_NATIVE) and its constants (read-only
+ * SYM_GLOBAL, given their values by the runtime when it is set up).
  * Identity is the file (dev, ino), so two paths to one file are one module.
  */
 typedef enum e_mod_state
@@ -97,6 +100,7 @@ typedef struct s_module
     int             rank;       /* order of completion, -1 while loading */
     t_mod_state     state;
     int             has_file;
+    int             native;     /* a module of the language (NMOD_*), or -1 */
     dev_t           dev;
     ino_t           ino;
 }   t_module;

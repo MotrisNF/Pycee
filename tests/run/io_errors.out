@@ -1,0 +1,20 @@
+IOError family: FileNotFoundError - no such file or directory: "build/does/not/exist.txt"
+IOError family: IOError - is a directory: "tests"
+IOError family: FileNotFoundError - no such file or directory: "build/no_such_dir/x.txt"
+IOError family: PermissionError - permission denied: "/proc/version"
+ValueError: open() mode must be "r", "w" or "a", not "rw"
+TypeError: open() needs a mode (a string), not 'number'
+TypeError: open() needs a path (a string), not 'number'
+ValueError: open(): a path cannot contain the character \0
+TypeError: write_file() needs a string to write, not 'number' (str() converts it)
+IOError family: IOError - the file is not open for reading: "build/io_b.txt"
+IOError family: IOError - the file is not open for writing: "tests/run/io_fixture.txt"
+TypeError: write() needs a string, not 'number' (str() converts it)
+IOError family: IOError - the standard streams cannot be closed: "<stdout>"
+IOError family: IOError - the file is not open for writing: "<stdin>"
+TypeError: print(file = ...) needs a file, not 'number'
+IOError family: IOError - the file is not open for writing: "<stdin>"
+TypeError: sep must be a string, not 'number'
+IOError: the file is closed: "tests/run/io_fixture.txt"
+caught by its own type: true true
+exit=0

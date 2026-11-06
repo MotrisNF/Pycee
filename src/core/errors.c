@@ -25,19 +25,26 @@ static const char   *g_error_names[ERR_TYPE_COUNT] = {
     [ERR_RUNTIME] = "RuntimeError",
     [ERR_EOF] = "EOFError",
     [ERR_ASSERTION] = "AssertionError",
+    [ERR_IO] = "IOError",
+    [ERR_FILE_NOT_FOUND] = "FileNotFoundError",
+    [ERR_PERMISSION] = "PermissionError",
     [ERR_ERROR] = "Error",
     [ERR_EXIT] = "SystemExit",
+    [ERR_KEYBOARD_INTERRUPT] = "KeyboardInterrupt",
 };
 
 /*
  * The parent of each type (-1: none). Everything descends from Error
- * except Error itself and SystemExit. A deeper tree (or the errors of
- * the user's obj, later) is only more entries here.
+ * except Error itself, SystemExit and KeyboardInterrupt; FileNotFoundError and
+ * PermissionError are kinds of IOError.
  */
 static int  error_parent(t_error_type type)
 {
-    if (type == ERR_ERROR || type == ERR_EXIT)
+    if (type == ERR_ERROR || type == ERR_EXIT
+        || type == ERR_KEYBOARD_INTERRUPT)
         return (-1);
+    if (type == ERR_FILE_NOT_FOUND || type == ERR_PERMISSION)
+        return (ERR_IO);
     return (ERR_ERROR);
 }
 
@@ -311,8 +318,8 @@ static void print_traceback(const t_error *err, const t_sources *sources,
     here.offset = err->offset;
     here.len = err->len;
     print_frame(b, sources, &here, err->inner[0].name, err->inner[0].name_len);
-    out_printf(b, "%s: %s\n", err->type_name ? err->type_name
-        : error_type_name(err->type), err->msg);
+    out_printf(b, "%s%s%s\n", err->type_name ? err->type_name
+        : error_type_name(err->type), err->msg[0] ? ": " : "", err->msg);
 }
 
 static void format_one(const t_error *err, const t_sources *sources,
@@ -326,8 +333,9 @@ static void format_one(const t_error *err, const t_sources *sources,
         return ;
     }
     locate(sources, err->offset, &w);
-    out_printf(b, "%s: %s (%s, line %zu)\n", err->type_name ? err->type_name
-        : error_type_name(err->type), err->msg, w.source->path, w.line_no);
+    out_printf(b, "%s%s%s (%s, line %zu)\n", err->type_name ? err->type_name
+        : error_type_name(err->type), err->msg[0] ? ": " : "", err->msg,
+        w.source->path, w.line_no);
     print_code(b, &w, err->len, "    ");
 }
 

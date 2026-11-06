@@ -1,0 +1,8 @@
++ Explicacion breve
+- Explicacion breve
+++ Explicacion breve
+
+Hay una frase indicando que cada operador tiene una entrada en el manual con explicacion detallada y ejemplos
+
+
+q devuelve al repl

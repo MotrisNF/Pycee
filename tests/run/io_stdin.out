@@ -1,0 +1,10 @@
+first: hola
+line: uno
+line: dos
+rest: ["tres", "cuatro", "cinco"]
+true false
+to stdout
+to stderr
+to stdout again
+stderr too
+exit=0

@@ -1,0 +1,6 @@
+import signal
+print("before")
+signal.send(signal.SIGINT)
+print("the REPL goes on")
+try { signal.send(signal.SIGINT); } except KeyboardInterrupt (e) { print("caught", e.type()); }
+raise KeyboardInterrupt()

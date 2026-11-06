@@ -9,10 +9,10 @@ REL_FLAGS = -O2
 # One line per layer; a layer only uses the ones above it.
 CORE     = arena errors reader source stack buffer utf8
 FRONT    = tokens lexer parser ast_print
-RESOLVER = symtab scope declarations objects expressions statements modules resolver
-RUNTIME  = value heap interp eval exec call ops format fmtspec methods
-TYPES    = number range tuple list string seq table dict object error unicode_data
-NATIVES  = natives
+RESOLVER = native_defs symtab scope declarations objects expressions statements modules resolver
+RUNTIME  = value heap interp eval exec call ops format fmtspec methods signals
+TYPES    = number range tuple list string seq table dict object error file unicode_data
+NATIVES  = natives sys math io random time os signal json
 LIBS     = -lm
 
 SRCS = src/main.c \
@@ -59,6 +59,8 @@ re: fclean all
 
 test: $(NAME)
 	sh tests/run_tests.sh
+	sh tests/check_members.sh
+	sh tests/check_signals.sh
 
 # Every test again, collecting on every allocation (with the sanitizers,
 # a value left out of the roots is a use-after-free at once).

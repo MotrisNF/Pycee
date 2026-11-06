@@ -1,0 +1,2 @@
+import json;
+prog main() { json.dump(dict("a": 1), 2); }

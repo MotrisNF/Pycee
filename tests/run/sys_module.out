@@ -1,0 +1,20 @@
+true true true
+linux 0.10.0 string tuple
+1000
+none
+RecursionError: maximum recursion depth exceeded (50 calls)
+2500 3000
+true true
+["collections", "objects", "bytes", "next_gc"]
+[true, true, true, true]
+disabled, no collection: true
+gc_collect still works: true true
+max reached, collected: true
+true
+ValueError: gc_set_min() needs a number of bytes >= 0, not -1
+TypeError: gc_set_max() needs an integer number of bytes, not 'string'
+ValueError: the recursion limit must be from 1 to 2147483647, not 0
+TypeError: recursion_limit() needs an integer limit, not a float
+ValueError: exit code must be between 0 and 255, not 256
+finally runs on the way out
+exit=3

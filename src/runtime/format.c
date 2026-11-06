@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "core/stack.h"
+#include "resolver/natives.h"
 #include "runtime/interp_internal.h"
 
 /*
@@ -270,7 +271,7 @@ static void format_function(t_buffer *b, t_value v)
     }
     else if (val_is_obj(v, OBJ_NATIVE))
         buf_printf(b, "<built-in %s>",
-            g_native_names[((const t_native *)v.as.obj)->slot]);
+            g_native_defs[((const t_native *)v.as.obj)->slot].qualified);
     else
     {
         m = (const t_bound *)v.as.obj;
@@ -403,6 +404,13 @@ static void format_value(t_buffer *b, t_value v, int repr,
             ->func->as.func.cls->as.obj.cname,
             (int)((const t_method_value *)v.as.obj)->func->as.func.name.len,
             ((const t_method_value *)v.as.obj)->func->as.func.name.ptr);
+    else if (val_is_obj(v, OBJ_FILE))
+    {
+        buf_add_str(b, "<file ");
+        format_string_repr(b, ((const t_file *)v.as.obj)->path,
+            ((const t_file *)v.as.obj)->path_len);
+        buf_add_char(b, '>');
+    }
     else if (val_is_string(v))
     {
         s = val_string(v);

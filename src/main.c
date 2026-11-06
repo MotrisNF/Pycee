@@ -13,11 +13,13 @@
 #include "front/ast.h"
 #include "front/lexer.h"
 #include "front/parser.h"
+#include "resolver/natives.h"
 #include "resolver/resolver.h"
 #include "runtime/interp.h"
 
 #define EXIT_LANG_ERROR 1
 #define EXIT_USAGE      2
+#define EXIT_INTERRUPT  130
 
 typedef enum e_mode
 {
@@ -183,7 +185,8 @@ static int  run_file(const char *path, t_mode mode, int nargs, char **args)
         else
         {
             error_print(&err, &s.sources);
-            status = EXIT_LANG_ERROR;
+            status = err.type == ERR_KEYBOARD_INTERRUPT ? EXIT_INTERRUPT
+                : EXIT_LANG_ERROR;
         }
     }
     session_free(&s);
@@ -206,7 +209,9 @@ static void prompt(int interactive, const char *text)
  * being its first line. An error is printed and the session goes on.
  * The prompts are only shown when stdin is a terminal. getline also
  * returns -1 when it runs out of memory: that is a MemoryError. exit()
- * ends the session with its code, after everything is unwound.
+ * ends the session with its code, after everything is unwound. Ctrl+C
+ * at the prompt drops what was being typed (KeyboardInterrupt) and asks
+ * again; while something runs, it is a KeyboardInterrupt error there.
  */
 static int  run_repl(t_mode mode)
 {
@@ -232,6 +237,14 @@ static int  run_repl(t_mode mode)
         prompt(interactive, s.pending.len ? "... " : ">>> ");
         errno = 0;
         len = getline(&s.input, &cap, stdin);
+        if (len == -1 && errno == EINTR)
+        {
+            clearerr(stdin);
+            interp_signals_clear();
+            buf_clear(&s.pending);
+            fputs("\nKeyboardInterrupt\n", stderr);
+            continue ;
+        }
         if (len == -1)
         {
             if (errno == ENOMEM)
@@ -266,14 +279,34 @@ static int  run_repl(t_mode mode)
     return (status);
 }
 
+/*
+ * --members: every member of the modules of the language, one per line
+ * as "module name" (tests/check_members.sh imports each one alone).
+ */
+static int  print_members(void)
+{
+    int i;
+
+    for (i = g_native_global_count; i < g_native_count; i++)
+        printf("%s %s\n", g_native_module_names[g_native_defs[i].module],
+            g_native_defs[i].name);
+    for (i = 0; i < g_native_const_count; i++)
+        printf("%s %s\n", g_native_module_names[g_native_consts[i].module],
+            g_native_consts[i].name);
+    return (0);
+}
+
 int main(int argc, char **argv)
 {
     t_mode  mode;
     int     i;
 
     stack_init();
+    interp_signals_init();
     mode = MODE_RUN;
     i = 1;
+    if (argc == 2 && strcmp(argv[1], "--members") == 0)
+        return (print_members());
     if (i < argc && strcmp(argv[i], "--tokens") == 0)
     {
         mode = MODE_TOKENS;
@@ -294,7 +327,7 @@ int main(int argc, char **argv)
     if (argv[i][0] != '-')
         return (run_file(argv[i], mode, argc - i, argv + i));
     fprintf(stderr, "usage: %s [--tokens | --ast | --check] [file.pce"
-        " [arguments...]]\n", argv[0]);
+        " [arguments...]]\n       %s --members\n", argv[0], argv[0]);
     return (EXIT_USAGE);
 }
 

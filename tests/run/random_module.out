@@ -1,0 +1,21 @@
+[0.08386297105988216, 0.3789802506626686, 0.6800434110281394]
+[1, 3, 1, 5, 3, 6, 5, 5, 5, 2]
+true
+76222 f [3, 5, 1, 4, 2] [10, 94, 18, 68]
+uniform: true
+floats in [0, 1): true true
+5 true
+true true true x
+true [1, 2, 3, 4, 5]
+5 5 true
+["a", "b", "c"] [] 3
+true
+ValueError: rand_int() needs a <= b, not 3 > 1
+TypeError: rand_int() needs an integer bound, not a float
+IndexError: choice() from an empty list
+TypeError: choice() needs a list, a tuple, a string or a range, not 'set'
+TypeError: shuffle() needs a list, not 'tuple' (a tuple cannot change: shuffle(t.to_list()))
+ValueError: sample() needs a count from 0 to 1 (how many items there are), not 2
+ValueError: sample() needs a count from 0 to 1 (how many items there are), not -1
+TypeError: seed() needs an integer seed, not 'string'
+exit=0

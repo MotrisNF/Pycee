@@ -1,0 +1,4 @@
+AttributeError: module 'math' has no attribute 'nope' (tests/resolver/err_native_no_attribute.pce, line 2)
+    prog main() { print(math.nope); }
+                             ^^^^
+exit=1

@@ -6,18 +6,6 @@
 #include "resolver/natives.h"
 #include "resolver/resolver_internal.h"
 
-/* Native functions and how many arguments they take (resolver/natives.h). */
-#define NATIVE_ENTRY(name, min, max, repl) {#name, {min, max}, repl},
-
-static const struct
-{
-    const char  *name;
-    t_arity     arity;
-    int         repl;
-}   g_natives[] = {
-    NATIVE_LIST(NATIVE_ENTRY)
-};
-
 /*
  * Natives are shared by every module; module 0 is the main one. A
  * REPL-only native is left out of a file's session, so there its name
@@ -27,7 +15,7 @@ void    resolver_init(t_resolver *r, t_arena *arena, t_sources *sources,
             int repl)
 {
     t_symbol    sym;
-    size_t      i;
+    int         i;
 
     r->arena = arena;
     r->sources = sources;
@@ -39,17 +27,18 @@ void    resolver_init(t_resolver *r, t_arena *arena, t_sources *sources,
     symtab_init(&r->locals, 0);
     symtab_init(&r->temps, 0);
     r->pending = NULL;
-    for (i = 0; i < sizeof(g_natives) / sizeof(*g_natives); i++)
+    for (i = 0; i < g_native_global_count; i++)
     {
-        if (g_natives[i].repl && !repl)
+        if (g_native_defs[i].repl && !repl)
             continue ;
-        sym.name.ptr = g_natives[i].name;
-        sym.name.len = strlen(g_natives[i].name);
+        sym.name.ptr = g_native_defs[i].name;
+        sym.name.len = strlen(g_native_defs[i].name);
         sym.kind = SYM_NATIVE;
         sym.decl = NULL;
         sym.offset = 0;
-        sym.arity = g_natives[i].arity;
-        sym.slot = (int)i;
+        sym.arity.min = g_native_defs[i].min;
+        sym.arity.max = g_native_defs[i].max;
+        sym.slot = i;
         sym.module = -1;
         sym.imported = 0;
         sym.constant = 0;

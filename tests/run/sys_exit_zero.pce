@@ -1,0 +1,6 @@
+import sys;
+prog main() {
+    print("before");
+    sys.exit();
+    print("never");
+}

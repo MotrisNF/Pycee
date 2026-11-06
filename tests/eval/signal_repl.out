@@ -1,0 +1,10 @@
+before
+KeyboardInterrupt (<stdin:3>, line 1)
+    signal.send(signal.SIGINT)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+the REPL goes on
+caught KeyboardInterrupt
+KeyboardInterrupt (<stdin:6>, line 1)
+    raise KeyboardInterrupt()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+exit=0

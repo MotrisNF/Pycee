@@ -1,0 +1,93 @@
+/*
+ * Word counter (the milestone of phase 10: the standard library)
+ * - Reads a text file, counts how many times each word appears (in lower
+ *   case, without punctuation or digits) and writes the ten most frequent
+ *   to a JSON file, then reads that file back to check it.
+ *     ./pycee examples/example8.pce book.txt            -> book.json
+ *     ./pycee examples/example8.pce book.txt out.json
+ * - Modules: sys (arguments, exit code), io (files, the error stream),
+ *   os (paths), json (writing and reading it back).
+ * - The errors of the file system are values too: FileNotFoundError and
+ *   PermissionError are kinds of IOError.
+ */
+
+import sys;
+import io;
+import os;
+import json;
+
+const TOP = 10;
+
+/* Every word of text, in lower case: anything that is not a letter separates. */
+func words_of(text) {
+    var letters = [c.is_alpha() ? c.lower() : " " for (c in text)];
+    return "".join(letters).split();
+}
+
+/* How many times each word appears, in the order they first appear. */
+func count(words) {
+    var counts = dict();
+    for (w in words) {
+        counts[w] = counts.get(w, 0) + 1;
+    }
+    return counts;
+}
+
+/*
+ * The n most frequent, most frequent first; a tie in alphabetical order
+ * (sort is stable: by word first, then by count).
+ */
+func most_frequent(counts, n) {
+    var pairs = counts.items();
+    pairs.sort(key = (p) => p[0]);
+    pairs.sort(key = (p) => p[1], reverse = true);
+    return [dict("word": p[0], "count": p[1]) for (p in pairs[:n])];
+}
+
+/* book.txt -> book.json, next to it. */
+func json_path_for(path) {
+    var name = os.base_name(path);
+    var dot = name.find(".");
+    if (dot > 0) {
+        name = name[:dot];
+    }
+    return os.join(os.dir_name(path), name + ".json");
+}
+
+prog main() {
+    if (sys.argv.len() < 2 or sys.argv.len() > 3) {
+        io.eprint("usage: pycee example8.pce file.txt [result.json]");
+        sys.exit(2);
+    }
+    var source = sys.argv[1];
+    var output = sys.argv.len() is 3 ? sys.argv[2] : json_path_for(source);
+
+    var text = "";
+    try {
+        text = io.read_file(source);
+    } except FileNotFoundError (e) {
+        io.eprint("cannot read the text:", e.message());
+        return 1;
+    } except IOError (e) {
+        io.eprint("cannot read the text:", e);
+        return 1;
+    }
+
+    var words = words_of(text);
+    var counts = count(words);
+    var result = dict(
+        "file": os.base_name(source),
+        "words": words.len(),
+        "distinct": counts.len(),
+        "top": most_frequent(counts, TOP)
+    );
+    io.write_file(output, json.dump(result, indent = 2) + "\n");
+
+    print(f"{result["words"]} words, {result["distinct"]} different, in {result["file"]}");
+    for (i, entry in result["top"].enumerate()) {
+        print(f"{i + 1:>2}. {entry["word"]:<12}{entry["count"]:>5}");
+    }
+    var back = json.parse(io.read_file(output));
+    print(f"wrote {output}:", back is result ? "read back the same" : "DIFFERENT");
+    return 0;
+}

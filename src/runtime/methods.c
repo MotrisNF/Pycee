@@ -128,6 +128,8 @@ static const t_method   *type_methods(t_value v)
         return (g_string_methods);
     if (val_is_obj(v, OBJ_ERROR))
         return (g_error_methods);
+    if (val_is_obj(v, OBJ_FILE))
+        return (g_file_methods);
     return (NULL);
 }
 

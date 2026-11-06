@@ -1,0 +1,4 @@
+TypeError: print() has no parameter 'x' (tests/resolver/err_native_no_param.pce, line 1)
+    prog main() { print(1, x = 1); }
+                           ^
+exit=1

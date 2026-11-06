@@ -1,0 +1,4 @@
+ImportError: cannot import name 'nope' from 'math' (tests/resolver/err_native_cannot_import.pce, line 1)
+    from math import nope;
+                     ^^^^
+exit=1

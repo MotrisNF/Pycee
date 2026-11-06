@@ -136,5 +136,7 @@ const char  *val_type_name(t_value v)
         return (((t_instance *)v.as.obj)->cls->as.obj.cname);
     if (val_is_obj(v, OBJ_CLASS) || val_is_obj(v, OBJ_METHOD))
         return ("function");
+    if (val_is_obj(v, OBJ_FILE))
+        return ("file");
     return ("string");
 }

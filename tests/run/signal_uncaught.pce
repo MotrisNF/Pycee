@@ -1,0 +1,20 @@
+# A KeyboardInterrupt nobody catches: its traceback, the finally blocks on
+# the way out run, and the exit code is 130 (as the shell's for Ctrl+C).
+import signal;
+
+func deep(n) {
+    if (n is 0) {
+        signal.send(signal.SIGINT);
+    }
+    deep(n - 1);
+}
+
+prog main() {
+    try {
+        deep(2);
+    } except {
+        print("never: a bare except does not catch it");
+    } finally {
+        print("finally runs");
+    }
+}

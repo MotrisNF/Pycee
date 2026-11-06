@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include "core/reader.h"
 #include "front/parser.h"
+#include "resolver/natives.h"
 #include "resolver/resolver_internal.h"
 
 /* Grows the table before allocating, so no module is ever unreachable. */
@@ -37,6 +38,7 @@ t_module *rs_module_new(t_resolver *r, const char *name)
     m->rank = -1;
     m->state = MOD_LOADING;
     m->has_file = 0;
+    m->native = -1;
     r->modules[r->nmodules++] = m;
     return (m);
 }
@@ -132,6 +134,71 @@ int  rs_resolve_module(t_resolver *r, t_module *m, t_error *err)
     return (0);
 }
 
+/* A native of module mod, or one of its constants, as a global of m. */
+static void add_native_symbol(t_module *m, const char *name, t_sym_kind kind,
+                int slot, const t_native_def *def)
+{
+    t_symbol    sym;
+
+    sym.name.ptr = name;
+    sym.name.len = strlen(name);
+    sym.kind = kind;
+    sym.decl = NULL;
+    sym.offset = 0;
+    sym.arity.min = def ? def->min : 0;
+    sym.arity.max = def ? def->max : 0;
+    sym.slot = slot;
+    sym.module = m->index;
+    sym.imported = 0;
+    sym.constant = (kind == SYM_GLOBAL);
+    sym.depth = 0;
+    symtab_push(&m->globals, &sym);
+}
+
+/*
+ * A module of the language: loaded once, already DONE (it imports
+ * nothing). A user's file with its name next to the importer would be
+ * silently hidden, so it is an error: the name is taken.
+ */
+static int  load_native(t_ctx *c, t_name name, t_native_module which,
+                t_module **out)
+{
+    char            path[PATH_MAX];
+    struct stat     st;
+    t_resolver      *r;
+    t_module        *m;
+    int             i;
+
+    r = c->r;
+    if (module_path(c, name, path, sizeof(path)) && stat(path, &st) == 0
+        && S_ISREG(st.st_mode))
+        return (error_set(c->err, ERR_IMPORT, rs_name_offset(c, name),
+                name.len, "'%.*s' is a module of the language: rename %s",
+                (int)name.len, name.ptr, path));
+    for (i = 0; i < r->nmodules; i++)
+    {
+        if (r->modules[i]->native == (int)which)
+        {
+            *out = r->modules[i];
+            return (0);
+        }
+    }
+    m = rs_module_new(r, g_native_module_names[which]);
+    m->native = which;
+    for (i = 0; i < g_native_count; i++)
+        if (g_native_defs[i].module == which)
+            add_native_symbol(m, g_native_defs[i].name, SYM_NATIVE, i,
+                &g_native_defs[i]);
+    for (i = 0; i < g_native_const_count; i++)
+        if (g_native_consts[i].module == which)
+            add_native_symbol(m, g_native_consts[i].name, SYM_GLOBAL,
+                m->nglobals++, NULL);
+    m->state = MOD_DONE;
+    m->rank = r->ndone++;
+    *out = m;
+    return (0);
+}
+
 /*
  * Finds or loads the module "name" imported from c's source. A module is
  * loaded once (identity is the file, not the path); meeting one that is
@@ -149,6 +216,9 @@ static int  load_module(t_ctx *c, t_name name, t_module **out)
     size_t          offset;
     int             i;
 
+    if (native_module_named(name.ptr, name.len) != NMOD_NONE)
+        return (load_native(c, name, native_module_named(name.ptr, name.len),
+                out));
     r = c->r;
     offset = rs_name_offset(c, name);
     if (!module_path(c, name, path, sizeof(path)))
@@ -194,6 +264,16 @@ static int  load_module(t_ctx *c, t_name name, t_module **out)
     return (0);
 }
 
+/* The REPL has an exit() of its own (a REPL-only native). */
+static int  repl_has_exit(const t_ctx *c)
+{
+    t_name  name;
+
+    name.ptr = "exit";
+    name.len = 4;
+    return (symtab_find(&c->r->natives, name) != NULL);
+}
+
 /*
  * import m / import m as x: one name for the module (it is not a value:
  * only m.name is). from m import a, b as c: each name (or its alias)
@@ -221,6 +301,11 @@ int  rs_resolve_import(t_ctx *c, t_node *n)
     for (id = n->as.import.names; id; id = id->next)
     {
         name = id->as.ident.name;
+        if (m->native == NMOD_sys && rs_is_named(name, "exit")
+            && repl_has_exit(c))
+            return (error_set(c->err, ERR_IMPORT, id->offset, name.len,
+                    "cannot import 'exit' from 'sys' in the REPL: exit() is"
+                    " already there"));
         target = rs_exported(m, name);
         if (!target)
             return (error_set(c->err, ERR_IMPORT, id->offset, name.len,

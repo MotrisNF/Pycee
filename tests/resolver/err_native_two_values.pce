@@ -1,0 +1,2 @@
+from os import list_dir;
+prog main() { list_dir(".", p = "."); }

@@ -1,0 +1,18 @@
+2 10 15
+[10, 10]
+lambda got 10
+caught: ValueError: from handler
+caught KI: KeyboardInterrupt
+bare except did not swallow it
+not an Error
+my ctrl-c 2
+ignored ok
+ValueError: signal 9 (SIGKILL) cannot be handled
+ValueError: signal 19 (SIGSTOP) cannot be handled
+ValueError: signal 11 is not allowed: going on after it would not be memory safe
+ValueError: signal 8 is not allowed: going on after it would not be memory safe
+ValueError: 99 is not one of the signals of the module (SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGUSR1, SIGUSR2, SIGALRM, SIGPIPE, SIGCHLD)
+ValueError: 0 is not one of the signals of the module (SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGUSR1, SIGUSR2, SIGALRM, SIGPIPE, SIGCHLD)
+TypeError: handle() needs a function to call, not 'number'
+TypeError: handle() needs an integer signal, not 'string'
+exit=0

@@ -1,0 +1,6 @@
+1
+RecursionError: json.parse(): the text is nested deeper than the recursion limit (1000)
+RecursionError: dump(): the value is nested deeper than the recursion limit (1000)
+1
+RecursionError: json.parse(): the text is nested deeper than the recursion limit (5000)
+exit=0

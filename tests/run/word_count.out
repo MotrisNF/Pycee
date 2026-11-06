@@ -1,0 +1,13 @@
+71 words, 45 different, in word_count.txt
+ 1. el              8
+ 2. palabras        4
+ 3. y               4
+ 4. cuenta          3
+ 5. fichero         3
+ 6. las             3
+ 7. más             3
+ 8. en              2
+ 9. la              2
+10. palabra         2
+wrote build/word_count.json: read back the same
+exit=0

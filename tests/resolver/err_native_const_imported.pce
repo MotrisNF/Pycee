@@ -1,0 +1,2 @@
+from math import pi;
+prog main() { pi += 1; }

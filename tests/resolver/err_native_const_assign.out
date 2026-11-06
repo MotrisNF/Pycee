@@ -1,0 +1,4 @@
+SyntaxError: cannot assign to 'pi': it is a constant (tests/resolver/err_native_const_assign.pce, line 2)
+    prog main() { math.pi = 3; }
+                  ^^^^^^^
+exit=1

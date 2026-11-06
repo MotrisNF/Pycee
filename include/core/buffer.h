@@ -26,6 +26,9 @@ void    buf_add(t_buffer *b, const char *s, size_t n);
 void    buf_add_str(t_buffer *b, const char *s);
 void    buf_add_char(t_buffer *b, char c);
 
+/* Appends n bytes c (room for a table: buf_fill(b, 0, n)). */
+void    buf_fill(t_buffer *b, char c, size_t n);
+
 /* Appends like printf. */
 void    buf_printf(t_buffer *b, const char *fmt, ...)
             __attribute__((format(printf, 2, 3)));

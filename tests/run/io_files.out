@@ -1,0 +1,20 @@
+39 ["primera línea\n", "segunda\n", "\n", "última sin salto"]
+<file "tests/run/io_fixture.txt"> file false true
+primera línea
+[segunda]
+[]
+[última sin salto]
+true false true
+none none true
+true
+uno
+dos
+tres y cuatro
+cinco, seis.
+uno
+["dos\n", "tres y cuatro\n", "cinco, seis.\n"] []
+4 4
+10 ñ
+<file "<stdin>"> <file "<stdout>"> <file "<stderr>">
+through io.stdout
+exit=0

@@ -1,0 +1,74 @@
+# Module os, inside build/os_test (removed first if a run left it behind,
+# with a recursive delete written with os itself). Paths behave as
+# Python's os.path.
+import os;
+import io;
+from os import join, base_name, dir_name;
+
+func remove_tree(p) {
+    for (name in os.list_dir(p)) {
+        vemp full = join(p, name);
+        if (os.is_dir(full)) {
+            remove_tree(full);
+        } else {
+            os.remove(full);
+        }
+    }
+    os.remove_dir(p);
+}
+
+prog main() {
+    const root = "build/os_test";
+    if (os.exists(root)) {
+        remove_tree(root);
+    }
+    print(os.cwd().starts_with("/"), os.is_dir(os.cwd()), os.exists("."), os.is_file("."), os.exists(root));
+
+    os.make_dir(root);
+    try {
+        os.make_dir(root);
+    } except IOError (e) {
+        print(e);
+    }
+    os.make_dir(join(root, "x/y/z"), "r");
+    os.make_dir(join(root, "x/y/z"), "r");
+    print(os.is_dir(join(root, "x/y/z")));
+    io.write_file(join(root, "b.txt"), "b");
+    io.write_file(join(root, "a.txt"), "a");
+    print(os.list_dir(root), os.list_dir(p = join(root, "x")), os.is_file(join(root, "a.txt")));
+
+    var tries = [
+        () => os.remove_dir(root),
+        () => os.remove(join(root, "x")),
+        () => os.remove(join(root, "nope.txt")),
+        () => os.rename(join(root, "nope"), join(root, "other")),
+        () => os.make_dir(join(root, "a.txt/k"), "r"),
+        () => os.make_dir(join(root, "q/w")),
+        () => os.make_dir(join(root, "q"), "x"),
+        () => os.make_dir(join(root, "q"), 1),
+        () => os.list_dir(join(root, "a.txt")),
+        () => os.list_dir(join(root, "nope")),
+        () => join("a", 1),
+        () => os.exists(1),
+        () => os.env(5)
+    ];
+    for (t in tries) {
+        try {
+            t();
+        } except (e) {
+            print(e);
+        }
+    }
+
+    os.rename(join(root, "a.txt"), join(root, "c.txt"));
+    os.remove(join(root, "b.txt"));
+    print(os.list_dir(root), io.read_file(join(root, "c.txt")));
+    remove_tree(root);
+    print(os.exists(root));
+
+    print(os.env("PATH") is not none, os.env("PYCEE_SURELY_NOT_SET"));
+    print(join("a", "b", "c.txt"), join("a/", "b"), join("a", "/abs", "b"), join("a", ""), join("", "b"));
+    print([base_name(p) for (p in ["a/b.txt", "b.txt", "a/", "/"])]);
+    print([dir_name(p) for (p in ["a/b.txt", "b.txt", "/a", "a/b/", "/", "a//b"])]);
+    return (0);
+}

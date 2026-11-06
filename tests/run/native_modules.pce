@@ -1,0 +1,50 @@
+# Modules of the language: import forms, natives as values, named arguments.
+import math;
+import math as m;
+import json;
+from math import sqrt as root, floor;
+from os import list_dir;
+
+func apply(f, x) {
+    return (f(x));
+}
+
+prog main() {
+    print(math.sqrt, m.floor, root, floor, json.dump);
+    var f = math.sqrt;
+    print(f is root, f is math.floor, [math.sqrt, print]);
+    print(1, 2, 3, sep = ", ");
+    print("no newline", end = "");
+    print(" | then", "end", sep = "-", end = "!\n");
+    print(sep = "x");
+    print("a", "b", "c", sep = "");
+    var p = print;
+    p("through", "a value", sep = "_");
+    try {
+        p(1, foo = 2);
+    } except TypeError (e) {
+        print(e);
+    }
+    try {
+        p(1, end = 5);
+    } except TypeError (e) {
+        print(e);
+    }
+    try {
+        apply(root, 4);
+    } except NotImplementedError (e) {
+        print(e);
+    }
+    var d = json.dump;
+    try {
+        d(1, 2);
+    } except TypeError (e) {
+        print(e);
+    }
+    try {
+        list_dir(p = ".");
+    } except NotImplementedError (e) {
+        print(e);
+    }
+    return (0);
+}

@@ -1,0 +1,19 @@
+# io.stdin: lines with their "\n", has_next, the rest with read(); eprint and
+# print(file = io.stderr) come out after what was printed before them.
+import io;
+
+prog main() {
+    print("first:", io.stdin.read_line(), end = "");
+    var count = 0;
+    while (io.stdin.has_next() and count < 2) {
+        print("line:", io.stdin.read_line().strip());
+        count++;
+    }
+    print("rest:", io.stdin.read().split());
+    print(io.stdin.read_line() is "", io.stdin.has_next());
+    print("to stdout");
+    io.eprint("to", "stderr", sep = " ");
+    print("to stdout again");
+    print("stderr too", file = io.stderr);
+    return (0);
+}

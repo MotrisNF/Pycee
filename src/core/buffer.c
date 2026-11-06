@@ -59,6 +59,14 @@ void    buf_add(t_buffer *b, const char *s, size_t n)
     b->data[b->len] = '\0';
 }
 
+void    buf_fill(t_buffer *b, char c, size_t n)
+{
+    reserve(b, n);
+    memset(b->data + b->len, c, n);
+    b->len += n;
+    b->data[b->len] = '\0';
+}
+
 void    buf_add_str(t_buffer *b, const char *s)
 {
     buf_add(b, s, strlen(s));

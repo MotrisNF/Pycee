@@ -1,0 +1,4 @@
+ImportError: 'random' is a module of the language: rename tests/imports/random.pce (tests/imports/err_native_name_taken.pce, line 1)
+    import random;
+           ^^^^^^
+exit=1

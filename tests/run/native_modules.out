@@ -1,0 +1,11 @@
+<built-in math.sqrt> <built-in math.floor> <built-in math.sqrt> <built-in math.floor> <built-in json.dump>
+true false [<built-in math.sqrt>, <built-in print>]
+1, 2, 3
+no newline | then-end!
+
+abc
+through_a value
+TypeError: print() has no parameter 'foo'
+TypeError: end must be a string, not 'number'
+TypeError: dump() takes 1 positional argument but 2 were given: indent goes by name: dump(v, indent = 2)
+exit=0

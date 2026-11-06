@@ -1,0 +1,2 @@
+import math;
+prog main() { print(math.nope); }

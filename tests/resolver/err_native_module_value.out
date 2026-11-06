@@ -1,0 +1,4 @@
+TypeError: 'time' is a module, not a value (tests/resolver/err_native_module_value.pce, line 2)
+    prog main() { var t = time; }
+                          ^^^^
+exit=1

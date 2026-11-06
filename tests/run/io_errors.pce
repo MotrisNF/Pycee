@@ -1,0 +1,48 @@
+# Errors of io: missing files, directories, permissions, modes, types,
+# closed files, the standard streams. FileNotFoundError and
+# PermissionError are kinds of IOError.
+import io;
+
+prog main() {
+    var tries = [
+        () => io.read_file("build/does/not/exist.txt"),
+        () => io.read_lines("tests"),
+        () => io.write_file("build/no_such_dir/x.txt", "x"),
+        () => io.write_file("/proc/version", "x"),
+        () => io.open("tests/run/io_fixture.txt", "rw"),
+        () => io.open("tests/run/io_fixture.txt", 1),
+        () => io.open(5),
+        () => io.open("bad\0path"),
+        () => io.write_file("build/io_b.txt", 5),
+        () => io.open("build/io_b.txt", "w").read(),
+        () => io.open("tests/run/io_fixture.txt").write("x"),
+        () => io.open("tests/run/io_fixture.txt").write(5),
+        () => io.stdout.close(),
+        () => io.stdin.write("x"),
+        () => print(1, file = 3),
+        () => print(1, file = io.stdin),
+        () => io.eprint(1, sep = 2)
+    ];
+    for (t in tries) {
+        try {
+            t();
+        } except IOError (e) {
+            print("IOError family:", e.type(), "-", e.message());
+        } except (e) {
+            print(e);
+        }
+    }
+    var f = io.open("tests/run/io_fixture.txt");
+    f.close();
+    try {
+        f.read_line();
+    } except IOError (e) {
+        print(e);
+    }
+    try {
+        io.read_file("build/does/not/exist.txt");
+    } except FileNotFoundError (e) {
+        print("caught by its own type:", e.is_type("IOError"), e.is_type("Error"));
+    }
+    return (0);
+}

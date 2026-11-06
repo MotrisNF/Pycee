@@ -1,0 +1,47 @@
+dict("name": "año", "n": 3, "pi": 3.14, "big": 1e+300, "ok": true, "nothing": none, "list": [1, [2, 3], dict()], "esc": "a\"b\\c\n\té😀", "neg": -0.0005)
+a"b\c
+	é😀 9
+{"name": "año", "n": 3, "pi": 3.14, "big": 1e+300, "ok": true, "nothing": null, "list": [1, [2, 3], {}], "esc": "a\"b\\c\n\té😀", "neg": -0.0005}
+true
+{"a": [1, 2], "b": [], "c": {}}
+{
+  "a": [
+    1,
+    {
+      "x": null
+    }
+  ],
+  "b": "z"
+}
+[
+1,
+2
+]
+"ctrl\u0001\u001f" -0.0 7.0 1e-07 -9223372036854775808
+[] dict("a": 2) �x 0 0
+ValueError: json.parse(): expected a key (a string) but found '}' at line 1, column 9
+ValueError: json.parse(): expected ',' or ']' but found '2' at line 1, column 4
+ValueError: json.parse(): expected ':' but found '1' at line 1, column 6
+ValueError: json.parse(): expected a key (a string) but found 'a' at line 1, column 2
+ValueError: json.parse(): expected a value but found 't' at line 1, column 1
+ValueError: json.parse(): unexpected text after the value at line 1, column 2
+ValueError: json.parse(): expected a digit after '.' but the text ended at line 1, column 3
+ValueError: json.parse(): a string is not closed at line 1, column 5
+ValueError: json.parse(): expected a value but found 'x' at line 3, column 3
+ValueError: json.parse(): a control character inside a string at line 1, column 3
+ValueError: json.parse(): invalid escape in a string at line 1, column 3
+ValueError: json.parse(): expected a value but the text ended at line 1, column 1
+ValueError: json.parse(): unexpected text after the value at line 1, column 5
+ValueError: json.parse(): expected a value but found 'N' at line 1, column 1
+OverflowError: json.parse(): 99999999999999999999 does not fit in an int
+OverflowError: json.parse(): 1e400 is too large for a float
+TypeError: parse() needs a string, not 'number'
+TypeError: dump(): a 'set' cannot be written in JSON (only dicts, lists, tuples, strings, numbers, bools and none)
+TypeError: dump(): the keys of a dict must be strings in JSON, not 'number'
+ValueError: dump(): nan cannot be written in JSON
+ValueError: dump(): circular reference (a value that contains itself)
+ValueError: dump() needs an indent from 0 to 64, not -1
+TypeError: dump() needs an integer indent, not 'string'
+TypeError: dump(): a 'range' cannot be written in JSON (only dicts, lists, tuples, strings, numbers, bools and none)
+TypeError: dump(): a 'function' cannot be written in JSON (only dicts, lists, tuples, strings, numbers, bools and none)
+exit=0

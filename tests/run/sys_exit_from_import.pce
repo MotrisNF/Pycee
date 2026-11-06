@@ -1,0 +1,4 @@
+from sys import exit;
+prog main() {
+    exit(7);
+}

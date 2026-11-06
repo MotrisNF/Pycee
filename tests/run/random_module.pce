@@ -1,0 +1,46 @@
+# Module random: with a seed, the same sequence on any machine (the values
+# below are those of xoshiro256** seeded through splitmix64); without one,
+# different on each run. Uniformity, every function and their errors.
+import random;
+from random import rand_int, rand_float, choice, sample, shuffle, seed;
+
+prog main() {
+    seed(42);
+    print([rand_float() for (i in range(3))]);
+    seed(7);
+    var a = [rand_int(1, 6) for (i in range(10))];
+    print(a);
+    seed(7);
+    print(a is [rand_int(1, 6) for (i in range(10))]);
+    seed(-1);
+    print(rand_int(0, 1000000), choice("abcdef"), shuffle([1, 2, 3, 4, 5]), sample(range(100), 4));
+
+    var counts = [0] * 6;
+    for (i in range(60000)) {
+        counts[rand_int(1, 6) - 1] += 1;
+    }
+    print("uniform:", counts.all((c) => c > 9500 and c < 10500));
+    var f = [rand_float() for (i in range(1000))];
+    print("floats in [0, 1):", f.all((x) => x >= 0 and x < 1), f.sum() > 400 and f.sum() < 600);
+
+    print(rand_int(5, 5), rand_int(-9223372036854775807 - 1, 9223372036854775807).is_int());
+    print(choice([1, 2, 3]) in [1, 2, 3], choice("ñu") in "ñu", choice(range(10, 20)) >= 10, choice(tuple("x")));
+    var l = [1, 2, 3, 4, 5];
+    print(shuffle(l) is l, l.copy().sort());
+    var s = sample(range(1000000), 5);
+    print(s.len(), s.to_set().len(), s.all((x) => x >= 0 and x < 1000000));
+    print(sample("abc", 3).copy().sort(), sample([1, 2], 0), sample(tuple(1, 2, 3), 3).len());
+    print(sample(range(100), 100).copy().sort() is [x for (x in range(100))]);
+    var tries = [
+        () => rand_int(3, 1), () => rand_int(1.5, 2), () => choice([]), () => choice(set(1)),
+        () => shuffle(tuple(1, 2)), () => sample([1], 2), () => sample([1], -1), () => seed("x")
+    ];
+    for (t in tries) {
+        try {
+            t();
+        } except (e) {
+            print(e);
+        }
+    }
+    return (0);
+}

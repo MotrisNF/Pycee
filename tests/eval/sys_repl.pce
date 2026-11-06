@@ -1,0 +1,7 @@
+import sys
+sys.version
+sys.argv
+var f = sys.exit
+print("still here")
+f(4)
+print("never")

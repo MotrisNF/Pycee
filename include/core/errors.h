@@ -21,7 +21,10 @@
  * IndexError (an index out of range), AssignmentError (unpacking a
  * value into a different number of targets), EOFError (input() at the
  * end of the input), AssertionError; KeyError and RuntimeError come with
- * dicts and lists. Error is the base of them all.
+ * dicts and lists. IOError (files, the file system: io, os) has two
+ * children of its own, FileNotFoundError and PermissionError. Error is
+ * the base of them all. KeyboardInterrupt (Ctrl+C) is not an Error
+ * either, like SystemExit: only an except that names it catches it.
  */
 typedef enum e_error_type
 {
@@ -41,8 +44,12 @@ typedef enum e_error_type
     ERR_RUNTIME,
     ERR_EOF,
     ERR_ASSERTION,
+    ERR_IO,
+    ERR_FILE_NOT_FOUND,
+    ERR_PERMISSION,
     ERR_ERROR,
     ERR_EXIT,
+    ERR_KEYBOARD_INTERRUPT,
     ERR_TYPE_COUNT
 }   t_error_type;
 

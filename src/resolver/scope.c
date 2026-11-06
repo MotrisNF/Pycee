@@ -227,14 +227,18 @@ void rs_ref_name(t_ctx *c, t_node *ident, const t_symbol *sym)
     ident->as.ident.ref.slot = capture_index(c, c->scope, sym);
 }
 
-/* What a module offers: its own func, obj and var (no prog, no imports). */
+/*
+ * What a module offers: its own func, obj and var (no prog, no imports);
+ * for a module of the language, its natives and constants.
+ */
 const t_symbol   *rs_exported(const t_module *m, t_name name)
 {
     const t_symbol  *sym;
 
     sym = symtab_find(&m->globals, name);
     if (!sym || sym->imported || (sym->kind != SYM_FUNC
-            && sym->kind != SYM_OBJ && sym->kind != SYM_GLOBAL))
+            && sym->kind != SYM_OBJ && sym->kind != SYM_GLOBAL
+            && sym->kind != SYM_NATIVE))
         return (NULL);
     return (sym);
 }

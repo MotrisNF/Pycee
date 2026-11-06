@@ -1,0 +1,79 @@
+# Module sys: arguments, platform, version, recursion limit and the collector.
+import sys;
+from sys import argv, platform, version, gc_stats;
+
+func depth(n) {
+    return (n is 0 ? 0 : 1 + depth(n - 1));
+}
+
+prog main(argc, args) {
+    print(argv.len() is argc, argv is args, argv[0].ends_with("sys_module.pce"));
+    print(platform, version, platform.type(), argv.type());
+    print(sys.recursion_limit());
+    print(sys.recursion_limit(50));
+    try {
+        depth(100);
+    } except RecursionError (e) {
+        print(e);
+    }
+    sys.recursion_limit(3000);
+    print(depth(2500), sys.recursion_limit());
+    sys.recursion_limit(1000);
+
+    var junk = [[i] for (i in range(1000))];
+    junk = none;
+    print(sys.gc_collect() >= 1000, sys.memory() > 0);
+    print(gc_stats().keys());
+    print([v.is_int() for (v in gc_stats().values())]);
+
+    sys.gc_disable();
+    var before = gc_stats()["collections"];
+    var big = [[i] for (i in range(100000))];
+    print("disabled, no collection:", gc_stats()["collections"] is before);
+    print("gc_collect still works:", sys.gc_collect() >= 0, gc_stats()["collections"] is before + 1);
+    sys.gc_enable();
+    big = none;
+
+    sys.gc_set_max(1);
+    before = gc_stats()["collections"];
+    var small = [1, 2, 3];
+    print("max reached, collected:", gc_stats()["collections"] > before);
+    sys.gc_set_max(0);
+    sys.gc_set_min(64 * 1024 * 1024);
+    print(gc_stats()["next_gc"] >= 64 * 1024 * 1024);
+    sys.gc_set_min(1024 * 1024);
+
+    try {
+        sys.gc_set_min(-1);
+    } except ValueError (e) {
+        print(e);
+    }
+    try {
+        sys.gc_set_max("a lot");
+    } except TypeError (e) {
+        print(e);
+    }
+    try {
+        sys.recursion_limit(0);
+    } except ValueError (e) {
+        print(e);
+    }
+    try {
+        sys.recursion_limit(1.5);
+    } except TypeError (e) {
+        print(e);
+    }
+    try {
+        sys.exit(256);
+    } except ValueError (e) {
+        print(e);
+    }
+    try {
+        sys.exit(3);
+    } except {
+        print("never: except cannot catch exit");
+    } finally {
+        print("finally runs on the way out");
+    }
+    print("never reached");
+}

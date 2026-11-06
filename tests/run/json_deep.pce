@@ -1,0 +1,31 @@
+# JSON nested deeper than the recursion limit (sys.recursion_limit(), 1000 at
+# the start) is a RecursionError, as in Python: when parsing and when
+# dumping. The limit can be raised; the real stack guard still protects.
+import json;
+import sys;
+
+prog main() {
+    print(json.parse("[" * 999 + "]" * 999).len());
+    try {
+        json.parse("[" * 1001 + "]" * 1001);
+    } except RecursionError (e) {
+        print(e);
+    }
+    var v = [];
+    for (i in range(1001)) {
+        v = [v];
+    }
+    try {
+        json.dump(v);
+    } except RecursionError (e) {
+        print(e);
+    }
+    sys.recursion_limit(5000);
+    print(json.parse(json.dump(v)).len());
+    try {
+        json.parse("[" * 6000);
+    } except RecursionError (e) {
+        print(e);
+    }
+    return (0);
+}

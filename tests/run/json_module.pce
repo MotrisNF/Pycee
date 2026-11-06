@@ -1,0 +1,37 @@
+# Module json: parse (every kind of value, escapes, surrogate pairs, repeated
+# keys) and dump (one line as Python, or indented), a round trip, and the
+# errors with their line and column.
+import json;
+from json import parse, dump;
+
+prog main() {
+    var text = r"""{"name": "año", "n": 3, "pi": 3.14, "big": 1e300, "ok": true,
+      "nothing": null, "list": [1, [2, 3], {}], "esc": "a\"b\\c\n\t\u00e9\ud83d\ude00", "neg": -0.5e-3}""";
+    var v = parse(text);
+    print(v);
+    print(v["esc"], v["esc"].len());
+    print(dump(v));
+    print(parse(dump(v)) is v);
+    print(dump(dict("a": tuple(1, 2), "b": [], "c": dict())));
+    print(dump(dict("a": [1, dict("x": none)], "b": "z"), indent = 2));
+    print(dump([1, 2], indent = 0));
+    print(dump("ctrl\u{1}\u{1f}"), dump(-0.0), dump(7.0), dump(1e-7), dump(-9223372036854775807 - 1));
+    print(parse("  [ ]  "), parse("{\"a\": 1, \"a\": 2}"), parse("\"\\ud800x\""), parse("0"), parse("-0"));
+    var l = [1];
+    l.append(l);
+    var tries = [
+        () => parse("{\"a\": 1,}"), () => parse("[1 2]"), () => parse("{\"a\" 1}"), () => parse("{a: 1}"),
+        () => parse("tru"), () => parse("01"), () => parse("1."), () => parse("\"abc"), () => parse("[1,\n  2,\n  x]"),
+        () => parse("\"a\tb\""), () => parse("\"\\q\""), () => parse(""), () => parse("[1] 2"), () => parse("NaN"),
+        () => parse("99999999999999999999"), () => parse("1e400"), () => parse(5),
+        () => dump(set(1)), () => dump(dict(1: 2)), () => dump(math_nan()), () => dump(l), () => dump(1, indent = -1),
+        () => dump(1, indent = "x"), () => dump(range(3)), () => dump([print])
+    ];
+    for (t in tries) {
+        try { print(t()); } except (e) { print(e); }
+    }
+}
+
+func math_nan() {
+    return (float("nan"));
+}

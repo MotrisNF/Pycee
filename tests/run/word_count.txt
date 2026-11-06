@@ -1,0 +1,7 @@
+El lenguaje lee el texto, cuenta las palabras y escribe el resultado.
+¿Cuántas veces aparece cada palabra? El programa lo sabe: cuenta, ordena
+y guarda las diez más frecuentes en un fichero JSON.
+
+Un fichero, otro fichero... el año que viene, más ficheros y más palabras.
+Las palabras se cuentan en minúsculas: EL, El y el son la misma palabra.
+Los números como 2026 o 42 no son palabras; la puntuación tampoco cuenta.

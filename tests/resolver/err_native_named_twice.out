@@ -1,0 +1,4 @@
+SyntaxError: argument 'sep' is given twice (tests/resolver/err_native_named_twice.pce, line 1)
+    prog main() { print(1, sep = ",", sep = ";"); }
+                                      ^^^
+exit=1

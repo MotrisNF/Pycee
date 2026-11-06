@@ -15,7 +15,11 @@ static void heap_reset(t_heap *h)
     h->bytes = 0;
     h->count = 0;
     h->next_gc = GC_MIN_BYTES;
+    h->survived = 0;
     h->collections = 0;
+    h->enabled = 1;
+    h->min_bytes = GC_MIN_BYTES;
+    h->max_bytes = 0;
     h->gray = NULL;
     h->ngray = 0;
     h->gray_cap = 0;
@@ -58,6 +62,8 @@ static size_t   object_size(const t_obj *o)
         return (sizeof(t_bound));
     if (o->type == OBJ_CELL)
         return (sizeof(t_cell));
+    if (o->type == OBJ_FILE)
+        return (sizeof(t_file) + ((const t_file *)o)->path_len + 1);
     if (o->type == OBJ_LIST)
         return (sizeof(t_list) + ((const t_list *)o)->cap * sizeof(t_value));
     if (o->type == OBJ_DICT || o->type == OBJ_SET)
@@ -162,9 +168,15 @@ static void trace(t_heap *h, t_obj *o)
     }
 }
 
-/* An object and what it owns apart from itself. */
+/*
+ * An object and what it owns apart from itself. A file still open is
+ * closed (what was written reaches the disk); a standard stream stays.
+ */
 static void free_object(t_obj *o)
 {
+    if (o->type == OBJ_FILE && ((t_file *)o)->fp
+        && !((t_file *)o)->standard)
+        fclose(((t_file *)o)->fp);
     if (o->type == OBJ_LIST)
         free(((t_list *)o)->items);
     if (o->type == OBJ_DICT || o->type == OBJ_SET)
@@ -198,6 +210,8 @@ static void sweep(t_heap *h)
     }
 }
 
+static void heap_pace(t_heap *h);
+
 void    heap_collect(t_heap *h)
 {
     t_obj   *o;
@@ -211,9 +225,51 @@ void    heap_collect(t_heap *h)
     }
     sweep(h);
     h->collections++;
-    h->next_gc = h->bytes * 2;
-    if (h->next_gc < GC_MIN_BYTES)
-        h->next_gc = GC_MIN_BYTES;
+    h->survived = h->bytes;
+    heap_pace(h);
+}
+
+/* The next automatic collection: twice what survived the last, never below min. */
+static void heap_pace(t_heap *h)
+{
+    h->next_gc = h->survived * 2;
+    if (h->next_gc < h->min_bytes)
+        h->next_gc = h->min_bytes;
+}
+
+void    heap_set_min(t_heap *h, size_t bytes)
+{
+    h->min_bytes = bytes;
+    heap_pace(h);
+}
+
+void    heap_set_max(t_heap *h, size_t bytes)
+{
+    h->max_bytes = bytes;
+}
+
+void    heap_enable(t_heap *h, int enabled)
+{
+    h->enabled = enabled;
+}
+
+/*
+ * Whether allocating size more bytes collects first: never while the
+ * collector is disabled; always in stress mode or on reaching max (when
+ * there is one: it wins over min); otherwise on passing next_gc.
+ */
+static int  must_collect(const t_heap *h, size_t size)
+{
+    size_t  need;
+
+    if (!h->roots_fn || !h->enabled)
+        return (0);
+    if (h->stress)
+        return (1);
+    need = h->bytes + size;
+    if (h->max_bytes && need >= h->max_bytes)
+        return (1);
+    return (need > h->next_gc);
 }
 
 /*
@@ -225,7 +281,7 @@ t_obj   *heap_alloc(t_heap *h, t_obj_type type, size_t size)
 {
     t_obj   *o;
 
-    if (h->roots_fn && (h->stress || h->bytes + size > h->next_gc))
+    if (must_collect(h, size))
         heap_collect(h);
     o = malloc(size);
     if (!o)

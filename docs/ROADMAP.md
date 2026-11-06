@@ -6,7 +6,7 @@
 
 Cada fase termina con un **hito** ejecutable. No se pasa a la siguiente fase hasta que el hito funcione.
 
-**Estado (2026-11-05):** fases 0 a 9 terminadas; **siguiente: fase 10, paso 1** (módulos nativos). Para retomar: [SESSION.md](SESSION.md), sección "Cómo retomar".
+**Estado (2026-11-06):** fases 0 a 10 terminadas; **siguiente: fase 11** (eficiencia). Para retomar: [SESSION.md](SESSION.md), sección "Cómo retomar".
 
 ---
 
@@ -99,31 +99,35 @@ Cada fase termina con un **hito** ejecutable. No se pasa a la siguiente fase has
 - [x] Objetos: campos declarados en `create` (`self.x = ...`) o con `var`, métodos, `self` (también en lambdas), herencia (`extends` / `(P)`), `super`, `private`, `static`, métodos ligados, el `obj` como valor; métodos especiales `to_str`, `compare`, `get`/`set`, `iter`/`has_next`/`next`; errores propios (`obj E extends ValueError`).
 - **Hito:** listas y objetos de verdad: `tests/run/obj_compare.pce` ordena una lista de objetos con su `compare`.
 
-## Fase 10: Librería estándar nativa
+## Fase 10: Librería estándar nativa ✅
 API completa decidida por el autor el 2026-11-05: [SESSION.md](SESSION.md), "Fase 10 (API decidida)". Regla: ningún miembro de un módulo del sistema se llama como una palabra reservada o una nativa global, para poder importarlo suelto.
 - [x] Antes de empezar: `from m import a as b`; `input()` vuelve a esperar en un terminal tras Ctrl+D.
-- [ ] **Paso 1.** Módulos nativos: el resolver conoce `sys`, `math`, `io`, `random`, `time`, `os` y `json` (funciones con su aridad y constantes); `import m`, `import m as x`, `from m import a as b`; `ImportError` si un `m.pce` del usuario se llama como uno del sistema; test de que ningún miembro choca con un nombre reservado; argumentos con nombre en las nativas.
-- [ ] **Paso 2.** `sys`: `argv`, `exit`, `recursion_limits`, `platform`, `version`, `gc_collect`, `memory`, `gc_stats`, `gc_enable`, `gc_disable`, `gc_set_min`, `gc_set_max`.
-- [ ] **Paso 3.** `math`.
-- [ ] **Paso 4.** `io`: funciones directas, tipo `file` (se cierra al liberarlo el GC), `IOError` / `FileNotFoundError` / `PermissionError`, `stdin/stdout/stderr`, `print(..., sep, end, file)` y `eprint`.
-- [ ] **Paso 5.** `time` y `random`.
-- [ ] **Paso 6.** `os`.
-- [ ] **Paso 7.** `json`.
-- **Hito (paso 8):** un programa que lee un fichero, lo procesa y escribe el resultado.
+- [x] **Paso 1.** Módulos nativos: el resolver conoce `sys`, `math`, `io`, `random`, `time`, `os`, `signal` y `json` (funciones con su aridad y constantes); `import m`, `import m as x`, `from m import a as b`; `ImportError` si un `m.pce` del usuario se llama como uno del sistema; test de que ningún miembro choca con un nombre reservado; argumentos con nombre en las nativas.
+- [x] **Paso 2.** `sys`: `argv`, `exit`, `recursion_limit`, `platform`, `version`, `gc_collect`, `memory`, `gc_stats`, `gc_enable`, `gc_disable`, `gc_set_min`, `gc_set_max`.
+- [x] **Paso 3.** `math` (y los métodos de número `trunc()` y `round(digits)`).
+- [x] **Paso 4.** `io`: funciones directas, tipo `file` (se cierra al liberarlo el GC), `IOError` / `FileNotFoundError` / `PermissionError`, `stdin/stdout/stderr`, `print(..., sep, end, file)` y `eprint`.
+- [x] **Paso 5.** `time` y `random`.
+- [x] **Paso 6.** `os`.
+- [x] **Paso 7.** `signal` (manejadores de señales, una constante por señal) y `KeyboardInterrupt` capturable.
+- [x] **Paso 8.** `json`.
+- **Hito (paso 9):** `examples/example8.pce`: lee un `.txt`, cuenta las palabras y escribe un `.json` con las 10 más frecuentes (comprobado contra Python).
 
 ## Fase 11: Eficiencia sin salir del AST
-- [ ] Medir primero, con `perf` y `valgrind --tool=callgrind`.
-- [x] Acceso a variables por (ámbito, índice): el resolver ya lo calcula (fase 4); el intérprete lo usa desde el principio.
-- [ ] *String interning*, para comparar strings por puntero.
-- [ ] Ajustar los umbrales del GC y la representación de los valores (NaN-boxing es opcional).
-- **Hito:** un benchmark propio con tiempos antes y después.
+Estructura propuesta el 2026-11-06 (las preguntas abiertas están en SESSION.md, "Fase 11: por decidir"). Regla de toda la fase: **ninguna optimización cambia lo que hace un programa** (mismas salidas y mismos mensajes de error), y cada paso pasa `make test`, `make stress`, valgrind y torturette. Lo que no gane tiempo medible se deshace.
+- [ ] **Paso 0. Mensajes de las f-strings.** Un error dentro de un campo dice "found end of file" en vez de "found '}'" (`f"{1 +}"`); y `f"{(1}"` dice "unterminated f-string" cuando lo que falta es cerrar el `(`.
+- [ ] **Paso 1. Medir antes de tocar.** Una batería de benchmarks propia (`bench/`), cada uno con su equivalente en Python y un script que da los tiempos de los dos: llamadas (fib recursivo), bucles y aritmética, strings y f-strings, listas (comprensiones, `sort`), dicts (contador de palabras), objetos y métodos, closures y basura para el GC. Perfiles con `valgrind --tool=callgrind` (y `perf` donde se pueda). Tabla "antes" en `docs/BENCH.md`.
+- [ ] **Paso 2. Llamadas** (hoy ~3,7× más lentas que Python): lo que diga el perfil; candidatos: un camino rápido para llamadas solo con posicionales y aridad ya comprobada por el resolver, preparar el marco sin trabajo repetido, no crear valores de función para llamadas directas.
+- [ ] **Paso 3. Métodos y nombres.** Hoy cada `x.m()` busca `m` comparando strings en la tabla de su tipo. Internar los nombres (el resolver da a cada nombre de método un número) y una caché por sitio de llamada (*inline cache*: tipo visto → método), que sigue siendo AST.
+- [ ] **Paso 4. Strings.** Guardar el hash en cada string (dicts y sets no lo recalculan); internar los nombres y los literales cortos; ver si `s += x` en un bucle merece un camino especial.
+- [ ] **Paso 5. Memoria y GC.** Ajustar los umbrales (mínimo, factor de crecimiento) con los benchmarks; y, si el perfil lo pide, un asignador propio para objetos pequeños (listas libres por tamaño) en vez de un `malloc` por objeto.
+- [ ] **Paso 6 (opcional). Representación de los valores.** NaN-boxing (`t_value` de 16 a 8 bytes): solo si los pasos anteriores lo justifican; cambia todo el intérprete.
+- **Hito:** `docs/BENCH.md` con la tabla antes/después de cada benchmark, contra Python, y el objetivo que se fije.
 
 ## Fase 12: Calidad
 - [ ] Una batería de tests: programas con su salida esperada y un script que los compara.
-- [ ] Revisar los mensajes de error y comprobar que todos los tests pasan sin fugas en valgrind. Pendiente: un error dentro de un campo de f-string dice "found end of file" en vez de "found '}'".
+- [ ] Revisar los mensajes de error y comprobar que todos los tests pasan sin fugas en valgrind.
 - [ ] Decoradores con `@` para getters y setters de campos `private` (idea del autor; la cuenta él cuando toque). Ejemplo orientativo: `@get func edad()` / `@set func edad(v)`, usados como `p.edad` y `p.edad = 5`.
 - [ ] Decidir si `sort` acepta también un comparador de dos elementos (hoy solo `key`).
-- [ ] Decidir si `from sys import exit` en el REPL es error (choca con la global `exit` del REPL; propuesta: sí).
 
 ---
 
@@ -132,5 +136,7 @@ Las fases 0 a 7 son el núcleo del proyecto. Lo más difícil está en las fases
 **Manual en el REPL (`man`), cuando el lenguaje ya sea mínimamente funcional** (decidido 2026-11-05; `man` ya es palabra reservada): `man(palabra_reservada)`, `man(tipo)`, `man(método)` y `man(tipo.método)`. El argumento no se evalúa (es una palabra reservada, no una función). El contenido va en una tabla dentro del binario. Por decidir cuando toque: qué muestra `man(split)` si varios tipos tienen ese método, `man()` sin argumentos, el idioma y si funciona en ficheros.
 
 **Al terminar el lenguaje: tutorial con ejercicios al estilo 42** (pedido por el autor, 2026-11-05). Las decisiones las ha tomado el autor, pero el código no lo ha escrito él, así que necesita aprender a usar su lenguaje *usándolo*: una serie de ejercicios progresivos (enunciado, qué se pide, ejemplos de entrada y salida, un corrector que lo comprueba), desde `print` y variables hasta closures, objetos, módulos y errores. Cada ejercicio introduce una pieza nueva y obliga a usarla.
+
+**Editor (2026-11-06):** hecha la extensión de VS Code (`editors/vscode/`: resaltado y error de `--check` subrayado). Después de la fase 12, junto al `man`: un *language server* con autocompletado, ir a la definición y documentación al pasar el ratón, que reutilice el resolver (y el contenido del `man`).
 
 **Después de la fase 12** (decidido, con sus palabras ya reservadas): `enum`, `match`, `with` (`with (io.open("f") as f) { }`, atajo de `try`/`finally` que llama a `close()`), `export` y `async`/`await`. La herencia (`extends`, `super`) se adelantó a la fase 9 y los decoradores (`@`) pasan a la fase 12.

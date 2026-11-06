@@ -1,0 +1,6 @@
+prog its the entry point of a program...
+
+
+Todas las explicaciones pertinentes
+
+q devuelve al repl

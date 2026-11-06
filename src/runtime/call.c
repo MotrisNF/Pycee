@@ -6,6 +6,7 @@
  */
 
 #include <string.h>
+#include "resolver/natives.h"
 #include "runtime/interp_internal.h"
 
 /* "double", or "lambda" for a function without a name. */
@@ -270,6 +271,8 @@ static int  call_function(t_interp *in, const t_node *call, const t_node *f,
     if (in->depth >= in->max_depth)
         return (rt_error(err, ERR_RECURSION, call, "maximum recursion depth"
                 " exceeded (%d calls)", in->max_depth));
+    if (RT_POLL(in, call, err) == -1)
+        return (-1);
     frame = in->top;
     for (i = 0; i < f->as.func.nslots; i++)
         rt_push(in, val_none());
@@ -376,6 +379,113 @@ static int  run_method_named(t_interp *in, const t_node *call,
     return (rt_run_method(in, call, m, args, nargs, out, err));
 }
 
+/*
+ * Where a named argument of a native goes: its position among the
+ * positional parameters, -2 - i for keyword-only parameter i, -1 if the
+ * native has no parameter called that.
+ */
+static int  native_slot(const t_native_def *def, t_name name)
+{
+    int i;
+
+    i = native_param(def->names, name.ptr, name.len);
+    if (i != -1)
+        return (i);
+    i = native_param(def->kw, name.ptr, name.len);
+    if (i != -1)
+        return (-2 - i);
+    return (-1);
+}
+
+/*
+ * The named arguments of a native call that the resolver could not see
+ * (through a value): each one a parameter it has, once, not already given
+ * by position. *nargs grows to the last positional one named.
+ */
+static int  check_native_named(const t_native_def *def, int npos,
+                const t_node *named, int *nargs, t_error *err)
+{
+    const t_node    *a;
+    const t_node    *b;
+    t_name          name;
+    int             i;
+
+    *nargs = npos;
+    for (a = named; a; a = a->next)
+    {
+        name = a->as.named.name;
+        i = native_slot(def, name);
+        if (i == -1)
+            return (rt_error(err, ERR_TYPE, a, "%s() has no parameter"
+                    " '%.*s'", def->name, (int)name.len, name.ptr));
+        for (b = named; b != a; b = b->next)
+            if (b->as.named.name.len == name.len
+                && memcmp(b->as.named.name.ptr, name.ptr, name.len) == 0)
+                return (rt_error(err, ERR_TYPE, a, "argument '%.*s' is"
+                        " given twice", (int)name.len, name.ptr));
+        if (i >= 0 && i < npos)
+            return (rt_error(err, ERR_TYPE, a, "%s() got two values for"
+                    " '%.*s'", def->name, (int)name.len, name.ptr));
+        if (i + 1 > *nargs)
+            *nargs = i + 1;
+    }
+    return (0);
+}
+
+/*
+ * Calls the native in slot with npos positional arguments from base and
+ * the values of the named ones after them. A native without parameters
+ * that can be named gets them where they are. One with them gets its
+ * arguments laid out again after everything: its nargs positional ones
+ * (none where one is left out), then one slot per keyword-only one
+ * (none when not given), at base + nargs.
+ */
+int rt_call_native(t_interp *in, const t_node *call, int slot, size_t base,
+        int npos, const t_node *named, t_value *out, t_error *err)
+{
+    const t_native_def  *def;
+    const t_node        *a;
+    size_t              args;
+    int                 nargs;
+    int                 nkw;
+    int                 i;
+    int                 j;
+    int                 status;
+
+    def = &g_native_defs[slot];
+    if (!def->names && !def->kw)
+    {
+        if (no_named(call, named, def->name, err) == -1
+            || rt_check_arity(call, def->name, def->min, def->max, npos,
+                err) == -1)
+            return (-1);
+        return (g_native_fns[slot](in, base, npos, call, out, err));
+    }
+    if (check_native_named(def, npos, named, &nargs, err) == -1)
+        return (-1);
+    if (def->max != -1 && nargs > def->max && native_kw_hint(def))
+        return (rt_error(err, ERR_TYPE, call, "%s() takes %d positional"
+                " argument%s but %d %s given: %s", def->name, def->max,
+                def->max == 1 ? "" : "s", nargs, nargs == 1 ? "was" : "were",
+                native_kw_hint(def)));
+    if (rt_check_arity(call, def->name, def->min, def->max, nargs, err) == -1)
+        return (-1);
+    nkw = native_param_count(def->kw);
+    args = in->top;
+    for (i = 0; i < nargs + nkw; i++)
+        rt_push(in, i < npos ? in->stack[base + (size_t)i] : val_none());
+    j = 0;
+    for (a = named; a; a = a->next, j++)
+    {
+        i = native_slot(def, a->as.named.name);
+        in->stack[args + (size_t)(i >= 0 ? i : nargs - 2 - i)]
+            = in->stack[base + (size_t)npos + (size_t)j];
+    }
+    status = g_native_fns[slot](in, args, nargs, call, out, err);
+    in->top = args;
+    return (status);
+}
+
 /* Calls the value at in->stack[base], its arguments after it. */
 static int  call_value(t_interp *in, const t_node *call, size_t base,
                 int npos, const t_node *named, t_value *out, t_error *err)
@@ -395,12 +505,8 @@ static int  call_value(t_interp *in, const t_node *call, size_t base,
     if (val_is_obj(v, OBJ_NATIVE))
     {
         slot = ((const t_native *)v.as.obj)->slot;
-        if (no_named(call, named, g_native_names[slot], err) == -1
-            || rt_check_arity(call, g_native_names[slot],
-                g_native_arity[slot][0], g_native_arity[slot][1], npos,
-                err) == -1)
-            return (-1);
-        return (g_native_fns[slot](in, base + 1, npos, call, out, err));
+        return (rt_call_native(in, call, slot, base + 1, npos, named, out,
+                err));
     }
     if (val_is_obj(v, OBJ_CLASS))
         return (rt_construct(in, call, ((t_class *)v.as.obj)->decl, base + 1,
@@ -500,10 +606,8 @@ int rt_eval_call(t_interp *in, t_node *n, t_value *out, t_error *err)
         status = rt_construct(in, n, ref->decl, base, npos, named, out, err);
     else if (status == 0 && callee->type == NODE_IDENT
         && ref->kind == REF_NATIVE)
-        status = rt_check_arity(n, g_native_names[ref->slot],
-                g_native_arity[ref->slot][0], g_native_arity[ref->slot][1],
-                npos, err) == -1 ? -1
-            : g_native_fns[ref->slot](in, base, npos, n, out, err);
+        status = rt_call_native(in, n, ref->slot, base, npos, named, out,
+                err);
     else if (status == 0 && callee->type == NODE_IDENT
         && ref->kind == REF_FUNC)
         status = call_function(in, n, ref->decl, NULL, base, npos, named,

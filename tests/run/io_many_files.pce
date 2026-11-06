@@ -1,0 +1,17 @@
+# Files left open are closed when the collector frees them, and running out
+# of descriptors makes it collect: thousands of opens never fail
+# (tests/run_torturette.sh runs a short version with "ulimit -n 64").
+import io;
+
+prog main(argc, argv) {
+    var times = argc > 1 ? int(argv[1]) : 3000;
+    var n = 0;
+    for (i in range(times)) {
+        vemp f = io.open("tests/run/io_fixture.txt");
+        n += f.read_lines().len();
+    }
+    print(n);
+    var w = io.open("build/io_unclosed.txt", "w");
+    w.write("written, never closed: the end of the program closes it\n");
+    return (0);
+}

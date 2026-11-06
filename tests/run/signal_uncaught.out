@@ -1,0 +1,16 @@
+finally runs
+Traceback (most recent call last):
+  File "tests/run/signal_uncaught.pce", line 14, in main
+            deep(2);
+            ^^^^^^^
+  File "tests/run/signal_uncaught.pce", line 9, in deep
+        deep(n - 1);
+        ^^^^^^^^^^^
+  File "tests/run/signal_uncaught.pce", line 9, in deep
+        deep(n - 1);
+        ^^^^^^^^^^^
+  File "tests/run/signal_uncaught.pce", line 7, in deep
+            signal.send(signal.SIGINT);
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+exit=130

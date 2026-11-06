@@ -1,0 +1,6 @@
+1 linux 0.10.0
+RecursionError: maximum recursion depth exceeded (20 calls)
+true true 4
+ValueError: gc_set_min() needs a number of bytes >= 0, not -1
+finally
+exit=2

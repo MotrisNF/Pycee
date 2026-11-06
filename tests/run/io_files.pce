@@ -1,0 +1,38 @@
+# Module io: whole-file functions, file values (read, write, iterate, close)
+# and print(file = ...). Writes under build/, reads tests/run/io_fixture.txt.
+import io;
+from io import read_file, write_file, append_file, read_lines;
+
+prog main() {
+    const fixture = "tests/run/io_fixture.txt";
+    print(read_file(fixture).len(), read_lines(fixture));
+
+    var f = io.open(fixture);
+    print(f, f.type(), f.is_closed(), f.has_next());
+    print(f.read_line(), end = "");
+    for (line in f) {
+        print(f"[{line.rstrip("\n")}]");
+    }
+    print(f.read_line() is "", f.has_next(), f.read() is "");
+    print(f.close(), f.close(), f.is_closed());
+
+    write_file("build/io_a.txt", "uno\n");
+    append_file("build/io_a.txt", "dos\n");
+    var w = io.open("build/io_a.txt", "a");
+    print(w.write("tres ").write("y cuatro\n") is w);
+    print("cinco", "seis", sep = ", ", end = ".\n", file = w);
+    w.flush().close();
+    print(read_file("build/io_a.txt"), end = "");
+
+    var r = io.open("build/io_a.txt");
+    print(r.read_line(), end = "");
+    print(r.read_lines(), r.read_lines());
+    print(sum(1 for (x in io.open(fixture))), [].extend(io.open(fixture)).len());
+
+    write_file("build/io_a.txt", "año ñandú\n");
+    print(read_file("build/io_a.txt").len(), read_file("build/io_a.txt")[1]);
+
+    print(io.stdin, io.stdout, io.stderr);
+    io.stdout.write("through io.stdout\n").flush();
+    return (0);
+}

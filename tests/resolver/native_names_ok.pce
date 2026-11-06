@@ -1,0 +1,14 @@
+import math;
+import math as m;
+from math import floor, sqrt as root, pi;
+from sys import exit;
+import os;
+import random;
+import time;
+import signal;
+import json;
+import io;
+prog main() {
+    var f = m.sqrt;
+    print(root, floor(2.5), pi);
+}

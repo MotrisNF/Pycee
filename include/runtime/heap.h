@@ -17,9 +17,12 @@
  * of recursing, so no nesting can exhaust the C stack.
  *
  * bytes is what live objects take; a collection runs when it passes
- * next_gc, which is then set to twice what survived. stress collects in
- * every allocation (PYCEE_GC_STRESS=1), to catch a value left out of the
- * roots as soon as it happens.
+ * next_gc, which is then set to twice what survived (never below
+ * min_bytes), or when it reaches max_bytes (0: no max). enabled = 0
+ * stops every automatic collection (sys.gc_disable); heap_collect still
+ * runs when asked. stress collects in every allocation
+ * (PYCEE_GC_STRESS=1), to catch a value left out of the roots as soon
+ * as it happens.
  */
 typedef struct s_heap
 {
@@ -27,6 +30,10 @@ typedef struct s_heap
     size_t  bytes;
     size_t  count;
     size_t  next_gc;
+    size_t  survived;
+    size_t  min_bytes;
+    size_t  max_bytes;
+    int     enabled;
     size_t  collections;
     uint64_t    last_id;
     int     stress;
@@ -68,6 +75,11 @@ void        heap_mark_object(t_heap *h, t_obj *o);
 
 /* Runs a collection now. */
 void        heap_collect(t_heap *h);
+
+/* The settings of sys: gc_set_min, gc_set_max (0: none), gc_enable/disable. */
+void        heap_set_min(t_heap *h, size_t bytes);
+void        heap_set_max(t_heap *h, size_t bytes);
+void        heap_enable(t_heap *h, int enabled);
 
 void        heap_free(t_heap *h);
 

@@ -1,0 +1,21 @@
+str it`s a method that transform any value in to a list of chars.
+
+metods:
+- to_lower
+- to_upper
+- split
+
+-Todos los metodos de str
+
+to join several str this method has diferent ways:
+
+    var string = "example";
+    string += "example";
+
+    Mas ejemplos de como hacerlo
+
+
+Todas las explicaciones pertinentes
+
+
+q para volver al REPL

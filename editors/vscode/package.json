@@ -1,0 +1,52 @@
+{
+    "name": "pycee",
+    "displayName": "pycee",
+    "description": "The pycee language: highlighting, and the errors of ./pycee --check underlined on open and on save.",
+    "version": "0.1.0",
+    "publisher": "pycee",
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "categories": ["Programming Languages", "Linters"],
+    "main": "./extension.js",
+    "activationEvents": [],
+    "contributes": {
+        "languages": [
+            {
+                "id": "pycee",
+                "aliases": ["pycee", "Pycee"],
+                "extensions": [".pce"],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "pycee",
+                "scopeName": "source.pycee",
+                "path": "./syntaxes/pycee.tmLanguage.json"
+            }
+        ],
+        "configuration": {
+            "title": "pycee",
+            "properties": {
+                "pycee.executable": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Path of the pycee interpreter used to check files. Empty: pycee-release or pycee at the root of the workspace, otherwise pycee in the PATH."
+                },
+                "pycee.checkOnSave": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Run pycee --check when a .pce file is opened or saved, and underline the error it reports."
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "pycee.check",
+                "title": "pycee: Check this file"
+            }
+        ]
+    }
+}

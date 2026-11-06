@@ -1,6 +1,7 @@
 /*
  * Global native functions, one per line of NATIVE_LIST
- * (resolver/natives.h). The resolver has already checked their arity.
+ * (resolver/natives.h), and the table of every native's function. The
+ * resolver has already checked the arity of direct calls.
  */
 
 #include <errno.h>
@@ -11,34 +12,88 @@
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
-#include "resolver/natives.h"
-#include "runtime/interp_internal.h"
+#include "natives/modules.h"
 
-#define ARG(i)  (in->stack[base + (i)])
+/*
+ * sep and end of print (and io.eprint): a string, or none for the
+ * default. *out is left as it is for none.
+ */
+static int  print_text(const t_node *call, t_value v, const char *what,
+                const char **out, size_t *len, t_error *err)
+{
+    t_string    *s;
 
-/* print(a, b...): plain text, separated by a space, then a newline. */
+    if (v.type == VAL_NONE)
+        return (0);
+    if (!val_is_string(v))
+        return (rt_error(err, ERR_TYPE, call, "%s must be a string, not '%s'",
+                what, val_type_name(v)));
+    s = (t_string *)v.as.obj;
+    *out = s->chars;
+    *len = s->len;
+    return (0);
+}
+
+/*
+ * The arguments from base shown as print does, separated by sep and
+ * followed by end (KW(0) and KW(1): strings, or none for " " and "\n"),
+ * into b.
+ */
+int rt_print_args(t_interp *in, size_t base, int nargs, const t_node *call,
+        t_buffer *b, t_error *err)
+{
+    const char  *sep;
+    const char  *end;
+    size_t      sep_len;
+    size_t      end_len;
+    int         i;
+
+    sep = " ";
+    sep_len = 1;
+    end = "\n";
+    end_len = 1;
+    if (print_text(call, KW(0), "sep", &sep, &sep_len, err) == -1
+        || print_text(call, KW(1), "end", &end, &end_len, err) == -1)
+        return (-1);
+    for (i = 0; i < nargs; i++)
+    {
+        if (i > 0)
+            buf_add(b, sep, sep_len);
+        if (rt_show(in, call, b, ARG(i), 0, err) == -1)
+            return (-1);
+    }
+    buf_add(b, end, end_len);
+    return (0);
+}
+
+/*
+ * print(a, b..., sep = " ", end = "\n", file = none): plain text, to
+ * stdout or to file (an open file for writing; checked again when the
+ * text is ready, since a to_str may have closed it). The strings of sep
+ * and end, and the file, stay valid while a to_str runs: they are
+ * rooted in their slots and the collector never moves anything.
+ */
 static int  native_print(t_interp *in, size_t base, int nargs,
                 const t_node *call, t_value *out, t_error *err)
 {
     t_buffer    *b;
-    int         i;
+    t_file      *f;
+    int         status;
 
+    f = NULL;
+    if (KW(2).type != VAL_NONE
+        && rt_file_for_writing(call, KW(2), "print(file = ...)", &f,
+            err) == -1)
+        return (-1);
     b = rt_buf_take(in);
-    for (i = 0; i < nargs; i++)
-    {
-        if (i > 0)
-            buf_add_char(b, ' ');
-        if (rt_show(in, call, b, ARG(i), 0, err) == -1)
-        {
-            rt_buf_give(in);
-            return (-1);
-        }
-    }
-    buf_add_char(b, '\n');
-    fwrite(b->data, 1, b->len, stdout);
+    status = rt_print_args(in, base, nargs, call, b, err);
+    if (status == 0 && f)
+        status = rt_file_write(in, call, f, b->data, b->len, err);
+    else if (status == 0)
+        fwrite(b->data, 1, b->len, stdout);
     rt_buf_give(in);
     *out = val_none();
-    return (0);
+    return (status);
 }
 
 static int  native_str(t_interp *in, size_t base, int nargs,
@@ -310,8 +365,16 @@ static int  native_input(t_interp *in, size_t base, int nargs,
             return (-1);
     }
     fflush(stdout);
-    errno = 0;
-    len = getline(&in->line, &in->line_cap, stdin);
+    while (1)
+    {
+        errno = 0;
+        len = getline(&in->line, &in->line_cap, stdin);
+        if (len != -1 || errno != EINTR)
+            break ;
+        clearerr(stdin);
+        if (rt_interrupted(in, call, err) == -1)
+            return (-1);
+    }
     if (len == -1 && errno == ENOMEM)
         fatal_oom();
     if (len == -1 && isatty(STDIN_FILENO))
@@ -479,33 +542,50 @@ static int  native_max(t_interp *in, size_t base, int nargs,
 }
 
 /*
- * exit() / exit(code), only in the REPL: ends the session with that
- * status. It travels up as a SystemExit, so every frame on the way is
- * unwound and the session frees everything before leaving.
+ * An integer argument of fname: a float or anything else is a TypeError
+ * ("exit() needs an integer code, not a float"); what names it ("code").
  */
-static int  native_exit(t_interp *in, size_t base, int nargs,
-                const t_node *call, t_value *out, t_error *err)
+int rt_int_arg(const t_node *call, t_value v, const char *fname,
+        const char *what, int64_t *out, t_error *err)
+{
+    if (v.type == VAL_FLOAT)
+        return (rt_error(err, ERR_TYPE, call, "%s() needs an integer %s,"
+                " not a float", fname, what));
+    if (v.type != VAL_INT)
+        return (rt_error(err, ERR_TYPE, call, "%s() needs an integer %s,"
+                " not '%s'", fname, what, val_type_name(v)));
+    *out = v.as.integer;
+    return (0);
+}
+
+/*
+ * exit() / exit(code) in the REPL, and sys.exit anywhere: ends the
+ * program (or the session) with that status. It travels up as a
+ * SystemExit, so every frame on the way is unwound (finally blocks run,
+ * except cannot catch it) and the session frees everything before leaving.
+ */
+int rt_exit(t_interp *in, size_t base, int nargs, const t_node *call,
+        t_error *err)
 {
     int64_t code;
 
-    (void)out;
     code = 0;
-    if (nargs == 1)
-    {
-        if (ARG(0).type == VAL_FLOAT)
-            return (rt_error(err, ERR_TYPE, call, "exit() needs an integer"
-                    " code, not a float"));
-        if (ARG(0).type != VAL_INT)
-            return (rt_error(err, ERR_TYPE, call, "exit() needs an integer"
-                    " code, not '%s'", val_type_name(ARG(0))));
-        code = ARG(0).as.integer;
-        if (code < 0 || code > 255)
-            return (rt_error(err, ERR_VALUE, call, "exit code must be"
-                    " between 0 and 255, not %lld", (long long)code));
-    }
+    if (nargs == 1 && rt_int_arg(call, ARG(0), "exit", "code", &code, err)
+        == -1)
+        return (-1);
+    if (code < 0 || code > 255)
+        return (rt_error(err, ERR_VALUE, call, "exit code must be"
+                " between 0 and 255, not %lld", (long long)code));
     rt_error(err, ERR_EXIT, call, "exit");
     err->code = (int)code;
     return (-1);
+}
+
+static int  native_exit(t_interp *in, size_t base, int nargs,
+                const t_node *call, t_value *out, t_error *err)
+{
+    (void)out;
+    return (rt_exit(in, base, nargs, call, err));
 }
 
 /*
@@ -556,20 +636,45 @@ ERROR_NATIVE(RecursionError)
 ERROR_NATIVE(NotImplementedError)
 ERROR_NATIVE(EOFError)
 ERROR_NATIVE(AssertionError)
+ERROR_NATIVE(IOError)
+ERROR_NATIVE(FileNotFoundError)
+ERROR_NATIVE(PermissionError)
+ERROR_NATIVE(KeyboardInterrupt)
 
-#define NATIVE_FN(name, min, max, repl) native_##name,
-#define NATIVE_ARITY(name, min, max, repl) {min, max},
-#define NATIVE_NAME(name, min, max, repl) #name,
+#define NATIVE_FN(name, min, max, repl, names, kw) native_##name,
+#define MEMBER_FN(mod, name, min, max, names, kw) nat_##mod##_##name,
+#define MEMBER_CONST(mod, name) nconst_##mod##_##name,
+#define SKIP_CONST(mod, name)
+#define SKIP_FN(mod, name, min, max, names, kw)
 
 const t_native_fn   g_native_fns[] = {
     NATIVE_LIST(NATIVE_FN)
+    NATIVE_MEMBERS(MEMBER_FN, SKIP_CONST)
 };
 
-/* For calls through a value, which the resolver could not check. */
-const int           g_native_arity[][2] = {
-    NATIVE_LIST(NATIVE_ARITY)
+/* In the order of g_native_consts. */
+static const t_native_const_fn  g_const_fns[] = {
+    NATIVE_MEMBERS(SKIP_FN, MEMBER_CONST)
 };
 
-const char          *g_native_names[] = {
-    NATIVE_LIST(NATIVE_NAME)
-};
+/*
+ * The constants of module index (a module of the language), in the
+ * slots the resolver gave them: their order among the module's.
+ */
+void    rt_init_native_module(t_interp *in, int index)
+{
+    t_value     v;
+    int         which;
+    int         slot;
+    int         i;
+
+    which = in->resolver->modules[index]->native;
+    slot = 0;
+    for (i = 0; i < g_native_const_count; i++)
+    {
+        if ((int)g_native_consts[i].module != which)
+            continue ;
+        v = g_const_fns[i](in);
+        in->modules[index].values[slot++] = v;
+    }
+}

@@ -1,0 +1,7 @@
+Version de pycee y descripcion muy muy breve
+
+
+lista completa de todos y cada uno de los manuales
+
+
+q devuelve al repl

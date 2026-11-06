@@ -1,0 +1,23 @@
+# Module time: now() and clock() are floats in seconds; clock() never goes
+# back, so differences of it are durations; sleep() waits at least that.
+import time;
+
+prog main() {
+    var t0 = time.clock();
+    time.sleep(0.05);
+    time.sleep(0);
+    var dt = time.clock() - t0;
+    print(dt >= 0.05 and dt < 1, time.clock() >= t0);
+    print(time.now() > 1700000000, time.now().is_int(), time.clock().is_int());
+    try {
+        time.sleep(-1);
+    } except ValueError (e) {
+        print(e);
+    }
+    try {
+        time.sleep("1");
+    } except TypeError (e) {
+        print(e);
+    }
+    return (0);
+}

@@ -1,6 +1,7 @@
 /* Expressions: names, calls, fields, self, assignment targets. */
 
 #include "core/stack.h"
+#include "resolver/natives.h"
 #include "resolver/resolver_internal.h"
 
 /*
@@ -348,6 +349,60 @@ static int  check_func_call(t_ctx *c, t_node *call, const t_node *f,
 }
 
 /*
+ * A call to a native: named arguments only where it has them (see
+ * resolver/natives.h), each once, and a positional one that may be
+ * named counts as given. Then the arity, unless ...t hides the count.
+ */
+static int  check_native_call(t_ctx *c, t_node *call, t_name name,
+                const t_symbol *sym, const t_args *a)
+{
+    const t_native_def  *def;
+    const t_node        *arg;
+    const t_node        *other;
+    t_name              an;
+    int                 nargs;
+    int                 i;
+
+    def = &g_native_defs[sym->slot];
+    nargs = a->npos;
+    for (arg = call->as.call.args; arg; arg = arg->next)
+    {
+        if (arg->type != NODE_NAMED_ARG)
+            continue ;
+        an = arg->as.named.name;
+        if (!def->names && !def->kw)
+            return (error_set(c->err, ERR_TYPE, call->offset, call->len,
+                    "%.*s() takes no named arguments", (int)name.len,
+                    name.ptr));
+        i = native_param(def->names, an.ptr, an.len);
+        if (i == -1 && native_param(def->kw, an.ptr, an.len) == -1)
+            return (error_set(c->err, ERR_TYPE, arg->offset, an.len,
+                    "%.*s() has no parameter '%.*s'", (int)name.len,
+                    name.ptr, (int)an.len, an.ptr));
+        for (other = call->as.call.args; other != arg; other = other->next)
+            if (other->type == NODE_NAMED_ARG
+                && rs_name_eq(other->as.named.name, an))
+                return (error_set(c->err, ERR_SYNTAX, arg->offset, an.len,
+                        "argument '%.*s' is given twice", (int)an.len,
+                        an.ptr));
+        if (i != -1 && !a->spread && i < a->npos)
+            return (error_set(c->err, ERR_TYPE, arg->offset, an.len,
+                    "%.*s() got two values for '%.*s'", (int)name.len,
+                    name.ptr, (int)an.len, an.ptr));
+        if (i + 1 > nargs)
+            nargs = i + 1;
+    }
+    if (a->spread)
+        return (0);
+    if (def->max != -1 && nargs > def->max && native_kw_hint(def))
+        return (error_set(c->err, ERR_TYPE, call->offset, call->len,
+                "%.*s() takes %d positional argument%s but %d %s given: %s",
+                (int)name.len, name.ptr, def->max, def->max == 1 ? "" : "s",
+                nargs, nargs == 1 ? "was" : "were", native_kw_hint(def)));
+    return (check_arity(c, call, name, sym->arity, nargs));
+}
+
+/*
  * callee (an IDENT, maybe rewritten from m.f) names sym. A func, an obj
  * or a native is known now, so what it is given is checked here; a
  * variable may hold anything callable, checked when it runs.
@@ -367,6 +422,8 @@ static int  check_callable(t_ctx *c, t_node *call, t_node *callee,
         return (check_func_call(c, call, sym->decl, a));
     if (rs_is_variable(sym->kind))
         return (0);
+    if (sym->kind == SYM_NATIVE)
+        return (check_native_call(c, call, name, sym, a));
     if (a->nnamed)
         return (error_set(c->err, ERR_TYPE, call->offset, call->len,
                 "%.*s() takes no named arguments", (int)name.len, name.ptr));

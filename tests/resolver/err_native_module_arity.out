@@ -1,0 +1,4 @@
+TypeError: sqrt() takes 1 argument but 2 were given (tests/resolver/err_native_module_arity.pce, line 2)
+    prog main() { math.sqrt(1, 2); }
+                  ^^^^^^^^^^^^^^^
+exit=1

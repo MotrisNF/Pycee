@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 #include "core/errors.h"
 
 /*
@@ -61,7 +62,8 @@ typedef enum e_obj_type
     OBJ_SET,
     OBJ_INSTANCE,
     OBJ_CLASS,
-    OBJ_METHOD
+    OBJ_METHOD,
+    OBJ_FILE
 }   t_obj_type;
 
 /*
@@ -105,6 +107,23 @@ typedef struct s_range
     int64_t stop;
     int64_t step;
 }   t_range;
+
+/*
+ * An open file (io.open, and io.stdin / stdout / stderr). fp is NULL
+ * once it is closed; the collector closes it when it frees the object,
+ * and the session's end frees (so closes) every one. mode is 'r', 'w'
+ * or 'a'. A standard stream is never closed. path is what it was opened
+ * with, for messages and for showing it: <file "a.txt">.
+ */
+typedef struct s_file
+{
+    t_obj   obj;
+    FILE    *fp;
+    char    mode;
+    int     standard;
+    size_t  path_len;
+    char    path[];
+}   t_file;
 
 /*
  * A mutable sequence: len values in items, room for cap (items is its

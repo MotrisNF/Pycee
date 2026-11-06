@@ -175,6 +175,14 @@ newline = ? line break ? ;
 - Errors: `ImportError` (no such module, circular import, `from m import x` with no `x`), `AttributeError` (`m.x` with no `x`).
 - Only the `prog` of the main file runs; the `prog` of an imported module is ignored (like `if __name__ == "__main__"`).
 
+**Modules of the language** (`sys`, `math`, `io`, `random`, `time`, `os`, `signal`, `json`; phase 10):
+- Imported like any other: `import math;`, `import math as m;`, `from math import sqrt, pi as PI;`. They are built in: no file is read.
+- A user's `m.pce` next to the importing file, named like one of them, is an `ImportError` when imported: `'math' is a module of the language: rename math.pce`.
+- Their functions are values like the global natives (`var f = math.sqrt;`, `l.map(math.sqrt)`), shown `<built-in math.sqrt>`; their arity is checked before running. Their constants (`math.pi`, `sys.argv`) are read-only (`math.pi = 3;` is a `SyntaxError`).
+- Naming rule: no member is called like a reserved word or a global native, so any of them can be imported alone (checked by `tests/check_members.sh`; `./pycee --members` lists them). The one exception is `sys.exit`: in the REPL, where `exit()` already exists, `from sys import exit` is an `ImportError`.
+
+**Named arguments of natives:** only where documented: `print(..., sep, end, file)`, `io.eprint(..., sep, end)`, `json.dump(v, indent = n)` (keyword-only: they go after every positional argument and can only be given by name) and `os.list_dir(p)` (positional or named). Any other native takes no named arguments (`TypeError`).
+
 ## Planned syntax (decided 2026-11-05, not implemented yet)
 
 Decided in the design review; see SESSION.md for the reasons and TYPES.md for the semantics. Each piece is added to the grammar above when it is implemented.

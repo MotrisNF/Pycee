@@ -2,12 +2,16 @@
 # define INTERP_H
 
 #include <stddef.h>
+#include <stdint.h>
 #include "core/buffer.h"
 #include "core/errors.h"
 #include "front/ast.h"
 #include "resolver/resolver.h"
 #include "runtime/heap.h"
 #include "runtime/value.h"
+
+/* Signals 1 to 31: the handlers of the program (module signal). */
+# define RT_NSIG 32
 
 /* The global variables of one module, indexed by their slot. */
 typedef struct s_globals
@@ -44,6 +48,13 @@ typedef struct s_globals
  * showing values (rt_buf_take / rt_buf_give, one per level), because
  * showing an object runs its to_str, which may show things too.
  *
+ * rng is the state of module random's generator (xoshiro256**), seeded
+ * from the system on first use unless random.seed came first. dir is the
+ * directory os.list_dir is reading (a DIR *, NULL otherwise): kept here
+ * so that running out of memory meanwhile still closes it.
+ * sig_handlers[s] is the program's handler of signal s, when
+ * sig_handled[s] (roots of the collector too).
+ *
  * modules[i] holds the globals of the resolver's module i. text is a
  * scratch buffer for turning values into text (str, print, the REPL echo).
  * Everything here is freed by interp_free, which the session (and
@@ -79,6 +90,11 @@ typedef struct s_interp
     int         nmodules;
     int         modules_cap;
     t_buffer    text;
+    uint64_t    rng[4];
+    int         rng_seeded;
+    void        *dir;
+    t_value     sig_handlers[RT_NSIG];
+    int         sig_handled[RT_NSIG];
 }   t_interp;
 
 void    interp_init(t_interp *in, t_resolver *r);
@@ -97,5 +113,13 @@ void    interp_set_args(t_interp *in, int argc, char **argv);
 int     interp_run(t_interp *in, t_node *root, int echo, t_error *err);
 
 void    interp_free(t_interp *in);
+
+/*
+ * Ctrl+C becomes a KeyboardInterrupt instead of killing the program
+ * (runtime/signals.c), from the start of the session. clear forgets the
+ * signals that came and were not attended (the REPL's prompt).
+ */
+void    interp_signals_init(void);
+void    interp_signals_clear(void);
 
 #endif

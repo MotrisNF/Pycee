@@ -1,0 +1,9 @@
+import math
+math.floor
+from sys import exit
+from sys import exit as leave
+import sys
+sys.exit
+var m = math
+from math import max
+print(1, 2, sep = "+")

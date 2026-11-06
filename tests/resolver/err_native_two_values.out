@@ -1,0 +1,4 @@
+TypeError: list_dir() got two values for 'p' (tests/resolver/err_native_two_values.pce, line 2)
+    prog main() { list_dir(".", p = "."); }
+                                ^
+exit=1

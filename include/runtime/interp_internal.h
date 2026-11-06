@@ -6,6 +6,7 @@
  * Functions are prefixed rt_.
  */
 
+#include <signal.h>
 #include <stddef.h>
 #include <stdint.h>
 #include "runtime/interp.h"
@@ -95,6 +96,21 @@ const t_node    *rt_special(t_value v, const char *name);
 int             rt_call_named(t_interp *in, const t_node *call, size_t base,
                     const char *name, int npos, t_value *out, t_error *err);
 
+/*
+ * signals.c: a signal that came is attended at the next safe point:
+ * RT_POLL before each statement and each call (one read when none came);
+ * rt_interrupted where a wait or a read returned EINTR (0: wait again).
+ */
+extern volatile sig_atomic_t    g_signal_pending;
+int             rt_poll_signals(t_interp *in, const t_node *at,
+                    t_error *err);
+int             rt_interrupted(t_interp *in, const t_node *at,
+                    t_error *err);
+void            rt_signal_handle(t_interp *in, int sig, t_value f);
+void            rt_signal_unhandle(t_interp *in, int sig, int ignore);
+# define RT_POLL(in, at, err) \
+    (g_signal_pending ? rt_poll_signals(in, at, err) : 0)
+
 /* exec.c: statements */
 t_exec          rt_exec(t_interp *in, t_node *n, t_error *err);
 
@@ -140,6 +156,9 @@ int64_t         rt_range_at(const t_range *r, uint64_t i);
 
 /* types/number.c */
 extern const t_method   g_number_methods[];
+int             rt_number_method(t_interp *in, const char *name,
+                    size_t base, int nargs, const t_node *call,
+                    t_value *out, t_error *err);
 
 /* types/string.c */
 extern const t_method   g_string_methods[];
@@ -156,6 +175,32 @@ int             rt_index_value(t_interp *in, const t_node *n, size_t base,
 int             rt_index_store(t_interp *in, const t_node *n, size_t base,
                     t_value v, t_error *err);
 t_value         *rt_seq_items(t_value c, size_t *len);
+
+/*
+ * types/file.c: files (io). Paths are strings without '\0'; failures of
+ * the system are IOError, FileNotFoundError or PermissionError, with the
+ * path in the message.
+ */
+extern const t_method   g_file_methods[];
+int             rt_path_arg(const t_node *call, t_value v, const char *fname,
+                    t_error *err);
+int             rt_io_error(const t_node *call, const char *path,
+                    size_t len, int errnum, t_error *err);
+t_file          *rt_file_new(t_interp *in, FILE *fp, char mode,
+                    int standard, const char *path, size_t len);
+int             rt_file_open(t_interp *in, const t_node *call, t_value path,
+                    char mode, t_value *out, t_error *err);
+int             rt_file_read_line(t_interp *in, const t_node *call,
+                    t_value f, t_value *out, t_error *err);
+int             rt_file_read_all(t_interp *in, const t_node *call,
+                    t_value f, t_value *out, t_error *err);
+int             rt_file_read_lines(t_interp *in, const t_node *call,
+                    size_t slot, t_value *out, t_error *err);
+int             rt_file_write(t_interp *in, const t_node *call, t_file *f,
+                    const char *s, size_t len, t_error *err);
+int             rt_file_close(const t_node *call, t_file *f, t_error *err);
+int             rt_file_for_writing(const t_node *call, t_value v,
+                    const char *what, t_file **out, t_error *err);
 
 /* types/error.c */
 extern const t_method   g_error_methods[];
@@ -187,10 +232,20 @@ extern const t_method   g_tuple_methods[];
 int             rt_seq_index(const t_node *n, const char *type, size_t len,
                     int64_t i, size_t *out, t_error *err);
 
-/* natives/natives.c */
+/*
+ * natives/natives.c: the function of every native, in the slots of
+ * g_native_defs (resolver/natives.h); the constants of a module of the
+ * language, set when it is first imported (globals of module index).
+ */
 extern const t_native_fn    g_native_fns[];
-extern const int            g_native_arity[][2];
-extern const char           *g_native_names[];
+void            rt_init_native_module(t_interp *in, int index);
+int             rt_print_args(t_interp *in, size_t base, int nargs,
+                    const t_node *call, t_buffer *b, t_error *err);
+
+/* call.c: a native by its slot, with named arguments (see call.c) */
+int             rt_call_native(t_interp *in, const t_node *call, int slot,
+                    size_t base, int npos, const t_node *named,
+                    t_value *out, t_error *err);
 
 /* methods.c */
 const t_method  *rt_find_method(t_value v, t_name name);

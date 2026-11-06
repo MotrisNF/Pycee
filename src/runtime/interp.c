@@ -1,5 +1,6 @@
 /* Interpreter state: value stack, module globals and the top level. */
 
+#include <dirent.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,10 +26,15 @@ static void mark_roots(t_heap *h, void *ctx)
         for (g = 0; g < in->modules[m].count; g++)
             heap_mark_value(h, in->modules[m].values[g]);
     heap_mark_value(h, in->ret);
+    for (g = 0; g < RT_NSIG; g++)
+        if (in->sig_handled[g])
+            heap_mark_value(h, in->sig_handlers[g]);
 }
 
 void    interp_init(t_interp *in, t_resolver *r)
 {
+    int i;
+
     in->resolver = r;
     heap_init(&in->heap);
     heap_set_roots(&in->heap, mark_roots, in);
@@ -59,6 +65,13 @@ void    interp_init(t_interp *in, t_resolver *r)
     in->nmodules = 0;
     in->modules_cap = 0;
     buf_init(&in->text);
+    in->rng_seeded = 0;
+    in->dir = NULL;
+    for (i = 0; i < RT_NSIG; i++)
+    {
+        in->sig_handlers[i] = val_none();
+        in->sig_handled[i] = 0;
+    }
 }
 
 void    interp_set_args(t_interp *in, int argc, char **argv)
@@ -73,6 +86,8 @@ void    interp_free(t_interp *in)
     int     argc;
     char    **argv;
 
+    if (in->dir)
+        closedir(in->dir);
     for (i = 0; i < in->nmodules; i++)
         free(in->modules[i].values);
     free(in->modules);
@@ -333,7 +348,8 @@ static int  run_items(t_interp *in, int module, t_node *root, int echo,
 
 /*
  * Imported modules are initialised once, in the order they finished
- * loading (a module after everything it imports). One that fails stays
+ * loading (a module after everything it imports); a module of the
+ * language only has its constants to set. One that fails stays
  * marked initialised, with the globals it did not reach still none.
  */
 static int  init_modules(t_interp *in, t_error *err)
@@ -352,7 +368,9 @@ static int  init_modules(t_interp *in, t_error *err)
             if (r->modules[i]->rank != rank || in->modules[i].initialized)
                 continue ;
             in->modules[i].initialized = 1;
-            if (run_items(in, i, r->modules[i]->root, 0, err) == -1)
+            if (r->modules[i]->native != -1)
+                rt_init_native_module(in, i);
+            else if (run_items(in, i, r->modules[i]->root, 0, err) == -1)
                 return (-1);
             in->top = top;
         }

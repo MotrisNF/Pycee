@@ -1,0 +1,2 @@
+import math;
+prog main() { math.pi = 3; }

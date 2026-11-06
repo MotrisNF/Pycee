@@ -12,7 +12,8 @@
 #
 # Adding a suite = one line in suite_mode ("-" = no flag, normal mode;
 # "<" = the file is typed into the REPL, one line at a time). In the
-# other modes a <name>.in next to the test is its stdin (/dev/null if none).
+# other modes a <name>.in next to the test is its stdin (/dev/null if none),
+# and a <name>.args holds the program's arguments (split on spaces).
 
 cd "$(dirname "$0")/.." || exit 2
 
@@ -51,6 +52,8 @@ for suite in $suites; do
         else
             if [ "$mode" = "-" ]; then
                 set -- "$src"
+                args_file="${src%.pce}.args"
+                [ -f "$args_file" ] && set -- "$src" $(cat "$args_file")
             else
                 set -- "$mode" "$src"
             fi

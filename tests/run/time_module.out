@@ -1,0 +1,5 @@
+true true
+true false false
+ValueError: sleep() needs a number of seconds >= 0
+TypeError: sleep() needs a number of seconds, not 'string'
+exit=0

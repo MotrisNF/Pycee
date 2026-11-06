@@ -756,6 +756,34 @@ static t_exec   exec_for_iter(t_interp *in, t_node *n, size_t obj,
     }
 }
 
+/*
+ * for over a file: one line per round, each with its "\n" (read_line),
+ * until the end. The file stays rooted at at.
+ */
+static t_exec   exec_for_file(t_interp *in, t_node *n, size_t at,
+                    int *broken, t_error *err)
+{
+    t_value v;
+    t_exec  status;
+    t_loop  step;
+
+    while (1)
+    {
+        if (rt_file_read_line(in, n->as.for_.iterable, in->stack[at], &v,
+                err) == -1)
+            return (EXEC_ERROR);
+        if (val_string(v)->len == 0)
+            return (EXEC_OK);
+        if (bind_for(in, n, v, err) == -1)
+            return (EXEC_ERROR);
+        status = rt_exec_block(in, n->as.for_.body, err);
+        step = loop_step(in, status);
+        *broken = (step == LOOP_BROKEN);
+        if (step != LOOP_NEXT)
+            return (*broken ? EXEC_OK : status);
+    }
+}
+
 /* The loop of n over stack[at] (rooted there), whatever it is. */
 static t_exec   exec_for_value(t_interp *in, t_node *n, size_t at,
                     int *broken, t_error *err)
@@ -766,11 +794,13 @@ static t_exec   exec_for_value(t_interp *in, t_node *n, size_t at,
     v = in->stack[at];
     if (!val_is_range(v) && !val_is_tuple(v) && !val_is_string(v)
         && !val_is_list(v) && !val_is_dict(v) && !val_is_set(v)
-        && !rt_special(v, "iter"))
+        && !val_is_obj(v, OBJ_FILE) && !rt_special(v, "iter"))
         return (rt_error(err, ERR_TYPE, n->as.for_.iterable,
                 "'%s' object is not iterable", val_type_name(v)));
     if (val_is_obj(v, OBJ_INSTANCE))
         return (exec_for_iter(in, n, at, broken, err));
+    if (val_is_obj(v, OBJ_FILE))
+        return (exec_for_file(in, n, at, broken, err));
     if (val_is_dict(v) || val_is_set(v))
         return (exec_for_table(in, n, at, broken, err));
     return (exec_for_items(in, n, v, broken, err));
@@ -993,7 +1023,9 @@ static int  obj_extends(const t_node *cls, const t_node *base)
 /*
  * The first except that catches err: one without types catches any
  * error, otherwise one of its types must be err's or an ancestor. A
- * SystemExit (exit) is not an Error: nothing catches it.
+ * SystemExit (exit) is not an Error: nothing catches it. Nor is a
+ * KeyboardInterrupt, which only an except naming it catches (an except
+ * without types must never swallow Ctrl+C).
  */
 static t_node   *find_handler(const t_node *n, const t_error *err)
 {
@@ -1001,11 +1033,12 @@ static t_node   *find_handler(const t_node *n, const t_error *err)
     const t_node    *t;
     t_name          name;
 
-    if (!error_is_a(err->type, ERR_ERROR))
+    if (!error_is_a(err->type, ERR_ERROR)
+        && err->type != ERR_KEYBOARD_INTERRUPT)
         return (NULL);
     for (h = n->as.try_.handlers; h; h = h->next)
     {
-        if (!h->as.except.types)
+        if (!h->as.except.types && error_is_a(err->type, ERR_ERROR))
             return (h);
         for (t = h->as.except.types; t; t = t->next)
         {
@@ -1182,6 +1215,8 @@ t_exec  rt_exec_block(t_interp *in, t_node *block, t_error *err)
     t_node  *n;
     t_exec  status;
 
+    if (RT_POLL(in, block, err) == -1)
+        return (EXEC_ERROR);
     for (n = block->as.list.items; n; n = n->next)
     {
         status = rt_exec(in, n, err);
@@ -1198,6 +1233,8 @@ t_exec  rt_exec(t_interp *in, t_node *n, t_error *err)
 
     if (stack_exhausted())
         return (rt_error(err, ERR_RECURSION, n, "stack exhausted"));
+    if (RT_POLL(in, n, err) == -1)
+        return (EXEC_ERROR);
     if (n->type == NODE_VAR)
         return (rt_run_var(in, n, err));
     if (n->type == NODE_FUNC)

@@ -1,0 +1,7 @@
+str method: see man(str)
+
+this method returns the string with all the alpha characterns in lower.
+
+Todas las explicaciones pertinentes.
+
+q devuelve al REPL

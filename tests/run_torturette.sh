@@ -29,14 +29,18 @@ repl_input=build/torture/repl.in
 printf 'func f() { return 1; }\nx = 2;\nfunc g() { } func f() { }\nvar a = 1;\nvar b = a + f();\nvar c = zz;\nimport not_here;\nprog main() { }\n' > "$repl_input"
 
 fail=0
-# One case per line: name|arguments|stdin file ("-" = none; no arguments = REPL).
+# One case per line: name|arguments|stdin file ("-" = none; no arguments
+# = REPL). A name starting with "fd64 " runs with only 64 file descriptors
+# (to reach the paths taken when the system has none left).
 while IFS='|' read -r name args input; do
     [ -z "$name" ] && continue
     set -- $args
+    limit=$(ulimit -n)
+    case "$name" in fd64\ *) limit=64 ;; esac
     if [ "$input" = "-" ]; then
-        report=$("$tool" "$bin" "$@" 2>&1 < /dev/null)
+        report=$(ulimit -n "$limit"; "$tool" "$bin" "$@" 2>&1 < /dev/null)
     else
-        report=$("$tool" "$bin" "$@" 2>&1 < "$input")
+        report=$(ulimit -n "$limit"; "$tool" "$bin" "$@" 2>&1 < "$input")
     fi
     report=$(printf '%s\n' "$report" | sed 's/\x1b\[[0-9;]*m//g')
     result=$(printf '%s\n' "$report" | grep "OVERALL RESULT")
@@ -124,5 +128,25 @@ run obj to_str|tests/run/obj_to_str.pce|-
 run obj compare|tests/run/obj_compare.pce|-
 run obj iter get set|tests/run/obj_iter_get_set.pce|-
 run obj errors|tests/run/obj_errors.pce|-
+run native modules|tests/run/native_modules.pce|-
+native names|--check tests/resolver/native_names_ok.pce|-
+native name taken|tests/imports/err_native_name_taken.pce|-
+eval native repl||tests/eval/native_repl.pce
+run sys|tests/run/sys_light.pce|-
+run sys exit|tests/run/sys_exit_from_import.pce|-
+eval sys repl||tests/eval/sys_repl.pce
+run math|tests/run/math_module.pce|-
+run io files|tests/run/io_files.pce|-
+run io errors|tests/run/io_errors.pce|-
+run io stdin|tests/run/io_stdin.pce|tests/run/io_stdin.in
+fd64 run io many files|tests/run/io_many_files.pce 100|-
+run random|tests/run/random_module.pce|-
+run time|tests/run/time_module.pce|-
+run os|tests/run/os_module.pce|-
+run signal|tests/run/signal_module.pce|-
+run signal uncaught|tests/run/signal_uncaught.pce|-
+eval signal repl||tests/eval/signal_repl.pce
+run json|tests/run/json_module.pce|-
+run milestone word count|tests/run/word_count.pce tests/run/word_count.txt build/word_count.json|-
 EOF
 [ "$fail" -eq 0 ]
