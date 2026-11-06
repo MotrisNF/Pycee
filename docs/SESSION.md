@@ -187,6 +187,7 @@ Las anteriores a la fase 5 se revisaron todas en un repaso general ("revisión d
 - La limpieza de la sesión se registra después de inicializar todo lo que no reserva (un fallo de `malloc` temprano liberaba basura).
 - Un `for` comprueba también al terminar si la lista cambió de tamaño.
 - El binario release (-O2) puede dar avisos que el debug no da (`maybe-uninitialized`): compilar los dos.
+- gcc 15 trae funciones del próximo estándar de C como *built-ins* (`uabs`...): una función `static` con ese nombre y otro tipo no compila. `math.c` usaba `uabs` (renombrada a `abs_u64` el 2026-11-06, en una máquina con gcc 15.2). Evitar nombres cortos tipo libc en funciones propias.
 - **torturette repite el programa una vez por cada `malloc`**: un test con 100.000 reservas tarda más de media hora (y parece colgado: el proceso duerme esperando al hijo). Los casos de `run_torturette.sh` deben reservar poco (`sys_light.pce` en vez de `sys_module.pce`). Y nunca lanzar dos torturette a la vez: comparten `build/torture/pycee`.
 - No editar código mientras corre una verificación en segundo plano: se mezclan resultados de dos versiones.
 - **En `make stress` el GC recolecta en cada reserva y recorre todo lo vivo**: un test que crea N objetos vivos cuesta ~N². Los tests de "muy profundo" o "muy grande" deben llegar al límite con pocos objetos (`json_deep.pce` usa el límite de recursión, no 200.000 niveles).

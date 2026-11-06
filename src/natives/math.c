@@ -204,7 +204,7 @@ static int  int_arg(const t_node *call, t_value v, const char *fname,
 }
 
 /* |a| as an unsigned (|INT64_MIN| fits there). */
-static uint64_t uabs(int64_t a)
+static uint64_t abs_u64(int64_t a)
 {
     return (a < 0 ? (uint64_t)0 - (uint64_t)a : (uint64_t)a);
 }
@@ -244,7 +244,7 @@ int nat_math_gcd(t_interp *in, size_t base, int nargs, const t_node *call,
     {
         if (int_arg(call, ARG(i), "gcd", &a, err) == -1)
             return (-1);
-        r = ugcd(r, uabs(a));
+        r = ugcd(r, abs_u64(a));
     }
     return (fit(call, r, out, err));
 }
@@ -263,7 +263,7 @@ int nat_math_lcm(t_interp *in, size_t base, int nargs, const t_node *call,
     {
         if (int_arg(call, ARG(i), "lcm", &a, err) == -1)
             return (-1);
-        u = uabs(a);
+        u = abs_u64(a);
         if (u == 0 || r == 0)
             r = 0;
         else if (__builtin_mul_overflow(r / ugcd(r, u), u, &r)
